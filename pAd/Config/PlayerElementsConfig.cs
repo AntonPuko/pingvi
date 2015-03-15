@@ -25,44 +25,58 @@ namespace Pingvi {
 
 
         //STATS
-        public PixelPoint[] SB_3BETvsBTN_StatDigPosPoints { get; set; }
-        public RectangleF[][] SB_3BETvsBTN_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] BB_3BETvsBTN_StatDigPosPoints { get; set; }
-        public RectangleF[][] BB_3BETvsBTN_StatDigitsRectMass { get; set; }
+        //PREFLOP
 
-        public PixelPoint[] BB_3BETvsSB_StatDigPosPoints { get; set; }
-        public RectangleF[][] BB_3BETvsSB_StatDigitsRectMass { get; set; }
+        
+        public PixelPoint[] PF_BTN_STEAL_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_BTN_STEAL_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] BB_DEFvsSBSTEAL_StatDigPosPoints { get; set; }
-        public RectangleF[][] BB_DEFvsSBSTEAL_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_SB_STEAL_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_SB_STEAL_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopFoldCBIP_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopFoldCBIP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_FOLD_3BET_IP_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_FOLD_3BET_IP_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopRaiseCBIP_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopRaiseCBIP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_FOLD_3BET_OOP_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_FOLD_3BET_OOP_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopFoldCBOOP_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopFoldCBOOP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_SB_3BET_VS_BTN_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_SB_3BET_VS_BTN_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopRaiseCBOOP_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopRaiseCBOOP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_BB_3BET_VS_BTN_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_BB_3BET_VS_BTN_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopCbet_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopCbet_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_BB_3BET_VS_SB_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_BB_3BET_VS_SB_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopCbFoldRIP_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopCbFoldRIP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopCbFoldROOP_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopCbFoldROOP_StatDigitsRectMass { get; set; }
+        //FLOP
 
-        public PixelPoint[] FlopDonkBet_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopDonkBet_StatDigitsRectMass { get; set; }
+        public PixelPoint[] F_CBET_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_CBET_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] FlopDonkFold_StatDigPosPoints { get; set; }
-        public RectangleF[][] FlopDonkFold_StatDigitsRectMass { get; set; }
+        public PixelPoint[] F_BET_LPOT_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_BET_LPOT_StatDigitsRectMass { get; set; }
+
+        public PixelPoint[] F_CBET_FOLDRAISE_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_CBET_FOLDRAISE_StatDigitsRectMass { get; set; }
+
+        public PixelPoint[] F_FOLD_CBET_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_FOLD_CBET_StatDigitsRectMass { get; set; }
+
+        public PixelPoint[] F_RAISE_CBET_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_RAISE_CBET_StatDigitsRectMass { get; set; }
+
+        public PixelPoint[] F_DONK_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_DONK_StatDigitsRectMass { get; set; }
+
+        public PixelPoint[] F_DONK_FOLDRAISE_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_DONK_FOLDRAISE_StatDigitsRectMass { get; set; }
+
+     
 
 
 

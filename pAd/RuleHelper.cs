@@ -96,5 +96,17 @@ namespace Pingvi {
             });
         }
 
+        public static RuleContext<Elements> OppBetSizeMinRaise(this RuleContext<Elements> context)
+        {
+            return context.If(e =>
+            {
+                var opponents = e.ActivePlayers.Where(p => p.Name != e.HeroPlayer.Name);
+                if (!opponents.Any()) return false;
+
+                double maxb = opponents.Select(o => o.Bet).Concat(new double[] { 0 }).Max();
+                return maxb >= 2 && maxb < 2.5;
+            });
+        }
+
     }
 }

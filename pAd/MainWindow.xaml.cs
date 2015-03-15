@@ -73,36 +73,42 @@ namespace Pingvi
                     elements.HeroPlayer.Hand.Name, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.StatePostflop);
 
             LeftPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                          "Type: {5} \n\nSB_3BETvsBTN: {6}\nBB_3BETvsBTN: {7}\nBB_3BETvsSB: {8}" +
-                                                    "\nBB_DEFvsSBSTEAL: {9}\nFoldCBIP: {10}\nFlopRaiseCBIP: {11}\nFlopFoldCBOOP: {12}" +
-                                                    "\nFlopRaiseCBOOP: {13}\nFlopCbet: {14}\nFlopCbFoldRIP: {15}\nFlopCbFoldROOP: {16}" +
-                                                    "\nFlopDonkBet: {17}\nFlopDonkFold: {18} ",
+                                          "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_FOLD_3BET_IP: {8}" +
+                                                    "\nPF_FOLD_3BET_OOP: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
+                                                    "\nPF_BB_3BET_VS_SB: {12}\nPF_BB_DEF_VS_SBSTEAL: {13}\n" +
+                                                    "\nF_CBET: {14}\nF_BET_LPOT: {15}\nF_CBET_FOLDRAISE: {16}" +
+                                                    "\nF_FOLD_CBET: {17}\nF_RAISE_CBET: {18}\nF_DONK: {19}" +
+                                                    "\nF_DONK_FOLDRAISE: {20}",
             elements.LeftPlayer.Status, elements.LeftPlayer.Position,
             elements.LeftPlayer.CurrentStack, elements.LeftPlayer.Bet,
             elements.LeftPlayer.Stack, elements.LeftPlayer.Type,
-            elements.LeftPlayer.Stats.SB_3BETvsBTN, elements.LeftPlayer.Stats.BB_3BETvsBTN,
-            elements.LeftPlayer.Stats.BB_3BETvsSB,
-            elements.LeftPlayer.Stats.BB_DEFvsSBSTEAL,elements.LeftPlayer.Stats.FlopFoldCBIP,
-            elements.LeftPlayer.Stats.FlopRaiseCBIP, elements.LeftPlayer.Stats.FlopFoldCBOOP,
-            elements.LeftPlayer.Stats.FlopRaiseCBOOP, elements.LeftPlayer.Stats.FlopCbet,
-            elements.LeftPlayer.Stats.FlopCbFoldRIP, elements.LeftPlayer.Stats.FlopCbFoldROOP,
-            elements.LeftPlayer.Stats.FlopDonkBet, elements.LeftPlayer.Stats.FlopDonkFold);
+            elements.LeftPlayer.Stats.PF_BTN_STEAL, elements.LeftPlayer.Stats.PF_SB_STEAL,
+            elements.LeftPlayer.Stats.PF_FOLD_3BET_IP, elements.LeftPlayer.Stats.PF_FOLD_3BET_OOP,
+            elements.LeftPlayer.Stats.PF_SB_3BET_VS_BTN, elements.LeftPlayer.Stats.PF_BB_3BET_VS_BTN,
+            elements.LeftPlayer.Stats.PF_BB_3BET_VS_SB, elements.LeftPlayer.Stats.PF_BB_DEF_VS_SBSTEAL,
+            elements.LeftPlayer.Stats.F_CBET, elements.LeftPlayer.Stats.F_BET_LPOT,
+            elements.LeftPlayer.Stats.F_CBET_FOLDRAISE, elements.LeftPlayer.Stats.F_FOLD_CBET,
+            elements.LeftPlayer.Stats.F_RAISE_CBET, elements.LeftPlayer.Stats.F_DONK,
+            elements.LeftPlayer.Stats.F_DONK_FOLDRAISE);
 
             RightPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                          "Type: {5} \n\nSB_3BETvsBTN: {6}\nBB_3BETvsBTN: {7}\nBB_3BETvsSB: {8}" +
-                                                    "\nBB_DEFvsSBSTEAL: {9}\nFoldCBIP: {10}\nFlopRaiseCBIP: {11}\nFlopFoldCBOOP: {12}" +
-                                                    "\nFlopRaiseCBOOP: {13}\nFlopCbet: {14}\nFlopCbFoldRIP: {15}\nFlopCbFoldROOP: {16}" +
-                                                    "\nFlopDonkBet: {17}\nFlopDonkFold: {18} ",
-                       elements.RightPlayer.Status, elements.RightPlayer.Position,
-                       elements.RightPlayer.CurrentStack, elements.RightPlayer.Bet,
-                       elements.RightPlayer.Stack, elements.RightPlayer.Type,
-                       elements.RightPlayer.Stats.SB_3BETvsBTN, elements.RightPlayer.Stats.BB_3BETvsBTN,
-                       elements.RightPlayer.Stats.BB_3BETvsSB,
-                       elements.RightPlayer.Stats.BB_DEFvsSBSTEAL, elements.RightPlayer.Stats.FlopFoldCBIP,
-                       elements.RightPlayer.Stats.FlopRaiseCBIP, elements.RightPlayer.Stats.FlopFoldCBOOP,
-                       elements.RightPlayer.Stats.FlopRaiseCBOOP, elements.RightPlayer.Stats.FlopCbet,
-                       elements.RightPlayer.Stats.FlopCbFoldRIP, elements.RightPlayer.Stats.FlopCbFoldROOP,
-                       elements.RightPlayer.Stats.FlopDonkBet, elements.RightPlayer.Stats.FlopDonkFold);
+                                         "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_FOLD_3BET_IP: {8}" +
+                                                   "\nPF_FOLD_3BET_OOP: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
+                                                   "\nPF_BB_3BET_VS_SB: {12}\nPF_BB_DEF_VS_SBSTEAL: {13}\n" +
+                                                   "\nF_CBET: {14}\nF_BET_LPOT: {15}\nF_CBET_FOLDRAISE: {16}" +
+                                                   "\nF_FOLD_CBET: {17}\nF_RAISE_CBET: {18}\nF_DONK: {19}" +
+                                                   "\nF_DONK_FOLDRAISE: {20}",
+           elements.RightPlayer.Status, elements.RightPlayer.Position,
+           elements.RightPlayer.CurrentStack, elements.RightPlayer.Bet,
+           elements.RightPlayer.Stack, elements.RightPlayer.Type,
+           elements.RightPlayer.Stats.PF_BTN_STEAL, elements.RightPlayer.Stats.PF_SB_STEAL,
+           elements.RightPlayer.Stats.PF_FOLD_3BET_IP, elements.RightPlayer.Stats.PF_FOLD_3BET_OOP,
+           elements.RightPlayer.Stats.PF_SB_3BET_VS_BTN, elements.RightPlayer.Stats.PF_BB_3BET_VS_BTN,
+           elements.RightPlayer.Stats.PF_BB_3BET_VS_SB, elements.RightPlayer.Stats.PF_BB_DEF_VS_SBSTEAL,
+           elements.RightPlayer.Stats.F_CBET, elements.RightPlayer.Stats.F_BET_LPOT,
+           elements.RightPlayer.Stats.F_CBET_FOLDRAISE, elements.RightPlayer.Stats.F_FOLD_CBET,
+           elements.RightPlayer.Stats.F_RAISE_CBET, elements.RightPlayer.Stats.F_DONK,
+           elements.RightPlayer.Stats.F_DONK_FOLDRAISE);
 
             SituationLabel.Content = String.Format("EffStack: {0} :: HeroRole: {1} :: HeroStatePreflop: {2} :: RelativePos: {3}",
                 elements.EffectiveStack, elements.HeroPlayer.Role, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.RelativePosition);

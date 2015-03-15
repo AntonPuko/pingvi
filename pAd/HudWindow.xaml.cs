@@ -191,6 +191,8 @@ namespace Pingvi
                         {
                             case HeroStatePostflop.Cbet: case HeroStatePostflop.FacingRaiseToCbet:
                                 {
+
+
                                     if (hudInfo.HeroStatePreflop == HeroStatePreflop.FacingLimp && hudInfo.CurrentPot == 2) {
                                         HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 180, 232));
                                         HeroStateRun.Text = "L BT";
@@ -209,15 +211,13 @@ namespace Pingvi
                                  
                                     
                                     Stat1DefRun.Text = "fcb";
-                                    var stat1 = hudInfo.HeroRelativePosition == HeroRelativePosition.InPosition ?
-                                       hudInfo.Opponent.Stats.FlopFoldCBIP : hudInfo.Opponent.Stats.FlopFoldCBOOP;
+                                    var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
 
                                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
                                     Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
 
                                     Stat2DefRun.Text = "rcb";
-                                    var stat2 = hudInfo.HeroRelativePosition == HeroRelativePosition.InPosition ?
-                                       hudInfo.Opponent.Stats.FlopRaiseCBIP : hudInfo.Opponent.Stats.FlopRaiseCBOOP;
+                                    var stat2 =  hudInfo.Opponent.Stats.F_RAISE_CBET;
                                     Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
                                     Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
 
@@ -242,7 +242,7 @@ namespace Pingvi
                                         HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 100));
 
                                         Stat1DefRun.Text = "cb";
-                                        var stat1 = hudInfo.Opponent.Stats.FlopCbet;
+                                        var stat1 = hudInfo.Opponent.Stats.F_CBET;
                                         Stat1ValRun.Foreground = PeekStatColor(stat1, 55, 70);
                                         Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
                                         PeekStatDefForeground(stat1, Stat1DefRun);
@@ -264,14 +264,13 @@ namespace Pingvi
                                     }
                                     
                                     Stat1DefRun.Text = "cb";
-                                    var stat1 = hudInfo.Opponent.Stats.FlopCbet;
+                                    var stat1 = hudInfo.Opponent.Stats.F_CBET;
                                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
                                     Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
                                     
 
                                     Stat2DefRun.Text = "fr";
-                                    var stat2 = hudInfo.HeroRelativePosition == HeroRelativePosition.InPosition ?
-                                       hudInfo.Opponent.Stats.FlopCbFoldRIP : hudInfo.Opponent.Stats.FlopCbFoldROOP;
+                                    var stat2 = hudInfo.Opponent.Stats.F_CBET_FOLDRAISE;
                                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
                                     Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
                                     PeekStatDefForeground(stat1, Stat1DefRun);
@@ -284,12 +283,12 @@ namespace Pingvi
                                     HeroStateRun.Text = "VsDK";
                                     
                                     Stat1DefRun.Text = "db";
-                                    var stat1 = hudInfo.Opponent.Stats.FlopDonkBet;
+                                    var stat1 = hudInfo.Opponent.Stats.F_DONK;
                                     Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
                                     Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
 
                                     Stat2DefRun.Text = "fr";
-                                    var stat2 = hudInfo.Opponent.Stats.FlopDonkFold;
+                                    var stat2 = hudInfo.Opponent.Stats.F_DONK_FOLDRAISE;
                                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
                                     Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
 
