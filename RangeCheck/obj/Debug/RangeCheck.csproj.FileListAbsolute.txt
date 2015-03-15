@@ -1,0 +1,14 @@
+P:\Dropbox\pAd\RangeCheck\bin\Debug\RangeCheck.exe.config
+P:\Dropbox\pAd\RangeCheck\bin\Debug\RangeCheck.exe
+P:\Dropbox\pAd\RangeCheck\bin\Debug\RangeCheck.pdb
+P:\Dropbox\pAd\RangeCheck\bin\Debug\PokerModel.dll
+P:\Dropbox\pAd\RangeCheck\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\RangeCheck\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\RangeCheck\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\RangeCheck\obj\Debug\App.g.cs
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck_MarkupCompile.cache
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.g.resources
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.Properties.Resources.resources
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.exe
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.pdb

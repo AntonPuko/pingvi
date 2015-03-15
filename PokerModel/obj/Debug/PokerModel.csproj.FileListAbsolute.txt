@@ -1,0 +1,10 @@
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\bin\Debug\PokerModel.dll
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\bin\Debug\PokerModel.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\obj\Debug\PokerModel.dll
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\obj\Debug\PokerModel.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\obj\Debug\PokerModel.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\PokerModel\bin\Debug\PokerModel.dll
+P:\Dropbox\pAd\PokerModel\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\PokerModel\obj\Debug\PokerModel.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\PokerModel\obj\Debug\PokerModel.dll
+P:\Dropbox\pAd\PokerModel\obj\Debug\PokerModel.pdb

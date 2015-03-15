@@ -1,0 +1,34 @@
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\RangeParser.exe.config
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\RangeParser.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\RangeParser.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\MainWindow.baml
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\MainWindow.g.cs
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\App.g.cs
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser_MarkupCompile.cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser.g.resources
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser.Properties.Resources.resources
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser.csproj.GenerateResource.Cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\obj\Debug\RangeParser.csprojResolveAssemblyReference.cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\pAd.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\PokerModel.dll
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\pAd.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\RangeParser\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\RangeParser\bin\Debug\RangeParser.exe.config
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser.exe
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser.pdb
+P:\Dropbox\pAd\RangeParser\bin\Debug\RangeParser.exe
+P:\Dropbox\pAd\RangeParser\bin\Debug\RangeParser.pdb
+P:\Dropbox\pAd\RangeParser\bin\Debug\PokerModel.dll
+P:\Dropbox\pAd\RangeParser\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\RangeParser\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\RangeParser\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\RangeParser\obj\Debug\App.g.cs
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser_MarkupCompile.cache
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser.g.resources
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser.Properties.Resources.resources
+P:\Dropbox\pAd\RangeParser\obj\Debug\RangeParser.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\RangeParser\bin\Debug\Pingvi.exe
+P:\Dropbox\pAd\RangeParser\bin\Debug\Pingvi.pdb

@@ -1,0 +1,34 @@
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\bin\Debug\pAd.exe.config
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\bin\Debug\pAd.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\bin\Debug\pAd.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\MainWindow.baml
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\MainWindow.g.cs
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\App.g.cs
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd_MarkupCompile.cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd.g.resources
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd.Properties.Resources.resources
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd.csproj.GenerateResource.Cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\obj\Debug\pAd.csprojResolveAssemblyReference.cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\bin\Debug\PokerModel.dll
+C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\pAd\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\pAd\bin\Debug\pAd.exe.config
+P:\Dropbox\pAd\pAd\obj\Debug\pAd.exe
+P:\Dropbox\pAd\pAd\obj\Debug\pAd.pdb
+P:\Dropbox\pAd\pAd\bin\Debug\pAd.exe
+P:\Dropbox\pAd\pAd\bin\Debug\pAd.pdb
+P:\Dropbox\pAd\pAd\bin\Debug\PokerModel.dll
+P:\Dropbox\pAd\pAd\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\pAd\obj\Debug\pAd.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\pAd\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\pAd\obj\Debug\App.g.cs
+P:\Dropbox\pAd\pAd\obj\Debug\pAd_MarkupCompile.cache
+P:\Dropbox\pAd\pAd\obj\Debug\pAd.g.resources
+P:\Dropbox\pAd\pAd\obj\Debug\pAd.Properties.Resources.resources
+P:\Dropbox\pAd\pAd\obj\Debug\pAd.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\pAd\obj\Debug\HudWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\HudWindow.g.cs
+P:\Dropbox\pAd\pAd\obj\Debug\VmWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\VmWindow.g.cs

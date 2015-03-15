@@ -1,0 +1,26 @@
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\bin\Debug\MoveTablePos.exe.config
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\bin\Debug\MoveTablePos.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\bin\Debug\MoveTablePos.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MainWindow.baml
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MainWindow.g.cs
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\App.g.cs
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos_MarkupCompile.cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.g.resources
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.Properties.Resources.resources
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.csproj.GenerateResource.Cache
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.exe
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.pdb
+C:\Users\sony\Documents\Visual Studio 2013\Projects\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\bin\Debug\MoveTablePos.exe.config
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\bin\Debug\MoveTablePos.exe
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\App.g.cs
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos_MarkupCompile.cache
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.g.resources
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.Properties.Resources.resources
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.exe
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\obj\Debug\MoveTablePos.pdb
+P:\Dropbox\pAd\MoveTablePos\MoveTablePos\bin\Debug\MoveTablePos.pdb
