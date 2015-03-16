@@ -559,7 +559,6 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(8, 9.5)
-                    .VsSmallStack()
                     .Do(
                         e =>
                             CheckHandInRange(e, HeroStatePreflop.FacingOpen, _hudInfo.EffectiveStack, PlMode.More,
@@ -572,7 +571,6 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(8, 9.5)
-                    .VsSmallStack()
                     .Do(
                         e =>
                             CheckHandInRange(e, HeroStatePreflop.FacingOpen, _OpenRaise, PlMode.Less,
@@ -646,12 +644,12 @@ namespace Pingvi
 
             elements.StartRule()
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
-                .EffectiveStackBetween(0, 8)
+                .EffectiveStackBetween(0,11)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack, PlMode.More, "COMMON_FacingPush_HU_08bb"));
             //TODO переделать со статами!!
             elements.StartRule()
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
-                .EffectiveStackBetween(8, 100)
+                .EffectiveStackBetween(11, 100)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack, PlMode.More, "COMMON_FacingPush_HU_8_25bb"));
 
             #endregion
