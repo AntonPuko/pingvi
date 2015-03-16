@@ -108,5 +108,9 @@ namespace Pingvi {
             });
         }
 
+        public static RuleContext<Elements> BBEqOrMoreThen(this RuleContext<Elements> context, double BBSize) {
+            return context.If(e => e.BbAmt >= BBSize);
+        }
+
     }
 }

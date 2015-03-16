@@ -69,6 +69,29 @@ namespace Pingvi
 
             elements.StartRule().HeroPosition(PlayerPosition.Button)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                .HeroStackBetween(0, 4)
+                .EffectiveStackBetween(0, 100)
+                .BBEqOrMoreThen(60)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_0_4bb_HEROSTACK_BIGBB"));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Button)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                .HeroStackBetween(4, 100)
+                .EffectiveStackBetween(0, 6)
+                .BBEqOrMoreThen(60)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_0_6bb_EFFSTACK_BIGBB"));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Button)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                .HeroStackBetween(4, 100)
+                .EffectiveStackBetween(6, 8)
+                .BBEqOrMoreThen(60)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_6_8bb_EFFSTACK_BIGBB"));
+
+           
+
+            elements.StartRule().HeroPosition(PlayerPosition.Button)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                 .HeroStackBetween(0, 8)
                 .EffectiveStackBetween(0, 8)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_0_8bb_HEROSTACK"));
@@ -737,7 +760,7 @@ namespace Pingvi
                 case HeroStatePreflop.Open: {
                     var nDecision = Decision.Fold;
                     var pDecision = (elements.EffectiveStack <= 8 && elements.IsHU) ? Decision.OpenPush : Decision.OpenRaise;
-                    if (elements.HeroPlayer.Stack <= 8) pDecision = Decision.OpenPush;
+                    if ((elements.HeroPlayer.Stack <= 8 && elements.IsHU) || (!elements.IsHU && elements.BbAmt < 60)) pDecision = Decision.OpenPush;
                     if(hPlayability == -1) pDecision = Decision.OpenPush;
                     if(hPlayability == -2) pDecision = Decision.Limp;
                     Decision[] d  = { nDecision, pDecision};
