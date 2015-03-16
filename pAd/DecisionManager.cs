@@ -760,7 +760,8 @@ namespace Pingvi
                 case HeroStatePreflop.Open: {
                     var nDecision = Decision.Fold;
                     var pDecision = (elements.EffectiveStack <= 8 && elements.IsHU) ? Decision.OpenPush : Decision.OpenRaise;
-                    if ((elements.HeroPlayer.Stack <= 8 && elements.IsHU) || (!elements.IsHU && elements.BbAmt < 60)) pDecision = Decision.OpenPush;
+                    if ((elements.HeroPlayer.Stack <= 8 && elements.IsHU) || (elements.HeroPlayer.Stack <= 8 && 
+                        !elements.IsHU && elements.BbAmt < 60)) pDecision = Decision.OpenPush;
                     if(hPlayability == -1) pDecision = Decision.OpenPush;
                     if(hPlayability == -2) pDecision = Decision.Limp;
                     Decision[] d  = { nDecision, pDecision};
