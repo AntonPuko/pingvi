@@ -21,6 +21,9 @@ namespace Pingvi
 
         private Elements prevEl;
 
+        
+        public event Action<string> NewRangeChosen;
+
         public DecisionManager() {
             _hudInfo = new HudInfo();
             LoadRanges(RangesPath);
@@ -542,11 +545,45 @@ namespace Pingvi
 
             ////BB FACING MINRAISE OOP
 
+            double _OpenRaise = 0;
+            if (elements.HuOpp != null) {
+                if (elements.HuOpp.Position == PlayerPosition.Button) _OpenRaise = elements.HuOpp.Stats.PF_BTN_STEAL;
+                else if (elements.HuOpp.Position == PlayerPosition.Sb) _OpenRaise = elements.HuOpp.Stats.PF_SB_OPENMINRAISE;
+            }
+
+
+            if (_OpenRaise == 0) {
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(8, 9.5)
+                    .VsSmallStack()
+                    .Do(
+                        e =>
+                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, _hudInfo.EffectiveStack, PlMode.More,
+                                "BB_FacingMinRaise_HU_OOP_8_9.5bb_UNK"));
+
+            }
+            else {
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(8, 9.5)
+                    .VsSmallStack()
+                    .Do(
+                        e =>
+                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, _OpenRaise, PlMode.Less,
+                                "BB_FacingMinRaise_HU_OOP_8_9.5bb_EXPL"));
+            }
+
             elements.StartRule().HeroPosition(PlayerPosition.Bb)
                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                .OppBetSize(2)
-               .EffectiveStackBetween(8, 13)
+               .EffectiveStackBetween(9.5, 13)
                .VsSmallStack()
                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "BB_FacingMinRaise_HU_OOP_VSMALL_8_13bb"));
 
@@ -554,7 +591,7 @@ namespace Pingvi
                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                .OppBetSize(2)
-               .EffectiveStackBetween(8, 11)
+               .EffectiveStackBetween(9.5, 11)
                .VsBigStack()
                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "BB_FacingMinRaise_HU_OOP_VBIG_8_11bb"));
 
@@ -658,7 +695,16 @@ namespace Pingvi
             Hand heroHand = elements.HeroPlayer.Hand;
             Range range = _rangesList.FirstOrDefault(r => r.Name == rangeName);
 
+            if (NewRangeChosen != null)
+            {
+                NewRangeChosen(rangeName);
+            }
+          
+
             if (range != null) {
+
+               
+
                 if (heroHand.Name == "") return;
                 double hPlayability = range.Hands.First(h => h.Name == heroHand.Name).Playability;
                 _hudInfo.HandPlayability = hPlayability;
@@ -704,7 +750,8 @@ namespace Pingvi
                     return d;
                 }
                 case HeroStatePreflop.FacingOpen: {
-                    var callDec = elements.HeroPlayer.Stack <= 8 ? Decision.PushToOpen : Decision.CallToOpen;
+                    var callDec = elements.HeroPlayer.Stack <= 9.5 ? Decision.PushToOpen : Decision.CallToOpen;
+                    if (elements.EffectiveStack <= 9.5 && elements.IsHU) callDec = Decision.PushToOpen;
                     Decision[] d = { Decision.Fold, callDec, Decision._3Bet4, Decision.PushToOpen, };
                     return d;
                 }

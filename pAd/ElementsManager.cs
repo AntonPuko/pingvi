@@ -151,7 +151,12 @@ namespace Pingvi {
                FindNumber(_elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
                    _elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-
+            
+            _elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE =
+               FindNumber(_elementsConfig.LeftPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints,
+                   _elementsConfig.LeftPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass,
+                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            
             //LEFT FLOP
             _elements.LeftPlayer.Stats.F_CBET =
                FindNumber(_elementsConfig.LeftPlayer.F_CBET_StatDigPosPoints,
@@ -230,6 +235,12 @@ namespace Pingvi {
                    _elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
+            
+            _elements.RightPlayer.Stats.PF_SB_OPENMINRAISE =
+              FindNumber(_elementsConfig.RightPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints,
+                  _elementsConfig.RightPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass,
+                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            
             //RIGHT FLOP
             _elements.RightPlayer.Stats.F_CBET =
                FindNumber(_elementsConfig.RightPlayer.F_CBET_StatDigPosPoints,
@@ -644,7 +655,7 @@ namespace Pingvi {
             catch (Exception ex) {
                 Debug.WriteLine(ex.Message + "In method FindNUmber");
                 return 0.0;
-            }
+          }
         }
 
         private double CountEffStack() {

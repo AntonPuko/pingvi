@@ -241,11 +241,16 @@ namespace Pingvi {
                 };
 
 
-
             LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints = new[] { new PixelPoint(19, 272), new PixelPoint(14, 272) };
             LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(8,267,5,4), new RectangleF(13,267,5,4) }, 
                 new [] {new RectangleF(8,267,5,4)}
+                };
+
+            LeftPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints = new[] { new PixelPoint(19, 282), new PixelPoint(14, 282) };
+            LeftPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(8,277,5,4), new RectangleF(13,277,5,4) }, 
+                new [] {new RectangleF(8,277,5,4)}
                 };
 
             //FLOP
@@ -340,6 +345,12 @@ namespace Pingvi {
             RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(720,267,5,4), new RectangleF(725,267,5,4) }, 
                 new [] {new RectangleF(720,267,5,4)}
+                };
+
+            RightPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints = new[] { new PixelPoint(731, 282), new PixelPoint(726, 282) };
+            RightPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(720,277,5,4), new RectangleF(725,277,5,4) }, 
+                new [] {new RectangleF(720,277,5,4)}
                 };
 
             //RIGHT FLOP
