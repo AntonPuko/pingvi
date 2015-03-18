@@ -102,7 +102,7 @@ namespace Pingvi
                         break;
                     case Decision.Limp:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "L " + hudInfo.HandPlayability.ToString("#.#");
+                        DecisionRun.Text = "Lim 22 ";
                         break;
                     case Decision.OpenPush:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));

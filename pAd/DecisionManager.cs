@@ -72,21 +72,21 @@ namespace Pingvi
                 .HeroStackBetween(0, 4)
                 .EffectiveStackBetween(0, 100)
                 .BBEqOrMoreThen(60)
-                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_0_4bb_HEROSTACK_BIGBB"));
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "BTN_OPEN_0_4bb_HEROSTACK_BIGBB"));
 
             elements.StartRule().HeroPosition(PlayerPosition.Button)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                 .HeroStackBetween(4, 100)
                 .EffectiveStackBetween(0, 6)
                 .BBEqOrMoreThen(60)
-                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_0_6bb_EFFSTACK_BIGBB"));
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "BTN_OPEN_0_6bb_EFFSTACK_BIGBB"));
 
             elements.StartRule().HeroPosition(PlayerPosition.Button)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                 .HeroStackBetween(4, 100)
                 .EffectiveStackBetween(6, 8)
                 .BBEqOrMoreThen(60)
-                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "BTN_OPEN_6_8bb_EFFSTACK_BIGBB"));
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "BTN_OPEN_6_8bb_EFFSTACK_BIGBB"));
 
            
 
@@ -700,14 +700,30 @@ namespace Pingvi
                 .EffectiveStackBetween(0,8)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, elements.EffectiveStack, PlMode.More, "COMMON_PushFoldVsOpen_NASH"));
 
+
+            elements.StartRule()
+               .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
+               .EffectiveStackBetween(0, 8)
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack, PlMode.More, "COMMON_FacingPush_HU_08bb"));
+            
+            elements.StartRule()
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
+                .EffectiveStackBetween(8, 100)
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack, PlMode.More, "COMMON_FacingPush_HU_8_25bb"));
+
+
             elements.StartRule()
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
                 .EffectiveStackBetween(0,11)
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack, PlMode.More, "COMMON_FacingPush_HU_08bb"));
             //TODO переделать со статами!!
             elements.StartRule()
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
                 .EffectiveStackBetween(11, 100)
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack, PlMode.More, "COMMON_FacingPush_HU_8_25bb"));
 
             #endregion
