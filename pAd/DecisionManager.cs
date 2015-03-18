@@ -198,12 +198,35 @@ namespace Pingvi
 
             //OPEN COMMON
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
-                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open).HeroRelativePosition(HeroRelativePosition.InPosition)
+                .EffectiveStackBetween(0, 7)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "SB_OPEN_0_8bb"));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .EffectiveStackBetween(0, 8)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.More, "SB_OPEN_0_8bb"));
 
              //OPEN IP
               //OPEN IP VS LAG
+
+
+            //Open Unex IP
+            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.InPosition)
+                   .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                   .EffectiveStackBetween(7, 8)
+                   .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "SB_OPEN_IP_7-8bb_UNEX"));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.InPosition)
+                   .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                   .EffectiveStackBetween(8, 9)
+                   .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "SB_OPEN_IP_8-9bb_UNEX"));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.InPosition)
+                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                 .EffectiveStackBetween(9, 12)
+                 .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "SB_OPEN_IP_9-12bb_UNEX"));
+
 
             if (_3betStatSB > 35)
             {
@@ -347,6 +370,18 @@ namespace Pingvi
               .EffectiveStackBetween(20, 100)
               .Do(e => CheckHandInRange(e, HeroStatePreflop.Open, elements.EffectiveStack, PlMode.Less, "SB_OPEN_OOP_20bb+_UNK"));
 
+            //CALL PUSH AFTER LIMP
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPushVsLimp)
+                .EffectiveStackBetween(0, 9)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack,
+                        PlMode.More, "SB_CALLPUSH_VSLIMP_7_9bb_UNK"));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPushVsLimp)
+                .EffectiveStackBetween(9, 12)
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingPush, elements.EffectiveStack,
+                        PlMode.More, "SB_CALLPUSH_VSLIMP_9-12bb_UNK"));
 
 
             //CALL PUSH AFTER OPEN
@@ -596,7 +631,7 @@ namespace Pingvi
                     .EffectiveStackBetween(8, 9.5)
                     .Do(
                         e =>
-                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, _OpenRaise, PlMode.Less,
+                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, _OpenRaise, PlMode.More,
                                 "BB_FacingMinRaise_HU_OOP_8_9.5bb_EXPL"));
             }
 

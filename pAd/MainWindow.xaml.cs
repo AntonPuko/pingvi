@@ -97,7 +97,7 @@ namespace Pingvi
             elements.LeftPlayer.Stats.F_CBET, elements.LeftPlayer.Stats.F_BET_LPOT,
             elements.LeftPlayer.Stats.F_CBET_FOLDRAISE, elements.LeftPlayer.Stats.F_FOLD_CBET,
             elements.LeftPlayer.Stats.F_RAISE_CBET, elements.LeftPlayer.Stats.F_DONK,
-            elements.LeftPlayer.Stats.F_DONK_FOLDRAISE, elements.RightPlayer.Stats.PF_SB_OPENMINRAISE);
+            elements.LeftPlayer.Stats.F_DONK_FOLDRAISE, elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE);
 
             RightPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
                                          "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_FOLD_3BET_IP: {8}" +

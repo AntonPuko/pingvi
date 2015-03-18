@@ -10,7 +10,7 @@ namespace PokerModel
         None, Opener,Defender
     }
     public enum HeroStatePreflop {
-        None, Open, FacingLimp, FacingOpen, Facing3Bet, FacingPush
+        None, Open, FacingLimp, FacingOpen, Facing3Bet, FacingPush, FacingPushVsLimp
     }
 
     public enum HeroStatePostflop {
