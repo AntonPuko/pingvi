@@ -14,7 +14,7 @@ namespace PokerModel
     }
 
     public enum HeroStatePostflop {
-        None, Cbet, FacingCbet, FacingDonk, FacingBetToCheck, FacingRaiseToCbet, FacingCheckRaise, MissedCbet
+        None, Cbet, FacingCbet, FacingDonk, FacingBetToCheck, FacingRaiseToCbet, FacingCheckRaise, MissedCbet, LimpBet, FacingDONKVsOpenLimp
     }
 
     public enum HeroRelativePosition {

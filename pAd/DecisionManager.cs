@@ -432,6 +432,12 @@ namespace Pingvi
 
 
             //DEFEND VS OPENRAISE
+            double _btnOpenSteal = 0;
+            var buttonOpener = elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button);
+            if (buttonOpener != null) _btnOpenSteal = buttonOpener.Stats.PF_BTN_STEAL;
+
+            
+
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
                 .OppBetSizeMinRaise()
@@ -444,23 +450,64 @@ namespace Pingvi
                 .EffectiveStackBetween(12, 15)
                 .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "SB_FacingMinRaise_MP_12_15bb"));
 
-            elements.StartRule().HeroPosition(PlayerPosition.Sb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
-                .OppBetSizeMinRaise()
-                .EffectiveStackBetween(15, 17)
-                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "SB_FacingMinRaise_MP_15_17bb"));
+            if (_btnOpenSteal == 0) {
+                elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(15, 17)
+                    .Do(
+                        e =>
+                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None,
+                                "SB_FacingMinRaise_MP_15_17bb_UNK"));
 
-            elements.StartRule().HeroPosition(PlayerPosition.Sb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
-                .OppBetSizeMinRaise()
-                .EffectiveStackBetween(17, 20)
-                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "SB_FacingMinRaise_MP_17_20bb"));
+                elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(17, 20)
+                    .Do(
+                        e =>
+                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None,
+                                "SB_FacingMinRaise_MP_17_20bb_UNK"));
+
+              
+                
+            }
+            else {
+                elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(15, 17)
+                    .Do(
+                     e =>
+                         CheckHandInRange(e, HeroStatePreflop.FacingOpen, _btnOpenSteal, PlMode.Less,
+                             "SB_FacingMinRaise_MP_15_17bb_EXPL"));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(17, 20)
+                    .Do(
+                    e =>
+                       CheckHandInRange(e, HeroStatePreflop.FacingOpen, _btnOpenSteal, PlMode.Less,
+                           "SB_FacingMinRaise_MP_17_20bb_EXPl"));
+
+                if (_btnOpenSteal < 50) {
+                    elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                        .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
+                        .OppBetSizeMinRaise()
+                        .EffectiveStackBetween(20, 100)
+                        .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "SB_FacingMinRaise_MP_20bb+_SMALLBTNSTEAL"));
+                    
+                }
+
+            }
+
 
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
                 .OppBetSizeMinRaise()
                 .EffectiveStackBetween(20, 100)
-                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "SB_FacingMinRaise_MP_20bb+"));
+                .Do(e => CheckHandInRange(e, HeroStatePreflop.FacingOpen, 0, PlMode.None, "SB_FacingMinRaise_MP_20bb+_UNKORBIGBTNSTEAL"));
 
 
             
@@ -631,7 +678,7 @@ namespace Pingvi
                     .EffectiveStackBetween(8, 9.5)
                     .Do(
                         e =>
-                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, _OpenRaise, PlMode.More,
+                            CheckHandInRange(e, HeroStatePreflop.FacingOpen, _OpenRaise, PlMode.Less,
                                 "BB_FacingMinRaise_HU_OOP_8_9.5bb_EXPL"));
             }
 
@@ -813,6 +860,10 @@ namespace Pingvi
                     var pDecision = (elements.EffectiveStack <= 8 && elements.IsHU) ? Decision.OpenPush : Decision.OpenRaise;
                     if ((elements.HeroPlayer.Stack <= 8 && elements.IsHU) || (elements.HeroPlayer.Stack <= 8 && 
                         !elements.IsHU && elements.BbAmt < 60)) pDecision = Decision.OpenPush;
+                    var bplayer = elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button);
+                    if (elements.HeroPlayer.Position == PlayerPosition.Sb && elements.EffectiveStack < 20
+                        && bplayer !=null && bplayer.Bet >0) pDecision = Decision.OpenPush;
+
                     if(hPlayability == -1) pDecision = Decision.OpenPush;
                     if(hPlayability == -2) pDecision = Decision.Limp;
                     Decision[] d  = { nDecision, pDecision};

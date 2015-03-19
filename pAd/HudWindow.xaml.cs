@@ -189,6 +189,46 @@ namespace Pingvi
                     if (hudInfo.Opponent != null) {
                         switch (hudInfo.HeroStateFlop)
                         {
+                            case HeroStatePostflop.LimpBet: {
+                                HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 177, 130));
+                                HeroStateRun.Text = "OL BT";
+
+                                Stat1DefRun.Text = "fcb";
+                                var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
+
+                                Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
+                                Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+
+                                Stat2DefRun.Text = "rcb";
+                                var stat2 = hudInfo.Opponent.Stats.F_RAISE_CBET;
+                                Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
+                                Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+
+                                PeekStatDefForeground(stat1, Stat1DefRun);
+                                PeekStatDefForeground(stat2, Stat2DefRun);
+                                break;
+                            }
+
+                            case HeroStatePostflop.FacingDONKVsOpenLimp: {
+                                HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 180, 255));
+                                HeroStateRun.Text = "LvsDB";
+
+                                Stat1DefRun.Text = "db";
+                                var stat1 = hudInfo.Opponent.Stats.F_DONK;
+                                Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
+                                Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+
+                                Stat2DefRun.Text = "fr";
+                                var stat2 = hudInfo.Opponent.Stats.F_DONK_FOLDRAISE;
+                                Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
+                                Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+
+                                PeekStatDefForeground(stat1, Stat1DefRun);
+                                PeekStatDefForeground(stat2, Stat2DefRun);
+                                break;
+                            }
+
+
                             case HeroStatePostflop.Cbet: case HeroStatePostflop.FacingRaiseToCbet:
                                 {
 

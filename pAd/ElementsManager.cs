@@ -760,6 +760,13 @@ namespace Pingvi {
 
             if (_elements.CurrentStreet == CurrentStreet.Flop) {
                  if(_elements.HeroPlayer.StatePreflop == HeroStatePreflop.None) return HeroStatePostflop.None;
+
+                if (_elements.HeroPlayer.StatePreflop == HeroStatePreflop.Open) {
+                    if (_elements.TotalPot - maxOppBet == 2) {
+                        if (_elements.HeroPlayer.Bet == 0 && maxOppBet == 0) return HeroStatePostflop.LimpBet;
+                        if (_elements.HeroPlayer.Bet == 0 && maxOppBet > 0 && _elements.HeroPlayer.RelativePosition == HeroRelativePosition.InPosition) return HeroStatePostflop.FacingDONKVsOpenLimp;
+                    }
+                }
                  if (_elements.HeroPlayer.StatePreflop == HeroStatePreflop.Open || _elements.HeroPlayer.StatePreflop == HeroStatePreflop.FacingLimp) {
                      if(_elements.HeroPlayer.Bet == 0 && maxOppBet == 0) return HeroStatePostflop.Cbet;
                      if(_elements.HeroPlayer.Bet == 0 && maxOppBet > 0 && _elements.HeroPlayer.RelativePosition ==  HeroRelativePosition.InPosition ) return HeroStatePostflop.FacingDonk;
