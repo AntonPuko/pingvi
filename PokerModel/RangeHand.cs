@@ -13,6 +13,9 @@ namespace PokerModel
     {
         [XmlAttribute]
         public double Playability { get; set; }
+
+
+
         public RangeHand(Card card1, Card card2) : base(card1, card2) {
             Playability = 0.0;
         }

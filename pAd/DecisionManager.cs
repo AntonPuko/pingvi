@@ -860,9 +860,8 @@ namespace Pingvi
                     var pDecision = (elements.EffectiveStack <= 8 && elements.IsHU) ? Decision.OpenPush : Decision.OpenRaise;
                     if ((elements.HeroPlayer.Stack <= 8 && elements.IsHU) || (elements.HeroPlayer.Stack <= 8 && 
                         !elements.IsHU && elements.BbAmt < 60)) pDecision = Decision.OpenPush;
-                    var bplayer = elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button);
-                    if (elements.HeroPlayer.Position == PlayerPosition.Sb && elements.EffectiveStack < 20
-                        && bplayer !=null && bplayer.Bet >0) pDecision = Decision.OpenPush;
+
+                  
 
                     if(hPlayability == -1) pDecision = Decision.OpenPush;
                     if(hPlayability == -2) pDecision = Decision.Limp;
@@ -875,6 +874,12 @@ namespace Pingvi
                 }
                 case HeroStatePreflop.FacingOpen: {
                     var callDec = elements.HeroPlayer.Stack <= 9.5 ? Decision.PushToOpen : Decision.CallToOpen;
+
+                    var bplayer = elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button);
+                    if (elements.HeroPlayer.Position == PlayerPosition.Sb && elements.EffectiveStack < 20
+                        && bplayer != null && bplayer.Bet > 0) callDec = Decision.PushToOpen;
+
+
                     if (elements.EffectiveStack <= 9.5 && elements.IsHU) callDec = Decision.PushToOpen;
                     Decision[] d = { Decision.Fold, callDec, Decision._3Bet4, Decision.PushToOpen, };
                     return d;
