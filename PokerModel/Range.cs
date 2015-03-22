@@ -32,11 +32,7 @@ namespace PokerModel {
             return hnd != null;
         }
 
-        public double CheckHandPlayability(Hand hand) {
-            var hnd = Hands.FirstOrDefault(h => h == hand);
-            if (hnd == null) return 0;
-            return hnd.Playability;
-        }
+    
     
 
        

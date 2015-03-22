@@ -7,14 +7,13 @@ using PokerModel;
 
 namespace Pingvi
 {
-    public enum Decision {
-        None, Fold, Limp, OpenPush, OpenRaise, CallToPush , 
-        CallToOpen, CallToLimp, PushToLimp, RaiseToLimp,  _3Bet4, _3Bet45, PushToOpen,
+    public enum DecisionPreflop {
+        None,Fold,Limp,OpenRaise,Call, _3Bet,Push
     }
     public class HudInfo {
-        public Decision Decision { get; set; }
+        public DecisionPreflop DecisionPreflop { get; set; }
         public double EffectiveStack { get; set; }
-        public double HandPlayability { get; set; }
+        public double HandRangeStat { get; set; }
         public HeroStatePreflop HeroStatePreflop { get; set; }
 
         public HeroStatePostflop HeroStateFlop { get; set; }

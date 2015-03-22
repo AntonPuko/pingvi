@@ -28,7 +28,7 @@ namespace PokerModel
                     return (Range) serializer.Deserialize(fs);
                 }
             } catch (Exception ex) {
-                Debug.Fail(ex.Message);
+                Debug.Fail(pathToXmlFile + ex.Message);
                 return null;
             }
         }
