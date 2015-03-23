@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Pingvi.HudWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="HudWindow"  Height="40" Width="120" Topmost="True" Top="448" Left="2253" WindowStyle="None"  ResizeMode="NoResize" Background="#002A2A2A" Foreground="#FFF3F3F3" AllowsTransparency="True">
+        Title="HudWindow"  Height="40" Width="120" Topmost="True" Top="448" Left="2253" WindowStyle="None"  ResizeMode="NoResize" Background="#002A2A2A" Foreground="#FFF3F3F3" AllowsTransparency="True" Loaded="Window_Loaded" Closing="Window_Closing">
     <Border Name="HudBorder" CornerRadius="2" Background="#2A2A2A">
         <Grid>
             <Grid.RowDefinitions>

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using PokerModel;
@@ -635,6 +637,27 @@ namespace Pingvi
             const string path = @"P:\screens\";
             _tableBitmap.Save(path + DateTime.Now.ToString("s").Replace(':',' ') + ".bmp");
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            //register activate hotkey
+            const uint activateHotkeyVLC = 192; // keycode of tilda ~
+            WINAPI.RegisterHotKey(this, activateHotkeyVLC);
+            ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            WINAPI.UnregisterHotKey(this);
+        }
+
+  
+        void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
+        {
+            if (msg.message == WINAPI.WM_HOTKEY) {
+                this.Activate();
+            }
+        }
+
+       
          
 
     }
