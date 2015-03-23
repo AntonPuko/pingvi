@@ -9,19 +9,20 @@ namespace Pingvi
     //TODO Refact сделать проверку для какого монитора снимать скриншот
     public class ScreenTableManager {
 
-        public RectangleF TablePositionRect;
+        public Rectangle TablePositionRect;
         public TimeSpan BitmapMakeInterval;
         public event Action<Bitmap> NewBitmap;
 
         private DispatcherTimer _bitmapTimer;
 
-        public ScreenTableManager(RectangleF tableRectF, TimeSpan timeInterval) {
-            TablePositionRect = tableRectF;
+        public ScreenTableManager(Rectangle tableRect, TimeSpan timeInterval)
+        {
+            TablePositionRect = tableRect;
             BitmapMakeInterval = timeInterval;
         }
         
         public ScreenTableManager() {
-            TablePositionRect = new RectangleF(550,20,808,581);
+            TablePositionRect = new Rectangle(550, 20, 808, 581);
             BitmapMakeInterval = TimeSpan.FromMilliseconds(150);
         }
 
@@ -44,13 +45,9 @@ namespace Pingvi
                 //capture second monitor screen
                 Bitmap bmp = new Bitmap(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height);
                 using (Graphics gr = Graphics.FromImage(bmp)) {
-                    gr.CopyFromScreen(Screen.AllScreens[1].Bounds.X, Screen.AllScreens[1].Bounds.Y,
-                        0, 0, Screen.AllScreens[1].Bounds.Size, CopyPixelOperation.SourceCopy);
+                    gr.CopyFromScreen(Screen.AllScreens[0].Bounds.Width + TablePositionRect.X, TablePositionRect.Y,
+                        0, 0, TablePositionRect.Size, CopyPixelOperation.SourceCopy);
                 }
-
-                //Crop ScreenShot to table size and position
-                bmp = bmp.Clone(TablePositionRect, bmp.PixelFormat);
-
                 if (NewBitmap != null) {
                     NewBitmap(bmp);
                 }
@@ -60,6 +57,7 @@ namespace Pingvi
          //  }
        }
 
+         
     }
 
 }
