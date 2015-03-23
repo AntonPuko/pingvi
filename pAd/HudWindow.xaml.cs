@@ -110,7 +110,7 @@ namespace Pingvi
             switch (decision) {
                     case DecisionPreflop.Fold:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 85, 85));
-                        DecisionRun.Text = "F 1";
+                        DecisionRun.Text = "F 11";
                         break;
                     case DecisionPreflop.Limp:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
@@ -124,7 +124,7 @@ namespace Pingvi
                         switch (heroState) {
                             case HeroStatePreflop.FacingLimp:
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                                DecisionRun.Text = "CL 42";
+                                DecisionRun.Text = "CL 2";
                                 break;
                             case HeroStatePreflop.FacingOpen:
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
@@ -132,7 +132,7 @@ namespace Pingvi
                                 break;
                             case HeroStatePreflop.FacingPush:
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                                DecisionRun.Text = "CP 46";
+                                DecisionRun.Text = "CP 6";
                                 break;
                         }
                         break;
@@ -352,265 +352,6 @@ namespace Pingvi
             }
         }
 
-        /*
-        public void  OnNewHudInfo(HudInfo hudInfo) {
-
-            ClearStats();
-            HeroStateRun.Text = "";
-
-
-            if (hudInfo.CurrentStreet == CurrentStreet.Preflop) {
-                switch (hudInfo.DecisionPreflop) {
-                    case DecisionPreflop.Fold:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 85, 85));
-                        DecisionRun.Text = "F " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.Limp:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "Lim 22 ";
-                        break;
-                    case DecisionPreflop.OpenPush:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                        DecisionRun.Text = "OP " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.PushToOpen:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                        DecisionRun.Text = "OP " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.OpenRaise:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
-                        DecisionRun.Text = "OR " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.PushToLimp:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                        DecisionRun.Text = "LP " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.RaiseToLimp:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
-                        DecisionRun.Text = "LR " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.CallToOpen:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CO " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.CallToPush:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop.CallToLimp:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CL " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop._3Bet4:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(100, 100, 255));
-                        DecisionRun.Text = "3b4 " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    case DecisionPreflop._3Bet45:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(170, 170, 255));
-                        DecisionRun.Text = "3b5 " + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                    default:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 125, 125));
-                        DecisionRun.Text = "" + hudInfo.HandRangeStat.ToString("#.#");
-                        break;
-                }
-            }
-            else {
-                DecisionRun.Text = "";
-
-                switch (hudInfo.HeroStatePreflop)
-                {
-                    case HeroStatePreflop.Open:
-                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(240, 255, 240));
-                        HeroStateRun.Text = "OPN";
-                        break;
-                    case HeroStatePreflop.FacingOpen:
-                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 232));
-                        HeroStateRun.Text = "Fop";
-                        break;
-                    case HeroStatePreflop.FacingLimp:
-                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 242, 249));
-                        HeroStateRun.Text = "Flp";
-                        break;
-                    case HeroStatePreflop.Facing3Bet:
-                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-                        HeroStateRun.Text = "F3bt" + " -";
-                        break;
-                    case HeroStatePreflop.FacingPush:
-                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-                        HeroStateRun.Text = "FPsh" + " -";
-                        break;
-                    case HeroStatePreflop.None:
-                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-                        HeroStateRun.Text = "non" + " -";
-                        break;
-
-
-                }
-
-
-
-                if (hudInfo.CurrentStreet == CurrentStreet.Flop) {
-                    if (hudInfo.Opponent != null) {
-                        switch (hudInfo.HeroStateFlop)
-                        {
-                            case HeroStatePostflop.LimpBet: {
-                                HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 177, 130));
-                                HeroStateRun.Text = "OL BT";
-
-                                Stat1DefRun.Text = "fcb";
-                                var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
-
-                                Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
-                                Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
-
-                                Stat2DefRun.Text = "rcb";
-                                var stat2 = hudInfo.Opponent.Stats.F_RAISE_CBET;
-                                Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
-                                Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
-
-                                PeekStatDefForeground(stat1, Stat1DefRun);
-                                PeekStatDefForeground(stat2, Stat2DefRun);
-                                break;
-                            }
-
-                            case HeroStatePostflop.FacingDONKVsOpenLimp: {
-                                HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 180, 255));
-                                HeroStateRun.Text = "LvsDB";
-
-                                Stat1DefRun.Text = "db";
-                                var stat1 = hudInfo.Opponent.Stats.F_DONK;
-                                Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
-                                Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
-
-                                Stat2DefRun.Text = "fr";
-                                var stat2 = hudInfo.Opponent.Stats.F_DONK_FOLDRAISE;
-                                Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
-                                Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
-
-                                PeekStatDefForeground(stat1, Stat1DefRun);
-                                PeekStatDefForeground(stat2, Stat2DefRun);
-                                break;
-                            }
-
-
-                            case HeroStatePostflop.Cbet: case HeroStatePostflop.FacingRaiseToCbet:
-                                {
-
-
-                                    if (hudInfo.HeroStatePreflop == HeroStatePreflop.FacingLimp && hudInfo.CurrentPot == 2) {
-                                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 180, 232));
-                                        HeroStateRun.Text = "L BT";
-                                    }
-
-                                    if (hudInfo.HeroStatePreflop == HeroStatePreflop.FacingLimp && hudInfo.CurrentPot >2)
-                                    {
-                                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 232));
-                                        HeroStateRun.Text = "L CB";
-                                    }
-
-                                    if (hudInfo.HeroStatePreflop == HeroStatePreflop.Open) {
-                                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 177, 130));
-                                        HeroStateRun.Text = "O CB";
-                                    }
-                                 
-                                    
-                                    Stat1DefRun.Text = "fcb";
-                                    var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
-
-                                    Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
-                                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
-
-                                    Stat2DefRun.Text = "rcb";
-                                    var stat2 =  hudInfo.Opponent.Stats.F_RAISE_CBET;
-                                    Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
-                                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
-
-                                    PeekStatDefForeground(stat1, Stat1DefRun);
-                                    PeekStatDefForeground(stat2, Stat2DefRun);
-                                    break;
-                                }
-
-                            case HeroStatePostflop.MissedCbet: {
-                                if (hudInfo.HeroStatePreflop == HeroStatePreflop.FacingOpen ||
-                                    hudInfo.HeroStatePreflop == HeroStatePreflop.Facing3Bet) {
-
-                                        if (hudInfo.HeroStatePreflop == HeroStatePreflop.FacingOpen)
-                                        {
-                                            HeroStateRun.Text = "MsCB";
-                                        }
-                                        else if (hudInfo.HeroStatePreflop == HeroStatePreflop.Facing3Bet)
-                                        {
-                                            HeroStateRun.Text = "3MsCB";
-                                        }
-                                        
-                                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 100));
-
-                                        Stat1DefRun.Text = "cb";
-                                        var stat1 = hudInfo.Opponent.Stats.F_CBET;
-                                        Stat1ValRun.Foreground = PeekStatColor(stat1, 55, 70);
-                                        Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
-                                        PeekStatDefForeground(stat1, Stat1DefRun);
-                                }
-                                    break;
-                                }
-
-
-
-                            case HeroStatePostflop.FacingCbet:
-                                {
-                                    
-                                    HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 185, 185));
-                                    if (hudInfo.HeroStatePreflop == HeroStatePreflop.FacingOpen) {
-                                        HeroStateRun.Text = "VsCB";
-                                    }
-                                    else if (hudInfo.HeroStatePreflop == HeroStatePreflop.Facing3Bet) {
-                                        HeroStateRun.Text = "3VsCB";
-                                    }
-                                    
-                                    Stat1DefRun.Text = "cb";
-                                    var stat1 = hudInfo.Opponent.Stats.F_CBET;
-                                    Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
-                                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
-                                    
-
-                                    Stat2DefRun.Text = "fr";
-                                    var stat2 = hudInfo.Opponent.Stats.F_CBET_FOLDRAISE;
-                                    Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
-                                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
-                                    PeekStatDefForeground(stat1, Stat1DefRun);
-                                    PeekStatDefForeground(stat2, Stat2DefRun);
-                                    break;
-                                }
-                            case HeroStatePostflop.FacingDonk:
-                                {
-                                    HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
-                                    HeroStateRun.Text = "VsDK";
-                                    
-                                    Stat1DefRun.Text = "db";
-                                    var stat1 = hudInfo.Opponent.Stats.F_DONK;
-                                    Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
-                                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
-
-                                    Stat2DefRun.Text = "fr";
-                                    var stat2 = hudInfo.Opponent.Stats.F_DONK_FOLDRAISE;
-                                    Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
-                                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
-
-                                    PeekStatDefForeground(stat1, Stat1DefRun);
-                                    PeekStatDefForeground(stat2, Stat2DefRun);
-                                    break;
-                                }
-                        }
-                    }
-                }
-                   
-
-            
-            }
-           
-        }
-           */
 
         private void ClearStats() {
             Stat1DefRun.Text = "";
@@ -640,7 +381,7 @@ namespace Pingvi
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //register activate hotkey
-            const uint activateHotkeyVLC = 192; // keycode of tilda ~
+            const uint activateHotkeyVLC = 86; // keycode of V
             WINAPI.RegisterHotKey(this, activateHotkeyVLC);
             ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
         }
@@ -649,10 +390,18 @@ namespace Pingvi
             WINAPI.UnregisterHotKey(this);
         }
 
+        private uint WM_KEYUP = 0x0101;
+
   
         void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
         {
+            /*
+            if (msg.message == WM_KEYUP) {
+                Debug.WriteLine(msg.wParam);
+            }
+             */
             if (msg.message == WINAPI.WM_HOTKEY) {
+               // MessageBox.Show("fdsdfs");
                 this.Activate();
             }
         }
