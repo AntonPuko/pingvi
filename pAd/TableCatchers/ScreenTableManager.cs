@@ -41,20 +41,20 @@ namespace Pingvi
         }
 
         private void MakeTableBitmap(object sender, EventArgs e) {
-          //  try {
-                //capture second monitor screen
-                Bitmap bmp = new Bitmap(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height);
+            try {
+                Bitmap bmp = new Bitmap(TablePositionRect.Width, TablePositionRect.Height);
                 using (Graphics gr = Graphics.FromImage(bmp)) {
                     gr.CopyFromScreen(Screen.AllScreens[0].Bounds.Width + TablePositionRect.X, TablePositionRect.Y,
                         0, 0, TablePositionRect.Size, CopyPixelOperation.SourceCopy);
                 }
+
                 if (NewBitmap != null) {
                     NewBitmap(bmp);
                 }
 
-         //   } catch (Exception ex ){
-         //       Debug.WriteLine(ex.Message + "in ScreenTableManager.MakeTableBitmap()");
-         //  }
+            } catch (Exception ex ){
+                Debug.WriteLine(ex.Message + "in ScreenTableManager.MakeTableBitmap()");
+           }
        }
 
          

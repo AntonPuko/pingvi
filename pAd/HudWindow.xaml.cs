@@ -130,6 +130,10 @@ namespace Pingvi
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
                                 DecisionRun.Text = "CO 43";
                                 break;
+                            case HeroStatePreflop.FacingPushVsLimp:
+                                DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                                DecisionRun.Text = "CP 22";
+                                break;
                             case HeroStatePreflop.FacingPush:
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
                                 DecisionRun.Text = "CP 6";
