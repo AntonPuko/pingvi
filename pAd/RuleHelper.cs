@@ -112,5 +112,15 @@ namespace Pingvi {
             return context.If(e => e.BbAmt >= BBSize);
         }
 
+        public static RuleContext<Elements> Is3Max(this RuleContext<Elements> context)
+        {
+            return context.If(e => e.InGamePlayers.Count == 3);
+        }
+
+        public static RuleContext<Elements> Is2Max(this RuleContext<Elements> context)
+        {
+            return context.If(e => e.InGamePlayers.Count == 2);
+        }
+
     }
 }
