@@ -195,7 +195,7 @@ namespace Pingvi
                         break;
                 }
         }
-
+        //TODO переписатЬ, убрать повторы кода
         private void ShowFlopInfoStats(HudInfo hudInfo) {
             if (hudInfo.Opponent == null) return;
             switch (hudInfo.HeroStateFlop) {
@@ -207,12 +207,12 @@ namespace Pingvi
                     var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
 
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
-                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+                    Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     Stat2DefRun.Text = "rcb";
                     var stat2 = hudInfo.Opponent.Stats.F_RAISE_CBET;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
-                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+                    Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
                     PeekStatDefForeground(stat1, Stat1DefRun);
                     PeekStatDefForeground(stat2, Stat2DefRun);
@@ -226,12 +226,12 @@ namespace Pingvi
                     Stat1DefRun.Text = "db";
                     var stat1 = hudInfo.Opponent.Stats.F_DONK;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
-                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+                    Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     Stat2DefRun.Text = "fr";
                     var stat2 = hudInfo.Opponent.Stats.F_DONK_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
-                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+                    Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
                     PeekStatDefForeground(stat1, Stat1DefRun);
                     PeekStatDefForeground(stat2, Stat2DefRun);
@@ -267,12 +267,12 @@ namespace Pingvi
                     var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
 
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
-                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+                    Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
-                    Stat2DefRun.Text = "rcb";
+                    Stat2DefRun.Text = "rb";
                     var stat2 = hudInfo.Opponent.Stats.F_RAISE_CBET;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
-                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+                    Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
                     PeekStatDefForeground(stat1, Stat1DefRun);
                     PeekStatDefForeground(stat2, Stat2DefRun);
@@ -299,7 +299,7 @@ namespace Pingvi
                         Stat1DefRun.Text = "cb";
                         var stat1 = hudInfo.Opponent.Stats.F_CBET;
                         Stat1ValRun.Foreground = PeekStatColor(stat1, 55, 70);
-                        Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+                        Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
                         PeekStatDefForeground(stat1, Stat1DefRun);
                     }
                     break;
@@ -323,13 +323,13 @@ namespace Pingvi
                     Stat1DefRun.Text = "cb";
                     var stat1 = hudInfo.Opponent.Stats.F_CBET;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
-                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+                    Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
 
                     Stat2DefRun.Text = "fr";
                     var stat2 = hudInfo.Opponent.Stats.F_CBET_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
-                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+                    Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
                     PeekStatDefForeground(stat1, Stat1DefRun);
                     PeekStatDefForeground(stat2, Stat2DefRun);
                     break;
@@ -342,12 +342,12 @@ namespace Pingvi
                     Stat1DefRun.Text = "db";
                     var stat1 = hudInfo.Opponent.Stats.F_DONK;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
-                    Stat1ValRun.Text = stat1 == 0 ? "-" : stat1.ToString("#");
+                    Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     Stat2DefRun.Text = "fr";
                     var stat2 = hudInfo.Opponent.Stats.F_DONK_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
-                    Stat2ValRun.Text = stat2 == 0 ? "-" : stat2.ToString("#");
+                    Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
                     PeekStatDefForeground(stat1, Stat1DefRun);
                     PeekStatDefForeground(stat2, Stat2DefRun);
@@ -364,13 +364,13 @@ namespace Pingvi
             Stat2ValRun.Text = "";
         }
 
-        private void PeekStatDefForeground(double statValue, Run statDefRun) {
-            if (statValue == 0) statDefRun.Foreground = new SolidColorBrush(Color.FromRgb(180, 180, 180));
+        private void PeekStatDefForeground(double? statValue, Run statDefRun) {
+            if (statValue == null || statValue == 0) statDefRun.Foreground = new SolidColorBrush(Color.FromRgb(180, 180, 180));
             else statDefRun.Foreground = new SolidColorBrush(Color.FromRgb(250, 250, 250));
         }
 
-        private SolidColorBrush PeekStatColor(double stat ,int lim1, int lim2) {
-            if (stat == 0) return new SolidColorBrush(Color.FromRgb(125, 125, 125));
+        private SolidColorBrush PeekStatColor(double? stat ,int lim1, int lim2) {
+            if (stat == null || stat == 0) return new SolidColorBrush(Color.FromRgb(125, 125, 125));
             if (stat > 0 && stat <= lim1) return new SolidColorBrush(Color.FromRgb(0, 255, 0));
             if (stat > lim1  && stat <= lim2) return new SolidColorBrush(Color.FromRgb(255, 255, 175));
             if (stat > lim2) return new SolidColorBrush(Color.FromRgb(255, 0, 0));

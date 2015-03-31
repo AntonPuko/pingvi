@@ -130,12 +130,12 @@ namespace Pingvi
 
             //BTN CALL PUSH VS OPEN
 
-            double _3betStatBtn = 0;
+            double? _3betStatBtn = null;
             if (elements.HuOpp != null && elements.HuOpp.Position == PlayerPosition.Sb) _3betStatBtn = elements.HuOpp.Stats.PF_SB_3BET_VS_BTN;
             if (elements.HuOpp != null && elements.HuOpp.Position == PlayerPosition.Bb) _3betStatBtn = elements.HuOpp.Stats.PF_BB_3BET_VS_BTN;
 
             //BTN CALL PUSH VS OPEN VS UNKNOWN
-            if (_3betStatBtn == 0) {
+            if (_3betStatBtn == null) {
 
                 elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
@@ -177,11 +177,11 @@ namespace Pingvi
             #region SB
             //SB
 
-            double _3betStatSB = 0;
+            double? _3betStatSB = null;
             if (elements.HuOpp != null) _3betStatSB = elements.HuOpp.Stats.PF_BB_3BET_VS_SB;
-            double _DefStatSB = 0;
+            double? _DefStatSB = null;
             if (elements.HuOpp != null) _DefStatSB = elements.HuOpp.Stats.PF_BB_DEF_VS_SBSTEAL;
-            double _FoldCBIP = 0;
+            double? _FoldCBIP = null;
             if (elements.HuOpp != null) _FoldCBIP = elements.HuOpp.Stats.F_FOLD_CBET;
 
             //SB OPEN COMMON
@@ -273,7 +273,7 @@ namespace Pingvi
             //SB OPEN OOP VS NIT OR LOOSEPASSIVE
            
 
-            if (_DefStatSB != 0 && _DefStatSB < 50 || (_DefStatSB >= 50 && _FoldCBIP > 60 && _3betStatSB < 25))
+            if (_DefStatSB != null && _DefStatSB < 50 || (_DefStatSB >= 50 && _FoldCBIP > 60 && _3betStatSB < 25))
             {
 
                 elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
@@ -376,7 +376,7 @@ namespace Pingvi
 
             //SB CALL PUSH AFTER OPEN
             //SB CALL PUSH AFTER VS UNK
-            if (_3betStatSB == 0)
+            if (_3betStatSB == null)
             {
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
@@ -413,7 +413,7 @@ namespace Pingvi
             }
 
             //SB DEFEND VS BTN OPEN
-            double _btnOpenSteal = 0;
+            double? _btnOpenSteal = null;
             var buttonOpener = elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button);
             if (buttonOpener != null) _btnOpenSteal = buttonOpener.Stats.PF_BTN_STEAL;
 
@@ -430,7 +430,7 @@ namespace Pingvi
                 .EffectiveStackBetween(12, 15)
                 .Do(e => CheckDecision(heroHand, "SB_FacingMinRaise_MP_12_15bb", 0, PlMode.None));
 
-            if (_btnOpenSteal == 0)
+            if (_btnOpenSteal == null)
             {
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
@@ -591,13 +591,13 @@ namespace Pingvi
                 .Do(e => CheckDecision(heroHand, "BB_FacingMinRaise_HU_IP_20bb+", 0, PlMode.None));
 
             //BB FACING MINRAISE OOP
-            double _OpenRaise = 0;
+            double? _OpenRaise = null;
             if (elements.HuOpp != null){
                 if (elements.HuOpp.Position == PlayerPosition.Button) _OpenRaise = elements.HuOpp.Stats.PF_BTN_STEAL;
                 else if (elements.HuOpp.Position == PlayerPosition.Sb) _OpenRaise = elements.HuOpp.Stats.PF_SB_OPENMINRAISE;
             }
 
-            if (_OpenRaise == 0) {
+            if (_OpenRaise == null) {
                 elements.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
@@ -801,6 +801,50 @@ namespace Pingvi
                 _isNewDecision = true;
             }
             else {
+                Debug.WriteLine(String.Format("can't find range {0}", rangeName));
+            }
+        }
+
+        private void CheckDecision(Hand heroHand, string rangeName, double? stat, PlMode plMode)
+        {
+            if (_isNewDecision || heroHand == null) return;
+            Range range = _rangesList.FirstOrDefault(r => r.Name == rangeName);
+
+            if (NewRangeChosen != null)
+            {
+
+                NewRangeChosen(rangeName);
+            }
+
+            if (range != null)
+            {
+                if (heroHand.Name == "" || heroHand.Name.Length != 4)
+                {
+                    Debug.WriteLine("wrong heroHand Name");
+                    return;
+                }
+
+                DecisionPreflop decision1 = (DecisionPreflop)range.Hands.First(n => n.Name == heroHand.Name).D1;
+                DecisionPreflop decision2 = (DecisionPreflop)range.Hands.First(n => n.Name == heroHand.Name).D2;
+
+                double statRange = range.Hands.First(n => n.Name == heroHand.Name).S1;
+
+                switch (plMode)
+                {
+                    case PlMode.None:
+                        _hudInfo.DecisionPreflop = decision1;
+                        break;
+                    case PlMode.More:
+                        _hudInfo.DecisionPreflop = stat >= statRange ? decision1 : decision2;
+                        break;
+                    case PlMode.Less:
+                        _hudInfo.DecisionPreflop = stat <= statRange ? decision1 : decision2;
+                        break;
+                }
+                _isNewDecision = true;
+            }
+            else
+            {
                 Debug.WriteLine(String.Format("can't find range {0}", rangeName));
             }
         }
