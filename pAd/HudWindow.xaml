@@ -16,19 +16,15 @@
         
             
             <Label Name="PotOddsLabel"  Content="o" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="13" Margin="1,-11,0,0" Height="40" Grid.Column="1"/>
-            <RichTextBox HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Margin="-3,0.075,-0.453,-45.151" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontWeight="Bold" FontFamily="Tahoma" SelectionOpacity="0" BorderThickness="0" FontSize="13">
+            <RichTextBox HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Margin="-3,0.075,-10,-45.151" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontWeight="Bold" FontFamily="Tahoma" SelectionOpacity="0" BorderThickness="0" FontSize="13" UndoLimit="200">
                 <FlowDocument AllowDrop="False" Focusable="False" FontSize="13" ForceCursor="True" PagePadding="1,0" TextAlignment="Center">
                     <Paragraph TextAlignment="Left">
-                        <Run Name="HeroStateRun"  Text="N"/>
-                        <Run Name="DecisionRun" Text="N" />
+                        <Run Name="HeroStateRun"  Text="NN N"/>
+                        <Run Name="DecisionRun" Text="NN" />
                         <Run Name="Stat1DefRun"  Text="St"/>
                         <Run Name="Stat1ValRun"  Text="0"/>
                         <Run Name="Stat2DefRun"  Text="St"/>
                         <Run Name="Stat2ValRun"  Text="0"/>
-
-                    </Paragraph>
-                    <Paragraph TextAlignment="Center" Margin="0">
-                      
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>

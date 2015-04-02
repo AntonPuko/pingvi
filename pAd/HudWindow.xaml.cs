@@ -189,6 +189,10 @@ namespace Pingvi
                         HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                         HeroStateRun.Text = "FPsh" + " -";
                         break;
+                    case HeroStatePreflop.FacingRaiseVsLimp:
+                        HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                        HeroStateRun.Text = "FRvL" + " -";
+                        break;
                     case HeroStatePreflop.None:
                         HeroStateRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                         HeroStateRun.Text = "non" + " -";
@@ -263,7 +267,7 @@ namespace Pingvi
                     }
 
 
-                    Stat1DefRun.Text = "fcb";
+                    Stat1DefRun.Text = "fb";
                     var stat1 = hudInfo.Opponent.Stats.F_FOLD_CBET;
 
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);

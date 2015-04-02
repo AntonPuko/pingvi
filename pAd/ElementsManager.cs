@@ -768,9 +768,14 @@ namespace Pingvi {
                             (maxOppBet < maxBetPStack/3 && maxOppBet < _elements.HeroPlayer.Stack/3))
                             return HeroStatePreflop.Facing3Bet;
 
+                        
+
                         if (maxOppBet >= _elements.HeroPlayer.Bet &&
                             (maxOppBet >= maxBetPStack || maxOppBet >= _elements.HeroPlayer.Stack / 3) && _elements.HeroPlayer.Bet == 1)
                             return HeroStatePreflop.FacingPushVsLimp;
+
+                        if ((maxOppBet >= 2 && maxOppBet <= 2.5) && _elements.HeroPlayer.Bet == 1)
+                            return HeroStatePreflop.FacingRaiseVsLimp;
                        
 
                         if (maxOppBet >= _elements.HeroPlayer.Bet &&
