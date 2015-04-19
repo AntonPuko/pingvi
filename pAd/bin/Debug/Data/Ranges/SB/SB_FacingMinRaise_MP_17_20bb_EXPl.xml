@@ -1485,7 +1485,7 @@
         <Name>8d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Ac9c" D1="6" D2="1" S1="20">
+    <RangeHand Name="Ac9c" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>13</Value>
         <Suit>Clubs</Suit>
@@ -1499,7 +1499,7 @@
         <Name>9c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="As9s" D1="6" D2="1" S1="20">
+    <RangeHand Name="As9s" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>26</Value>
         <Suit>Spades</Suit>
@@ -1513,7 +1513,7 @@
         <Name>9s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Ah9h" D1="6" D2="1" S1="20">
+    <RangeHand Name="Ah9h" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>39</Value>
         <Suit>Hearts</Suit>
@@ -1527,7 +1527,7 @@
         <Name>9h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Ad9d" D1="6" D2="1" S1="20">
+    <RangeHand Name="Ad9d" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>52</Value>
         <Suit>Diamonds</Suit>
@@ -1541,7 +1541,7 @@
         <Name>9d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AcTc" D1="6" D2="1" S1="15">
+    <RangeHand Name="AcTc" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>13</Value>
         <Suit>Clubs</Suit>
@@ -1555,7 +1555,7 @@
         <Name>Tc</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AsTs" D1="6" D2="1" S1="15">
+    <RangeHand Name="AsTs" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>26</Value>
         <Suit>Spades</Suit>
@@ -1569,7 +1569,7 @@
         <Name>Ts</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AhTh" D1="6" D2="1" S1="15">
+    <RangeHand Name="AhTh" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>39</Value>
         <Suit>Hearts</Suit>
@@ -1583,7 +1583,7 @@
         <Name>Th</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AdTd" D1="6" D2="1" S1="15">
+    <RangeHand Name="AdTd" D1="6" D2="1" S1="0">
       <FirstCard>
         <Value>52</Value>
         <Suit>Diamonds</Suit>
