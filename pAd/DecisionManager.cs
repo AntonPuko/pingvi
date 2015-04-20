@@ -137,42 +137,31 @@ namespace Pingvi
             if (elements.HuOpp != null && elements.HuOpp.Position == PlayerPosition.Sb) _3betStatBtn = elements.HuOpp.Stats.PF_SB_3BET_VS_BTN;
             if (elements.HuOpp != null && elements.HuOpp.Position == PlayerPosition.Bb) _3betStatBtn = elements.HuOpp.Stats.PF_BB_3BET_VS_BTN;
 
+            const double default3BetStatBtn = 20;
+
+            if (_3betStatBtn == null) _3betStatBtn = default3BetStatBtn;
             //BTN CALL PUSH VS OPEN VS UNKNOWN
-            if (_3betStatBtn == null) {
+            
+            elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
+                .EffectiveStackBetween(0, 10)
+                .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_0-11bb_UNK", e.EffectiveStack, PlMode.Less));
+            
+            elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
+                .EffectiveStackBetween(10, 13)
+                .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_10-13bb_EXPL", _3betStatBtn, PlMode.More));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(0, 11)
-                    .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_0-11bb_UNK", e.EffectiveStack, PlMode.Less));
+            elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
+                .EffectiveStackBetween(13, 20)
+                .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_13-20bb_EXPL", _3betStatBtn, PlMode.More));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(11, 100)
-                    .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_11bb+_UNK", e.EffectiveStack, PlMode.Less));
-            }
-            //BTN CALL PUSH VS OPEN  EXPL
-            else
-            {
-                elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
-                  .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                  .EffectiveStackBetween(0, 10)
-                  .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_11bb+_UNK", e.EffectiveStack, PlMode.Less));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(10, 13)
-                    .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_10-13bb_EXPL", _3betStatBtn, PlMode.More));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(13, 20)
-                    .Do(e => CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_13-20bb_EXPL", _3betStatBtn, PlMode.More));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(20, 100)
-                    .Do(e => CheckDecision(heroHand, "BTN_CALLPuSH_VSOPEN_20bb+_EXPL", _3betStatBtn, PlMode.More));
-            }
+            elements.StartRule().HeroPosition(PlayerPosition.Button).IsHU()
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
+                .EffectiveStackBetween(20, 100)
+                .Do(e => CheckDecision(heroHand, "BTN_CALLPuSH_VSOPEN_20bb+_EXPL", _3betStatBtn, PlMode.More));
+         
 
             #endregion
 
