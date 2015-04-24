@@ -408,8 +408,8 @@ namespace Pingvi {
 
 
             //HERO TURN
-            Hero.IsTurnPoint = new PixelPoint(447,568);
-            Hero.IsTurnColor = Color.FromArgb(171, 139, 49);
+            Hero.IsTurnPoint = new PixelPoint(456,543);
+            Hero.IsTurnColor = Color.FromArgb(250, 207, 63);
 
 
         }
