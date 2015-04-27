@@ -108,6 +108,10 @@ namespace Pingvi {
             });
         }
 
+        public static RuleContext<Elements> OppPosition(this RuleContext<Elements> context, PlayerPosition position) {
+            return context.If(e => e.HuOpp.Position == position);
+        } 
+
         public static RuleContext<Elements> BBEqOrMoreThen(this RuleContext<Elements> context, double BBSize) {
             return context.If(e => e.BbAmt >= BBSize);
         }
