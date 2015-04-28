@@ -215,98 +215,84 @@ namespace Pingvi
                .EffectiveStackBetween(17, 100)
                .Do(e => CheckDecision(heroHand, "SB_OPEN_IP_17bb+_UNK", 0, PlMode.None));
 
-            //SB OPEN OOP 
-            //SB OPEN OOP VS NIT OR LOOSEPASSIVE
-           
+            
+            //SB OPEN VS BB 3MAX
 
-            if (_DefStatBBvsSB != null && _DefStatBBvsSB < 50 || (_DefStatBBvsSB >= 50 && _FoldCBIP > 60 && _3betStatBBvsSB < 25))
-            {
+            if (_3betStatBBvsSB == null || _3betStatBBvsSB < 35) {
+                //VS UNK
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                    .EffectiveStackBetween(8, 10)
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_8-10bb_UNK", 0, PlMode.None));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_10-13bb_UNK", 0, PlMode.None));
+
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                    .EffectiveStackBetween(13, 15)
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_13-15bb_UNK", 0, PlMode.None));
+
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                    .EffectiveStackBetween(15, 20)
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_15-20bb_UNK", 0, PlMode.None));
+
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_20-100bb_UNK", 0, PlMode.None));
+            }
+            else {
+                //VS LAG
+                elements.StartRule()
+                   .HeroPosition(PlayerPosition.Sb)
+                   .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                   .EffectiveStackBetween(8, 11)
-                   .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_8-11bb_ROCKorLP", 0, PlMode.None));
+                   .EffectiveStackBetween(8, 10)
+                   .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_8-10bb_AGR", 0, PlMode.None));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(11, 13)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_11-13bb_ROCKorLP", 0, PlMode.None));
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_10-13bb_AGR", 0, PlMode.None));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(13, 15)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_13-15bb_ROCKorLP", 0, PlMode.None));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(15, 20)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_15-20bb_ROCKorLP", 0, PlMode.None));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(20, 100)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_20bb+_ROCKorLP", 0, PlMode.None));
-
-            }
-
-            //SB OPEN OOP VS MANIAC
-
-            if (_3betStatBBvsSB > 40)
-            {
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(8, 11)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_8-11bb_LAG", 0, PlMode.None));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(11, 13)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_11-13bb_LAG", 0, PlMode.None));
-
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                     .EffectiveStackBetween(13, 15)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_13-15bb_LAG", 0, PlMode.None));
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_13-15bb_AGR", 0, PlMode.None));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                     .EffectiveStackBetween(15, 20)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_15-20bb_LAG", 0, PlMode.None));
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_15-20bb_AGR", 0, PlMode.None));
 
-                elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                elements.StartRule()
+                    .HeroPosition(PlayerPosition.Sb)
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                     .EffectiveStackBetween(20, 100)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_20bb+_LAG", 0, PlMode.None));
+                    .Do(e => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_20-100bb_AGR", 0, PlMode.None));
             }
-
-            //SB OPEN OOP VS UNK
-
-            //OPEN OOP UNK
-            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-              .EffectiveStackBetween(8, 11)
-              .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_8-11bb_UNK", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-              .EffectiveStackBetween(11, 13)
-              .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_11-13bb_UNK", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-              .EffectiveStackBetween(13, 15)
-              .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_13-15bb_UNK", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-              .EffectiveStackBetween(15, 20)
-              .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_15-20bb_UNK", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Sb).HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-              .EffectiveStackBetween(20, 100)
-              .Do(e => CheckDecision(heroHand, "SB_OPEN_OOP_20bb+_UNK", 0, PlMode.None));
-
+            
             //SB CALL PUSH AFTER LIMP
 
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
@@ -419,7 +405,7 @@ namespace Pingvi
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
                     .OppBetSizeMinRaise()
-                    .EffectiveStackBetween(17, 20)
+                    .EffectiveStackBetween(17, 19)
                     .Do(e => CheckDecision(heroHand, "SB_FacingMinRaise_MP_17_20bb_UNK", 0, PlMode.None));
 
             }
@@ -434,18 +420,8 @@ namespace Pingvi
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
                     .OppBetSizeMinRaise()
-                    .EffectiveStackBetween(17, 20)
+                    .EffectiveStackBetween(17, 19)
                     .Do(e => CheckDecision(heroHand, "SB_FacingMinRaise_MP_17_20bb_EXPl", _btnOpenSteal, PlMode.More));
-
-                if (_btnOpenSteal < 50)
-                {
-                    elements.StartRule().HeroPosition(PlayerPosition.Sb)
-                        .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
-                        .OppBetSizeMinRaise()
-                        .EffectiveStackBetween(20, 100)
-                        .Do(e => CheckDecision(heroHand, "SB_FacingMinRaise_MP_20bb+_SMALLBTNSTEAL", 0, PlMode.None));
-
-                }
 
             }
 
@@ -453,8 +429,8 @@ namespace Pingvi
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
                 .OppBetSizeMinRaise()
-                .EffectiveStackBetween(20, 100)
-                .Do(e => CheckDecision(heroHand, "SB_FacingMinRaise_MP_20bb+_UNKORBIGBTNSTEAL", 0, PlMode.None));
+                .EffectiveStackBetween(19, 100)
+                .Do(e => CheckDecision(heroHand, "SB_VS_BTN_OPEN_MP_19-100bb", 0, PlMode.None));
 
 
             //BB
