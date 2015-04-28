@@ -674,6 +674,15 @@ namespace Pingvi
                 .Do(e => CheckDecision(heroHand, "BB_FacingMinRaise_HU_OOP_20bb+", 0, PlMode.None));
             
 
+            //BB VS SB CALL OPEN PUSH
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                .OppPosition(PlayerPosition.Sb)
+                .EffectiveStackBetween(9, 100)
+                .Do(e => CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK", e.EffectiveStack, PlMode.Less));
+
+
+
             #endregion
 
             #region COMMON
