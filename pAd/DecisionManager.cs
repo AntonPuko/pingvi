@@ -344,25 +344,25 @@ namespace Pingvi
             {
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(0, 11)
+                    .EffectiveStackBetween(0, 9)
                     .Do(e => CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_0-11bb_UNK", e.EffectiveStack, PlMode.Less));
 
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(11, 100)
-                    .Do(e => CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_11bb+_UNK", e.EffectiveStack, PlMode.Less));
+                    .EffectiveStackBetween(9, 100)
+                    .Do(e => CheckDecision(heroHand, "SB_CALLPUSH_AFTEROPEN_9-100_UNK_NEW", e.EffectiveStack, PlMode.Less));
 
             }
             else
             {
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(0, 10)
+                    .EffectiveStackBetween(0, 9)
                     .Do(e => CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_0-11bb_UNK", e.EffectiveStack, PlMode.Less));
 
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingPush)
-                    .EffectiveStackBetween(10, 13)
+                    .EffectiveStackBetween(9, 13)
                     .Do(e => CheckDecision(heroHand, "SB_CALLPuSH_VSOPEN_10-13bb_EXPL", _3betStatBBvsSB, PlMode.More));
 
                 elements.StartRule().HeroPosition(PlayerPosition.Sb)
@@ -676,7 +676,7 @@ namespace Pingvi
 
             //BB VS SB CALL OPEN PUSH
             elements.StartRule().HeroPosition(PlayerPosition.Bb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
                 .OppPosition(PlayerPosition.Sb)
                 .EffectiveStackBetween(9, 100)
                 .Do(e => CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK", e.EffectiveStack, PlMode.Less));
