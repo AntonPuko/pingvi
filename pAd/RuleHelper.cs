@@ -110,10 +110,20 @@ namespace Pingvi {
 
         public static RuleContext<Elements> OppPosition(this RuleContext<Elements> context, PlayerPosition position) {
             return context.If(e => e.HuOpp.Position == position);
+        }
+
+        public static RuleContext<Elements> OppStackBetween(this RuleContext<Elements> context, double min, double max) {
+            return context.If(e => e.HuOpp.Stack > min && e.HuOpp.Stack <= max);
         } 
 
         public static RuleContext<Elements> BBEqOrMoreThen(this RuleContext<Elements> context, double BBSize) {
             return context.If(e => e.BbAmt >= BBSize);
+        }
+
+
+        public static RuleContext<Elements> BBEqOrLessThen(this RuleContext<Elements> context, double BBSize)
+        {
+            return context.If(e => e.BbAmt <= BBSize);
         }
 
         public static RuleContext<Elements> Is3Max(this RuleContext<Elements> context)

@@ -197,21 +197,21 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.InPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                     .EffectiveStackBetween(9, 12)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_IP_9-12bb_UNEX", 0, PlMode.None));
+                    .Do(e => CheckDecision(heroHand, "SB_VS_BB_OPEN_9-12bb_2max_AGR", 0, PlMode.None));
 
                 elements.StartRule()
                     .HeroPosition(PlayerPosition.Sb)
                     .HeroRelativePosition(HeroRelativePosition.InPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                     .EffectiveStackBetween(12, 14)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_IP_12-14bb_UNEX", 0, PlMode.None));
+                    .Do(e => CheckDecision(heroHand, "SB_VS_BB_OPEN_12-14bb_2max_AGR", 0, PlMode.None));
 
                 elements.StartRule()
                     .HeroPosition(PlayerPosition.Sb)
                     .HeroRelativePosition(HeroRelativePosition.InPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
                     .EffectiveStackBetween(14, 16)
-                    .Do(e => CheckDecision(heroHand, "SB_OPEN_IP_14-16bb_UNEX", 0, PlMode.None));
+                    .Do(e => CheckDecision(heroHand, "SB_VS_BB_OPEN_14-16bb_2max_AGR", 0, PlMode.None));
 
                 elements.StartRule()
                     .HeroPosition(PlayerPosition.Sb)
@@ -261,7 +261,7 @@ namespace Pingvi
                     .HeroPosition(PlayerPosition.Sb)
                     .HeroRelativePosition(HeroRelativePosition.InPosition)
                     .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.Open)
-                    .EffectiveStackBetween(16, 20)
+                    .EffectiveStackBetween(20, 100)
                     .Do(e => CheckDecision(heroHand, "SB_VS_BB_OPEN_20-100bb_2max_UNK", 0, PlMode.None));
 
             }
@@ -577,6 +577,171 @@ namespace Pingvi
 
             Foldto3Bet fto3bCategory = ChooseFoldTo3betCategory(foldTo3bet, elements);
 
+
+            //BB VS BTN OPEN 3MAX
+
+            if (openRaise == null) {
+                //VS UNK
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(0, 3)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_0-3_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(3, 7)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_3-7_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(7, 10)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_7-10_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_10-13_BIGSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(13, 16)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_13-16_BIGSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(16, 20)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_16-20_BIGSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_20-100_BIGSTEAL", 0, PlMode.None));
+
+
+            }
+            if (openRaise > 50) {
+                //VS LOOSE OPEN
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(0, 3)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_0-3_BIGSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(3, 7)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_3-7_BIGSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(7, 10)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_7-10_BIGSTEAL", openRaise, PlMode.More));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_10-13_BIGSTEAL", openRaise, PlMode.More));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(13, 16)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_13-16_BIGSTEAL", openRaise, PlMode.More));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(16, 20)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_16-20_BIGSTEAL", openRaise, PlMode.More));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_20-100_BIGSTEAL", 0, PlMode.None));
+            }
+            else {
+                //VS TIGHT OPEN
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(0, 3)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_0-3_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(3, 7)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_3-7_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(7, 10)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_7-10_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_10-13_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(13, 16)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_13-16_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(16, 20)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_16-20_SMALLSTEAL", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .OppBetSizeMinRaise()
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPEN_20-100_SMALLSTEAL", 0, PlMode.None));
+                
+            }
+
+
+
+            
+
+
             //BB FACING MINRAISE IP
              
 
@@ -619,6 +784,14 @@ namespace Pingvi
 
              
             //BB FACING MINRAISE OOP
+
+
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
+               .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .OppBetSizeMinRaise()
+               .EffectiveStackBetween(17, 20)
+               .Do(e => CheckDecision(heroHand, "BB_FacingMinRaise_HU_OOP_17_20bb", 0, PlMode.None));
             
 
             if (openRaise == null) {
@@ -722,6 +895,22 @@ namespace Pingvi
                 .OppBetSizeMinRaise()
                 .EffectiveStackBetween(20, 100)
                 .Do(e => CheckDecision(heroHand, "BB_FacingMinRaise_HU_OOP_20bb+", 0, PlMode.None));
+
+            //BB vs BTN CALL OPEN PUSH
+
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
+                .OppPosition(PlayerPosition.Button)
+                .EffectiveStackBetween(0, 8)
+                .BBEqOrLessThen(40)
+                .Do(e => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb", e.HuOpp.Stack, PlMode.Less));
+
+
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingPush).IsHU()
+                .OppPosition(PlayerPosition.Button)
+                .EffectiveStackBetween(4, 100)
+                .Do(e => CheckDecision(heroHand, "BB_VS_BTN_OPENPUSH_4-100bb_UNK", e.HuOpp.Stack, PlMode.Less));
             
 
             //BB VS SB CALL OPEN PUSH
