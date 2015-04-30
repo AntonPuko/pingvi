@@ -60,7 +60,7 @@ namespace Pingvi
 
 
             if (hudInfo.CurrentStreet == CurrentStreet.Preflop) {
-                ShowPreflopDecision(hudInfo.DecisionPreflop, hudInfo.HeroStatePreflop, hudInfo.HandRangeStat);
+                ShowPreflopDecision(hudInfo.DecisionPreflop, hudInfo.HeroStatePreflop, hudInfo.HandRangeStat, hudInfo.EffectiveStack);
             }
             else {
                 ShowPreflopStateOnPostflop(hudInfo.HeroStatePreflop);
@@ -105,7 +105,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowPreflopDecision(DecisionPreflop decision, HeroStatePreflop heroState, double heroRangeStat) {
+        private void ShowPreflopDecision(DecisionPreflop decision, HeroStatePreflop heroState, double heroRangeStat, double EffStack) {
             DecisionRun.Text = "";
             switch (decision) {
                     case DecisionPreflop.Fold:
@@ -117,9 +117,19 @@ namespace Pingvi
                         DecisionRun.Text = "Lim 22 ";
                         break;
                     case DecisionPreflop.OpenRaise:
-                        DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
-                        DecisionRun.Text = "OR 3 ";
-                        break;
+                        switch (heroState) {
+                            case HeroStatePreflop.FacingLimp: {
+                                DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(150, 200, 255));
+                                if (EffStack <= 17) DecisionRun.Text = "IS 2 ";
+                                else if (EffStack > 17) DecisionRun.Text = "IS 2.5 ";
+                                break;
+                           }
+                            default:
+                                DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
+                                DecisionRun.Text = "OR 3 ";
+                                break;
+                    }
+                    break;
                     case DecisionPreflop.Call:
                         switch (heroState) {
                             case HeroStatePreflop.FacingLimp:

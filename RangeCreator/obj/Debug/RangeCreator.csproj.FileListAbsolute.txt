@@ -1,0 +1,15 @@
+P:\Dropbox\pAd\RangeCreator\bin\Debug\RangeCreator.exe.config
+P:\Dropbox\pAd\RangeCreator\bin\Debug\RangeCreator.exe
+P:\Dropbox\pAd\RangeCreator\bin\Debug\RangeCreator.pdb
+P:\Dropbox\pAd\RangeCreator\bin\Debug\PokerModel.dll
+P:\Dropbox\pAd\RangeCreator\bin\Debug\PokerModel.pdb
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\RangeCreator\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\RangeCreator\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\RangeCreator\obj\Debug\App.g.cs
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator_MarkupCompile.cache
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.g.resources
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.Properties.Resources.resources
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.exe
+P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.pdb
