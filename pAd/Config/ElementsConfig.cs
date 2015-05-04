@@ -210,14 +210,14 @@ namespace Pingvi {
                 new [] {new RectangleF(8,204,5,4)}
                 };
 
-            LeftPlayer.PF_FOLD_3BET_IP_StatDigPosPoints = new[] { new PixelPoint(19, 219), new PixelPoint(14, 219) };
-            LeftPlayer.PF_FOLD_3BET_IP_StatDigitsRectMass = new[] {
+            LeftPlayer.PF_LIMP_FOLD_StatDigPosPoints = new[] { new PixelPoint(19, 219), new PixelPoint(14, 219) };
+            LeftPlayer.PF_LIMP_FOLD_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(8,214,5,4), new RectangleF(13,214,5,4) }, 
                 new [] {new RectangleF(8,214,5,4)}
                 };
 
-            LeftPlayer.PF_FOLD_3BET_OOP_StatDigPosPoints = new[] { new PixelPoint(19, 230), new PixelPoint(14, 230) };
-            LeftPlayer.PF_FOLD_3BET_OOP_StatDigitsRectMass = new[] {
+            LeftPlayer.PF_FOLD_3BET_StatDigPosPoints = new[] { new PixelPoint(19, 230), new PixelPoint(14, 230) };
+            LeftPlayer.PF_FOLD_3BET_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(8,225,5,4), new RectangleF(13,225,5,4) }, 
                 new [] {new RectangleF(8,225,5,4)}
                 };
@@ -311,14 +311,14 @@ namespace Pingvi {
                 new [] {new RectangleF(720,204,5,4)}
                 };
 
-            RightPlayer.PF_FOLD_3BET_IP_StatDigPosPoints = new[] { new PixelPoint(731, 219), new PixelPoint(726, 219) };
-            RightPlayer.PF_FOLD_3BET_IP_StatDigitsRectMass = new[] {
+            RightPlayer.PF_LIMP_FOLD_StatDigPosPoints = new[] { new PixelPoint(731, 219), new PixelPoint(726, 219) };
+            RightPlayer.PF_LIMP_FOLD_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(720,214,5,4), new RectangleF(725,214,5,4) }, 
                 new [] {new RectangleF(720,214,5,4)}
                 };
 
-            RightPlayer.PF_FOLD_3BET_OOP_StatDigPosPoints = new[] { new PixelPoint(731, 230), new PixelPoint(726, 230) };
-            RightPlayer.PF_FOLD_3BET_OOP_StatDigitsRectMass = new[] {
+            RightPlayer.PF_FOLD_3BET_StatDigPosPoints = new[] { new PixelPoint(731, 230), new PixelPoint(726, 230) };
+            RightPlayer.PF_FOLD_3BET_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(720,225,5,4), new RectangleF(725,225,5,4) }, 
                 new [] {new RectangleF(720,225,5,4)}
                 };

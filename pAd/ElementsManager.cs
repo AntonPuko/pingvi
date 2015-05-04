@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Automation;
-using System.Windows.Threading;
-using System.Xml.Linq;
+
 using PokerModel;
 
 
@@ -122,14 +113,14 @@ namespace Pingvi {
                     _elementsConfig.LeftPlayer.PF_SB_STEAL_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.PF_FOLD_3BET_IP =
-                FindNumberN(_elementsConfig.LeftPlayer.PF_FOLD_3BET_IP_StatDigPosPoints,
-                    _elementsConfig.LeftPlayer.PF_FOLD_3BET_IP_StatDigitsRectMass,
+            _elements.LeftPlayer.Stats.PF_LIMP_FOLD =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_LIMP_FOLD_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_LIMP_FOLD_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.PF_FOLD_3BET_OOP =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_FOLD_3BET_OOP_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_FOLD_3BET_OOP_StatDigitsRectMass,
+            _elements.LeftPlayer.Stats.PF_FOLD_3BET =
+               FindNumberN(_elementsConfig.LeftPlayer.PF_FOLD_3BET_StatDigPosPoints,
+                   _elementsConfig.LeftPlayer.PF_FOLD_3BET_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.LeftPlayer.Stats.PF_SB_3BET_VS_BTN =
@@ -205,14 +196,14 @@ namespace Pingvi {
                     _elementsConfig.RightPlayer.PF_SB_STEAL_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.PF_FOLD_3BET_IP =
-                FindNumberN(_elementsConfig.RightPlayer.PF_FOLD_3BET_IP_StatDigPosPoints,
-                    _elementsConfig.RightPlayer.PF_FOLD_3BET_IP_StatDigitsRectMass,
+            _elements.RightPlayer.Stats.PF_LIMP_FOLD =
+                FindNumberN(_elementsConfig.RightPlayer.PF_LIMP_FOLD_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.PF_LIMP_FOLD_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.PF_FOLD_3BET_OOP =
-               FindNumberN(_elementsConfig.RightPlayer.PF_FOLD_3BET_OOP_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.PF_FOLD_3BET_OOP_StatDigitsRectMass,
+            _elements.RightPlayer.Stats.PF_FOLD_3BET =
+               FindNumberN(_elementsConfig.RightPlayer.PF_FOLD_3BET_StatDigPosPoints,
+                   _elementsConfig.RightPlayer.PF_FOLD_3BET_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.PF_SB_3BET_VS_BTN =

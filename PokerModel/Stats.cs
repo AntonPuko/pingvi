@@ -10,8 +10,8 @@ namespace PokerModel {
         //PREFLOP
         public double? PF_BTN_STEAL; //
         public double? PF_SB_STEAL; //
-        public double? PF_FOLD_3BET_IP; //
-        public double? PF_FOLD_3BET_OOP; //
+        public double? PF_LIMP_FOLD; //
+        public double? PF_FOLD_3BET; //
         public double? PF_SB_3BET_VS_BTN;
         public double? PF_BB_3BET_VS_BTN;
         public double? PF_BB_3BET_VS_SB;

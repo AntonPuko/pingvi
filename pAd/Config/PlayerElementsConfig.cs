@@ -35,11 +35,11 @@ namespace Pingvi {
         public PixelPoint[] PF_SB_STEAL_StatDigPosPoints { get; set; }
         public RectangleF[][] PF_SB_STEAL_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] PF_FOLD_3BET_IP_StatDigPosPoints { get; set; }
-        public RectangleF[][] PF_FOLD_3BET_IP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_LIMP_FOLD_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_LIMP_FOLD_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] PF_FOLD_3BET_OOP_StatDigPosPoints { get; set; }
-        public RectangleF[][] PF_FOLD_3BET_OOP_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_FOLD_3BET_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_FOLD_3BET_StatDigitsRectMass { get; set; }
 
         public PixelPoint[] PF_SB_3BET_VS_BTN_StatDigPosPoints { get; set; }
         public RectangleF[][] PF_SB_3BET_VS_BTN_StatDigitsRectMass { get; set; }

@@ -80,8 +80,8 @@ namespace Pingvi
                     elements.HeroPlayer.Hand.Name, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.StatePostflop);
 
             LeftPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                          "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_FOLD_3BET_IP: {8}" +
-                                                    "\nPF_FOLD_3BET_OOP: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
+                                          "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_LIMP_FOLD: {8}" +
+                                                    "\nPF_FOLD_3BET: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
                                                     "\nPF_BB_3BET_VS_SB: {12}\nPF_BB_DEF_VS_SBSTEAL: {13}\n" +
                                                     "\nF_CBET: {14}\nF_BET_LPOT: {15}\nF_CBET_FOLDRAISE: {16}" +
                                                     "\nF_FOLD_CBET: {17}\nF_RAISE_CBET: {18}\nF_DONK: {19}" +
@@ -91,7 +91,7 @@ namespace Pingvi
             elements.LeftPlayer.CurrentStack, elements.LeftPlayer.Bet,
             elements.LeftPlayer.Stack, elements.LeftPlayer.Type,
             elements.LeftPlayer.Stats.PF_BTN_STEAL, elements.LeftPlayer.Stats.PF_SB_STEAL,
-            elements.LeftPlayer.Stats.PF_FOLD_3BET_IP, elements.LeftPlayer.Stats.PF_FOLD_3BET_OOP,
+            elements.LeftPlayer.Stats.PF_LIMP_FOLD, elements.LeftPlayer.Stats.PF_FOLD_3BET,
             elements.LeftPlayer.Stats.PF_SB_3BET_VS_BTN, elements.LeftPlayer.Stats.PF_BB_3BET_VS_BTN,
             elements.LeftPlayer.Stats.PF_BB_3BET_VS_SB, elements.LeftPlayer.Stats.PF_BB_DEF_VS_SBSTEAL,
             elements.LeftPlayer.Stats.F_CBET, elements.LeftPlayer.Stats.F_BET_LPOT,
@@ -100,8 +100,8 @@ namespace Pingvi
             elements.LeftPlayer.Stats.F_DONK_FOLDRAISE, elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE);
 
             RightPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                         "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_FOLD_3BET_IP: {8}" +
-                                                   "\nPF_FOLD_3BET_OOP: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
+                                         "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_LIMP_FOLD: {8}" +
+                                                   "\nPF_FOLD_3BET: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
                                                    "\nPF_BB_3BET_VS_SB: {12}\nPF_BB_DEF_VS_SBSTEAL: {13}\n" +
                                                    "\nF_CBET: {14}\nF_BET_LPOT: {15}\nF_CBET_FOLDRAISE: {16}" +
                                                    "\nF_FOLD_CBET: {17}\nF_RAISE_CBET: {18}\nF_DONK: {19}" +
@@ -111,7 +111,7 @@ namespace Pingvi
            elements.RightPlayer.CurrentStack, elements.RightPlayer.Bet,
            elements.RightPlayer.Stack, elements.RightPlayer.Type,
            elements.RightPlayer.Stats.PF_BTN_STEAL, elements.RightPlayer.Stats.PF_SB_STEAL,
-           elements.RightPlayer.Stats.PF_FOLD_3BET_IP, elements.RightPlayer.Stats.PF_FOLD_3BET_OOP,
+           elements.RightPlayer.Stats.PF_LIMP_FOLD, elements.RightPlayer.Stats.PF_FOLD_3BET,
            elements.RightPlayer.Stats.PF_SB_3BET_VS_BTN, elements.RightPlayer.Stats.PF_BB_3BET_VS_BTN,
            elements.RightPlayer.Stats.PF_BB_3BET_VS_SB, elements.RightPlayer.Stats.PF_BB_DEF_VS_SBSTEAL,
            elements.RightPlayer.Stats.F_CBET, elements.RightPlayer.Stats.F_BET_LPOT,
