@@ -120,8 +120,9 @@ namespace Pingvi
                         switch (heroState) {
                             case HeroStatePreflop.FacingLimp: {
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(150, 200, 255));
-                                if (EffStack <= 17) DecisionRun.Text = "IS 2 ";
-                                else if (EffStack > 17) DecisionRun.Text = "IS 2.5 ";
+                                if (EffStack <= 16) DecisionRun.Text = "IS 2 ";
+                                else if (EffStack > 16 && EffStack <= 20) DecisionRun.Text = "IS 2.5 ";
+                                else if (EffStack > 20) DecisionRun.Text = "IS 3 ";
                                 break;
                            }
                             default:

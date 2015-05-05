@@ -21,12 +21,18 @@ namespace Pingvi
         string SLineLeftPlayer { get; set; }
         string SlineRightPlayer { get; set; }
 
-        
+        string ResultLine { get; set; }
+
+        string BTNLine { get; set; }
+        string SBLine { get; set; }
+        string BBLine { get; set; }
+
         public LineManager() {
-            SLineHero = "O.B";
-            SLineLeftPlayer = "F";
-            SlineRightPlayer = "C.XC";
+            BTNLine = "O";
+            SBLine = "F";
+            BBLine = "C";
         }
+
 
 
 

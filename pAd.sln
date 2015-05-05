@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveTablePos", "MoveTablePo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeCreator", "RangeCreator\RangeCreator.csproj", "{ED5A6DB2-BEF5-4152-A826-E9A1264D8A41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineManagerTest", "LineManagerTest\LineManagerTest.csproj", "{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{ED5A6DB2-BEF5-4152-A826-E9A1264D8A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED5A6DB2-BEF5-4152-A826-E9A1264D8A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED5A6DB2-BEF5-4152-A826-E9A1264D8A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

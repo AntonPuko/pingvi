@@ -484,7 +484,128 @@ namespace Pingvi
 
 
             //BB
-            //BB FACING LIMP HU
+            //BB FACING LIMP 2MAX HU
+            double? limpfold = null;
+            if (elements.HuOpp != null) limpfold = elements.HuOpp.Stats.PF_LIMP_FOLD;
+
+            if (limpfold > 78)
+            {
+                //VS BIG LIMP-FOLD
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                  .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                  .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                  .EffectiveStackBetween(6, 8)
+                  .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_6-8bb_2max_BIGFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                   .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                   .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                   .EffectiveStackBetween(8, 10)
+                   .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_8-10bb_2max_BIGFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_10-13bb_2max_BIGFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(13, 16)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_13-16bb_2max_BIGFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(16, 20)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_16-20bb_2max_BIGFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_16-20bb_2max_BIGFOLD", 0, PlMode.None));
+
+            }
+            else if (limpfold < 50) {
+                //vs small limp fold
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                   .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                   .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                   .EffectiveStackBetween(6, 8)
+                   .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_6-8bb_2max_SMALLFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                   .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                   .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                   .EffectiveStackBetween(8, 10)
+                   .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_8-10bb_2max_SMALLFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_10-13bb_2max_SMALLFOLD", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(13, 16)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_13-16bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(16, 20)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_16-20bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_16-20bb_2max_UNK", 0, PlMode.None));
+
+            }
+            else {
+                //vs UNK
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(6, 8)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_6-8bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                   .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                   .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                   .EffectiveStackBetween(8, 10)
+                   .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_8-10bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(10, 13)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_10-13bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(13, 16)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_13-16bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(16, 20)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_16-20bb_2max_UNK", 0, PlMode.None));
+
+                elements.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).Is2Max()
+                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                    .EffectiveStackBetween(20, 100)
+                    .Do(e => CheckDecision(heroHand, "BB_VS_SB_LIMP_16-20bb_2max_UNK", 0, PlMode.None));
+            }
+
             //BB FACING LIMP COMMON HU
 
             elements.StartRule().HeroPosition(PlayerPosition.Bb)
@@ -527,33 +648,6 @@ namespace Pingvi
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .EffectiveStackBetween(15, 100)
                 .Do(e => CheckDecision(heroHand, "BB_FacingLimp_HU_IP_15bb+", 0, PlMode.None));
-
-            //BB FACING LIMP OOP   
-
-            elements.StartRule().HeroPosition(PlayerPosition.Bb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).IsHU()
-                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                .EffectiveStackBetween(8, 10)
-                .Do(e => CheckDecision(heroHand, "BB_FacingLimp_HU_OOP_8_10bb", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Bb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).IsHU()
-                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                .EffectiveStackBetween(10, 13)
-                .Do(e => CheckDecision(heroHand, "BB_FacingLimp_HU_OOP_10_13bb", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Bb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).IsHU()
-                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                .EffectiveStackBetween(13, 16)
-                .Do(e => CheckDecision(heroHand, "BB_FacingLimp_HU_OOP_13_16bb", 0, PlMode.None));
-
-            elements.StartRule().HeroPosition(PlayerPosition.Bb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp).IsHU()
-                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                .EffectiveStackBetween(16, 100)
-                .Do(e => CheckDecision(heroHand, "BB_FacingLimp_HU_OOP_16bb+", 0, PlMode.None));
-
 
             double? openRaise = null;
             double? foldTo3bet = null;
