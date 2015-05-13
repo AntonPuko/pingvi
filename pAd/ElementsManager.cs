@@ -138,9 +138,9 @@ namespace Pingvi {
                    _elementsConfig.LeftPlayer.PF_BB_3BET_VS_SB_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.PF_BB_DEF_VS_SBSTEAL =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
+            _elements.LeftPlayer.Stats.PF_BB_FOLD_VS_SBSTEAL =
+               FindNumberN(_elementsConfig.LeftPlayer.PF_BB_VS_SBSTEAL_FOLD_StatDigPosPoints,
+                   _elementsConfig.LeftPlayer.PF_BB_VS_SBSTEAL_FOLD_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
             
             _elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE =
@@ -221,9 +221,9 @@ namespace Pingvi {
                    _elementsConfig.RightPlayer.PF_BB_3BET_VS_SB_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.PF_BB_DEF_VS_SBSTEAL =
-               FindNumberN(_elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
+            _elements.RightPlayer.Stats.PF_BB_FOLD_VS_SBSTEAL =
+               FindNumberN(_elementsConfig.RightPlayer.PF_BB_VS_SBSTEAL_FOLD_StatDigPosPoints,
+                   _elementsConfig.RightPlayer.PF_BB_VS_SBSTEAL_FOLD_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             

@@ -50,8 +50,8 @@ namespace Pingvi {
         public PixelPoint[] PF_BB_3BET_VS_SB_StatDigPosPoints { get; set; }
         public RectangleF[][] PF_BB_3BET_VS_SB_StatDigitsRectMass { get; set; }
 
-        public PixelPoint[] PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints { get; set; }
-        public RectangleF[][] PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass { get; set; }
+        public PixelPoint[] PF_BB_VS_SBSTEAL_FOLD_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_BB_VS_SBSTEAL_FOLD_StatDigitsRectMass { get; set; }
 
         public PixelPoint[] PF_SB_OPENMINRAISE_StatDigPosPoints { get; set; }
         public RectangleF[][] PF_SB_OPENMINRAISE_StatDigitsRectMass { get; set; }
