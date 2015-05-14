@@ -1,0 +1,13 @@
+P:\Dropbox\pAd\LineManagerTest\bin\Debug\LineManagerTest.exe.config
+P:\Dropbox\pAd\LineManagerTest\bin\Debug\LineManagerTest.exe
+P:\Dropbox\pAd\LineManagerTest\bin\Debug\LineManagerTest.pdb
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\App.g.cs
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest_MarkupCompile.cache
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.g.resources
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.Properties.Resources.resources
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.exe
+P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.pdb
