@@ -907,35 +907,35 @@ namespace Pingvi
 
             //BB VS SB OPEN BIG 2max
 
-            elements.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeBetween(2, 3)
                 .EffectiveStackBetween(8, 10)
                 .Do(e => CheckDecision(heroHand, "BB_VS_SB_OPEN_BIG_8-10bb_3max", null, PlMode.None));
 
-            elements.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeBetween(2, 3)
                 .EffectiveStackBetween(10, 13)
                 .Do(e => CheckDecision(heroHand, "BB_VS_SB_OPEN_BIG_10-13bb_3max", null, PlMode.None));
 
-            elements.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeBetween(2.5, 3)
                 .EffectiveStackBetween(13, 16)
                 .Do(e => CheckDecision(heroHand, "BB_VS_SB_OPEN_BIG_13-16bb_3max", null, PlMode.None));
 
-            elements.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeBetween(2.5, 4)
                 .EffectiveStackBetween(16, 20)
                 .Do(e => CheckDecision(heroHand, "BB_VS_SB_OPEN_BIG_16-20bb_3max", null, PlMode.None));
 
-            elements.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            elements.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeBetween(2.5, 4)
