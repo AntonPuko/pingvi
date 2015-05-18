@@ -905,7 +905,7 @@ namespace Pingvi
                 .EffectiveStackBetween(20, 100)
                 .Do(e => CheckDecision(heroHand, "BB_VS_SB_OPEN_20-100bb_3max", openRaise, PlMode.More));
 
-            //BB VS SB OPEN BIG 2max
+            //BB VS SB OPEN BIG 3max
 
             elements.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen).IsHU()
