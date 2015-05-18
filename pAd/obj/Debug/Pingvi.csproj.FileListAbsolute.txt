@@ -36,3 +36,5 @@ P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi_MarkupCompile.cache
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.g.resources
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.Properties.Resources.resources
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\pAd\obj\Debug\TesterWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\TesterWindow.g.cs

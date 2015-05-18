@@ -88,6 +88,9 @@
     <Compile Include="TableCatchers\_old_RemoteTableCatcher.cs" />
     <Compile Include="TableCatchers\_old_TableManager.cs" />
     <Compile Include="TableCatchers\_old_VmTableCatcher.cs" />
+    <Compile Include="TesterWindow.xaml.cs">
+      <DependentUpon>TesterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VmWindow.xaml.cs">
       <DependentUpon>VmWindow.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TesterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VmWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
