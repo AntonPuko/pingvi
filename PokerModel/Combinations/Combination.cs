@@ -7,7 +7,21 @@ using System.Threading.Tasks;
 namespace PokerModel.Combinations
 {
     class Combination {
-        private List<Card> CardList;
+
+        public string Name { get; set; }
+
+        private List<Card> _cardsList;
+
+        private void DefineStraight() {
+            var prevrange = 0;
+
+            _cardsList.Sort();//tidi
+            foreach (var card in _cardsList) {
+                
+            }
+        }
+
+
 
     }
 }

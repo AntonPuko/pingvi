@@ -338,6 +338,9 @@ namespace Pingvi {
             //COUNT EFFECTIVE STACK (AFTER CURRENT STACK AND CURRENT BET)
             _elements.EffectiveStack = CountEffStack();
 
+            _elements.SbBtnEffStack = CountSbBtnEffStack();
+
+
             //HERO ROLE
             _elements.HeroPlayer.Role = CheckHeroRole();
 
@@ -756,11 +759,11 @@ namespace Pingvi {
                     case HeroRole.Opener: {
                         if (maxOppBet <= 1) return HeroStatePreflop.Open;
 
-                        if ((maxOppBet >= 2 && maxOppBet <= 2.5) && _elements.HeroPlayer.Bet == 1)
+                        if ((maxOppBet >= 2 && maxOppBet <= 3) && _elements.HeroPlayer.Bet == 1)
                             return HeroStatePreflop.FacingRaiseVsLimp;
 
-                        if (maxOppBet >= _elements.HeroPlayer.Bet &&
-                            (maxOppBet < maxBetPStack/3 && maxOppBet < _elements.HeroPlayer.Stack/3))
+                        if (maxOppBet > _elements.HeroPlayer.Bet &&
+                            (maxOppBet < maxBetPStack/2.5 && maxOppBet < _elements.HeroPlayer.Stack/3))
                             return HeroStatePreflop.Facing3Bet;
 
                         
@@ -776,7 +779,7 @@ namespace Pingvi {
                         return HeroStatePreflop.None;
                     }
                     case HeroRole.Defender: {
-                        if (_elements.HeroPlayer.Bet == 1 && maxOppBet == 1) return HeroStatePreflop.FacingLimp;
+                        if (_elements.HeroPlayer.Bet <= 1 && maxOppBet == 1) return HeroStatePreflop.FacingLimp;
                         if (_elements.HeroPlayer.Bet <= 1 && maxOppBet > _elements.HeroPlayer.Bet &&
                             maxOppBet < maxBetPStack &&
                             (maxOppBet > maxBetPStack/2 || maxOppBet >= _elements.HeroPlayer.Stack/2))
@@ -840,6 +843,16 @@ namespace Pingvi {
             }
             return HeroStatePostflop.None;
            
+        }
+
+
+        private double CountSbBtnEffStack() {
+            if (_elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button) == null ||
+                _elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Sb) == null) return 0;
+            var btnstack = _elements.ActivePlayers.First(p => p.Position == PlayerPosition.Button).Stack;
+            var sbstack = _elements.ActivePlayers.First(p => p.Position == PlayerPosition.Sb).Stack;
+            return Math.Min(btnstack, sbstack);
+
         }
     }
 

@@ -48,7 +48,7 @@ namespace Pingvi
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             DragMove();
         } */
-
+        //TODO REFACTORING худинфо передавать тупо, сразу лучше все элементы.
 
         public void OnNewHudInfo(HudInfo hudInfo) {
             ShowPotOdds(hudInfo.PotOdds);
@@ -60,7 +60,7 @@ namespace Pingvi
 
 
             if (hudInfo.CurrentStreet == CurrentStreet.Preflop) {
-                ShowPreflopDecision(hudInfo.DecisionPreflop, hudInfo.HeroStatePreflop, hudInfo.HandRangeStat, hudInfo.EffectiveStack);
+                ShowPreflopDecision(hudInfo.DecisionPreflop, hudInfo.HeroStatePreflop, hudInfo.HandRangeStat, hudInfo.EffectiveStack, hudInfo);
             }
             else {
                 ShowPreflopStateOnPostflop(hudInfo.HeroStatePreflop);
@@ -105,7 +105,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowPreflopDecision(DecisionPreflop decision, HeroStatePreflop heroState, double heroRangeStat, double EffStack) {
+        private void ShowPreflopDecision(DecisionPreflop decision, HeroStatePreflop heroState, double heroRangeStat, double EffStack, HudInfo hudInfo) {
             DecisionRun.Text = "";
             switch (decision) {
                     case DecisionPreflop.Fold:
@@ -120,9 +120,20 @@ namespace Pingvi
                         switch (heroState) {
                             case HeroStatePreflop.FacingLimp: {
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(150, 200, 255));
-                                if (EffStack <= 16) DecisionRun.Text = "IS 2 ";
-                                else if (EffStack > 16 && EffStack <= 20) DecisionRun.Text = "IS 2.5 ";
-                                else if (EffStack > 20) DecisionRun.Text = "IS 3 ";
+                                if (hudInfo.HeroPosition == PlayerPosition.Sb) {
+                                    // ISO VS BTN LIMP
+                                    if (hudInfo.SbBtnEffStack >= 20) DecisionRun.Text = "IS 4 ";
+                                    else if (hudInfo.SbBtnEffStack < 20 && hudInfo.SbBtnEffStack > 13)
+                                        DecisionRun.Text = "IS 3 ";
+                                    else if (hudInfo.SbBtnEffStack <= 13) DecisionRun.Text = "IS 2 ";
+                                }
+                                else {
+                                    if (EffStack <= 16) DecisionRun.Text = "IS 2 ";
+                                    else if (EffStack > 16 && EffStack <= 20) DecisionRun.Text = "IS 2.5 ";
+                                    else if (EffStack > 20) DecisionRun.Text = "IS 3 ";
+                                }
+
+                                
                                 break;
                            }
                             default:

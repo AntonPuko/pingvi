@@ -27,6 +27,8 @@ namespace Pingvi
 
         public bool IsHU { get; set; }
         public Player HuOpp { get; set; }
+
+        public double SbBtnEffStack { get; set; }
         public double TotalPot { get; set; }
 
         public CurrentStreet CurrentStreet { get; set; }

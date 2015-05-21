@@ -49,12 +49,15 @@ namespace Pingvi
             prevEl = elements;
             _hudInfo.EffectiveStack = elements.EffectiveStack;
             _hudInfo.HeroRelativePosition = elements.HeroPlayer.RelativePosition;
+            _hudInfo.HeroPosition = elements.HeroPlayer.Position;
+            _hudInfo.SbBtnEffStack = elements.SbBtnEffStack;
             _hudInfo.HeroStatePreflop = elements.HeroPlayer.StatePreflop;
             _hudInfo.HeroStateFlop = elements.HeroPlayer.StatePostflop;
             _hudInfo.CurrentStreet = elements.CurrentStreet;
             _hudInfo.CurrentPot = elements.TotalPot;
             _hudInfo.PotOdds = FindPotOdds(elements);
             _hudInfo.Opponent = elements.HuOpp;
+
 
             Hand heroHand = elements.HeroPlayer.Hand;
 
@@ -365,28 +368,47 @@ namespace Pingvi
                 .EffectiveStackBetween(14, 16)
                 .Do(e => CheckDecision(heroHand, "SB_CALLPUSH_VSLIMP_14-16bb_UNK", null, PlMode.None));
 
-            //SB DEF VS MINR After LImp
+            //SB DEF VS RAISE AFTER LIMP
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
+                .OppBetSizeBetween(2,3)
                 .EffectiveStackBetween(7, 9)
                 .Do(e => CheckDecision(heroHand, "SB_DefVSMinRaise_AfterLIMP_IP_7-9bb_UNK", null, PlMode.None));
 
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
+                .OppBetSize(2)
                 .EffectiveStackBetween(9, 12)
                 .Do(e => CheckDecision(heroHand, "SB_DefVSMinRaise_AfterLIMP_IP_9-12bb_UNK", null, PlMode.None));
 
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
                 .EffectiveStackBetween(12, 14)
+                .OppBetSizeMinRaise()
                 .Do(e => CheckDecision(heroHand, "SB_DefVSMinRaise_AfterLIMP_IP_12-14bb_UNK", null, PlMode.None));
 
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
                 .EffectiveStackBetween(14, 16)
+                .OppBetSizeMinRaise()
                 .Do(e => CheckDecision(heroHand, "SB_DefVSMinRaise_AfterLIMP_IP_14-16bb_UNK", null, PlMode.None));
 
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
+                .OppBetSizeBetween(2, 3)
+                .Do(e => CheckDecision(heroHand, "SB_DefVS3xR_AfterLIMP_IP_9-12bb_UNK", null, PlMode.None));
 
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
+                .EffectiveStackBetween(12, 14)
+                .OppBetSizeBetween(2.5, 3)
+                .Do(e => CheckDecision(heroHand, "SB_DefVS3xR_AfterLIMP_IP_12-14bb_UNK", null, PlMode.None));
+
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Opener).HeroState(HeroStatePreflop.FacingRaiseVsLimp)
+                .EffectiveStackBetween(14, 16)
+                .OppBetSizeBetween(2.5,3)
+                .Do(e => CheckDecision(heroHand, "SB_DefVS3xR_AfterLIMP_IP_14-16bb_UNK", null, PlMode.None));
 
             //SB CALL PUSH AFTER OPEN
             //SB CALL PUSH AFTER VS UNK
@@ -475,12 +497,24 @@ namespace Pingvi
 
             }
 
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp)
+                .EffectiveStackSbVsBtnBetween(20, 100)
+                .Do(e => CheckDecision(heroHand, "SB_ISO_VS_BTN_LIMP_20-100bb_UNK", 0, PlMode.None));
+
 
             elements.StartRule().HeroPosition(PlayerPosition.Sb)
-                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
-                .OppBetSizeMinRaise()
-                .EffectiveStackBetween(19, 100)
-                .Do(e => CheckDecision(heroHand, "SB_VS_BTN_OPEN_MP_19-100bb", 0, PlMode.None));
+                .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingLimp)
+                .EffectiveStackSbVsBtnBetween(16, 20)
+                .Do(e => CheckDecision(heroHand, "SB_ISO_VS_BTN_LIMP_16-20bb_UNK", 0, PlMode.None));
+
+            //SB ISO VS BTN LIMP
+
+            elements.StartRule().HeroPosition(PlayerPosition.Sb)
+               .HeroRole(HeroRole.Defender).HeroState(HeroStatePreflop.FacingOpen)
+               .OppBetSizeMinRaise()
+               .EffectiveStackBetween(19, 100)
+               .Do(e => CheckDecision(heroHand, "SB_VS_BTN_OPEN_MP_19-100bb", 0, PlMode.None));
 
 
             //BB

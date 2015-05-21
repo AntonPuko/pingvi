@@ -20,6 +20,12 @@ namespace Pingvi {
                 return context.If(e => e.EffectiveStack > minAmtBB && e.EffectiveStack <= maxAmtBb);
         }
 
+        public static RuleContext<Elements> EffectiveStackSbVsBtnBetween(this RuleContext<Elements> context, double minAmtBB,
+         double maxAmtBb)
+        {
+            return context.If(e => e.SbBtnEffStack > minAmtBB && e.SbBtnEffStack <= maxAmtBb);
+        }
+
         public static RuleContext<Elements> HeroStackBetween(this RuleContext<Elements> context, double minAmtBB,
       double maxAmtBb)
         {

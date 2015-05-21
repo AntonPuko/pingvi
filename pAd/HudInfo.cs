@@ -16,6 +16,10 @@ namespace Pingvi
         public double HandRangeStat { get; set; }
         public HeroStatePreflop HeroStatePreflop { get; set; }
 
+        public PlayerPosition HeroPosition { get; set; }
+
+        public double SbBtnEffStack { get; set; }
+
         public HeroStatePostflop HeroStateFlop { get; set; }
         public CurrentStreet CurrentStreet { get; set; }
         public double CurrentPot { get; set; }
