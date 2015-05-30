@@ -24,6 +24,10 @@ namespace Pingvi {
         public RectangleF[][] BetDigitsRectMass { get; set; }
 
 
+        
+
+        public PixelPoint[] LinePixelPositions { get ; set; }
+
         //STATS
 
         //PREFLOP

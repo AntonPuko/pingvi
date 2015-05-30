@@ -62,11 +62,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DecisionInfo.cs" />
+    <Compile Include="LineInfo.cs" />
     <Compile Include="LineManager.cs" />
     <Compile Include="Stuff\BitmapHelper.cs" />
     <Compile Include="Config\BlindsElementsConfig.cs" />
     <Compile Include="Config\CommonElementsConfig.cs" />
-    <Compile Include="HudInfo.cs" />
     <Compile Include="Config\HeroElementsConfig.cs" />
     <Compile Include="HudWindow.xaml.cs">
       <DependentUpon>HudWindow.xaml</DependentUpon>
@@ -94,7 +95,7 @@
     <Compile Include="VmWindow.xaml.cs">
       <DependentUpon>VmWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WINAPI.cs" />
+    <Compile Include="Stuff\WINAPI.cs" />
     <Page Include="HudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

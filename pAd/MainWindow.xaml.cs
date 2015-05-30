@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
+
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,34 +22,25 @@ using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace Pingvi
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
-        private ScreenTableManager _tableManager;
-        private ElementsManager _elementManager;
-        private DecisionManager _decisionManager;
-        private HudWindow _hudWindow;
-        
-   //     private VmWindow _vmWindow;
-    
+
+        private readonly ScreenTableManager _tableManager;
+
         public MainWindow() {
-
             _tableManager = new ScreenTableManager();
-            _hudWindow = new HudWindow(_tableManager);
-            _hudWindow.Show();
-            _elementManager = new ElementsManager();
-            _decisionManager = new DecisionManager();
+            var hudWindow = new HudWindow(_tableManager);
+            var elementManager = new ElementsManager();
+            var lineManager = new LineManager();
+            var decisionManager = new DecisionManager();
 
-            _tableManager.NewBitmap += _elementManager.OnNewBitmap;
-            _elementManager.NewElements += OnNewElements;
-            _elementManager.NewElements += _decisionManager.OnNewElements;
-            _decisionManager.NewHudInfo += _hudWindow.OnNewHudInfo;
+            _tableManager.NewBitmap += elementManager.OnNewBitmap;
+            elementManager.NewElements += lineManager.OnNewElements;
+            lineManager.NewLineInfo += decisionManager.OnNewLineInfo;
+            decisionManager.NewDecisionInfo += hudWindow.OnNewDecisionInfo;
+            decisionManager.NewDecisionInfo += OnNewDecisionInfo;
 
-
-            _decisionManager.NewRangeChosen += OnNewRangeChosen;
+            hudWindow.Show();
             InitializeComponent();
-
 
         }
     
@@ -58,36 +49,41 @@ namespace Pingvi
             _tableManager.Start();
         }
 
-        private void OnNewRangeChosen(string rangeName) {
-            
-            RangeLabel.Content = rangeName;
-        }
 
-        private void OnNewElements(Elements elements) {
-            
-            CommonLabel.Content = String.Format("TABN: {0} DECK: {1} {2} {3} {4} {5} :: Str: {6} :: BL: {7}/{8} :: POT: {9}",
+        private void OnNewDecisionInfo(DecisionInfo decisionInfo) {
+
+            var elements = decisionInfo.LineInfo.Elements;
+
+            CommonLabel.Content = "";
+            RangeLabel.Content = "";
+            RangeLabel.Content = decisionInfo.PreflopRangeChosen;    
+
+            CommonLabel.Content = String.Format("TABN: {0} DECK: {1} {2} {3} {4} {5} :: Str: {6} :: BL: {7}/{8} :: POT: {9} :: LINE: {10}",
                 elements.TableNumber,
                 elements.FlopCard1.Name, elements.FlopCard2.Name, elements.FlopCard3.Name,
                 elements.TurnCard.Name, elements.RiverCard.Name,
-                elements.CurrentStreet, elements.SbAmt, elements.BbAmt, elements.TotalPot);
-             
+                elements.CurrentStreet, elements.SbAmt, elements.BbAmt, elements.TotalPot, decisionInfo.LineInfo.FinalCompositeLine);
 
-            HeroLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                                  "IsHeroTurn: {5}\nHeroHand: {6}\n HeroStatePreflop: {7}\n HeroStatePostflop: {8}",
+
+            HeroLabel.Content =
+                String.Format("Status: {0}\nPosition: {1}\nLine: {2}\nCurStack: {3}\nBet: {4}\nStack: {5}\n" +
+                              "IsHeroTurn: {6}\nHeroHand: {7}\n HeroStatePreflop: {8}\nHeroStatePostflop: {9}",
                     elements.HeroPlayer.Status, elements.HeroPlayer.Position,
+                    elements.HeroPlayer.Line,
                     elements.HeroPlayer.CurrentStack, elements.HeroPlayer.Bet,
                     elements.HeroPlayer.Stack, elements.HeroPlayer.IsHeroTurn,
                     elements.HeroPlayer.Hand.Name, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.StatePostflop);
 
-            LeftPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                          "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_LIMP_FOLD: {8}" +
-                                                    "\nPF_FOLD_3BET: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
-                                                    "\nPF_BB_3BET_VS_SB: {12}\nPF_BB_DEF_VS_SBSTEAL: {13}\n" +
-                                                    "\nF_CBET: {14}\nF_BET_LPOT: {15}\nF_CBET_FOLDRAISE: {16}" +
-                                                    "\nF_FOLD_CBET: {17}\nF_RAISE_CBET: {18}\nF_DONK: {19}" +
-                                                    "\nF_DONK_FOLDRAISE: {20}" +
-                                                    "\nPF_OPENMINRAISE: {21}",
+            LeftPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nLine: {2}\nCurStack: {3}\nBet: {4}\nStack: {5}\n" +
+                                          "Type: {6} \n\nPF_BTN_STEAL: {7}\nPF_SB_STEAL: {8}\nPF_LIMP_FOLD: {9}" +
+                                                    "\nPF_FOLD_3BET: {10}\nPF_SB_3BET_VS_BTN: {11}\nPF_BB_3BET_VS_BTN: {12}" +
+                                                    "\nPF_BB_3BET_VS_SB: {13}\nPF_BB_DEF_VS_SBSTEAL: {14}\n" +
+                                                    "\nF_CBET: {15}\nF_BET_LPOT: {16}\nF_CBET_FOLDRAISE: {17}" +
+                                                    "\nF_FOLD_CBET: {18}\nF_RAISE_CBET: {19}\nF_DONK: {20}" +
+                                                    "\nF_DONK_FOLDRAISE: {21}" +
+                                                    "\nPF_OPENMINRAISE: {22}",
             elements.LeftPlayer.Status, elements.LeftPlayer.Position,
+            elements.LeftPlayer.Line,
             elements.LeftPlayer.CurrentStack, elements.LeftPlayer.Bet,
             elements.LeftPlayer.Stack, elements.LeftPlayer.Type,
             elements.LeftPlayer.Stats.PF_BTN_STEAL, elements.LeftPlayer.Stats.PF_SB_STEAL,
@@ -99,15 +95,16 @@ namespace Pingvi
             elements.LeftPlayer.Stats.F_RAISE_CBET, elements.LeftPlayer.Stats.F_DONK,
             elements.LeftPlayer.Stats.F_DONK_FOLDRAISE, elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE);
 
-            RightPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nCurStack: {2}\nBet: {3}\nStack: {4}\n" +
-                                         "Type: {5} \n\nPF_BTN_STEAL: {6}\nPF_SB_STEAL: {7}\nPF_LIMP_FOLD: {8}" +
-                                                   "\nPF_FOLD_3BET: {9}\nPF_SB_3BET_VS_BTN: {10}\nPF_BB_3BET_VS_BTN: {11}" +
-                                                   "\nPF_BB_3BET_VS_SB: {12}\nPF_BB_DEF_VS_SBSTEAL: {13}\n" +
-                                                   "\nF_CBET: {14}\nF_BET_LPOT: {15}\nF_CBET_FOLDRAISE: {16}" +
-                                                   "\nF_FOLD_CBET: {17}\nF_RAISE_CBET: {18}\nF_DONK: {19}" +
-                                                   "\nF_DONK_FOLDRAISE: {20}" +
-                                                     "\nPF_OPENMINRAISE: {21}",
+            RightPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nLine: {2}\nCurStack: {3}\nBet: {4}\nStack: {5}\n" +
+                                          "Type: {6} \n\nPF_BTN_STEAL: {7}\nPF_SB_STEAL: {8}\nPF_LIMP_FOLD: {9}" +
+                                                    "\nPF_FOLD_3BET: {10}\nPF_SB_3BET_VS_BTN: {11}\nPF_BB_3BET_VS_BTN: {12}" +
+                                                    "\nPF_BB_3BET_VS_SB: {13}\nPF_BB_DEF_VS_SBSTEAL: {14}\n" +
+                                                    "\nF_CBET: {15}\nF_BET_LPOT: {16}\nF_CBET_FOLDRAISE: {17}" +
+                                                    "\nF_FOLD_CBET: {18}\nF_RAISE_CBET: {19}\nF_DONK: {20}" +
+                                                    "\nF_DONK_FOLDRAISE: {21}" +
+                                                    "\nPF_OPENMINRAISE: {22}",
            elements.RightPlayer.Status, elements.RightPlayer.Position,
+           elements.RightPlayer.Line,
            elements.RightPlayer.CurrentStack, elements.RightPlayer.Bet,
            elements.RightPlayer.Stack, elements.RightPlayer.Type,
            elements.RightPlayer.Stats.PF_BTN_STEAL, elements.RightPlayer.Stats.PF_SB_STEAL,
@@ -119,16 +116,17 @@ namespace Pingvi
            elements.RightPlayer.Stats.F_RAISE_CBET, elements.RightPlayer.Stats.F_DONK,
            elements.RightPlayer.Stats.F_DONK_FOLDRAISE, elements.RightPlayer.Stats.PF_SB_OPENMINRAISE);
 
-            SituationLabel.Content = String.Format("EffStack: {0} :: HeroRole: {1} :: HeroStatePreflop: {2} :: RelativePos: {3}",
-                elements.EffectiveStack, elements.HeroPlayer.Role, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.RelativePosition);
+            SituationLabel.Content = String.Format("EffStack: {0} :: HeroRole: {1} :: HeroStatePreflop: {2} :: RelativePos: {3} " +
+                                                   "\nPotType: {4} :: PfState: {5} :: FlopState: {6} :: TurnState: {7} :: RiverState: {8}",
+                elements.EffectiveStack, elements.HeroPlayer.Role, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.RelativePosition,
+                decisionInfo.LineInfo.PotType, decisionInfo.LineInfo.HeroPreflopState, decisionInfo.LineInfo.HeroFlopState, 
+                decisionInfo.LineInfo.HeroTurnState, decisionInfo.LineInfo.HeroRiverState);
 
         }
 
    
 
 
-        private void BborBucksButton_Click(object sender, RoutedEventArgs e) {
-           
-        }
+     
     }
 }

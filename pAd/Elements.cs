@@ -51,6 +51,10 @@ namespace Pingvi
         public double EffectiveStack { get; set; }
         public ButtonPosition ButtonPosition { get; set; }
 
+        public string BtnLine { get; set; }
+        public string SbLine { get; set; }
+        public string BbLine { get; set; }
+
         //public Queue<KeyValuePair<int, HeroStatePreflop>> TablesQueue { get; set; }
 
         public Dictionary<int,HeroStatePreflop> TablesDictionary { get;set;} 

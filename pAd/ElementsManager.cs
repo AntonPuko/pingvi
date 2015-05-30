@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-
+using System.Text;
 using PokerModel;
 
 
@@ -84,6 +85,7 @@ namespace Pingvi {
             _elements.TotalPot = FindNumber(_elementsConfig.Common.PotDigPosPoints,
                _elementsConfig.Common.PotDigitsRectMass, _elementsConfig.Common.PotDigitsList,
                _elementsConfig.Common.PotDigitsColor, true);
+
 
 
 
@@ -298,6 +300,12 @@ namespace Pingvi {
 
             //CheckPlayerPosition(_elements.ButtonPosition);
             _elements.HeroPlayer.RelativePosition = CheckHeroRelativePosition();
+
+            //PLAYERS LINE
+
+            _elements.HeroPlayer.Line = ParseLine(_elementsConfig.Hero.LinePixelPositions);
+            _elements.LeftPlayer.Line = ParseLine(_elementsConfig.LeftPlayer.LinePixelPositions);
+            _elements.RightPlayer.Line = ParseLine(_elementsConfig.RightPlayer.LinePixelPositions);
             //CURRENT STACK
 
             #region CurrentPlayersStack
@@ -305,9 +313,11 @@ namespace Pingvi {
             _elements.HeroPlayer.CurrentStack = FindNumber(_elementsConfig.Hero.StackDigPosPoints,
                 _elementsConfig.Hero.StackDigitsRectMass,
                 _elementsConfig.Common.StackDigitsList, _elementsConfig.Common.StackDigitsColor, true);
+
             _elements.LeftPlayer.CurrentStack = FindNumber(_elementsConfig.LeftPlayer.StackDigPosPoints,
                 _elementsConfig.LeftPlayer.StackDigitsRectMass,
                 _elementsConfig.Common.StackDigitsList, _elementsConfig.Common.StackDigitsColor, true);
+
             _elements.RightPlayer.CurrentStack = FindNumber(_elementsConfig.RightPlayer.StackDigPosPoints,
                 _elementsConfig.RightPlayer.StackDigitsRectMass,
                 _elementsConfig.Common.StackDigitsList, _elementsConfig.Common.StackDigitsColor, true);
@@ -333,6 +343,10 @@ namespace Pingvi {
             #endregion
 
 
+            _elements.HeroPlayer.BetToPot = CountBetToPot(_elements.TotalPot, _elements.HeroPlayer.Bet);
+            _elements.LeftPlayer.BetToPot = CountBetToPot(_elements.TotalPot, _elements.LeftPlayer.Bet);
+            _elements.RightPlayer.BetToPot = CountBetToPot(_elements.TotalPot, _elements.RightPlayer.Bet);
+
             CheckIsHU();
 
             //COUNT EFFECTIVE STACK (AFTER CURRENT STACK AND CURRENT BET)
@@ -340,16 +354,17 @@ namespace Pingvi {
 
             _elements.SbBtnEffStack = CountSbBtnEffStack();
 
+            
 
             //HERO ROLE
-            _elements.HeroPlayer.Role = CheckHeroRole();
+            //_elements.HeroPlayer.Role = CheckHeroRole();
 
             //HERO STATE
-            _elements.HeroPlayer.StatePreflop = CheckHeroStatePreflop();
+            //_elements.HeroPlayer.StatePreflop = CheckHeroStatePreflop();
 
             ProcessTable();
 
-            _elements.HeroPlayer.StatePostflop = CheckHeroStatePostflop();
+            //_elements.HeroPlayer.StatePostflop = CheckHeroStatePostflop();
 
             //FIRE EVENT
             if (NewElements != null) {
@@ -639,7 +654,12 @@ namespace Pingvi {
                     a = a*10;
                 }
                 if (inBb) {
-                    return fullNumber/_elements.BbAmt;
+                  // return fullNumber/_elements.BbAmt;
+                    if (digitRectMass[digitRectMass.Length - 1].X - 11 == digitRectMass[digitRectMass.Length - 2].X &&
+                        fullNumber.ToString().Length >1) {
+                        return fullNumber / 10;
+                    }
+                    return fullNumber / 10;
                 }
                 else {
                     return fullNumber; 
@@ -712,6 +732,8 @@ namespace Pingvi {
             return effStack;
         }
 
+
+        /*
         private HeroRole CheckHeroRole() {
             if (!_elements.HeroPlayer.IsHeroTurn) return HeroRole.None;
             if (_elements.CurrentStreet == CurrentStreet.Preflop) {
@@ -844,7 +866,7 @@ namespace Pingvi {
             return HeroStatePostflop.None;
            
         }
-
+        */
 
         private double CountSbBtnEffStack() {
             if (_elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button) == null ||
@@ -854,6 +876,29 @@ namespace Pingvi {
             return Math.Min(btnstack, sbstack);
 
         }
+
+        private string ParseLine(PixelPoint[] playerLinePixelPositions)
+        {
+
+            StringBuilder sb =  new StringBuilder();
+
+            foreach (var pixel in playerLinePixelPositions) {
+                foreach (var letter in _elementsConfig.Common.LineLettersDictionary) {
+                    if (TableBitmap.GetPixel(pixel.X, pixel.Y) == letter.Key)
+                        sb.Append(letter.Value);
+                  //  break; //todo разобраться почему не рабобтает с брейк
+                }
+                 
+            }
+
+            return sb.ToString();
+        }
+
+        private double CountBetToPot(double pot, double playerBet) {
+            if (pot == 0 || playerBet == 0) return 0.0;
+            return playerBet/(pot-playerBet)*100;
+        }
+     
     }
 
 

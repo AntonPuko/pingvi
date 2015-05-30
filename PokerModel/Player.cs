@@ -25,9 +25,13 @@ namespace PokerModel {
 
         public Stats Stats;
 
+        public string Line { get; set; }
+
         public double CurrentStack { get; set; }
 
         public double Bet { get; set; }
+
+        public double BetToPot { get; set; }
 
         public double Stack { get { return CurrentStack + Bet; }
             set { _stack = value; }

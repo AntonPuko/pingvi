@@ -41,7 +41,7 @@ namespace Pingvi
         }
 
         private void MakeTableBitmap(object sender, EventArgs e) {
-            try {
+         //   try {
                 Bitmap bmp = new Bitmap(TablePositionRect.Width, TablePositionRect.Height);
                 using (Graphics gr = Graphics.FromImage(bmp)) {
                     gr.CopyFromScreen(Screen.AllScreens[0].Bounds.Width + TablePositionRect.X, TablePositionRect.Y,
@@ -52,9 +52,9 @@ namespace Pingvi
                     NewBitmap(bmp);
                 }
 
-            } catch (Exception ex ){
-                Debug.WriteLine(ex.Message + "in ScreenTableManager.MakeTableBitmap()");
-           }
+       //     } catch (Exception ex ){
+       //         Debug.WriteLine(ex.Message + "in ScreenTableManager.MakeTableBitmap()");
+      //     }
        }
 
          

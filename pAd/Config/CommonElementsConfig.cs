@@ -24,7 +24,10 @@ namespace Pingvi
        //blinds
 
         public BlindsElementsConfig Blinds { get; set; }
-     
+
+        public PixelPoint[] LinePixelPositions { get; set; }
+
+        public Dictionary<Color, string> LineLettersDictionary { get; set; }
 
 
         //Colors

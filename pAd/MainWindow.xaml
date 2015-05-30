@@ -21,6 +21,6 @@
         <Label Name="RightPlayerLabel" Content="RigthPlayer" Grid.Column="2" Margin="2" Grid.Row="2"/>
         <Label Name="SituationLabel" Content="Situation" Margin="2,2.435,1.906,1.622" Grid.Row="3" Grid.ColumnSpan="3"/>
         <Label Name="RangeLabel" Content="Label" HorizontalAlignment="Left" Margin="80,3,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="437"/>
-        <Button Name="BborBucksButton" Content="bb/$" Grid.Column="2" Margin="114.396,0,0,0" Width="75" Click="BborBucksButton_Click"/>
+       
     </Grid>
 </Window>
