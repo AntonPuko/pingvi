@@ -43,6 +43,8 @@ namespace Pingvi {
             //pot
             Common.PotDigitsPath = @"Data\PotDigits\";
             Common.PotDigitsColor = Color.FromArgb(0, 0, 0);
+            /*
+            //pot in bb
             Common.PotDigPosPoints = new[] {new PixelPoint(408, 41), new PixelPoint(411, 41), new PixelPoint(413, 41), new PixelPoint(417,41) };
             Common.PotDigitsRectMass = new[] {
                 new[] {new RectangleF(412,42,6,6),new RectangleF(419,42,6,6), new RectangleF(430,42,6,6)},
@@ -50,7 +52,14 @@ namespace Pingvi {
                 new[] {new RectangleF(417,42,6,6),  new RectangleF(424,42,6,6),new RectangleF(431,42,6,6), },
                 new[] {new RectangleF(421,42,6,6), new RectangleF(428,42,6,6)}
             };
-            
+            */
+            Common.PotDigPosPoints = new[] { new PixelPoint(413, 41), new PixelPoint(410, 41), new PixelPoint(404, 41) };
+
+            Common.PotDigitsRectMass = new[] {
+                new[] {new RectangleF(417, 42, 6, 6), new RectangleF(424, 42, 6, 6)},
+                new[] {new RectangleF(414, 42, 6, 6), new RectangleF(421, 42, 6, 6), new RectangleF(428, 42, 6, 6),},
+                new[] { new RectangleF(408, 42, 6, 6), new RectangleF(419, 42, 6, 6), new RectangleF(426, 42, 6, 6),
+                    new RectangleF(433, 42, 6, 6)} };
 
             //CARDS
             Common.DeckPath = @"Data\Deck\";
@@ -122,25 +131,27 @@ namespace Pingvi {
             Common.StackDigitsColor = Color.FromArgb(192, 192, 192);
 
 
-
+            /*
+            //stacks in bb
             Hero.StackDigPosPoints = new[] { new PixelPoint(400, 459) , new PixelPoint(397, 459), new PixelPoint(395, 459), new PixelPoint(391, 459) };
             Hero.StackDigitsRectMass = new[] {
                 new[] {new RectangleF(404, 460, 6, 6), new RectangleF(410, 460, 6, 6)},
                 new[] {new RectangleF(401, 460, 6, 6), new RectangleF(408, 460, 6, 6), new RectangleF(415, 460, 6, 6)},
                 new[] {new RectangleF(399, 460, 6, 6), new RectangleF(410, 460, 6, 6)},
                 new[] {new RectangleF(395, 460, 6, 6), new RectangleF(402, 460, 6, 6), new RectangleF(413, 460, 6, 6)}};
+            */
 
-
-            /*
-             * FOR STACK IN CHIPS
+            
+             //FOR STACK IN CHIPS
             Hero.StackDigPosPoints = new[] { new PixelPoint(397, 459), new PixelPoint(393, 459), new PixelPoint(388, 459) };
             Hero.StackDigitsRectMass = new[] {
              new[] {new RectangleF(401, 460, 6, 6), new RectangleF(408, 460, 6, 6) }, 
              new[] {new RectangleF(397, 460, 6, 6), new RectangleF(404, 460, 6, 6), new RectangleF(411, 460, 6, 6)},
              new[] {new RectangleF(392, 460, 6, 6), new RectangleF(403, 460, 6, 6),
                     new RectangleF(410, 460, 6, 6), new RectangleF(417, 460, 6, 6)}};
-            */
-            //stack inBB
+            
+            /*
+            //stack in BB
             LeftPlayer.StackDigPosPoints = new[] { new PixelPoint(57, 133), new PixelPoint(54, 133), new PixelPoint(52, 133), new PixelPoint(48, 133) };
 
             LeftPlayer.StackDigitsRectMass = new[] {
@@ -149,16 +160,18 @@ namespace Pingvi {
              new[] {new RectangleF(56, 134, 6, 6), new RectangleF(67, 134, 6, 6) }, 
              new[] {new RectangleF(52, 134, 6, 6), new RectangleF(59, 134, 6, 6), new RectangleF(70, 134, 6, 6) }, 
              };
+            */
 
-            /*
-             *FOR STACK IN CHIPS       
+            
+             //FOR STACK IN CHIPS       
             LeftPlayer.StackDigPosPoints = new[] {new PixelPoint(54, 133), new PixelPoint(50, 133), new PixelPoint(45, 133)};
             LeftPlayer.StackDigitsRectMass = new [] {
              new[] {new RectangleF(58, 134, 6, 6), new RectangleF(65, 134, 6, 6) }, 
              new[] {new RectangleF(54, 134, 6, 6), new RectangleF(61, 134, 6, 6), new RectangleF(68, 138, 6, 6)},
              new[] {new RectangleF(49, 134, 6, 6), new RectangleF(60, 134, 6, 6), 
                     new RectangleF(67, 134, 6, 6), new RectangleF(74, 134, 6, 6)}};
-             */
+             
+            /*
 
             RightPlayer.StackDigPosPoints = new[] { new PixelPoint(748, 133), new PixelPoint(745, 133), new PixelPoint(743, 133), new PixelPoint(739, 133) };
 
@@ -168,22 +181,23 @@ namespace Pingvi {
                 new[] {new RectangleF(747, 134, 6, 6), new RectangleF(758, 134, 6, 6) },
                 new[] {new RectangleF(743, 134, 6, 6), new RectangleF(750, 134, 6, 6), new RectangleF(761, 134, 6, 6)},
             };
-             
-            /*
-             * FOR STACK IN CHIPS
+             */
+
+            
+             // FOR STACK IN CHIPS
             RightPlayer.StackDigPosPoints = new[] {new PixelPoint(745, 133), new PixelPoint(741, 133), new PixelPoint(736, 133)};
             RightPlayer.StackDigitsRectMass = new[] {
              new[] {new RectangleF(749, 134, 6, 6), new RectangleF(756, 134, 6, 6)},
              new[] {new RectangleF(745, 134, 6, 6), new RectangleF(752, 134, 6, 6), new RectangleF(759, 134, 6, 6)},
              new[] {new RectangleF(740, 134, 6, 6), new RectangleF(751, 134, 6, 6),
                     new RectangleF(758, 134, 6, 6), new RectangleF(765, 134, 6, 6)}};
-            */
+            
 
             //PLAYER BET
             Common.BetDigitsPath = @"Data\BetDigits\";
             Common.BetDigitsColor = Color.FromArgb(255, 246, 207);
 
-
+            /*
             Hero.BetDigPosPoints = new[] {
                 new PixelPoint(453, 324),new PixelPoint(447, 324), new PixelPoint(444, 324), new PixelPoint(438, 324),
                 new PixelPoint(430, 324),new PixelPoint(424, 324), new PixelPoint(421, 324), new PixelPoint(415, 324),
@@ -205,11 +219,11 @@ namespace Pingvi {
                 new[] {new RectangleF(389, 324, 6, 6), new RectangleF(395, 324, 6, 6), new RectangleF(401, 324, 6, 6)},
                 new[] {new RectangleF(389, 324, 6, 6),new RectangleF(395, 324, 6, 6) },
             };
+            */
 
 
 
-
-            /* FOR BET IN CHIPS
+            // FOR BET IN CHIPS
             Hero.BetDigPosPoints = new[] {
                 new PixelPoint(456, 324), new PixelPoint(450, 324), new PixelPoint(444, 324),
                 new PixelPoint(433, 324), new PixelPoint(427, 324), new PixelPoint(421, 324),
@@ -226,7 +240,9 @@ namespace Pingvi {
                 new[] {new RectangleF(389, 324, 6, 6), new RectangleF(395, 324, 6, 6), new RectangleF(401, 324, 6, 6)},
                 new[] {new RectangleF(389, 324, 6, 6),new RectangleF(395, 324, 6, 6), },
             };
-             */
+             
+
+            /*
 
 
             LeftPlayer.BetDigPosPoints = new[] {
@@ -256,11 +272,11 @@ namespace Pingvi {
                 new[] {new RectangleF(196, 191, 6, 6),new RectangleF(202, 191, 6, 6), },
             };
 
+            */
 
 
-
-            /*
-             * FOR BETS IN CHIPS
+            
+             // FOR BETS IN CHIPS
             LeftPlayer.BetDigPosPoints = new[] {
                 new PixelPoint(266, 191), new PixelPoint(257, 191), new PixelPoint(251, 191),
                 new PixelPoint(243, 191), new PixelPoint(234, 191), new PixelPoint(228, 191),
@@ -278,8 +294,9 @@ namespace Pingvi {
                 new[] {new RectangleF(196, 191, 6, 6), new RectangleF(202, 191, 6, 6), new RectangleF(208, 191, 6, 6)},
                 new[] {new RectangleF(196, 191, 6, 6),new RectangleF(202, 191, 6, 6), },
             };
-             * 
-             */
+             
+             
+                 /*
 
             RightPlayer.BetDigPosPoints = new[] {
                 new PixelPoint(594, 197), new PixelPoint(588, 197), new PixelPoint(585, 197), new PixelPoint(579, 197),
@@ -305,9 +322,9 @@ namespace Pingvi {
                 new[] {new RectangleF(537, 198, 6, 6), new RectangleF(543, 198, 6, 6), new RectangleF(552, 198, 6, 6),}
                 };
 
-
-            /*
-             * FOR BETS IN CHIPS
+                 */
+            
+            // FOR BETS IN CHIPS
             RightPlayer.BetDigPosPoints = new[] {
                 new PixelPoint(601, 198), new PixelPoint(578, 198), new PixelPoint(555, 198)};
 
@@ -316,18 +333,18 @@ namespace Pingvi {
                 new[] {new RectangleF(577, 198, 6, 6), new RectangleF(586, 198, 6, 6), new RectangleF(592, 198, 6, 6), new RectangleF(598, 198, 6, 6)},
                 new[] {new RectangleF(554, 198, 6, 6), new RectangleF(563, 198, 6, 6), new RectangleF(569, 198, 6, 6),new RectangleF(575, 198, 6, 6)},
                 new[] {new RectangleF(531, 198, 6, 6), new RectangleF(540, 198, 6, 6), new RectangleF(546, 198, 6, 6),new RectangleF(552, 198, 6, 6)},};
-            */
+            
 
 
             //LINE
             Common.LineLettersDictionary = new Dictionary<Color, string>();
             Common.LineLettersDictionary.Add(Color.FromArgb(128,128,128), "|");
-            Common.LineLettersDictionary.Add(Color.FromArgb(64, 128, 128), "F");
-            Common.LineLettersDictionary.Add(Color.FromArgb(192,192,192), "X");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 255), "L");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 255, 0), "C");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 64), "B");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 128), "R");
+            Common.LineLettersDictionary.Add(Color.FromArgb(64, 128, 128), "f");
+            Common.LineLettersDictionary.Add(Color.FromArgb(192,192,192), "x");
+            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 255), "l");
+            Common.LineLettersDictionary.Add(Color.FromArgb(255, 255, 0), "c");
+            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 64), "b");
+            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 128), "r");
 
             Common.LinePixelPositions = new[] {
                 new PixelPoint(7, 7), new PixelPoint(15, 7), new PixelPoint(23, 7), new PixelPoint(31, 7),
@@ -335,7 +352,7 @@ namespace Pingvi {
                 new PixelPoint(71, 7), new PixelPoint(79, 7), new PixelPoint(87, 7), new PixelPoint(95, 7)
             };
 
-            Hero.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(349,57));
+            Hero.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(459,413));
             LeftPlayer.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(349, 88));
             RightPlayer.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(349, 117));
             //STATISTICS

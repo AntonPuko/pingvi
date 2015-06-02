@@ -1,16 +1,18 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
+
 using PokerModel;
 
 namespace Pingvi {
+
+
+    public enum HeroPreflopStatus {
+        None,
+        Agressor,
+        Defender,
+        Limper,
+    }
     public enum HeroPreflopState {
         None,
         Open,
@@ -52,7 +54,7 @@ namespace Pingvi {
         Bet2,
         DelayBet,
         FacingBet2,
-        BetVsMissFCb,
+        VsMissFCb,
         BetVsMissTCb,
         BetAfterFReraise,
         DelayCbet,
@@ -101,16 +103,16 @@ namespace Pingvi {
         public Action<LineInfo> NewLineInfo;
 
 
-        public PotNType DefinePotNType(Elements elements) {
+        private PotNType DefinePotNType(Elements elements) {
             if(elements.ActivePlayers.Count == 3) return PotNType.Multipot;
             if(elements.ActivePlayers.Count == 2 && elements.InGamePlayers.Count == 3) return PotNType.Hu3Max;
             if(elements.InGamePlayers.Count == 2) return PotNType.Hu2Max;
             return PotNType.None;
         }
 
-        public PotType DefinePotType(string preflopCompositiveLine) {
-            int R = preflopCompositiveLine.Count(l => l == 'R');
-            int L = preflopCompositiveLine.Count(l => l == 'L');
+        private PotType DefinePotType(string preflopCompositiveLine) {
+            int R = preflopCompositiveLine.Count(l => l == 'R' || l == 'r');
+            int L = preflopCompositiveLine.Count(l => l == 'L' || l == 'l');
             if(L == 1 && R == 0) return  PotType.Limped;
             if(L == 1 && R == 1) return PotType.IsoLimped;
             if(R == 1) return PotType.Raised;
@@ -119,7 +121,7 @@ namespace Pingvi {
             
         }
 
-        public bool CheckFacingPush(Elements elements) {
+        private bool CheckFacingPush(Elements elements) {
             double maxOppBet;
             double maxBetPStack;
             if (elements.InGamePlayers == null || elements.InGamePlayers.Count < 2)
@@ -137,302 +139,192 @@ namespace Pingvi {
             return false;
         }
 
-        public HeroPreflopState DefineHeroPreflopState(Elements elements) {
+        private bool CheckLineInLinesMass(string line, string[] linesMass) {
+            var isLineInMass = false;
+            foreach (var l in linesMass) {
+                if (l == line) isLineInMass = true;
+            }
+            return isLineInMass;
+        }
+        private HeroPreflopStatus DefineHeroPreflopStatus(string preflopLine) {
+            string[] agressorLines = {
+                "Rcf|","Rfc|","Rcc|","rRfc|","rRcf|","rRcc|","fRc|","lRfc|","lRcc|","Rc|", 
+                "llRfc|","llRcf|","llRcc|","lfRc|","flRc|","rfRc|","rcRcf|","rcRfc|","rcRcc|","lRc|","rRc|",  "frRc|",
+            };
+            if(CheckLineInLinesMass(preflopLine, agressorLines)) return HeroPreflopStatus.Agressor;
+            string[] defenderLines = {
+                "RrfC|", "RrcC|", "RfrC|", "RcrCf|", "RcrCc|",  "lLrcC|", "lLrfC|",
+                "rCf|", "rCc|", "rCrcC|", "rCrfC|", "LrC|", "RrC|", "frC|", "flRrC|", "lrCc|", "lrCf|", "rcC|", "rfC|",
+                "rrCf|","rrCc|", "rC|"
+            };
+            if (CheckLineInLinesMass(preflopLine, defenderLines)) return HeroPreflopStatus.Defender;
+            string[] limperLines = { "Llx|", "lLx|", "llX|", "lfX|", "lX|", "flX|", "fLx|", "Lx|" , "Lfx", };
+
+            if (CheckLineInLinesMass(preflopLine, limperLines)) return HeroPreflopStatus.Limper;
+            return  HeroPreflopStatus.None;
+        }
+        private HeroPreflopState DefineHeroPreflopState(Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Preflop) return HeroPreflopState.None;
 
             bool facingPush = CheckFacingPush(elements);
 
-            switch (elements.HeroPlayer.Position) {
-                case PlayerPosition.Button: {
-                    if (_preflopCompositeLine == "") return HeroPreflopState.Open;
-                    if ((_preflopCompositeLine == "LRF|" || _preflopCompositeLine == "LFR|") && !facingPush) return HeroPreflopState.FacingISOvsLimp;
-                    if ((_preflopCompositeLine == "RRF|" || _preflopCompositeLine == "RFR|") && !facingPush) return HeroPreflopState.Facing3Bet;
-                    if (_preflopCompositeLine == "RCR|" && !facingPush) return HeroPreflopState.Facing3BetSqueeze;
-                    if (_preflopCompositeLine == "RCR|" && !facingPush) return HeroPreflopState.FacingPushSqueeze;
-                    if ((_preflopCompositeLine == "RRF|" || _preflopCompositeLine == "RFR|") && facingPush) return HeroPreflopState.FacingPushVsOpen;
-                    return HeroPreflopState.None;
-                }
-                case PlayerPosition.Sb: {
-                    switch (_potNtype) {
-                        case PotNType.Multipot: {
-                            if (_preflopCompositeLine == "L|") return HeroPreflopState.FacingLimp;
-                            if (_preflopCompositeLine == "R|" && !facingPush) return HeroPreflopState.FacingOpen;
-                            if (_preflopCompositeLine == "R|" && facingPush) return HeroPreflopState.FacingOpenPush;
-                            if (_preflopCompositeLine == "RCR|" && !facingPush) return HeroPreflopState.Facing3BetSqueeze;
-                            if (_preflopCompositeLine == "RCR|" && facingPush) return HeroPreflopState.FacingPushSqueeze;
-                            return HeroPreflopState.None;
-                        }
-                        case PotNType.Hu3Max: {
-                            if (_preflopCompositeLine == "F|") return HeroPreflopState.Open;
-                            if (_preflopCompositeLine == "FLR|" && !facingPush) return HeroPreflopState.FacingISOvsLimp;
-                            if (_preflopCompositeLine == "FLR|" && facingPush) return HeroPreflopState.FacingPushVsLimp;
-                            if (_preflopCompositeLine == "FRR|" && !facingPush) return HeroPreflopState.Facing3Bet;
-                            if (_preflopCompositeLine == "FRR|") return HeroPreflopState.FacingPush;
-                            return HeroPreflopState.None;
-                        }
-                        case PotNType.Hu2Max: {
-                            if(_preflopCompositeLine == "") return HeroPreflopState.Open;
-                            if (_preflopCompositeLine == "LR|" && !facingPush) return HeroPreflopState.FacingISOvsLimp;
-                            if (_preflopCompositeLine == "LR|" && facingPush) return HeroPreflopState.FacingPushVsLimp;
-                            if (_preflopCompositeLine == "RR|" && !facingPush) return HeroPreflopState.Facing3Bet;
-                            if (_preflopCompositeLine == "RR|" && facingPush) return HeroPreflopState.FacingPushVsOpen;
-                            return  HeroPreflopState.None;
-                        }
-                    }
-                    return HeroPreflopState.None;
-                }
-                case PlayerPosition.Bb: {
-                    switch (_potNtype) {
-                        case PotNType.Multipot: {
-                            if (_preflopCompositeLine == "RC|" && !facingPush) return HeroPreflopState.FacingRaiseCall;
-                            if (_preflopCompositeLine == "LR|" && !facingPush) return HeroPreflopState.FacingISOvsLimp;
-                            if (_preflopCompositeLine == "LR|" && facingPush) return HeroPreflopState.FacingLimpIsoShove;
-                            return HeroPreflopState.None;
-                        }
-                        case PotNType.Hu3Max: {
-                            if (_preflopCompositeLine == "FL|") return HeroPreflopState.FacingLimp;
-                            if ((_preflopCompositeLine == "FR|" || _preflopCompositeLine == "RF|") && !facingPush) return HeroPreflopState.FacingOpen;
-                            if ((_preflopCompositeLine == "FR|" || _preflopCompositeLine == "RF|") && facingPush) return HeroPreflopState.FacingOpenPush;
-                           
-                            return HeroPreflopState.None;
-                        }
-                        case PotNType.Hu2Max: {
-                            if (_preflopCompositeLine == "L|") return HeroPreflopState.FacingLimp;
-                            if (_preflopCompositeLine == "R|" && !facingPush) return HeroPreflopState.FacingOpen;
-                            if (_preflopCompositeLine == "R|" && facingPush) return HeroPreflopState.FacingOpenPush;
-                            if (_preflopCompositeLine == "LRR|" && !facingPush) return HeroPreflopState.FacingReraiseIso;
-                            if (_preflopCompositeLine == "LRR|" && facingPush) return HeroPreflopState.FacingPushToIso;
-                            return HeroPreflopState.None;
-                        }
-                    }
-
-                    }
-                    return HeroPreflopState.None;
-            }
+            //Open
+            string[] openMass = {"", "f|"};
+            bool open = CheckLineInLinesMass(_preflopCompositeLine, openMass);
+            if(open) return HeroPreflopState.Open;
+            //FacingOpen
+            string[] facingOpenMass = {"r|", "fr|", "rf|",};
+            bool facingOpen = CheckLineInLinesMass(_preflopCompositeLine, facingOpenMass);
+            if (facingOpen && !facingPush) return HeroPreflopState.FacingOpen;
+            //FacingLimp
+            string[] facingLimpMass = {"l|", "ll|", "fl|"};
+            bool facingLimp = CheckLineInLinesMass(_preflopCompositeLine, facingLimpMass);
+            if (facingLimp) return HeroPreflopState.FacingLimp;
+            //FacingOpenPush
+            string[] facingOpenPushMass = {"r|", "fr|", "rf|"};
+            bool facingOpenPush = CheckLineInLinesMass(_preflopCompositeLine, facingOpenPushMass);
+            if (facingOpenPush && facingPush) return HeroPreflopState.FacingOpenPush;
+            //FacingPushVsOpen
+            string[] facingPushVsOpenMass = { "Rrf|", "Rfr|", "fRr|", "Rr|"};
+            bool facingPushVsOpen = CheckLineInLinesMass(_preflopCompositeLine, facingPushVsOpenMass);
+            if (facingPushVsOpen && facingPush) return HeroPreflopState.FacingPushVsOpen;
+            //FacingPushVsLimp
+            string[] facingPushVsLimpMass = { "fLr|", "Lr|", };
+            bool facingPushVsLimp = CheckLineInLinesMass(_preflopCompositeLine, facingPushVsLimpMass);
+            if (facingPushVsLimp && facingPush) return HeroPreflopState.FacingPushVsLimp;
+            //Facing3bet
+            string[] facing3BetMass = {"RrF|", "Rfr|", "fRr|", "Rr|", "Rrf|"};
+            bool facing3Bet = CheckLineInLinesMass(_preflopCompositeLine, facing3BetMass);
+            if (facing3Bet && !facingPush) return HeroPreflopState.Facing3Bet;
+            //Facing3betSqeeze
+            string[] facing3BetSqueezeMass = {"Rcr|", "rCr|"};
+            bool facing3BetSqueeze = CheckLineInLinesMass(_preflopCompositeLine, facing3BetSqueezeMass);
+            if (facing3BetSqueeze && !facingPush) return HeroPreflopState.Facing3BetSqueeze;
+            //FacingPushSqeeze
+            string[] facingPushSqueezeMass = { "Rcr|", "rCr|" };
+            bool facingPushSqueeze = CheckLineInLinesMass(_preflopCompositeLine, facingPushSqueezeMass);
+            if (facingPushSqueeze && !facingPush) return HeroPreflopState.FacingPushSqueeze;
+            //FacingISOvsLimp
+            string[] facingISOvsLimpMass = {"Lrf|", "LfR|", "fLr|", "Lr|"};
+            bool facingISOvsLimp = CheckLineInLinesMass(_preflopCompositeLine, facingISOvsLimpMass);
+            if (facingISOvsLimp && !facingPush) return HeroPreflopState.FacingISOvsLimp;
+            //FacingReraiseToISO
+            string[]facingReraiseToISOMass = { "lfRr|", "flRr|", "lRr|"};
+            bool facingReraiseToISO = CheckLineInLinesMass(_preflopCompositeLine, facingReraiseToISOMass);
+            if (facingReraiseToISO && !facingPush) return HeroPreflopState.FacingReraiseIso;
+            //FacingPushToISO
+            string[] facingPushToISOMass = { "lfRr|", "flRr|", "lRr|" };
+            bool facingPushToISO = CheckLineInLinesMass(_preflopCompositeLine, facingPushToISOMass);
+            if (facingPushToISO && facingPush) return HeroPreflopState.FacingPushToIso;
+            //FacingRaiseCall
+            string[] facingRaiseCallMass = { "rc|" };
+            bool facingRaiseCall = CheckLineInLinesMass(_preflopCompositeLine, facingRaiseCallMass);
+            if (facingRaiseCall && facingPush) return HeroPreflopState.FacingRaiseCall;
 
             return HeroPreflopState.None;
         }
 
-        public HeroFlopState DefineHeroFlopState(PotType potType, string compositeLine, Elements elements) {
+        private HeroFlopState DefineHeroFlopState(string compositeLine, Elements elements) {
+
             if(elements.CurrentStreet != CurrentStreet.Flop) return HeroFlopState.None;
 
-            bool facingPush = CheckFacingPush(elements);
-            switch (_potNtype) {
-                case PotNType.Multipot: {
-                    switch (elements.HeroPlayer.Position) {
-                        case PlayerPosition.Button: {
-                            if (compositeLine == "RCC|XX|") return HeroFlopState.Cbet;
-                            if (compositeLine == "RCC|XB|" || compositeLine == "RCC|BF|") return HeroFlopState.FacingDonk;
-                            
-                            return HeroFlopState.None;
-                        }
-                        case PlayerPosition.Sb: {
-                            return HeroFlopState.None;
-                        }
-                        case PlayerPosition.Bb: {
-                            return  HeroFlopState.None;
-                        }
-                    }
-                    return HeroFlopState.None;
-                }
-                case PotNType.Hu3Max: {
-                    switch (elements.HeroPlayer.Position) {
-                        //TODO не все ситуации разобраны
-                        case PlayerPosition.Button: {
-                            if (compositeLine == "RCF|X|" || compositeLine == "RFC|X|") return HeroFlopState.Cbet;
-                            if (compositeLine == "RCF|B|" || compositeLine == "RFC|B|") return HeroFlopState.FacingDonk;
-                            if (compositeLine == "RCF|XBR|" || compositeLine == "RFC|XBR|") return HeroFlopState.FacingReraise;
 
-                            if (compositeLine == "RRFC|X" || compositeLine == "RFRC|X|") return HeroFlopState.FacingMissCbet;
-                            if (compositeLine == "RRFC|B" || compositeLine == "RFRC|B|") return HeroFlopState.FacingCbet;
-                            
-                            return HeroFlopState.None;
-                        }
-                        case PlayerPosition.Sb: {
-                            //SB VS BTN
-                            if(compositeLine == "LRFC|") return HeroFlopState.Cbet;
+            //Bet
+            string[] betMass = {"lLx|x|", "Llx|xx|", "lfX|", "flX|x|", "lX|", "fLx|"};
+            bool bet = CheckLineInLinesMass(compositeLine, betMass);
+            if(bet) return HeroFlopState.Bet;
+            //Cbet 
+            string[] cbetMass = {
+                "Rcc|xx|", "Rcf|x|", "Rfc|x|", "lRfc|", "rRfc|", "fRc|", "lfRc|", "rfRc|", "flRc|x|",
+                "lx|x|", "Rc|x|", "lRc|", "rRc|", "lRcf|"
+            };
+            bool cbet = CheckLineInLinesMass(compositeLine, cbetMass);
+            if (cbet) return HeroFlopState.Cbet;
+            //FacingBet
+            string[] facingbetMass = { "lLx|Xbf|", "lLx|Xbc|", "lX|Xb|", "Lx|b|" };
+            bool facingbet = CheckLineInLinesMass(compositeLine, facingbetMass);
+            if (facingbet) return HeroFlopState.FacingBet;
+            //FacingCbet
+            string[] facingCbetMass = {
+                "rCc|Xxb|", "rcC|xXbf|", "rcC|xXbc|", "rC|Xb|", "RrC|b|", "frC|b|", "rfC|Xb|", "fRrC|Xb|", "rCf|Xb|",
+                "RrfC|b|", "RfrC|b|", "LrC|b|", 
+            };
+            bool facingCbet = CheckLineInLinesMass(compositeLine, facingCbetMass);
+            if (facingCbet) return HeroFlopState.FacingCbet;
+            //FacingDonk
+            string[] facingDonkMass = {"Rcc|bf|", "Rcc|bc|", "Rcc|xb|", "Rcf|b|", "Rfc|b|", "Rc|b|", };
+            bool facingDonk = CheckLineInLinesMass(compositeLine, facingDonkMass);
+            if(facingDonk) return HeroFlopState.FacingDonk;
+            //FacingBet
+            string[] facingBetMass = {
+                "lX|Xb|", "lfX|Xb|", "Llx|b|", "Llx|xb|", "lLx|Xbf|", "lLx|Xbc|", "lLx|Xxb|",
+                "flX|Xb|", "lX|b|"
+            };
+            bool facingBet = CheckLineInLinesMass(compositeLine, facingBetMass);
+            if(facingBet) return HeroFlopState.FacingBet;
+            //FacingMissCbet
+            string[] facingMissCbetMass = {"RrfC|x|", "RfrC|x|", "frC|x|", "LrC|x", "RrC|x|"};
+            bool facingMissCbet = CheckLineInLinesMass(compositeLine, facingMissCbetMass);
+            if(facingMissCbet) return HeroFlopState.FacingMissCbet;
+            //FacingBetVsMissCbet
+            string[] facingBetVsMissCbetMass = {"rfRc|Xb|", "lfRc|Xb|", "rRfC|Xb|", "fRc|Xb|", "lRc|Xb|", "rRc|Xb|"};
+            bool facingBetVsMissCbet = CheckLineInLinesMass(compositeLine, facingBetVsMissCbetMass);
+            if (facingBetVsMissCbet) return HeroFlopState.FacingBetVsMissCbet;
+            //FacingReraise
+            string[] facingReraiseMass = {
+                "Rcf|xBr|", "lfX|Br|", "fRc|Br|", "lfRc|Br|", "rfRc|Br|", "flX|xBr|", "flRc|xBr|",
+                "frC|xBr|", "Rc|xBr|", "lX|Br|", "rRc|Br|"
+            };
+            bool facingReraise = CheckLineInLinesMass(compositeLine, facingReraiseMass);
+            if(facingReraise) return HeroFlopState.FacingReraise;
 
-                            if(compositeLine == "RCF|") return HeroFlopState.Donk;
-                            if (compositeLine == "RCF|XB|") return HeroFlopState.FacingCbet;
-
-                            if (compositeLine == "RRFC|") return HeroFlopState.Cbet;
-                            if (compositeLine == "RRFC|XB|") return HeroFlopState.FacingBetVsMissCbet;
-
-                            
-                            //SB VS BB
-                            if (compositeLine == "FLC|") return HeroFlopState.Cbet; //возможно стоит подругому статус сделать
-                            if (compositeLine == "FLC|XB|") return HeroFlopState.FacingBet;
-                            if (compositeLine == "FLRC|") return HeroFlopState.Donk;
-
-                            if (compositeLine == "FRC|") return HeroFlopState.Cbet;
-                            if (compositeLine == "FRC|XB|") return HeroFlopState.FacingBetVsMissCbet;
-                            if (compositeLine == "FRC|BR|") return HeroFlopState.FacingReraise;
-
-                            if (compositeLine == "FRRC|") return HeroFlopState.Donk;
-                            if (compositeLine == "FRRC|XB|") return HeroFlopState.FacingCbet;
-
-                            
-                            return HeroFlopState.None;
-                        }
-                        case PlayerPosition.Bb: {
-                            //TODO
-                            //BB VS BTN
-                            if(compositeLine == "LFX|") return HeroFlopState.Bet;
-                            if(compositeLine == "LFX|BR|") return  HeroFlopState.FacingReraise;
-                            if(compositeLine == "LFX|XB|") return  HeroFlopState.FacingBet;
-
-                            if(compositeLine == "LFRC|") return HeroFlopState.Cbet;
-                            if(compositeLine == "LFRC|BR|") return  HeroFlopState.FacingReraise;
-                            if(compositeLine == "LFRC|XB|") return HeroFlopState.FacingBetVsMissCbet;
-
-                            if(compositeLine == "RFC|") return  HeroFlopState.Donk;
-                            if(compositeLine == "RFC|BR") return  HeroFlopState.FacingReraise;
-                            if(compositeLine == "RFC|XB|") return HeroFlopState.FacingCbet;
-
-                            if(compositeLine == "RFRC|") return HeroFlopState.Cbet;
-                            if(compositeLine == "RFRC|BR|") return HeroFlopState.FacingReraise;
-                            if(compositeLine == "RFRC|XB|") return HeroFlopState.FacingBetVsMissCbet;
-
-                            //BB VS SB
-                            if(compositeLine == "FLX|B|") return HeroFlopState.FacingBet;
-                            if(compositeLine == "FLX|X|") return HeroFlopState.Bet;
-                            if(compositeLine == "FLX|XBR|") return  HeroFlopState.FacingReraise;
-
-                            if(compositeLine == "FLRC|B|") return  HeroFlopState.Donk;
-                            if(compositeLine == "FLRC|X|") return  HeroFlopState.Cbet;
-                            if(compositeLine == "FLRC|XBR|") return HeroFlopState.FacingReraise;
-                            
-                            
-                            return HeroFlopState.None;
-                        }
-                    }
-                    return HeroFlopState.None;
-                }
-                case PotNType.Hu2Max: {
-                    switch (elements.HeroPlayer.Position) {
-                        case PlayerPosition.Sb: {
-                            //TODO не все ситуации разобраны
-                            if (compositeLine == "LX|X|") return HeroFlopState.Cbet; //возможно стоит подругому статус сделать
-                            if (compositeLine == "LX|B|") return HeroFlopState.FacingBet;
-
-                            if (compositeLine == "LRC|B|") return HeroFlopState.FacingCbet;
-                            if (compositeLine == "LRC|X|") return HeroFlopState.FacingMissCbet;
-
-                            if (compositeLine == "RC|X|") return HeroFlopState.Cbet;
-                            if (compositeLine == "RC|B|") return HeroFlopState.FacingDonk;
-                            if (compositeLine == "RC|XBR|") return HeroFlopState.FacingReraise;
-
-                            if (compositeLine == "RRC|X|") return HeroFlopState.FacingMissCbet;
-                            if (compositeLine == "RRC|B|") return HeroFlopState.FacingCbet;
-                            return  HeroFlopState.None;
-                        }
-                        case PlayerPosition.Bb: {
-                            //TODO не все ситуации разобраны
-                            if (compositeLine == "LX|") return HeroFlopState.Bet;
-                            if (compositeLine == "LX|BR|") return  HeroFlopState.FacingReraise;
-                            if (compositeLine == "LX|XB|") return HeroFlopState.FacingBet;
-
-                            if (compositeLine == "RC|") return HeroFlopState.Donk;
-                            if (compositeLine == "RC|XB|") return HeroFlopState.FacingCbet;
-
-                            if(compositeLine == "RRC|") return HeroFlopState.Cbet;
-                            if (compositeLine == "RRC|XB|") return HeroFlopState.FacingBetVsMissCbet;
-                            if (compositeLine == "RRC|BR|") return HeroFlopState.FacingReraise;
-
-                            return  HeroFlopState.None;
-                        }
-                    }
-                    return HeroFlopState.None;
-                }
-            }
             return HeroFlopState.None;
         }
 
-        public HeroTurnState DefineHeroTurnState(PotType potType, string compositeLine, Elements elements) {
+        private HeroTurnState DefineHeroTurnState(string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Turn) return HeroTurnState.None;
+            //Bet2 
+            string[] bet2Mass = {"lX|Bc|", "Lx|xBc|x|"};
+            bool bet2 = CheckLineInLinesMass(compositeLine, bet2Mass);
+            if(bet2) return HeroTurnState.Bet2;
+            //Cbet2
+            string[] cbet2Mass = {
+                "Rcf|xBc|x|", "Rfc|xBc|x|", "fRc|Bc|", "Rc|xBc|x|", "Lx|xBc|x|", "lRc|Bc|",
+                "flRc|xBc|x|"
+            };
+            bool cbet2 = CheckLineInLinesMass(compositeLine, cbet2Mass);
+            if(cbet2) return HeroTurnState.Cbet2;
+            //FacingCbet2
+            string[] facingCbet2Mass = {"RfrC|bC|b|", "RrfC|bC|b|", "rfC|XbC|Xb|", "frC|bC|b|", "LrC|bC|b|", "rC|XbC|Xb|"};
+            bool facingCbet2 = CheckLineInLinesMass(compositeLine, facingCbet2Mass);
+            if(facingCbet2) return HeroTurnState.FacingCbet2;
 
-            bool facingPush = CheckFacingPush(elements);
-            switch (_potNtype) {
-                case PotNType.Multipot: {
-                        switch (elements.HeroPlayer.Position) {
-                            case PlayerPosition.Button: {
-                                
-                                return HeroTurnState.None;
-                                }
-                            case PlayerPosition.Sb: {
+            //facingDelayCbet2
+            string[] facingDelayCbetMass = {"rC|Xx|Xb|", "LrC|xX|b|", "rfC|Xx|Xb|", "frC|Xx|b|"};
+            bool facingDelayCbet = CheckLineInLinesMass(compositeLine, facingDelayCbetMass);
+            if (facingDelayCbet) return HeroTurnState.FacingDelayCbet;
 
-                                    return HeroTurnState.None;
-                                }
-                            case PlayerPosition.Bb: {
-
-                                    return HeroTurnState.None;
-                                }
-                        }
-                        return HeroTurnState.None;
-                    }
-                case PotNType.Hu3Max: {
-                        switch (elements.HeroPlayer.Position) {
-                            case PlayerPosition.Button: {
-                                if (compositeLine == "RCF|XBC|X|" || compositeLine == "RFC|XBC|X|") return HeroTurnState.Cbet2;
-                                if (compositeLine == "RFRC|BC|B|" || compositeLine == "RRFC|BC|B|") return HeroTurnState.FacingCbet2;
-                                    return HeroTurnState.None;
-                                }
-                            case PlayerPosition.Sb: {
-                                if(compositeLine == "FRC|BC|") return HeroTurnState.Cbet2;
-                                if(compositeLine == "FRC|XX|") return HeroTurnState.DelayCbet;
-                                if(compositeLine == "FRC|XX|XB|") return HeroTurnState.BetVsMissTCb;
-                                return HeroTurnState.None;
-                                }
-                            case PlayerPosition.Bb: {
-                                if(compositeLine == "FLRC|XX|B|") return  HeroTurnState.BetVsMissFCb;
-                                if(compositeLine == "RFC|XBC|XB|" || compositeLine == "FRC|BC|B|") return HeroTurnState.FacingCbet2;
-                                if(compositeLine == "RFC|XX|XB|" || compositeLine == "FRC|XX|B") return HeroTurnState.FacingDelayCbet;
-                                return HeroTurnState.None;
-                                }
-                        }
-                        return HeroTurnState.None;
-                    }
-                case PotNType.Hu2Max: {
-                        switch (elements.HeroPlayer.Position) {
-                            case PlayerPosition.Sb: {
-                                if(compositeLine == "LX|XX|B|") return  HeroTurnState.FacingDelayBet;
-                                if(compositeLine == "RC|BC|B|") return  HeroTurnState.FacingDonk2;
-                                if (compositeLine == "RC|XBC|B|") return HeroTurnState.FacingDonk;
-
-                                if (compositeLine == "RC|XBC|X|" || compositeLine == "LX|XBC|X|") return HeroTurnState.Cbet2;
-                                if(compositeLine == "RC|XBC|XBR|" || compositeLine == "LC|XBC|XBR|") return  HeroTurnState.FacingReraise;
-                                if(compositeLine == "RC|XX|B|" || compositeLine == "LC|XX|B|") return  HeroTurnState.DelayCbet;
-
-                                if(compositeLine == "LRC|BC|B|") return HeroTurnState.FacingCbet2;
-                                if(compositeLine == "LRC|XX|B|") return HeroTurnState.FacingDelayCbet;
-
-                                return HeroTurnState.None;
-                            }
-                            case PlayerPosition.Bb: {
-                                if(compositeLine == "LX|XX|") return HeroTurnState.DelayBet;
-                                if(compositeLine == "LX|XX|XB|") return HeroTurnState.FacingDelayBet;
-                                if(compositeLine == "LX|BC|B|") return HeroTurnState.FacingBet2;
-
-                                if(compositeLine == "LRC|XBC|") return HeroTurnState.Cbet2;
-                                if(compositeLine == "LRC|XBC|B|") return HeroTurnState.FacingDonk;
-                                if(compositeLine == "LRC|BC|B|") return HeroTurnState.FacingDonk2;
-
-                                if(compositeLine == "RC|BC|") return HeroTurnState.Donk;
-                                if (compositeLine == "RC|BC|XB|") return HeroTurnState.FacingCbet2;
-                                if(compositeLine == "RC|XX|XB") return HeroTurnState.FacingDelayCbet;
-                                return HeroTurnState.None;
-                            }
-                        }
-                        return HeroTurnState.None;
-                    }
-            }
+            //facingDonk2
+            string[] facingDonk2Mass = { "Rcc|bfC|b|", "Rcc|bcC|bf|", "Rcc|bcC|bc|", "Rcc|xbCc|xb|", "Rcc|xbCf|b|", "Rcf|bC|b|", "Rfc|bC|b|", "Rc|bC|b|" };
+            bool facingDonk2 = CheckLineInLinesMass(compositeLine, facingDonk2Mass);
+            if(facingDonk2) return HeroTurnState.FacingDonk2;
+            //
+            //VsMissFLopCbet
+            string[] vsMissFlopCbetMass = {"rfC|Xx|"};
+            bool vsMissFlopCbet = CheckLineInLinesMass(compositeLine, vsMissFlopCbetMass);
+            if(vsMissFlopCbet) return HeroTurnState.VsMissFCb;
+     
             return HeroTurnState.None;
         }
 
-        public HeroRiverState DefineHeroRiverState(PotType potType, string compositeLine, Elements elements) {
-            if (elements.CurrentStreet != CurrentStreet.Turn) return HeroRiverState.None;
+        private HeroRiverState DefineHeroRiverState( string compositeLine, Elements elements) {
+            if (elements.CurrentStreet != CurrentStreet.River) return HeroRiverState.None;
+            //Cbet3
+            string[] cbet3Mass = {"fRc|Bc|Bc|", "Rc|Bc|Bc|", "rRc|Bc|Bc|", "rRf|Bc|Bc|"};
+            bool cbet3 = CheckLineInLinesMass(compositeLine, cbet3Mass);
+            if(cbet3) return HeroRiverState.Cbet3;
 
-            bool facingPush = CheckFacingPush(elements);
+            
             switch (_potNtype)
             {
                 case PotNType.Multipot:
@@ -505,9 +397,8 @@ namespace Pingvi {
 
 
 
-
+       
         public void OnNewElements(Elements elements) {
-            
 
             string btnLine = elements.InGamePlayers.Any(p => p.Position == PlayerPosition.Button)
                 ? elements.InGamePlayers.First(p => p.Position == PlayerPosition.Button).Line
@@ -519,57 +410,78 @@ namespace Pingvi {
                 ? elements.InGamePlayers.First(p => p.Position == PlayerPosition.Bb).Line
                 : "";
 
-            StringBuilder finalLine = new StringBuilder();
-
-            var linesMass = new[] {btnLine, sbLine, bbLine};
-            var flopLines = CropLines(linesMass);
-
-            switch (elements.InGamePlayers.Count) {
-                case 3: flopLines = new[] { flopLines[1], flopLines[2], flopLines[0] };
+            switch (elements.HeroPlayer.Position) {
+                    case PlayerPosition.Button:
+                    btnLine = btnLine.ToUpper();
                     break;
-                case 2: flopLines = new[] { flopLines[2], flopLines[1] };
+                    case PlayerPosition.Sb:
+                    sbLine = sbLine.ToUpper();
                     break;
+                    case PlayerPosition.Bb:
+                    bbLine = bbLine.ToUpper();
+                    break;
+
             }
-
-            var turnLines = CropLines(flopLines);
-            var riverLines = CropLines(turnLines);
-
-            _preflopCompositeLine = CompositeLine(linesMass);
-            _flopCompositeLine = CompositeLine(flopLines);
-            _turnCompositeLine = CompositeLine(turnLines);
-            _riverCompositeLine = CompositeLine(riverLines);
+                
 
 
-            finalLine.Append(CompositeLine(linesMass));
-            finalLine.Append(CompositeLine(flopLines));
-            finalLine.Append(CompositeLine(turnLines));
-            finalLine.Append(CompositeLine(riverLines));
 
-            _potNtype = DefinePotNType(elements);
+                StringBuilder finalLine = new StringBuilder();
 
-            var potType = DefinePotType(_preflopCompositeLine);
-            var preflopState =  DefineHeroPreflopState(elements);
+                var linesMass = new[] {btnLine, sbLine, bbLine};
+                var flopLines = CropLines(linesMass);
 
-            var flopState = DefineHeroFlopState(potType, finalLine.ToString(), elements);
-            var turnState = DefineHeroTurnState(potType, finalLine.ToString(), elements);
-            var riverState = DefineHeroRiverState(potType, finalLine.ToString(), elements);
+                switch (elements.InGamePlayers.Count) {
+                    case 3:
+                        flopLines = new[] {flopLines[1], flopLines[2], flopLines[0]};
+                        break;
+                    case 2:
+                        flopLines = new[] {flopLines[2], flopLines[1]};
+                        break;
+                }
+
+                var turnLines = CropLines(flopLines);
+                var riverLines = CropLines(turnLines);
+
+                _preflopCompositeLine = CompositeLine(linesMass);
+                _flopCompositeLine = CompositeLine(flopLines);
+                _turnCompositeLine = CompositeLine(turnLines);
+                _riverCompositeLine = CompositeLine(riverLines);
 
 
-            var lineInfo = new LineInfo() {
-                Elements =  elements,
-                FinalCompositeLine = finalLine.ToString(),
-                PotNType =  _potNtype,
-                PotType =  potType,
-                HeroPreflopState =  preflopState,
-                HeroFlopState =  flopState,
-                HeroTurnState = turnState,
-                HeroRiverState = riverState,
+                finalLine.Append(CompositeLine(linesMass));
+                finalLine.Append(CompositeLine(flopLines));
+                finalLine.Append(CompositeLine(turnLines));
+                finalLine.Append(CompositeLine(riverLines));
 
-            };
+                _potNtype = DefinePotNType(elements);
 
-            if (NewLineInfo != null) {
-                NewLineInfo(lineInfo);
-            }
+                var potType = DefinePotType(_preflopCompositeLine);
+                var preflopState = DefineHeroPreflopState(elements);
+            var heroPreflopStatus = DefineHeroPreflopStatus(_preflopCompositeLine);
+
+                var flopState = DefineHeroFlopState(finalLine.ToString(), elements);
+                var turnState = DefineHeroTurnState(finalLine.ToString(), elements);
+                var riverState = DefineHeroRiverState(finalLine.ToString(), elements);
+
+
+                var lineInfo = new LineInfo() {
+                    HeroPreflopStatus =  heroPreflopStatus,
+                    Elements = elements,
+                    FinalCompositeLine = finalLine.ToString(),
+                    PotNType = _potNtype,
+                    PotType = potType,
+                    HeroPreflopState = preflopState,
+                    HeroFlopState = flopState,
+                    HeroTurnState = turnState,
+                    HeroRiverState = riverState,
+
+                };
+
+                if (NewLineInfo != null) {
+                    NewLineInfo(lineInfo);
+                }
+            
 
 
         }

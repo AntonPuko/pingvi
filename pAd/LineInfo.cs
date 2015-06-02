@@ -10,6 +10,7 @@ namespace Pingvi
     public class LineInfo {
         public Elements Elements { get; set; }
 
+        public HeroPreflopStatus HeroPreflopStatus { get; set; }
         public HeroPreflopState HeroPreflopState { get; set; }
 
         public HeroFlopState HeroFlopState { get; set; }

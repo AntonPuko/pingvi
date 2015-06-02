@@ -11,15 +11,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
-            <Label Name="StackLabel"  Content="S:" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="-3,-12,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="13" MouseDown="StackLabel_MouseDown" Grid.RowSpan="2" Height="40"/>
-        
-            
-            <Label Name="AdditionalInfoLabel"  Content="o" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="13" Margin="1,-11,0,0" Height="40" Grid.Column="1"/>
-            <RichTextBox HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Margin="-4,0.075,-10,-45.151" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontWeight="Bold" FontFamily="Tahoma" SelectionOpacity="0" BorderThickness="0" FontSize="13" UndoLimit="200">
+            <Label Name="StackLabel"  Content="S:" VerticalContentAlignment="Center" Margin="-3,-12,42.856,0" VerticalAlignment="Top" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="13" MouseDown="StackLabel_MouseDown" Grid.RowSpan="2" Height="40" Grid.ColumnSpan="2"/>
+
+
+            <Label Name="AdditionalInfoLabel"  Content="o" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="13" Margin="-6,-12,0,10.849" Grid.Column="1" Grid.RowSpan="2"/>
+            <RichTextBox HorizontalContentAlignment="Center" Grid.ColumnSpan="3" Margin="-4,0.075,-11.453,-46.151" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontWeight="Bold" FontFamily="Tahoma" SelectionOpacity="0" BorderThickness="0" FontSize="13" UndoLimit="200">
                 <FlowDocument AllowDrop="False" Focusable="False" FontSize="13" ForceCursor="True" PagePadding="1,0" TextAlignment="Center">
                     <Paragraph TextAlignment="Left">
-                        <Run Name="PotTypeRun" Text="N"/>
+                        <Run Name="HeroStatusRun" Text="N"></Run>
                         <Run Name="DecisionRun" Text="NN" />
                         <Run Name="StatName1Run"  Text="St"/>
                         <Run Name="Stat1ValRun"  Text="0"/>
@@ -28,6 +29,7 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
+            <Label Name="PotTypeLabel"  Content="t" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" FontFamily="Tahoma" FontWeight="Bold" FontSize="13" Margin="-5,-12,0,10.849" Grid.Column="2" Grid.RowSpan="2"/>
         </Grid>
     </Border>
 

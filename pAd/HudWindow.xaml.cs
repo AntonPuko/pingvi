@@ -57,9 +57,11 @@ namespace Pingvi
 
             ClearStats();
             DecisionRun.Text = "";
-            PotTypeRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 125, 125));
-            PotTypeRun.Text = "_";
+            PotTypeLabel.Foreground = new SolidColorBrush(Color.FromRgb(125, 125, 125));
+            PotTypeLabel.Content = "_";
             AdditionalInfoLabel.Content = "";
+
+            ShowHeroPreflopStatus(decisionInfo.LineInfo.HeroPreflopStatus);
 
             var currentStreet = decisionInfo.LineInfo.Elements.CurrentStreet;
             if (currentStreet == CurrentStreet.Preflop) {
@@ -84,7 +86,28 @@ namespace Pingvi
 
 
 
+        public void ShowHeroPreflopStatus(HeroPreflopStatus status) {
+            switch (status) {
+                case HeroPreflopStatus.Agressor:
+                    HeroStatusRun.Foreground = new SolidColorBrush(Color.FromRgb(0, 255, 255));
+                    HeroStatusRun.Text = "A";
+                    break;
+                case HeroPreflopStatus.Defender:
+                    HeroStatusRun.Foreground = new SolidColorBrush(Color.FromRgb(232, 218, 0));
+                    HeroStatusRun.Text = "D";
+                    break;
+                case HeroPreflopStatus.Limper:
+                    HeroStatusRun.Foreground = new SolidColorBrush(Color.FromRgb(225, 175, 232));
+                    HeroStatusRun.Text = "L";
+                    break;
+                case HeroPreflopStatus.None:
+                    HeroStatusRun.Foreground = new SolidColorBrush(Color.FromRgb(120, 120, 120));
+                    HeroStatusRun.Text = "_";
+                    break;
 
+            }
+            
+        }
 
         private void ShowEffectiveStack(double effStack) {
             //TODO придумать другую цветовую схему, это сливается в одно, нужно более ярко выделять близкие к пушам стеки
@@ -100,11 +123,11 @@ namespace Pingvi
             if (effStack > 20 && effStack <= 100)
                 StackLabel.Foreground = new SolidColorBrush(Color.FromRgb(37, 246, 76));
 
-            StackLabel.Content = "S: " + effStack.ToString("#.#");
+            StackLabel.Content = "S:" + effStack.ToString("#.#");
         }
 
         private void ShowPotOdds(double potOdds) {
-            AdditionalInfoLabel.Content = potOdds == 0.0 ? "-" : "p:" + potOdds.ToString("##.#");
+            AdditionalInfoLabel.Content = potOdds == 0.0 ? "-" : "o:" + potOdds.ToString("##");
             if (potOdds == 0.0) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (potOdds > 0.0 && potOdds <= 20) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(12, 255, 48));
             if (potOdds > 20 && potOdds <= 34) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 220, 0));
@@ -113,13 +136,13 @@ namespace Pingvi
         }
 
         private void ShowBetToPot(double betToPot) {
-            AdditionalInfoLabel.Content = betToPot == 0.0 ? "-" : "b:" +betToPot.ToString("###");
+            AdditionalInfoLabel.Content = betToPot == 0.0 ? "-" : "b:" +betToPot.ToString("0.0");
             if (betToPot == 0.0) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            if (betToPot > 0.0 && betToPot <= 30) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(12, 255, 48));
-            if (betToPot > 30 && betToPot <= 49) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 200, 0));
-            if (betToPot > 49 && betToPot <= 65) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 120, 30));
-            if (betToPot > 65 && betToPot <= 89) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 120, 120));
-            if (betToPot > 89 && betToPot <= 999) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 50, 50));
+            if (betToPot > 0.0 && betToPot <= 0.3) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(12, 255, 48));
+            if (betToPot > 0.30 && betToPot <= 0.49) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 200, 0));
+            if (betToPot > 0.49 && betToPot <= 0.65) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 120, 30));
+            if (betToPot > 0.65 && betToPot <= 0.89) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 120, 120));
+            if (betToPot > 0.89 && betToPot <= 9.99) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 50, 50));
         }
 
         private void ShowRelativePosition(HeroRelativePosition relPosition) {
@@ -127,6 +150,28 @@ namespace Pingvi
                 case HeroRelativePosition.None: HudBorder.Background = new SolidColorBrush(Color.FromRgb(42, 42, 42)); break;
                 case HeroRelativePosition.InPosition: HudBorder.Background = new SolidColorBrush(Color.FromRgb(42, 70, 42)); break;
                 case HeroRelativePosition.OutOfPosition: HudBorder.Background = new SolidColorBrush(Color.FromRgb(70, 42, 0)); break;
+            }
+        }
+        private void ShowPotType(PotType potType)
+        {
+            switch (potType)
+            {
+                case PotType.Limped:
+                    PotTypeLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 255));
+                    PotTypeLabel.Content = "Lm";
+                    break;
+                case PotType.IsoLimped:
+                    PotTypeLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 150, 100));
+                    PotTypeLabel.Content = "Is";
+                    break;
+                case PotType.Raised:
+                    PotTypeLabel.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
+                    PotTypeLabel.Content = "Rs";
+                    break;
+                case PotType.Reraised:
+                    PotTypeLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 80, 80));
+                    PotTypeLabel.Content = "3b";
+                    break;
             }
         }
 
@@ -138,11 +183,11 @@ namespace Pingvi
             switch (decision) {
                 case PreflopDecision.Fold:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 85, 85));
-                    DecisionRun.Text = "F 11";
+                    DecisionRun.Text = "___F 11";
                     break;
                 case PreflopDecision.Limp:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                    DecisionRun.Text = "Lim 22 ";
+                    DecisionRun.Text = "___Lim 22 ";
                     break;
                 case PreflopDecision.OpenRaise:
                 switch (heroPreflopState)
@@ -151,20 +196,20 @@ namespace Pingvi
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(150, 200, 255));
                         var sbVsBbEffStack = decisionInfo.LineInfo.Elements.SbBtnEffStack;
                         if (decisionInfo.LineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb) {
-                            if (sbVsBbEffStack >= 20) DecisionRun.Text = "IS 4 ";
-                            else if (sbVsBbEffStack < 20 && sbVsBbEffStack > 13) DecisionRun.Text = "IS 3 ";
-                            else if (sbVsBbEffStack <= 13) DecisionRun.Text = "IS 2 ";
+                            if (sbVsBbEffStack >= 20) DecisionRun.Text = "___IS 4 ";
+                            else if (sbVsBbEffStack < 20 && sbVsBbEffStack > 13) DecisionRun.Text = "___IS 3 ";
+                            else if (sbVsBbEffStack <= 13) DecisionRun.Text = "___IS 2 ";
                         }
                         else {
-                            if (effStack <= 16) DecisionRun.Text = "IS 2 ";
-                            else if (effStack > 16 && effStack <= 20) DecisionRun.Text = "IS 2.5 ";
-                            else if (effStack > 20) DecisionRun.Text = "IS 3 ";
+                            if (effStack <= 16) DecisionRun.Text = "___IS 2 ";
+                            else if (effStack > 16 && effStack <= 20) DecisionRun.Text = "___IS 2.5 ";
+                            else if (effStack > 20) DecisionRun.Text = "___IS 3 ";
                         }
                         break;
                     }
                     default: 
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
-                        DecisionRun.Text = "OR 3 ";
+                        DecisionRun.Text = "___OR 3 ";
                         break;
                 }
                 break;
@@ -172,72 +217,80 @@ namespace Pingvi
                 switch (heroPreflopState) {
                     case HeroPreflopState.FacingLimp:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CL 2";
+                        DecisionRun.Text = "___CL 2";
                         break;
                     case HeroPreflopState.FacingOpen:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CO 43";
+                        DecisionRun.Text = "___CO 43";
                         break;
                     case HeroPreflopState.FacingISOvsLimp:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CLR 322";
+                        DecisionRun.Text = "___CLR 322";
                         break;
                     case HeroPreflopState.FacingPushVsLimp:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 22";
+                        DecisionRun.Text = "___CP 22";
                         break;
                     case HeroPreflopState.FacingLimpIsoShove:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 222";
+                        DecisionRun.Text = "___CP 222";
                         break;
                     case HeroPreflopState.FacingOpenPush:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 6";
+                        DecisionRun.Text = "___CP 6";
                         break;
                     case HeroPreflopState.FacingPushSqueeze:  
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 3";
+                        DecisionRun.Text = "___CP 3";
                         break;
                     case HeroPreflopState.FacingPushVsOpen: 
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 3";
+                        DecisionRun.Text = "___CP 3";
                         break;
                     case HeroPreflopState.FacingPushToIso:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 236";
+                        DecisionRun.Text = "___CP 236";
                         break;
                     case HeroPreflopState.FacingPush: 
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-                        DecisionRun.Text = "CP 6";
+                        DecisionRun.Text = "___CP 6";
                         break;
                 }
                 break;
                 case PreflopDecision._3Bet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(100, 100, 255));
-                    DecisionRun.Text = "3bet 5";
+                    DecisionRun.Text = "___3bet 5";
                     break;
                 case PreflopDecision.Push:
                 switch (heroPreflopState) {
                     case HeroPreflopState.Open:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                        DecisionRun.Text = "OP 63";
+                        DecisionRun.Text = "___OP 63";
                         break;
                     case HeroPreflopState.FacingLimp:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                        DecisionRun.Text = "LP 62";
+                        DecisionRun.Text = "___LP 62";
                         break;
                     case HeroPreflopState.FacingISOvsLimp:
                                 DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                                DecisionRun.Text = "PtLR 26";
+                                DecisionRun.Text = "___PtLR 26";
                                 break;
                     case HeroPreflopState.FacingOpen:
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                        DecisionRun.Text = "OP 63";
+                        DecisionRun.Text = "___OP 63";
                         break;
                 }
                 break;
 
-                case PreflopDecision.None:
+                case PreflopDecision.None: {
+                    switch (heroPreflopState) {
+                        case HeroPreflopState.Facing3Bet:
+                            DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255,190,190));
+                            DecisionRun.Text = "v3bet";
+                            break;
+                    }
+                }
+                
                     ShowPotOdds(decisionInfo.PotOdds);
                 break;
 
@@ -247,33 +300,14 @@ namespace Pingvi
           
         }
 
-        private void ShowPotType(PotType potType) {
-            switch (potType) {
-                case PotType.Limped:
-                    PotTypeRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 255));
-                    PotTypeRun.Text = "L|";
-                    break;
-                case PotType.IsoLimped:
-                    PotTypeRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 150, 100));
-                    PotTypeRun.Text = "I|";
-                    break;
-                case PotType.Raised:
-                    PotTypeRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
-                    PotTypeRun.Text = "R|";
-                    break;
-                case PotType.Reraised:
-                    PotTypeRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 80, 80));
-                    PotTypeRun.Text = "3|";
-                    break;
-            }
-        }
+
 
         
    
         private void ShowFlopInfoStats(DecisionInfo decisionInfo) {
             var heroFlopState = decisionInfo.LineInfo.HeroFlopState;
             var opponent = decisionInfo.LineInfo.Elements.HuOpp;
-            double? stat1, stat2;
+            double? stat1 = null, stat2 = null;
 
             switch (heroFlopState) {
                 case HeroFlopState.Donk:
@@ -286,19 +320,19 @@ namespace Pingvi
                     DecisionRun.Text = "vsDB";
 
                     StatName1Run.Text = "db";
-                    stat1 = opponent.Stats.F_DONK;
+                    if(opponent !=null )stat1 = opponent.Stats.F_DONK;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 30);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     StatName2Run.Text = "fr";
-                    stat2 = opponent.Stats.F_DONK_FOLDRAISE;
+                    if (opponent != null) stat2 = opponent.Stats.F_DONK_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
                     Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
                     PeekStatNameColor(stat1, StatName1Run);
                     PeekStatNameColor(stat2, StatName2Run);
 
-                    ShowBetToPot(opponent.BetToPot);
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
 
                 case HeroFlopState.Bet:
@@ -306,13 +340,13 @@ namespace Pingvi
                     DecisionRun.Text = "BT";
 
                     StatName1Run.Text = "fb";
-                    stat1 = opponent.Stats.F_FOLD_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_FOLD_CBET;
 
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     StatName2Run.Text = "rb";
-                    stat2 = opponent.Stats.F_RAISE_CBET;
+                    if (opponent != null) stat2 = opponent.Stats.F_RAISE_CBET;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
                     Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
@@ -325,18 +359,18 @@ namespace Pingvi
                     DecisionRun.Text = "vBT";
 
                     StatName1Run.Text = "cb";
-                    stat1 = opponent.Stats.F_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_CBET;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     StatName2Run.Text = "fr";
-                    stat2 = opponent.Stats.F_CBET_FOLDRAISE;
+                    if (opponent != null) stat2 = opponent.Stats.F_CBET_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
                     Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
                     PeekStatNameColor(stat1, StatName1Run);
                     PeekStatNameColor(stat2, StatName2Run);
 
-                    ShowBetToPot(opponent.BetToPot);
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 
                 case HeroFlopState.FacingBetVsMissCbet:
@@ -344,32 +378,32 @@ namespace Pingvi
                     DecisionRun.Text = "vBx";
 
                     StatName1Run.Text = "cb";
-                    stat1 = opponent.Stats.F_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_CBET;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     StatName2Run.Text = "fr";
-                    stat2 = opponent.Stats.F_CBET_FOLDRAISE;
+                    if (opponent != null) stat2 = opponent.Stats.F_CBET_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
                     Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
                     PeekStatNameColor(stat1, StatName1Run);
                     PeekStatNameColor(stat2, StatName2Run);
 
-                    ShowBetToPot(opponent.BetToPot);
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
 
                 case HeroFlopState.Cbet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 177, 130));
-                    DecisionRun.Text = "CB";
+                    DecisionRun.Text = "CBet";
 
                     StatName1Run.Text = "fb";
-                    stat1 = opponent.Stats.F_FOLD_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_FOLD_CBET;
 
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     StatName2Run.Text = "rb";
-                    stat2 = opponent.Stats.F_RAISE_CBET;
+                    if (opponent != null) stat2 = opponent.Stats.F_RAISE_CBET;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
                     Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
 
@@ -381,42 +415,42 @@ namespace Pingvi
                     DecisionRun.Text = "vCB";
 
                     StatName1Run.Text = "cb";
-                    stat1 = opponent.Stats.F_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_CBET;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
                     StatName2Run.Text = "fr";
-                    stat2 = opponent.Stats.F_CBET_FOLDRAISE;
+                    if (opponent != null) stat2 = opponent.Stats.F_CBET_FOLDRAISE;
                     Stat2ValRun.Foreground = PeekStatColor(stat2, 40, 70);
                     Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
                     PeekStatNameColor(stat1, StatName1Run);
                     PeekStatNameColor(stat2, StatName2Run);
 
-                    ShowBetToPot(opponent.BetToPot);
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
 
                 case HeroFlopState.FacingMissCbet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 125));
-                    DecisionRun.Text = "mCB";
+                    DecisionRun.Text = "vmCB";
 
                     StatName1Run.Text = "cb";
-                    stat1 = opponent.Stats.F_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_CBET;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
                     break;
 
                 case HeroFlopState.FacingReraise:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 80, 80));
-                    DecisionRun.Text = "vRs";
+                    DecisionRun.Text = "vRE";
                     
                     StatName1Run.Text = "rb";
-                    stat1 = opponent.Stats.F_RAISE_CBET;
+                    if (opponent != null) stat1 = opponent.Stats.F_RAISE_CBET;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 10, 25);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
 
-                    PeekStatNameColor(stat1, StatName1Run);
+                     if(opponent !=null )PeekStatNameColor(stat1, StatName1Run);
 
-                    ShowPotOdds(decisionInfo.PotOdds);
+                     if (opponent != null) ShowPotOdds(decisionInfo.PotOdds);
                     break;
             }
         }
@@ -457,9 +491,9 @@ namespace Pingvi
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 170, 130));
                     DecisionRun.Text = "vCBrf";
                     break;
-                case HeroTurnState.BetVsMissFCb:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 220, 130));
-                    DecisionRun.Text = "vBTmf";
+                case HeroTurnState.VsMissFCb:
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 125));
+                    DecisionRun.Text = "vMFcb";
                     break;
                 case HeroTurnState.BetVsMissTCb:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 220, 130));
@@ -471,7 +505,7 @@ namespace Pingvi
                     break;
                 case HeroTurnState.Cbet2:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 150, 90));
-                    DecisionRun.Text = "2CB";
+                    DecisionRun.Text = "2CBet";
                     break;
                 case HeroTurnState.DelayCbet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 177, 120));
@@ -479,7 +513,7 @@ namespace Pingvi
                     break;
                 case HeroTurnState.FacingCbet2:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 80, 80));
-                    DecisionRun.Text = "v2CB";
+                    DecisionRun.Text = "v2CBet";
                     break;
                 case HeroTurnState.FacingCheckAfterFlopReraise:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 220, 130));

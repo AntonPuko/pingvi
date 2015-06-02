@@ -43,8 +43,12 @@ namespace Pingvi {
             
         }
 
-        private void FindElements() {
 
+        private  Object locker = new object();
+        private void FindElements() {
+            
+                
+            
             //TableNumber
             _elements.TableNumber = (int)(FindNumber(_elementsConfig.Common.TableNumberDigPosPoints,
               _elementsConfig.Common.TableNumberDigitsRectMass,
@@ -370,6 +374,7 @@ namespace Pingvi {
             if (NewElements != null) {
                 NewElements(_elements);
             }
+            
         }
 
         private void CheckIsHU() {
@@ -654,12 +659,12 @@ namespace Pingvi {
                     a = a*10;
                 }
                 if (inBb) {
-                  // return fullNumber/_elements.BbAmt;
-                    if (digitRectMass[digitRectMass.Length - 1].X - 11 == digitRectMass[digitRectMass.Length - 2].X &&
-                        fullNumber.ToString().Length >1) {
-                        return fullNumber / 10;
-                    }
-                    return fullNumber / 10;
+                   return fullNumber/_elements.BbAmt;
+                   // if (digitRectMass[digitRectMass.Length - 1].X - 11 == digitRectMass[digitRectMass.Length - 2].X &&
+                   //     fullNumber.ToString().Length >1) {
+                   //     return fullNumber / 10;
+                   // }
+                   // return fullNumber / 10;
                 }
                 else {
                     return fullNumber; 
@@ -896,7 +901,7 @@ namespace Pingvi {
 
         private double CountBetToPot(double pot, double playerBet) {
             if (pot == 0 || playerBet == 0) return 0.0;
-            return playerBet/(pot-playerBet)*100;
+            return playerBet/(pot-playerBet);
         }
      
     }
