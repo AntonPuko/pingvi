@@ -55,8 +55,8 @@ namespace Pingvi {
         DelayBet,
         FacingBet2,
         VsMissFCb,
-        BetVsMissTCb,
-        BetAfterFReraise,
+        vsMissTCb,
+        BetAfterReraiseFlop,
         DelayCbet,
         Cbet2,
         FacingCbet2,
@@ -155,7 +155,7 @@ namespace Pingvi {
             string[] defenderLines = {
                 "RrfC|", "RrcC|", "RfrC|", "RcrCf|", "RcrCc|",  "lLrcC|", "lLrfC|",
                 "rCf|", "rCc|", "rCrcC|", "rCrfC|", "LrC|", "RrC|", "frC|", "flRrC|", "lrCc|", "lrCf|", "rcC|", "rfC|",
-                "rrCf|","rrCc|", "rC|"
+                "rrCf|","rrCc|", "rC|", "fRrC|"
             };
             if (CheckLineInLinesMass(preflopLine, defenderLines)) return HeroPreflopStatus.Defender;
             string[] limperLines = { "Llx|", "lLx|", "llX|", "lfX|", "lX|", "flX|", "fLx|", "Lx|" , "Lfx", };
@@ -172,6 +172,7 @@ namespace Pingvi {
             string[] openMass = {"", "f|"};
             bool open = CheckLineInLinesMass(_preflopCompositeLine, openMass);
             if(open) return HeroPreflopState.Open;
+           
             //FacingOpen
             string[] facingOpenMass = {"r|", "fr|", "rf|",};
             bool facingOpen = CheckLineInLinesMass(_preflopCompositeLine, facingOpenMass);
@@ -227,7 +228,10 @@ namespace Pingvi {
         private HeroFlopState DefineHeroFlopState(string compositeLine, Elements elements) {
 
             if(elements.CurrentStreet != CurrentStreet.Flop) return HeroFlopState.None;
-
+            //Donk
+            string[] donkMass = {"rC|","rfC|","fRrC|"};
+            bool donk = CheckLineInLinesMass(compositeLine, donkMass);
+            if (donk) return HeroFlopState.Donk;
 
             //Bet
             string[] betMass = {"lLx|x|", "Llx|xx|", "lfX|", "flX|x|", "lX|", "fLx|"};
@@ -283,8 +287,12 @@ namespace Pingvi {
 
         private HeroTurnState DefineHeroTurnState(string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Turn) return HeroTurnState.None;
+            //Donk
+            string[] donkMass = { "rC|XbC|",  "rfC|XbC|"};
+            bool donk = CheckLineInLinesMass(compositeLine, donkMass);
+            if(donk) return HeroTurnState.Donk;
             //Bet2 
-            string[] bet2Mass = {"lX|Bc|", "Lx|xBc|x|"};
+            string[] bet2Mass = {"lX|Bc|", "Lx|xBc|x|", "frC|xBc|x|"};
             bool bet2 = CheckLineInLinesMass(compositeLine, bet2Mass);
             if(bet2) return HeroTurnState.Bet2;
             //Cbet2
@@ -293,7 +301,17 @@ namespace Pingvi {
                 "flRc|xBc|x|"
             };
             bool cbet2 = CheckLineInLinesMass(compositeLine, cbet2Mass);
-            if(cbet2) return HeroTurnState.Cbet2;
+            if (cbet2) return HeroTurnState.Cbet2;
+            //DelayCbet
+            string[] delayCbetMass = {"Rcf|xX|x|", "Rfc|xX|x|", "fRc|Xx|", "Rc|xX|x|", "Lx|xX|x|", "lRc|Xx|",
+                "flRc|xBc|x|"};
+            bool delayCbet = CheckLineInLinesMass(compositeLine, delayCbetMass);
+            if(delayCbet) return HeroTurnState.DelayCbet;;
+            //BetAfterReraiseFlop
+            string[] betAfterReraiseFlopMass = {"rC|XbRc|"};
+            bool betAfterReraiseFlop = CheckLineInLinesMass(compositeLine, betAfterReraiseFlopMass);
+            if(betAfterReraiseFlop) return HeroTurnState.BetAfterReraiseFlop;
+           
             //FacingCbet2
             string[] facingCbet2Mass = {"RfrC|bC|b|", "RrfC|bC|b|", "rfC|XbC|Xb|", "frC|bC|b|", "LrC|bC|b|", "rC|XbC|Xb|"};
             bool facingCbet2 = CheckLineInLinesMass(compositeLine, facingCbet2Mass);
@@ -310,9 +328,13 @@ namespace Pingvi {
             if(facingDonk2) return HeroTurnState.FacingDonk2;
             //
             //VsMissFLopCbet
-            string[] vsMissFlopCbetMass = {"rfC|Xx|"};
+            string[] vsMissFlopCbetMass = {"rfC|Xx|", "rC|Xx|"};
             bool vsMissFlopCbet = CheckLineInLinesMass(compositeLine, vsMissFlopCbetMass);
             if(vsMissFlopCbet) return HeroTurnState.VsMissFCb;
+            //vsMissTurnCbet
+            string[] vsMissTurnCbetMass = { "RfrC|bC|x|", "RrfC|bC|x|",  "frC|bC|x|", "LrC|bC|x|", };
+            bool vsMissTurnCbet = CheckLineInLinesMass(compositeLine, vsMissTurnCbetMass);
+            if(vsMissTurnCbet) return HeroTurnState.vsMissTCb;
      
             return HeroTurnState.None;
         }
@@ -323,75 +345,11 @@ namespace Pingvi {
             string[] cbet3Mass = {"fRc|Bc|Bc|", "Rc|Bc|Bc|", "rRc|Bc|Bc|", "rRf|Bc|Bc|"};
             bool cbet3 = CheckLineInLinesMass(compositeLine, cbet3Mass);
             if(cbet3) return HeroRiverState.Cbet3;
-
-            
-            switch (_potNtype)
-            {
-                case PotNType.Multipot:
-                    {
-                        switch (elements.HeroPlayer.Position)
-                        {
-                            case PlayerPosition.Button:
-                                {
-
-                                    return HeroRiverState.None;
-                                }
-                            case PlayerPosition.Sb:
-                                {
-
-                                    return HeroRiverState.None;
-                                }
-                            case PlayerPosition.Bb:
-                                {
-
-                                    return HeroRiverState.None;
-                                }
-                        }
-                        return HeroRiverState.None;
-                    }
-                case PotNType.Hu3Max:
-                    {
-                        switch (elements.HeroPlayer.Position)
-                        {
-                            case PlayerPosition.Button:
-                                {
-                                    return HeroRiverState.None;
-                                }
-                            case PlayerPosition.Sb:
-                                {
-                                    if(compositeLine == "FRC|BC|BC|") return HeroRiverState.Cbet3;
-                                    
-                                    return HeroRiverState.None;
-                                }
-                            case PlayerPosition.Bb:
-                                {
-                                    if(compositeLine == "RFC|XBC|XBC|XB|" || compositeLine == "FRC|BC|BC|B|") return HeroRiverState.Cbet3;
-                                    return HeroRiverState.None;
-                                }
-                        }
-                        return HeroRiverState.None;
-                    }
-                case PotNType.Hu2Max:
-                    {
-                        switch (elements.HeroPlayer.Position)
-                        {
-                            case PlayerPosition.Sb:
-                                {
-                                    if(compositeLine == "RC|XBC|XBC|X|" || compositeLine == "LX|XBC|XBC|X|") return HeroRiverState.Cbet3;
-                                    if(compositeLine == "RC|XBC|XBC|B" || compositeLine == "LX|XBC|XBC|B|") return HeroRiverState.FacingDonk;
-                                    if(compositeLine == "RC|BC|BC|B|") return HeroRiverState.FacingDonk3;
-                                    return HeroRiverState.None;
-                                }
-                            case PlayerPosition.Bb:
-                                {
-                                    if(compositeLine == "RC|XBC|XBC|") return HeroRiverState.Donk;
-                                    if(compositeLine == "RC|XBC|XBC|XB|") return HeroRiverState.FacingCbet3;
-                                    return HeroRiverState.None;
-                                }
-                        }
-                        return HeroRiverState.None;
-                    }
-            }
+            //facingCbet3
+            string[] facingCbet3Mass = {"rC|XbC|XbC|Xb|", "rfC|XbC|XbC|Xb|", "frC|bC|bC|b|"};
+            bool facingCbet3 = CheckLineInLinesMass(compositeLine, facingCbet3Mass);
+            if(facingCbet3) return HeroRiverState.FacingCbet3;
+           
             return HeroRiverState.None;
         }
 

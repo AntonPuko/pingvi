@@ -461,8 +461,8 @@ namespace Pingvi
 
             switch (heroTurnState) {
                 case HeroTurnState.Donk:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(130, 160, 180));
-                    DecisionRun.Text = "DB";
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(160, 160, 160));
+                    DecisionRun.Text = "Dk";
                     break;
                     
                 case HeroTurnState.Donk2:
@@ -473,10 +473,12 @@ namespace Pingvi
                 case HeroTurnState.FacingDonk:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
                     DecisionRun.Text = "vDB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroTurnState.FacingDonk2:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
                     DecisionRun.Text = "v2DB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
 
                 case HeroTurnState.Bet2:
@@ -485,23 +487,24 @@ namespace Pingvi
                     break;
                 case HeroTurnState.DelayBet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 220, 130));
-                    DecisionRun.Text = "dBT";
+                    DecisionRun.Text = "DBT";
                     break;
-                case HeroTurnState.BetAfterFReraise:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 170, 130));
-                    DecisionRun.Text = "vCBrf";
+                case HeroTurnState.BetAfterReraiseFlop:
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 190, 130));
+                    DecisionRun.Text = "BaRF";
                     break;
                 case HeroTurnState.VsMissFCb:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 125));
                     DecisionRun.Text = "vMFcb";
                     break;
-                case HeroTurnState.BetVsMissTCb:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 220, 130));
-                    DecisionRun.Text = "vBTxt";
+                case HeroTurnState.vsMissTCb:
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 125));
+                    DecisionRun.Text = "vMTcb";
                     break;
                 case HeroTurnState.FacingBet2:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 180, 180));
                     DecisionRun.Text = "v2BT";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroTurnState.Cbet2:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 150, 90));
@@ -509,11 +512,12 @@ namespace Pingvi
                     break;
                 case HeroTurnState.DelayCbet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 177, 120));
-                    DecisionRun.Text = "dCB";
+                    DecisionRun.Text = "DCB";
                     break;
                 case HeroTurnState.FacingCbet2:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 80, 80));
-                    DecisionRun.Text = "v2CBet";
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 50, 50));
+                    DecisionRun.Text = "v2CB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroTurnState.FacingCheckAfterFlopReraise:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 220, 130));
@@ -521,11 +525,13 @@ namespace Pingvi
                     break;
                 case HeroTurnState.FacingDelayBet:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 180, 180));
-                    DecisionRun.Text = "vdBT";
+                    DecisionRun.Text = "vDbt";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroTurnState.FacingDelayCbet:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
-                    DecisionRun.Text = "vdCB";
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 150, 150));
+                    DecisionRun.Text = "vDCB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroTurnState.FacingReraise:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
@@ -552,10 +558,12 @@ namespace Pingvi
                 case HeroRiverState.FacingDonk:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
                     DecisionRun.Text = "vDB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroRiverState.FacingDonk3:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(125, 225, 255));
                     DecisionRun.Text = "v3DB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroRiverState.Cbet3:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 150, 90));
@@ -564,10 +572,12 @@ namespace Pingvi
                 case HeroRiverState.FacingBet3:
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
                     DecisionRun.Text = "v3BT";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
                 case HeroRiverState.FacingCbet3:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 80, 80));
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 50, 50));
                     DecisionRun.Text = "v3CB";
+                    if (opponent != null) ShowBetToPot(opponent.BetToPot);
                     break;
             
             }

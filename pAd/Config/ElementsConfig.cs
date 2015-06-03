@@ -352,7 +352,7 @@ namespace Pingvi {
                 new PixelPoint(71, 7), new PixelPoint(79, 7), new PixelPoint(87, 7), new PixelPoint(95, 7)
             };
 
-            Hero.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(459,413));
+            Hero.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(473,414));
             LeftPlayer.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(349, 88));
             RightPlayer.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(349, 117));
             //STATISTICS

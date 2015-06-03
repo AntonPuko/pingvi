@@ -976,7 +976,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.InPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(8, 10)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_3max_SMALLBLINDS", openRaise, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_3max_SMALLBLINDS", foldTo3bet, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
