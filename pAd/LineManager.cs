@@ -240,7 +240,7 @@ namespace Pingvi {
             //Cbet 
             string[] cbetMass = {
                 "Rcc|xx|", "Rcf|x|", "Rfc|x|", "lRfc|", "rRfc|", "fRc|", "lfRc|", "rfRc|", "flRc|x|",
-                "lx|x|", "Rc|x|", "lRc|", "rRc|", "lRcf|"
+                "Lx|x|", "Rc|x|", "lRc|", "rRc|", "lRcf|"
             };
             bool cbet = CheckLineInLinesMass(compositeLine, cbetMass);
             if (cbet) return HeroFlopState.Cbet;
@@ -256,7 +256,7 @@ namespace Pingvi {
             bool facingCbet = CheckLineInLinesMass(compositeLine, facingCbetMass);
             if (facingCbet) return HeroFlopState.FacingCbet;
             //FacingDonk
-            string[] facingDonkMass = {"Rcc|bf|", "Rcc|bc|", "Rcc|xb|", "Rcf|b|", "Rfc|b|", "Rc|b|", };
+            string[] facingDonkMass = {"Rcc|bf|", "Rcc|bc|", "Rcc|xb|", "Rcf|b|", "Rfc|b|", "Rc|b|", "flRc|b|"};
             bool facingDonk = CheckLineInLinesMass(compositeLine, facingDonkMass);
             if(facingDonk) return HeroFlopState.FacingDonk;
             //FacingBet
@@ -288,39 +288,49 @@ namespace Pingvi {
         private HeroTurnState DefineHeroTurnState(string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Turn) return HeroTurnState.None;
             //Donk
-            string[] donkMass = { "rC|XbC|",  "rfC|XbC|"};
+            string[] donkMass = { "rC|XbC|",  "rfC|XbC|", "lX|XbC|"};
             bool donk = CheckLineInLinesMass(compositeLine, donkMass);
             if(donk) return HeroTurnState.Donk;
             //Bet2 
-            string[] bet2Mass = {"lX|Bc|", "Lx|xBc|x|", "frC|xBc|x|"};
+            string[] bet2Mass = { "lX|Bc|", "Lx|xBc|x|", "frC|xBc|x|", "lfX|Bc|" };
             bool bet2 = CheckLineInLinesMass(compositeLine, bet2Mass);
             if(bet2) return HeroTurnState.Bet2;
             //Cbet2
             string[] cbet2Mass = {
                 "Rcf|xBc|x|", "Rfc|xBc|x|", "fRc|Bc|", "Rc|xBc|x|", "Lx|xBc|x|", "lRc|Bc|",
-                "flRc|xBc|x|"
+                "flRc|xBc|x|", 
             };
             bool cbet2 = CheckLineInLinesMass(compositeLine, cbet2Mass);
             if (cbet2) return HeroTurnState.Cbet2;
+
+            //DelayBet
+            string[] delayBetMass = {"lX|Xx|", "lfX|Xx|", "flX|xX|x|"};
+            bool delayBet = CheckLineInLinesMass(compositeLine, delayBetMass);
+            if(delayBet) return HeroTurnState.DelayBet;
             //DelayCbet
             string[] delayCbetMass = {"Rcf|xX|x|", "Rfc|xX|x|", "fRc|Xx|", "Rc|xX|x|", "Lx|xX|x|", "lRc|Xx|",
                 "flRc|xBc|x|"};
             bool delayCbet = CheckLineInLinesMass(compositeLine, delayCbetMass);
             if(delayCbet) return HeroTurnState.DelayCbet;;
             //BetAfterReraiseFlop
-            string[] betAfterReraiseFlopMass = {"rC|XbRc|"};
+            string[] betAfterReraiseFlopMass = {"rC|XbRc|", "rfC|XbRc|"};
             bool betAfterReraiseFlop = CheckLineInLinesMass(compositeLine, betAfterReraiseFlopMass);
             if(betAfterReraiseFlop) return HeroTurnState.BetAfterReraiseFlop;
            
             //FacingCbet2
-            string[] facingCbet2Mass = {"RfrC|bC|b|", "RrfC|bC|b|", "rfC|XbC|Xb|", "frC|bC|b|", "LrC|bC|b|", "rC|XbC|Xb|"};
+            string[] facingCbet2Mass = {"RfrC|bC|b|", "RrfC|bC|b|", "rfC|XbC|Xb|", "frC|bC|b|", "LrC|bC|b|", "rC|XbC|Xb|", "RrC|bC|b|"};
             bool facingCbet2 = CheckLineInLinesMass(compositeLine, facingCbet2Mass);
             if(facingCbet2) return HeroTurnState.FacingCbet2;
+
 
             //facingDelayCbet2
             string[] facingDelayCbetMass = {"rC|Xx|Xb|", "LrC|xX|b|", "rfC|Xx|Xb|", "frC|Xx|b|"};
             bool facingDelayCbet = CheckLineInLinesMass(compositeLine, facingDelayCbetMass);
             if (facingDelayCbet) return HeroTurnState.FacingDelayCbet;
+            //facingDonk
+            string[] facingDonkMass = {"Rcf|xBc|b|"};
+            bool facingDonk = CheckLineInLinesMass(compositeLine, facingDonkMass);
+            if(facingDonk) return HeroTurnState.FacingDonk;
 
             //facingDonk2
             string[] facingDonk2Mass = { "Rcc|bfC|b|", "Rcc|bcC|bf|", "Rcc|bcC|bc|", "Rcc|xbCc|xb|", "Rcc|xbCf|b|", "Rcf|bC|b|", "Rfc|bC|b|", "Rc|bC|b|" };
@@ -335,6 +345,11 @@ namespace Pingvi {
             string[] vsMissTurnCbetMass = { "RfrC|bC|x|", "RrfC|bC|x|",  "frC|bC|x|", "LrC|bC|x|", };
             bool vsMissTurnCbet = CheckLineInLinesMass(compositeLine, vsMissTurnCbetMass);
             if(vsMissTurnCbet) return HeroTurnState.vsMissTCb;
+            //facingDelayBet
+            string[] facingDelayBetMass = {"lfX|Xx|Xb|"};
+            bool facingDelayBet = CheckLineInLinesMass(compositeLine, facingDelayBetMass);
+            if(facingDelayBet) return HeroTurnState.FacingDelayBet;
+                
      
             return HeroTurnState.None;
         }
@@ -342,7 +357,7 @@ namespace Pingvi {
         private HeroRiverState DefineHeroRiverState( string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.River) return HeroRiverState.None;
             //Cbet3
-            string[] cbet3Mass = {"fRc|Bc|Bc|", "Rc|Bc|Bc|", "rRc|Bc|Bc|", "rRf|Bc|Bc|"};
+            string[] cbet3Mass = {"fRc|Bc|Bc|", "Rc|Bc|Bc|", "rRc|Bc|Bc|", "rRf|Bc|Bc|", "flRc|xBc|xBc|x|"};
             bool cbet3 = CheckLineInLinesMass(compositeLine, cbet3Mass);
             if(cbet3) return HeroRiverState.Cbet3;
             //facingCbet3

@@ -34,6 +34,9 @@ namespace Pingvi
         public Color FishColor { get; set; }
         public Color WeakRegColor { get; set; }
         public Color GoodRegColor { get; set; }
+        public Color GoodRegColor2 { get; set; }
+        public Color GoodRegColor3 { get; set; }
+        public Color GoodRegColor4 { get; set; }
         public Color UberRegColor { get; set; }
 
         public Color RockColor { get; set; }

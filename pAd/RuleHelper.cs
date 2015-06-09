@@ -23,6 +23,10 @@ namespace Pingvi {
             return context.If(e => e.HeroFlopState == state);
         }
 
+        public static RuleContext<LineInfo> LeftPlayerType(this RuleContext<LineInfo> context, PlayerType playerType) {
+            return context.If(l => l.Elements.LeftPlayer.Type == playerType);
+        }
+
         public static RuleContext<LineInfo> HeroPosition(this RuleContext<LineInfo> context, PlayerPosition position)
         {
             return context.If(l => l.Elements.HeroPlayer.Position == position);

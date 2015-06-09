@@ -97,8 +97,11 @@ namespace Pingvi {
             //PLAYER TYPE
             Common.FishColor    = Color.FromArgb(6, 100, 6);
             Common.WeakRegColor = Color.FromArgb(6, 53, 100);
-            Common.GoodRegColor = Color.FromArgb(100, 53, 6);
-            Common.UberRegColor = Color.FromArgb(100, 6, 6);
+            Common.GoodRegColor = Color.FromArgb(101, 55, 8);
+            Common.GoodRegColor2 = Color.FromArgb(100, 6, 6);
+            Common.GoodRegColor3 = Color.FromArgb(54, 6, 6);
+            Common.GoodRegColor4 = Color.FromArgb(100, 53, 6);
+            Common.UberRegColor = Color.FromArgb(100, 5, 10);
             Common.RockColor = Color.FromArgb(54, 53, 6);
             Common.ManiacColor = Color.FromArgb(86, 23, 100);
 

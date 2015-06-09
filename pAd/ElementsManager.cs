@@ -456,7 +456,10 @@ namespace Pingvi {
             if (pixelColor == _elementsConfig.Common.ManiacColor) return PlayerType.Maniac;
             if (pixelColor == _elementsConfig.Common.FishColor) return PlayerType.Fish;
             if (pixelColor == _elementsConfig.Common.WeakRegColor) return PlayerType.WeakReg;
-            if (pixelColor == _elementsConfig.Common.GoodRegColor) return PlayerType.GoodReg;
+            if (pixelColor == _elementsConfig.Common.GoodRegColor ||
+                pixelColor == _elementsConfig.Common.GoodRegColor2 ||
+                pixelColor == _elementsConfig.Common.GoodRegColor3 ||
+                pixelColor == _elementsConfig.Common.GoodRegColor4) return PlayerType.GoodReg;
             if (pixelColor == _elementsConfig.Common.UberRegColor) return PlayerType.UberReg;
             return PlayerType.Unknown;
         }
