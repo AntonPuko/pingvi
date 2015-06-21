@@ -542,6 +542,16 @@ namespace Pingvi
                     .EffectiveStackSbVsBtnBetween(16, 20)
                     .Do(l => CheckDecision(heroHand, "SB_ISO_VS_BTN_LIMP_16-20bb_UNK", 0, PlMode.None));
 
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+                       .HeroPreflopState(HeroPreflopState.FacingLimp)
+                       .EffectiveStackSbVsBtnBetween(13, 16)
+                       .Do(l => CheckDecision(heroHand, "SB_ISO_VS_BTN_LIMP_13-16bb_UNK", 0, PlMode.None));
+
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+                       .HeroPreflopState(HeroPreflopState.FacingLimp)
+                       .EffectiveStackSbVsBtnBetween(10, 13)
+                       .Do(l => CheckDecision(heroHand, "SB_ISO_VS_BTN_LIMP_10-13bb_UNK", 0, PlMode.None));
+
 
 
                 #endregion
@@ -549,6 +559,35 @@ namespace Pingvi
                 #region BB
 
                 //BB
+            //BB FACING LIMP OOP (BB VS BTN LIMP)
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                .HeroPreflopState(HeroPreflopState.FacingLimp)
+                .Is3Max()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .EffectiveStackBetween(20, 100)
+                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_LIMP_20-100bb", 0, PlMode.None));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+               .HeroPreflopState(HeroPreflopState.FacingLimp)
+               .Is3Max()
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .EffectiveStackBetween(16, 20)
+               .Do(l => CheckDecision(heroHand, "BB_VS_BTN_LIMP_16-20bb", 0, PlMode.None));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+               .HeroPreflopState(HeroPreflopState.FacingLimp)
+               .Is3Max()
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .EffectiveStackBetween(13, 16)
+               .Do(l => CheckDecision(heroHand, "BB_VS_BTN_LIMP_13-16bb", 0, PlMode.None));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+               .HeroPreflopState(HeroPreflopState.FacingLimp)
+               .Is3Max()
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .EffectiveStackBetween(10, 13)
+               .Do(l => CheckDecision(heroHand, "BB_VS_BTN_LIMP_10-13bb", 0, PlMode.None));
+
                 //BB FACING LIMP 2MAX HU
                 double? limpfold = null;
                 if (lineInfo.Elements.HuOpp != null) limpfold = lineInfo.Elements.HuOpp.Stats.PF_LIMP_FOLD;
@@ -759,6 +798,7 @@ namespace Pingvi
 
 
                 //BB VS BTN OPEN 3MAX
+            //VS MINR
                 if (openRaise == null) {
                     //VS UNK
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
@@ -937,8 +977,46 @@ namespace Pingvi
 
                 }
 
+            //bb vs btn open  BIG RAISE
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeBetween(2, 3)
+                .EffectiveStackBetween(8, 10)
+                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_OPEN_BIG_8-10bb", 0, PlMode.None));
 
-
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeBetween(2, 3)
+                .EffectiveStackBetween(10, 13)
+                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_OPEN_BIG_10-13bb", 0, PlMode.None));
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeBetween(2.5, 3)
+                .EffectiveStackBetween(13, 16)
+                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_OPEN_BIG_13-16bb", 0, PlMode.None));
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeBetween(2.5, 3)
+                .EffectiveStackBetween(16, 20)
+                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_OPEN_BIG_16-20bb", 0, PlMode.None));
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeBetween(2.5,4)
+                .EffectiveStackBetween(20, 100)
+                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_OPEN_BIG_20-100bb", 0, PlMode.None));
 
 
 

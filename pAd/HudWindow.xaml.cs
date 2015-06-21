@@ -537,7 +537,16 @@ namespace Pingvi
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                     DecisionRun.Text = "vRE";
                     break;
+                case HeroTurnState.VsMissDonk2:
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(217, 222, 255));
+                    DecisionRun.Text = "vMDK2";
+                    break;
+                case HeroTurnState.FacingCbetAfterFlopReraise:
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                    DecisionRun.Text = "vCbaFR";
+                    break;
             }
+            
         }
 
         private void ShowRiverInfoStats(DecisionInfo decisionInfo) {

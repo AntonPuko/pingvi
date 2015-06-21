@@ -18,6 +18,7 @@ namespace Pingvi {
         Open,
         FacingOpen,
         FacingLimp,
+        FacingDoubleLimp,
         FacingISOvsLimp,
         FacingLimpIsoShove,
         FacingReraiseIso,
@@ -56,12 +57,14 @@ namespace Pingvi {
         FacingBet2,
         VsMissFCb,
         vsMissTCb,
+        VsMissDonk2,
         BetAfterReraiseFlop,
         DelayCbet,
         Cbet2,
         FacingCbet2,
         FacingReraise,
         FacingCheckAfterFlopReraise,
+        FacingCbetAfterFlopReraise,
         FacingDelayBet,
         FacingDelayCbet,
     }
@@ -178,9 +181,13 @@ namespace Pingvi {
             bool facingOpen = CheckLineInLinesMass(_preflopCompositeLine, facingOpenMass);
             if (facingOpen && !facingPush) return HeroPreflopState.FacingOpen;
             //FacingLimp
-            string[] facingLimpMass = {"l|", "ll|", "fl|"};
+            string[] facingLimpMass = {"l|", "fl|", "lf|"};
             bool facingLimp = CheckLineInLinesMass(_preflopCompositeLine, facingLimpMass);
             if (facingLimp) return HeroPreflopState.FacingLimp;
+            //FacingDoubleLimp
+            string[] facingDoubleLimpMass = { "ll|" };
+            bool facingDoubleLimp = CheckLineInLinesMass(_preflopCompositeLine, facingDoubleLimpMass);
+            if (facingDoubleLimp) return HeroPreflopState.FacingDoubleLimp;
             //FacingOpenPush
             string[] facingOpenPushMass = {"r|", "fr|", "rf|"};
             bool facingOpenPush = CheckLineInLinesMass(_preflopCompositeLine, facingOpenPushMass);
@@ -240,7 +247,7 @@ namespace Pingvi {
             //Cbet 
             string[] cbetMass = {
                 "Rcc|xx|", "Rcf|x|", "Rfc|x|", "lRfc|", "rRfc|", "fRc|", "lfRc|", "rfRc|", "flRc|x|",
-                "Lx|x|", "Rc|x|", "lRc|", "rRc|", "lRcf|"
+                "Lx|x|", "Rc|x|", "lRc|", "rRc|", "lRcf|", "frRc|x|"
             };
             bool cbet = CheckLineInLinesMass(compositeLine, cbetMass);
             if (cbet) return HeroFlopState.Cbet;
@@ -256,7 +263,7 @@ namespace Pingvi {
             bool facingCbet = CheckLineInLinesMass(compositeLine, facingCbetMass);
             if (facingCbet) return HeroFlopState.FacingCbet;
             //FacingDonk
-            string[] facingDonkMass = {"Rcc|bf|", "Rcc|bc|", "Rcc|xb|", "Rcf|b|", "Rfc|b|", "Rc|b|", "flRc|b|"};
+            string[] facingDonkMass = {"Rcc|bf|", "Rcc|bc|", "Rcc|xb|", "Rcf|b|", "Rfc|b|", "Rc|b|", "flRc|b|", "rcC|b|"};
             bool facingDonk = CheckLineInLinesMass(compositeLine, facingDonkMass);
             if(facingDonk) return HeroFlopState.FacingDonk;
             //FacingBet
@@ -277,7 +284,7 @@ namespace Pingvi {
             //FacingReraise
             string[] facingReraiseMass = {
                 "Rcf|xBr|", "lfX|Br|", "fRc|Br|", "lfRc|Br|", "rfRc|Br|", "flX|xBr|", "flRc|xBr|",
-                "frC|xBr|", "Rc|xBr|", "lX|Br|", "rRc|Br|"
+                "frC|xBr|", "Rc|xBr|", "lX|Br|", "rRc|Br|", "Rfc|xBr|"
             };
             bool facingReraise = CheckLineInLinesMass(compositeLine, facingReraiseMass);
             if(facingReraise) return HeroFlopState.FacingReraise;
@@ -298,7 +305,7 @@ namespace Pingvi {
             //Cbet2
             string[] cbet2Mass = {
                 "Rcf|xBc|x|", "Rfc|xBc|x|", "fRc|Bc|", "Rc|xBc|x|", "Lx|xBc|x|", "lRc|Bc|",
-                "flRc|xBc|x|", 
+                "flRc|xBc|x|", "lfRc|Bc|"
             };
             bool cbet2 = CheckLineInLinesMass(compositeLine, cbet2Mass);
             if (cbet2) return HeroTurnState.Cbet2;
@@ -313,7 +320,7 @@ namespace Pingvi {
             bool delayCbet = CheckLineInLinesMass(compositeLine, delayCbetMass);
             if(delayCbet) return HeroTurnState.DelayCbet;;
             //BetAfterReraiseFlop
-            string[] betAfterReraiseFlopMass = {"rC|XbRc|", "rfC|XbRc|"};
+            string[] betAfterReraiseFlopMass = {"rC|XbRc|", "rfC|XbRc|", "lX|XbRc|"};
             bool betAfterReraiseFlop = CheckLineInLinesMass(compositeLine, betAfterReraiseFlopMass);
             if(betAfterReraiseFlop) return HeroTurnState.BetAfterReraiseFlop;
            
@@ -338,7 +345,7 @@ namespace Pingvi {
             if(facingDonk2) return HeroTurnState.FacingDonk2;
             //
             //VsMissFLopCbet
-            string[] vsMissFlopCbetMass = {"rfC|Xx|", "rC|Xx|"};
+            string[] vsMissFlopCbetMass = {"rfC|Xx|", "rC|Xx|", "frC|xX|x|"};
             bool vsMissFlopCbet = CheckLineInLinesMass(compositeLine, vsMissFlopCbetMass);
             if(vsMissFlopCbet) return HeroTurnState.VsMissFCb;
             //vsMissTurnCbet
@@ -349,7 +356,18 @@ namespace Pingvi {
             string[] facingDelayBetMass = {"lfX|Xx|Xb|"};
             bool facingDelayBet = CheckLineInLinesMass(compositeLine, facingDelayBetMass);
             if(facingDelayBet) return HeroTurnState.FacingDelayBet;
-                
+            //vsMissDonk2
+            string[] vsMissDonk2Mass = {"flRc|bC|x|"};
+            bool vsMissDonk2 = CheckLineInLinesMass(compositeLine, vsMissDonk2Mass);
+            if (vsMissDonk2) return HeroTurnState.VsMissDonk2;
+            //vsRFCbet
+            string[] facingCbetkAfterFlopReraiseMass = {"Rc|xBrC|b|"};
+            bool facingCbetkAfterFlopReraise = CheckLineInLinesMass(compositeLine, facingCbetkAfterFlopReraiseMass);
+            if( facingCbetkAfterFlopReraise) return HeroTurnState.FacingCbetAfterFlopReraise;
+            //vs2CbetReraise
+            string[] facingReraiseMass = {"Rc|xBc|xBr|"};
+            bool facingReraise = CheckLineInLinesMass(compositeLine, facingReraiseMass);
+            if(facingReraise) return HeroTurnState.FacingReraise;
      
             return HeroTurnState.None;
         }
