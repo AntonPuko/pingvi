@@ -1269,13 +1269,33 @@ namespace Pingvi
 
             PlayerType oopType =  PlayerType.Unknown;
             if (lineInfo.Elements.HuOpp != null) oopType = lineInfo.Elements.HuOpp.Type;
+
+
+            //BB VS SB CALL OPEN PUSH 3max hu
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                  .HeroPreflopState(HeroPreflopState.FacingOpenPush).Is3Max()
+                  .IsHU()
+                  .OppPosition(PlayerPosition.Sb)
+                  .EffectiveStackBetween(8, 100)
+                  .Do(l => CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK",
+                              l.Elements.EffectiveStack, PlMode.Less));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                 .HeroPreflopState(HeroPreflopState.FacingOpenPush).Is3Max()
+                 .IsHU()
+                 .OppPosition(PlayerPosition.Sb)
+                 .EffectiveStackBetween(0, 8)
+                 .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb",
+                             l.Elements.EffectiveStack, PlMode.Less));
+
+
             
-            
-                //BB VS SB CALL OPEN PUSH
+                //BB VS SB CALL OPEN PUSH HU 2max
             if ((openPush > 18 && lineInfo.Elements.TourneyMultiplier <= 6) || oopType == PlayerType.GoodReg) {
                 //vs agr or good reg
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
-                    .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                    .HeroPreflopState(HeroPreflopState.FacingOpenPush).Is2Max()
                     .IsHU()
                     .OppPosition(PlayerPosition.Sb)
                     .EffectiveStackBetween(8, 100)
@@ -1285,7 +1305,7 @@ namespace Pingvi
             else {
                 //vs unk
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
-                   .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                   .HeroPreflopState(HeroPreflopState.FacingOpenPush).Is2Max()
                    .IsHU()
                    .OppPosition(PlayerPosition.Sb)
                    .EffectiveStackBetween(8, 100)

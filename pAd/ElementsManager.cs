@@ -154,6 +154,11 @@ namespace Pingvi {
                FindNumberN(_elementsConfig.LeftPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints,
                    _elementsConfig.LeftPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.PF_OPENPUSH =
+              FindNumberN(_elementsConfig.LeftPlayer.PF_OPENPUSH_StatDigPosPoints,
+                  _elementsConfig.LeftPlayer.PF_OPENPUSH_StatDigitsRectMass,
+                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
             
             //LEFT FLOP
             _elements.LeftPlayer.Stats.F_CBET =
@@ -238,6 +243,11 @@ namespace Pingvi {
               FindNumberN(_elementsConfig.RightPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints,
                   _elementsConfig.RightPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass,
                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.PF_OPENPUSH =
+           FindNumberN(_elementsConfig.RightPlayer.PF_OPENPUSH_StatDigPosPoints,
+               _elementsConfig.RightPlayer.PF_OPENPUSH_StatDigitsRectMass,
+               _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
             
             //RIGHT FLOP
             _elements.RightPlayer.Stats.F_CBET =

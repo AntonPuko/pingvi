@@ -437,8 +437,8 @@ namespace Pingvi {
 
             LeftPlayer.PF_OPENPUSH_StatDigPosPoints = new[] { new PixelPoint(19, 293), new PixelPoint(14, 293) };
             LeftPlayer.PF_OPENPUSH_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(8,289,5,4), new RectangleF(13,289,5,4) }, 
-                new [] {new RectangleF(8,289,5,4)}
+                new [] {new RectangleF(8,288,5,4), new RectangleF(13,288,5,4) }, 
+                new [] {new RectangleF(8,288,5,4)}
                 };
 
             //FLOP
@@ -543,8 +543,8 @@ namespace Pingvi {
 
             RightPlayer.PF_OPENPUSH_StatDigPosPoints = new[] { new PixelPoint(731, 293), new PixelPoint(726, 293) };
             RightPlayer.PF_OPENPUSH_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(720,289,5,4), new RectangleF(725,289,5,4) }, 
-                new [] {new RectangleF(720,289,5,4)}
+                new [] {new RectangleF(720,288,5,4), new RectangleF(725,288,5,4) }, 
+                new [] {new RectangleF(720,288,5,4)}
                 };
 
             //RIGHT FLOP
