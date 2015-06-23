@@ -1267,29 +1267,30 @@ namespace Pingvi
                             CheckDecision(heroHand, "BB_VS_BTN_OPENPUSH_4-100bb_UNK", l.Elements.HuOpp.Stack,
                                 PlMode.Less));
 
-
+            PlayerType oopType =  PlayerType.Unknown;
+            if (lineInfo.Elements.HuOpp != null) oopType = lineInfo.Elements.HuOpp.Type;
+            
+            
                 //BB VS SB CALL OPEN PUSH
-            if (openPush < 6 || (lineInfo.Elements.TourneyMultiplier >= 6 || openPush < 12)) {
+            if ((openPush > 18 && lineInfo.Elements.TourneyMultiplier <= 6) || oopType == PlayerType.GoodReg) {
+                //vs agr or good reg
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                     .IsHU()
                     .OppPosition(PlayerPosition.Sb)
                     .EffectiveStackBetween(8, 100)
-                    .Do(
-                        l =>
-                            CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV",
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK",
                                 l.Elements.EffectiveStack, PlMode.Less));
             }
             else {
+                //vs unk
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                    .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                    .IsHU()
                    .OppPosition(PlayerPosition.Sb)
                    .EffectiveStackBetween(8, 100)
-                   .Do(
-                       l =>
-                           CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK", l.Elements.EffectiveStack,
-                               PlMode.Less));
+                   .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV",
+                       l.Elements.EffectiveStack, PlMode.Less));
             }
 
 
@@ -1303,8 +1304,7 @@ namespace Pingvi
                 #region smallMultiplicator
                 //big blinds
                 #region bigblinds
-                if (openPush >= openPushSeparator08Bb)
-                { // vs agr
+                if (openPush >= openPushSeparator08Bb) { // vs agr
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                         .BBEqOrMoreThen(60)
@@ -1376,6 +1376,14 @@ namespace Pingvi
                 //small blinds
                 if (openPush >= openPushSeparator08Bb)
                 { // vs agr
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                      .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                      .EffectiveStackBetween(0, 8)
+                      .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                          , l.Elements.EffectiveStack, PlMode.Less));
+
+
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                       .EffectiveStackBetween(0, 8)
@@ -1438,13 +1446,13 @@ namespace Pingvi
                         , l.Elements.EffectiveStack, PlMode.Less));
                 #endregion
                 //small blinds
-                if (openPush >= openPushSeparator08Bb)
-                {
+                if (openPush >= openPushSeparator08Bb) {
+
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
-                   .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                   .EffectiveStackBetween(0, 8)
-                   .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
-                       , l.Elements.EffectiveStack, PlMode.Less));
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .EffectiveStackBetween(0, 8)
+                        .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                            , l.Elements.EffectiveStack, PlMode.Less));
                 }
                 else if (openPush < openPushSeparator08Bb)
                 {
