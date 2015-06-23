@@ -17,6 +17,7 @@ namespace PokerModel {
         public double? PF_BB_3BET_VS_SB;
         public double? PF_BB_DEF_VS_SBSTEAL;
         public double? PF_SB_OPENMINRAISE;
+        public double? PF_OPENPUSH;
 
         //FLOP
         public double? F_CBET;

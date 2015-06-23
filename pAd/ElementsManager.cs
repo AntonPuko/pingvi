@@ -48,7 +48,8 @@ namespace Pingvi {
         private void FindElements() {
             
                 
-            
+            //TourneyMultiplier 
+            _elements.TourneyMultiplier = CheckTourneyMultiplier();
             //TableNumber
             _elements.TableNumber = (int)(FindNumber(_elementsConfig.Common.TableNumberDigPosPoints,
               _elementsConfig.Common.TableNumberDigitsRectMass,
@@ -67,8 +68,8 @@ namespace Pingvi {
             _elements.RiverCard = FindCard(_elementsConfig.Common.RiverCardRect);
 
             _elements.HeroPlayer.Hand  = new Hand(FindCard(_elementsConfig.Hero.Card1Rect), FindCard(_elementsConfig.Hero.Card2Rect));
-    
 
+            
             #endregion
 
             //CURRENT STREET (AFTER FINDING CARD)
@@ -905,6 +906,15 @@ namespace Pingvi {
         private double CountBetToPot(double pot, double playerBet) {
             if (pot == 0 || playerBet == 0) return 0.0;
             return playerBet/(pot-playerBet);
+        }
+
+        private int? CheckTourneyMultiplier() {
+            var pixelColor = TableBitmap.GetPixel(_elementsConfig.Common.MultiplierPixelPoint.X,
+                _elementsConfig.Common.MultiplierPixelPoint.Y);
+            foreach (var c in _elementsConfig.Common.MultiplierColors) {
+                if (pixelColor == c.Value) return c.Key;
+            }
+            return null;
         }
      
     }

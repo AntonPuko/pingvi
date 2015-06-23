@@ -25,6 +25,8 @@ namespace Pingvi
         public Card TurnCard { get; set; }
         public Card RiverCard { get; set; }
 
+        public int? TourneyMultiplier { get; set; }
+
         public bool IsHU { get; set; }
         public Player HuOpp { get; set; }
 

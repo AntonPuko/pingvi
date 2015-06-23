@@ -105,6 +105,21 @@ namespace Pingvi {
             Common.RockColor = Color.FromArgb(54, 53, 6);
             Common.ManiacColor = Color.FromArgb(86, 23, 100);
 
+
+            //TOURNEY MULTIPLIER
+            Common.MultiplierPixelPoint = new PixelPoint(800,445);
+            Common.MultiplierColors = new Dictionary<int, Color> {
+                {2, Color.FromArgb(4, 24, 47)},
+                {4, Color.FromArgb(0, 60, 76)},
+                {6, Color.FromArgb(0, 56, 32)},
+                {10, Color.FromArgb(0, 79, 0)},
+                {25, Color.FromArgb(55, 31, 76)},
+                {120, Color.FromArgb(5, 5, 5)},
+                {240, Color.FromArgb(5, 5, 5)},
+                {3600, Color.FromArgb(5, 5, 5)}
+            };
+
+
             LeftPlayer.PlayerTypePoint  = new PixelPoint(145, 100);
             RightPlayer.PlayerTypePoint = new PixelPoint(666, 101);
             //TODO Init Hero Player type if needs to
@@ -420,6 +435,12 @@ namespace Pingvi {
                 new [] {new RectangleF(8,277,5,4)}
                 };
 
+            LeftPlayer.PF_OPENPUSH_StatDigPosPoints = new[] { new PixelPoint(19, 293), new PixelPoint(14, 293) };
+            LeftPlayer.PF_OPENPUSH_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(8,289,5,4), new RectangleF(13,289,5,4) }, 
+                new [] {new RectangleF(8,289,5,4)}
+                };
+
             //FLOP
             LeftPlayer.F_CBET_StatDigPosPoints = new[] { new PixelPoint(41, 198), new PixelPoint(36, 198) };
             LeftPlayer.F_CBET_StatDigitsRectMass = new[] {
@@ -518,6 +539,12 @@ namespace Pingvi {
             RightPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(720,277,5,4), new RectangleF(725,277,5,4) }, 
                 new [] {new RectangleF(720,277,5,4)}
+                };
+
+            RightPlayer.PF_OPENPUSH_StatDigPosPoints = new[] { new PixelPoint(731, 293), new PixelPoint(726, 293) };
+            RightPlayer.PF_OPENPUSH_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(720,289,5,4), new RectangleF(725,289,5,4) }, 
+                new [] {new RectangleF(720,289,5,4)}
                 };
 
             //RIGHT FLOP

@@ -1243,7 +1243,8 @@ namespace Pingvi
                     .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_BIG_20-100bb_2max", null, PlMode.None));
 
 
-
+                double? openPush = null;
+                if (lineInfo.Elements.HuOpp != null) openPush = lineInfo.Elements.HuOpp.Stats.PF_OPENPUSH;
 
                 //BB vs BTN CALL OPEN PUSH
 
@@ -1253,7 +1254,7 @@ namespace Pingvi
                     .OppPosition(PlayerPosition.Button)
                     .EffectiveStackBetween(0, 8)
                     .BBEqOrLessThen(40)
-                    .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb", l.Elements.HuOpp.Stack, PlMode.Less));
+                    .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV", l.Elements.HuOpp.Stack, PlMode.Less));
 
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
@@ -1268,15 +1269,214 @@ namespace Pingvi
 
 
                 //BB VS SB CALL OPEN PUSH
+            if (openPush < 6) {
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                     .IsHU()
                     .OppPosition(PlayerPosition.Sb)
-                    .EffectiveStackBetween(9, 100)
+                    .EffectiveStackBetween(8, 100)
                     .Do(
                         l =>
-                            CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK", l.Elements.EffectiveStack,
-                                PlMode.Less));
+                            CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV",
+                                l.Elements.EffectiveStack, PlMode.Less));
+            }
+            else {
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                   .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                   .IsHU()
+                   .OppPosition(PlayerPosition.Sb)
+                   .EffectiveStackBetween(8, 100)
+                   .Do(
+                       l =>
+                           CheckDecision(heroHand, "BB_VS_SB_CALL_OPENPUSH_9-100bb_UNK", l.Elements.EffectiveStack,
+                               PlMode.Less));
+            }
+
+
+               
+
+
+            //bb  vs sb call openpush HU 0-8bb
+            const double openPushSeparator08Bb = 50.0;
+
+            if (lineInfo.Elements.TourneyMultiplier <= 4) { // small multiplier
+                #region smallMultiplicator
+                //big blinds
+                #region bigblinds
+                if (openPush >= openPushSeparator08Bb)
+                { // vs agr
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(60)
+                        .EffectiveStackBetween(5, 8)
+                        .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(80)
+                        .EffectiveStackBetween(4, 5)
+                        .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(100)
+                        .EffectiveStackBetween(0, 3)
+                        .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                else if (openPush < openPushSeparator08Bb)
+                { // vs nit
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(60)
+                        .EffectiveStackBetween(5, 8)
+                        .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(80)
+                        .EffectiveStackBetween(4, 5)
+                        .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(100)
+                        .EffectiveStackBetween(0, 3)
+                        .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                }
+                else { //vs unk
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                     .BBEqOrMoreThen(60)
+                     .EffectiveStackBetween(5, 8)
+                     .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                         , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(80)
+                        .EffectiveStackBetween(4, 5)
+                        .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .BBEqOrMoreThen(100)
+                        .EffectiveStackBetween(0, 3)
+                        .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                #endregion
+                //small blinds
+                if (openPush >= openPushSeparator08Bb)
+                { // vs agr
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                      .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                      .EffectiveStackBetween(0, 8)
+                      .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                          , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                else if (openPush < openPushSeparator08Bb)
+                { // vs nit
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                     .EffectiveStackBetween(6, 8)
+                     .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                         , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                     .EffectiveStackBetween(6, 0)
+                     .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                         , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                else { //vs unk
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                     .EffectiveStackBetween(7, 8)
+                     .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                         , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                     .EffectiveStackBetween(7, 0)
+                     .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                         , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                #endregion
+            }
+            else { // big multiplier
+                #region bigMultiplicator
+
+                #region bigblinds
+                //big blinds
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                    .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                    .BBEqOrMoreThen(60)
+                    .EffectiveStackBetween(5,8)
+                    .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                        , l.Elements.EffectiveStack, PlMode.Less));
+
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                    .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                    .BBEqOrMoreThen(80)
+                    .EffectiveStackBetween(4, 5)
+                    .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                        , l.Elements.EffectiveStack, PlMode.Less));
+
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                    .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                    .BBEqOrMoreThen(100)
+                    .EffectiveStackBetween(0, 3)
+                    .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                        , l.Elements.EffectiveStack, PlMode.Less));
+                #endregion
+                //small blinds
+                if (openPush >= openPushSeparator08Bb)
+                {
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                   .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                   .EffectiveStackBetween(0, 8)
+                   .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                       , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                else if (openPush < openPushSeparator08Bb)
+                {
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .EffectiveStackBetween(6, 8)
+                        .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .EffectiveStackBetween(0, 6)
+                        .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+                }
+                else {
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                      .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                      .EffectiveStackBetween(7, 8)
+                      .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
+                          , l.Elements.EffectiveStack, PlMode.Less));
+
+                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
+                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                        .EffectiveStackBetween(0, 7)
+                        .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
+                            , l.Elements.EffectiveStack, PlMode.Less));
+                }
+
+                #endregion
+            }
+
 
 
 

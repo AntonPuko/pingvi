@@ -60,6 +60,9 @@ namespace Pingvi {
         public PixelPoint[] PF_SB_OPENMINRAISE_StatDigPosPoints { get; set; }
         public RectangleF[][] PF_SB_OPENMINRAISE_StatDigitsRectMass { get; set; }
 
+        public PixelPoint[] PF_OPENPUSH_StatDigPosPoints { get; set; }
+        public RectangleF[][] PF_OPENPUSH_StatDigitsRectMass { get; set; }
+
         //FLOP
 
         public PixelPoint[] F_CBET_StatDigPosPoints { get; set; }

@@ -77,8 +77,18 @@ namespace Pingvi
         public Color StatsDigitsColor { get; set; }
 
 
+        public Dictionary<int, Color> MultiplierColors { get; set; }
+        public PixelPoint MultiplierPixelPoint { get; set; }
 
 
+        public Color MultiplierColorX2 { get; set; }
+        public Color MultiplierColorX4 { get; set; }
+        public Color MultiplierColorX6 { get; set; }
+        public Color MultiplierColorX10 { get; set; }
+        public Color MultiplierColorX25 { get; set; }
+        public Color MultiplierColorX120 { get; set; }
+        public Color MultiplierColorX240 { get; set; }
+        public Color MultiplierColorX3600 { get; set; }
 
         public CommonElementsConfig() {
            Blinds = new BlindsElementsConfig();
