@@ -1269,7 +1269,7 @@ namespace Pingvi
 
 
                 //BB VS SB CALL OPEN PUSH
-            if (openPush < 6) {
+            if (openPush < 6 || (lineInfo.Elements.TourneyMultiplier >= 6 || openPush < 12)) {
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                     .IsHU()
