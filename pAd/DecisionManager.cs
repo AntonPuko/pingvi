@@ -1253,8 +1253,19 @@ namespace Pingvi
                     .IsHU()
                     .OppPosition(PlayerPosition.Button)
                     .EffectiveStackBetween(0, 8)
-                    .BBEqOrLessThen(40)
-                    .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV", l.Elements.HuOpp.Stack, PlMode.Less));
+                    .BBEqOrLessThen(60)
+                    .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb", l.Elements.HuOpp.Stack, PlMode.Less));
+
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                    .IsHU()
+                    .OppPosition(PlayerPosition.Button)
+                    .EffectiveStackBetween(0, 4)
+                    .BBEqOrMoreThen(80)
+                    .Do(
+                        l =>
+                            CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV", l.Elements.HuOpp.Stack,
+                                PlMode.Less));
 
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
@@ -1289,11 +1300,13 @@ namespace Pingvi
                  .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb",
                              l.Elements.EffectiveStack, PlMode.Less));
 
-
+   
             
                 //BB VS SB CALL OPEN PUSH HU 2max
-            if ((openPush > 18 && lineInfo.Elements.TourneyMultiplier <= 6) || oopType == PlayerType.GoodReg) {
-                //vs agr or good reg
+            if ((openPush > 20 && lineInfo.Elements.TourneyMultiplier >= 6) || oopType == PlayerType.GoodReg ||
+                lineInfo.Elements.TourneyMultiplier <= 6)
+            {
+                //vs agr or good reg or small multi
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroPreflopState(HeroPreflopState.FacingOpenPush).Is2Max()
                     .IsHU()
@@ -1303,7 +1316,7 @@ namespace Pingvi
                                 l.Elements.EffectiveStack, PlMode.Less));
             }
             else {
-                //vs unk
+                //vs unk and big multi
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                    .HeroPreflopState(HeroPreflopState.FacingOpenPush).Is2Max()
                    .IsHU()
@@ -1318,9 +1331,10 @@ namespace Pingvi
 
 
             //bb  vs sb call openpush HU 0-8bb
-            const double openPushSeparator08Bb = 50.0;
-
-            if (lineInfo.Elements.TourneyMultiplier <= 4) { // small multiplier
+            const double openPushSeparator08Bb = 40.0;
+            const int multiplierSeparator = 6;
+            if (lineInfo.Elements.TourneyMultiplier <= multiplierSeparator)
+            { // small multiplier
                 #region smallMultiplicator
                 //big blinds
                 #region bigblinds
@@ -1427,13 +1441,7 @@ namespace Pingvi
                 else { //vs unk
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
                      .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                     .EffectiveStackBetween(7, 8)
-                     .Do(l => CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV"
-                         , l.Elements.EffectiveStack, PlMode.Less));
-
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max().IsHU()
-                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                     .EffectiveStackBetween(7, 0)
+                     .EffectiveStackBetween(0, 8)
                      .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb"
                          , l.Elements.EffectiveStack, PlMode.Less));
                 }
