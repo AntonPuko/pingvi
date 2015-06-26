@@ -49,3 +49,5 @@ P:\Dropbox\pAd\pAd\bin\Debug\ja\Npgsql.resources.dll
 P:\Dropbox\pAd\pAd\bin\Debug\zh-CN\Npgsql.resources.dll
 P:\Dropbox\pAd\pAd\obj\Debug\ResultsWindow.baml
 P:\Dropbox\pAd\pAd\obj\Debug\ResultsWindow.g.cs
+P:\Dropbox\pAd\pAd\bin\Debug\Newtonsoft.Json.dll
+P:\Dropbox\pAd\pAd\bin\Debug\Newtonsoft.Json.xml

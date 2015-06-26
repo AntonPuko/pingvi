@@ -20,3 +20,5 @@ P:\Dropbox\pAd\SQLTest\obj\Debug\SQLTest.Properties.Resources.resources
 P:\Dropbox\pAd\SQLTest\obj\Debug\SQLTest.csproj.GenerateResource.Cache
 P:\Dropbox\pAd\SQLTest\obj\Debug\SQLTest.exe
 P:\Dropbox\pAd\SQLTest\obj\Debug\SQLTest.pdb
+P:\Dropbox\pAd\SQLTest\bin\Debug\Newtonsoft.Json.dll
+P:\Dropbox\pAd\SQLTest\bin\Debug\Newtonsoft.Json.xml

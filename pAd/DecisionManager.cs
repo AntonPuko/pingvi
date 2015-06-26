@@ -269,9 +269,9 @@ namespace Pingvi
                 }
 
 
-                //SB OPEN VS BB 3MAX //26.06 убрал подстройку под 3бет, надо затестить
-                //26.06 sb vs bb 3max убрал подстройку под 3бет
-               // if (_3betStatBBvsSB == null || _3betStatBBvsSB < 35) {
+                //SB OPEN VS BB 3MAX 
+            
+                if (_3betStatBBvsSB == null || _3betStatBBvsSB < 35) {
                     //VS UNK
                     lineInfo.StartRule()
                         .HeroPosition(PlayerPosition.Sb)
@@ -307,9 +307,8 @@ namespace Pingvi
                         .HeroPreflopState(HeroPreflopState.Open)
                         .EffectiveStackBetween(20, 100)
                         .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_20-100bb_UNK", 0, PlMode.None));
-              //  }
-              //  else {
-            /*
+                }
+                else {
                     //VS LAG
                     lineInfo.StartRule()
                         .HeroPosition(PlayerPosition.Sb)
@@ -346,7 +345,7 @@ namespace Pingvi
                         .EffectiveStackBetween(20, 100)
                         .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_20-100bb_AGR", 0, PlMode.None));
                 }
-             */
+             
 
                 //SB CALL PUSH AFTER LIMP
 
@@ -420,8 +419,8 @@ namespace Pingvi
 
                 //SB CALL PUSH AFTER OPEN
                 //SB CALL PUSH AFTER VS UNK
-                //26.06 sb vs bb 3max убрал подстройку под 3бет
-             //   if (_3betStatBBvsSB == null) {
+                
+                if (_3betStatBBvsSB == null) {
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
                         .EffectiveStackBetween(0, 9)
@@ -434,9 +433,9 @@ namespace Pingvi
                         .Do(l => CheckDecision(heroHand, "SB_CALLPUSH_AFTEROPEN_9-100_UNK_NEW", l.Elements.EffectiveStack,
                                     PlMode.Less));
             
-              //  }
-             //   else {
-            /*
+                }
+                else {
+            
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
                         .EffectiveStackBetween(0, 9)
@@ -463,8 +462,8 @@ namespace Pingvi
                         .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
                         .EffectiveStackBetween(20, 100)
                         .Do(l => CheckDecision(heroHand, "SB_CALLPuSH_VSOPEN_20bb+_EXPL", _3betStatBBvsSB, PlMode.More));
-             //   }
-             */
+               }
+             
 
                 //SB DEFEND VS BTN OPEN
                 double? _btnOpenSteal = null;
