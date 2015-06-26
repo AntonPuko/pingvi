@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeCreator", "RangeCreato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineManagerTest", "LineManagerTest\LineManagerTest.csproj", "{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTest", "SQLTest\SQLTest.csproj", "{B1EC726B-1366-49A4-A8B7-A86B60A75722}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71D23E33-C3DD-46BC-A7F3-1D2B8881F545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1EC726B-1366-49A4-A8B7-A86B60A75722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1EC726B-1366-49A4-A8B7-A86B60A75722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1EC726B-1366-49A4-A8B7-A86B60A75722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1EC726B-1366-49A4-A8B7-A86B60A75722}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

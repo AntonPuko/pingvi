@@ -38,3 +38,14 @@ P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.Properties.Resources.resources
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.csproj.GenerateResource.Cache
 P:\Dropbox\pAd\pAd\obj\Debug\TesterWindow.baml
 P:\Dropbox\pAd\pAd\obj\Debug\TesterWindow.g.cs
+P:\Dropbox\pAd\pAd\bin\Debug\Npgsql.dll
+P:\Dropbox\pAd\pAd\bin\Debug\Mono.Security.dll
+P:\Dropbox\pAd\pAd\bin\Debug\Npgsql.xml
+P:\Dropbox\pAd\pAd\bin\Debug\de\Npgsql.resources.dll
+P:\Dropbox\pAd\pAd\bin\Debug\es\Npgsql.resources.dll
+P:\Dropbox\pAd\pAd\bin\Debug\fi\Npgsql.resources.dll
+P:\Dropbox\pAd\pAd\bin\Debug\fr\Npgsql.resources.dll
+P:\Dropbox\pAd\pAd\bin\Debug\ja\Npgsql.resources.dll
+P:\Dropbox\pAd\pAd\bin\Debug\zh-CN\Npgsql.resources.dll
+P:\Dropbox\pAd\pAd\obj\Debug\ResultsWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\ResultsWindow.g.cs

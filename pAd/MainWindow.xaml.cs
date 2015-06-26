@@ -29,6 +29,7 @@ namespace Pingvi
         public MainWindow() {
             _tableManager = new ScreenTableManager();
             var hudWindow = new HudWindow(_tableManager);
+            var resultWindow = new ResultsWindow();
             var elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
@@ -40,6 +41,7 @@ namespace Pingvi
             decisionManager.NewDecisionInfo += OnNewDecisionInfo;
 
             hudWindow.Show();
+            resultWindow.Show();
             InitializeComponent();
 
         }
