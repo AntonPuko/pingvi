@@ -52,14 +52,16 @@ namespace Pingvi
             double rake = 0;
             double rakeback = 0;
 
-            
-            var dtNow = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+
+
+
+            string dtNow = DateTime.Now.Hour < 7 ? DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
           
 
-            string statsURL ="http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"" + dtNow +" 07:00:00 AM\"}";
+            string statsURL ="http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"" + dtNow +" 00:00:00 AM\"}";
             string statsJson;
 
-            string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 07:00:00 AM\"} and FinishPosition > 0 ";
+            string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 00:00:00 AM\"} and FinishPosition > 0 ";
             string tourneysJson;
             
             using (var webClient = new System.Net.WebClient()) {
