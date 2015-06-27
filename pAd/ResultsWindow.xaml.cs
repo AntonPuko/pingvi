@@ -37,13 +37,14 @@ namespace Pingvi
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
                 _timer = new DispatcherTimer() {
-                    Interval = TimeSpan.FromSeconds(3),
+                    Interval = TimeSpan.FromSeconds(5),
                 };
 
                 _timer.Tick += OnTimerTick;
                 _timer.IsEnabled = true;
             }
 
+        private int prevtagCount;
         private void OnTimerTick(object sender, EventArgs e) {
             int tagCount = 0;
             double chipsEV = 0;
@@ -112,8 +113,8 @@ namespace Pingvi
             if (result < 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(255,125,125));
             if (result > 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
             RakeBackRun.Text = rakeback.ToString("##.#");
-
-            ChipsEvRun.Text = ChipsEVTourney.ToString("##.#");
+            if (prevtagCount != tagCount) ChipsEvRun.Text = ChipsEVTourney.ToString("##.#");
+            prevtagCount = tagCount;
             if (ChipsEVTourney < 0) ChipsEvRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
             if (ChipsEVTourney > 0) ChipsEvRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
         }
