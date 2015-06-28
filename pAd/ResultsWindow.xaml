@@ -7,8 +7,8 @@
             <FlowDocument AllowDrop="true" Focusable="False" FontSize="13" ForceCursor="false" TextAlignment="Center" >
                 <Paragraph >
                     <Run Name="CountRun" Text="-" Foreground="White" FontWeight="Bold"/>
-                    <Run Text="ChipsEV" Foreground="White"></Run>
-                    <Run Name="ChipsEvRun" Text="-" Foreground="White" FontWeight="Bold"/>
+                    <Run Text="EVbb" Foreground="White"></Run>
+                    <Run Name="EvBB100Run" Text="-" Foreground="White" FontWeight="Bold"/>
                     <Run Text="Result" Foreground="White"  />
                     <Run Name="ResultRun" Text="-" Foreground="White" FontWeight="Bold" />
                     <Run Text="RB" Foreground="White" />

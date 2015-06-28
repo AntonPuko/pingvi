@@ -45,10 +45,9 @@ namespace Pingvi
             }
 
 
-        private async void OnTimerTick(object sender, EventArgs e) {
+        private void OnTimerTick(object sender, EventArgs e) {
             int tagCount = 0;
-            double chipsEV = 0;
-            double ChipsEVTourney = 0;
+            double evBB100 = 0;
             double result = 0;
             double rake = 0;
             double rakeback = 0;
@@ -57,9 +56,9 @@ namespace Pingvi
 
 
             string dtNow = DateTime.Now.Hour < 5 ? DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
-          
 
-            string statsURL ="http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"" + dtNow +" 05:00:00 AM\"}";
+
+            string statsURL = "http://localhost:8001/query?q=select StatTourneyCount, StatEVBigBlindsPer100 from stats where HandTimestamp > {d \"" + dtNow + " 05:00:00 AM\"}";
             string statsJson;
 
             string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 05:00:00 AM\"} and FinishPosition > 0 ";
@@ -83,7 +82,7 @@ namespace Pingvi
             var statsResults = statsJObect["Results"];
 
             //tagCount = int.Parse(statsResults[0]["TagCount"].ToString().Replace("В", "").Trim());
-            chipsEV = double.Parse(statsResults[0]["Chips(EVAdjusted)"].ToString().Replace("В", "").Trim());
+            evBB100 = double.Parse(statsResults[0]["EVbb100"].ToString().Replace("В", "").Trim());
 
 
            
@@ -104,7 +103,7 @@ namespace Pingvi
             }
 
 
-            ChipsEVTourney = tagCount == 0 ?  0 : chipsEV/tagCount;
+            //ChipsEVTourney = tagCount == 0 ?  0 : chipsEV/tagCount;
              
 
 
@@ -119,10 +118,10 @@ namespace Pingvi
             if (result < 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(255,125,125));
             if (result > 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
             RakeBackRun.Text = rakeback.ToString("##.#");
-            ChipsEvRun.Text = ChipsEVTourney.ToString("##.#");
-            
-            if (ChipsEVTourney < 0) ChipsEvRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
-            if (ChipsEVTourney > 0) ChipsEvRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
+            EvBB100Run.Text = evBB100.ToString("##.#");
+
+            if (evBB100 < 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
+            if (evBB100 > 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
         }
 
         private bool isVisible = false;
@@ -131,7 +130,7 @@ namespace Pingvi
         private void CleartStats() {
             ResultRun.Text = "-";
             RakeBackRun.Text = "-";
-            ChipsEvRun.Text = "-";
+            EvBB100Run.Text = "-";
             CountRun.Text = "-";
         }
 

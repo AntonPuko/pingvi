@@ -26,19 +26,20 @@ namespace Pingvi
             hudWindow.Show();
 
             //create new thread for result window because of http query lags
-            /*
+            
             Thread resultWindowThread = new Thread(new ThreadStart(() => {
-               
+                var resultWindow = new ResultsWindow();
+                resultWindow.Show();
+
                 System.Windows.Threading.Dispatcher.Run();
             }));
 
             resultWindowThread.SetApartmentState(ApartmentState.STA);
             resultWindowThread.IsBackground = true;
             resultWindowThread.Start();
-             */
+             
 
-            var resultWindow = new ResultsWindow();
-            resultWindow.Show();
+            
 
 
             InitializeComponent();
