@@ -1,24 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PokerModel;
-using PixelFormat = System.Drawing.Imaging.PixelFormat;
+
 
 namespace Pingvi
 {
@@ -29,7 +12,7 @@ namespace Pingvi
         public MainWindow() {
             _tableManager = new ScreenTableManager();
             var hudWindow = new HudWindow(_tableManager);
-            var resultWindow = new ResultsWindow();
+            
             var elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
@@ -41,7 +24,23 @@ namespace Pingvi
             decisionManager.NewDecisionInfo += OnNewDecisionInfo;
 
             hudWindow.Show();
+
+            //create new thread for result window because of http query lags
+            /*
+            Thread resultWindowThread = new Thread(new ThreadStart(() => {
+               
+                System.Windows.Threading.Dispatcher.Run();
+            }));
+
+            resultWindowThread.SetApartmentState(ApartmentState.STA);
+            resultWindowThread.IsBackground = true;
+            resultWindowThread.Start();
+             */
+
+            var resultWindow = new ResultsWindow();
             resultWindow.Show();
+
+
             InitializeComponent();
 
         }

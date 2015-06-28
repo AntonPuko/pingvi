@@ -44,8 +44,8 @@ namespace Pingvi
                 _timer.IsEnabled = true;
             }
 
-        private int prevtagCount;
-        private void OnTimerTick(object sender, EventArgs e) {
+
+        private async void OnTimerTick(object sender, EventArgs e) {
             int tagCount = 0;
             double chipsEV = 0;
             double ChipsEVTourney = 0;
@@ -56,13 +56,13 @@ namespace Pingvi
 
 
 
-            string dtNow = DateTime.Now.Hour < 7 ? DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
+            string dtNow = DateTime.Now.Hour < 5 ? DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
           
 
-            string statsURL ="http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"" + dtNow +" 00:00:00 AM\"}";
+            string statsURL ="http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"" + dtNow +" 05:00:00 AM\"}";
             string statsJson;
 
-            string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 00:00:00 AM\"} and FinishPosition > 0 ";
+            string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 05:00:00 AM\"} and FinishPosition > 0 ";
             string tourneysJson;
             
             using (var webClient = new System.Net.WebClient()) {
@@ -82,11 +82,11 @@ namespace Pingvi
             var statsJObect = JObject.Parse(statsJson);
             var statsResults = statsJObect["Results"];
 
-            tagCount = int.Parse(statsResults[0]["TagCount"].ToString().Replace("В", "").Trim());
+            //tagCount = int.Parse(statsResults[0]["TagCount"].ToString().Replace("В", "").Trim());
             chipsEV = double.Parse(statsResults[0]["Chips(EVAdjusted)"].ToString().Replace("В", "").Trim());
 
 
-            ChipsEVTourney = chipsEV / tagCount;
+           
 
             var tourneysJObject = JObject.Parse(tourneysJson);
             var tourneysResults = tourneysJObject["Results"];
@@ -94,6 +94,7 @@ namespace Pingvi
           
 
             foreach (var tourney in tourneysResults) {
+                tagCount++;
                 var tResult = (double.Parse(tourney["WinningsInCents"].ToString().Replace("В", "").Trim() )
                     -double.Parse( tourney["BuyInPlusRake"].ToString().Replace("В", "").Trim())) / 100;
                 result += tResult;
@@ -101,6 +102,11 @@ namespace Pingvi
                 var tRake = double.Parse(tourney["RakeInCents"].ToString().Replace("В", "").Trim()) / 100;
                 rake += tRake;
             }
+
+
+            ChipsEVTourney = tagCount == 0 ?  0 : chipsEV/tagCount;
+             
+
 
             const double vppMultiplicator = 5.5;
             const double bonusFormula = 3.5/40000*600;
@@ -113,8 +119,8 @@ namespace Pingvi
             if (result < 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(255,125,125));
             if (result > 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
             RakeBackRun.Text = rakeback.ToString("##.#");
-            if (prevtagCount != tagCount) ChipsEvRun.Text = ChipsEVTourney.ToString("##.#");
-            prevtagCount = tagCount;
+            ChipsEvRun.Text = ChipsEVTourney.ToString("##.#");
+            
             if (ChipsEVTourney < 0) ChipsEvRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
             if (ChipsEVTourney > 0) ChipsEvRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
         }

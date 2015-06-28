@@ -1167,7 +1167,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(8, 10)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_2max", foldTo3bet, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_2max", openRaise, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1175,7 +1175,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(10, 13)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_10-13bb_2max", foldTo3bet, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_10-13bb_2max", openRaise, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1183,7 +1183,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSizeMinRaise()
                     .EffectiveStackBetween(13, 16)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_13-16bb_2max", foldTo3bet, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_13-16bb_2max", openRaise, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1305,7 +1305,7 @@ namespace Pingvi
             
                 //BB VS SB CALL OPEN PUSH HU 2max
             if ((openPush > 20 && lineInfo.Elements.TourneyMultiplier >= 6) || oopType == PlayerType.GoodReg ||
-                lineInfo.Elements.TourneyMultiplier <= 6)
+                lineInfo.Elements.TourneyMultiplier < 6)
             {
                 //vs agr or good reg or small multi
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
