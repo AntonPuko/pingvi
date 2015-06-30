@@ -34,7 +34,25 @@ namespace Pingvi
         private Action _dbOpenAction;
         private DispatcherTimer _timer;
         private NpgsqlConnection _npgSqlConnection;
+
+        private double _usdRubExRate = 0;
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+
+            try {
+                string exchangeRatesURL = "http://www.apilayer.net/api/live?access_key=b5a73c66b2b8f58fee2d61ac8e9695a2";
+
+                string ratesJson;
+                using (var webClient = new System.Net.WebClient()) {
+                    ratesJson = webClient.DownloadString(exchangeRatesURL);
+                }
+
+                var ratesJObect = JObject.Parse(ratesJson);
+                _usdRubExRate = (double)ratesJObect["quotes"]["USDRUB"];
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
+            if (_usdRubExRate == 0) _usdRubExRate = 55;
+         
 
                 _timer = new DispatcherTimer() {
                     Interval = TimeSpan.FromSeconds(5),
@@ -46,6 +64,8 @@ namespace Pingvi
 
 
         private void OnTimerTick(object sender, EventArgs e) {
+
+            
             int tagCount = 0;
             double evBB100 = 0;
             double result = 0;
@@ -53,6 +73,7 @@ namespace Pingvi
             double rakeback = 0;
 
 
+            
 
 
             string dtNow = DateTime.Now.Hour < 5 ? DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
@@ -63,6 +84,7 @@ namespace Pingvi
 
             string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 05:00:00 AM\"} and FinishPosition > 0 ";
             string tourneysJson;
+
             
             using (var webClient = new System.Net.WebClient()) {
                 try {
@@ -78,29 +100,40 @@ namespace Pingvi
                 
             }
 
-            var statsJObect = JObject.Parse(statsJson);
-            var statsResults = statsJObect["Results"];
+            try {
+                var statsJObect = JObject.Parse(statsJson);
+                var statsResults = statsJObect["Results"];
 
-            //tagCount = int.Parse(statsResults[0]["TagCount"].ToString().Replace("В", "").Trim());
-            evBB100 = double.Parse(statsResults[0]["EVbb100"].ToString().Replace("В", "").Trim());
-
-
-           
-
-            var tourneysJObject = JObject.Parse(tourneysJson);
-            var tourneysResults = tourneysJObject["Results"];
-
-          
-
-            foreach (var tourney in tourneysResults) {
-                tagCount++;
-                var tResult = (double.Parse(tourney["WinningsInCents"].ToString().Replace("В", "").Trim() )
-                    -double.Parse( tourney["BuyInPlusRake"].ToString().Replace("В", "").Trim())) / 100;
-                result += tResult;
-
-                var tRake = double.Parse(tourney["RakeInCents"].ToString().Replace("В", "").Trim()) / 100;
-                rake += tRake;
+                //tagCount = int.Parse(statsResults[0]["TagCount"].ToString().Replace("В", "").Trim());
+                evBB100 = double.Parse(statsResults[0]["EVbb100"].ToString().Replace("В", "").Trim());
             }
+            catch {
+                return;
+            }
+
+
+
+
+            try {
+                var tourneysJObject = JObject.Parse(tourneysJson);
+                var tourneysResults = tourneysJObject["Results"];
+
+
+
+                foreach (var tourney in tourneysResults) {
+                    tagCount++;
+                    var tResult = (double.Parse(tourney["WinningsInCents"].ToString().Replace("В", "").Trim())
+                                   - double.Parse(tourney["BuyInPlusRake"].ToString().Replace("В", "").Trim()))/100;
+                    result += tResult;
+
+                    var tRake = double.Parse(tourney["RakeInCents"].ToString().Replace("В", "").Trim())/100;
+                    rake += tRake;
+                }
+            }
+            catch {
+                return;
+            }
+          
 
 
             //ChipsEVTourney = tagCount == 0 ?  0 : chipsEV/tagCount;
@@ -109,7 +142,7 @@ namespace Pingvi
 
             const double vppMultiplicator = 5.5;
             const double bonusFormula = 3.5/40000*600;
-            rakeback = rake * vppMultiplicator * bonusFormula;
+            rakeback = rake * vppMultiplicator * bonusFormula * _usdRubExRate;
 
 
 
@@ -118,8 +151,9 @@ namespace Pingvi
             if (result < 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(255,125,125));
             if (result > 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
             RakeBackRun.Text = rakeback.ToString("##.#");
-            EvBB100Run.Text = evBB100.ToString("##.#");
 
+
+            EvBB100Run.Text = evBB100.ToString("0.0");
             if (evBB100 < 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
             if (evBB100 > 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
         }
@@ -141,6 +175,17 @@ namespace Pingvi
         private void RichTextBox_MouseUp(object sender, MouseButtonEventArgs e)
         {
               if (!_timer.IsEnabled) _timer.IsEnabled = true;
+        }
+
+        private void Run_MouseEnter(object sender, MouseEventArgs e) {
+            if (EvBB100Run.FontSize == 13) EvBB100Run.FontSize = 1;
+            else EvBB100Run.FontSize = 13;
+        }
+
+        private void Run_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            if (ResultRun.FontSize == 13) ResultRun.FontSize = 1;
+            else ResultRun.FontSize = 13;
         }
      
             

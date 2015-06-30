@@ -1255,7 +1255,7 @@ namespace Pingvi
                     .OppPosition(PlayerPosition.Button)
                     .EffectiveStackBetween(0, 8)
                     .BBEqOrLessThen(60)
-                    .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb", l.Elements.HuOpp.Stack, PlMode.Less));
+                    .Do(l => CheckDecision(heroHand, "COMMON_FacingPush_HU_08bb", l.Elements.EffectiveStack, PlMode.Less));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                     .HeroPreflopState(HeroPreflopState.FacingOpenPush)
@@ -1265,7 +1265,7 @@ namespace Pingvi
                     .BBEqOrMoreThen(80)
                     .Do(
                         l =>
-                            CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV", l.Elements.HuOpp.Stack,
+                            CheckDecision(heroHand, "COMMON_CALL_VS_OPENPUSH_SKLANSKY-CHEBUKOV", l.Elements.EffectiveStack,
                                 PlMode.Less));
 
 
