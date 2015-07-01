@@ -192,7 +192,7 @@ namespace Pingvi
                     .Do(l => CheckDecision(heroHand, "SB_VS_BB_OPEN_8-9bb_2max_UNK", 0, PlMode.None));
 
 
-                if (_3betStatBBvsSB > 35 || (_DefStatBBvsSB > 65 && _FoldCBIP < 43)) {
+                if (_3betStatBBvsSB > 40 || (_DefStatBBvsSB > 65 && _FoldCBIP < 43)) {
                     //vs LAG
                     lineInfo.StartRule()
                         .HeroPosition(PlayerPosition.Sb)
@@ -271,7 +271,7 @@ namespace Pingvi
 
                 //SB OPEN VS BB 3MAX 
             
-                if (_3betStatBBvsSB == null || _3betStatBBvsSB < 35) {
+                if (_3betStatBBvsSB == null || _3betStatBBvsSB < 40) {
                     //VS UNK
                     lineInfo.StartRule()
                         .HeroPosition(PlayerPosition.Sb)
@@ -420,7 +420,7 @@ namespace Pingvi
                 //SB CALL PUSH AFTER OPEN
                 //SB CALL PUSH AFTER VS UNK
                 
-                if (_3betStatBBvsSB == null) {
+                if (_3betStatBBvsSB == null || _3betStatBBvsSB > 15) {
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
                         .EffectiveStackBetween(0, 9)
@@ -435,7 +435,6 @@ namespace Pingvi
             
                 }
                 else {
-            
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
                         .EffectiveStackBetween(0, 9)
@@ -593,7 +592,7 @@ namespace Pingvi
                 double? limpfold = null;
                 if (lineInfo.Elements.HuOpp != null) limpfold = lineInfo.Elements.HuOpp.Stats.PF_LIMP_FOLD;
 
-                if (limpfold > 78) {
+                if (limpfold > 80) {
                     //VS BIG LIMP-FOLD
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                         .HeroPreflopState(HeroPreflopState.FacingLimp)
