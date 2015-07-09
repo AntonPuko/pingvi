@@ -194,16 +194,15 @@ namespace Pingvi
                 {
                     case HeroPreflopState.FacingLimp: {
                         DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(150, 200, 255));
-                        var sbVsBbEffStack = decisionInfo.LineInfo.Elements.SbBtnEffStack;
+                        var sbVsbtnEffStack = decisionInfo.LineInfo.Elements.SbBtnEffStack;
+
                         if (decisionInfo.LineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb) {
-                            if (sbVsBbEffStack >= 20) DecisionRun.Text = "___IS 4 ";
-                            else if (sbVsBbEffStack < 20 && sbVsBbEffStack > 13) DecisionRun.Text = "___IS 3 ";
-                            else if (sbVsBbEffStack <= 13) DecisionRun.Text = "___IS 2 ";
+                            if (sbVsbtnEffStack >= 20) DecisionRun.Text = "___IS 4 ";
+                            else if (sbVsbtnEffStack < 20 && sbVsbtnEffStack > 13) DecisionRun.Text = "___IS 3 ";
+                            else if (sbVsbtnEffStack <= 13) DecisionRun.Text = "___IS 2 ";
                         }
                         else {
-                            if (effStack <= 16) DecisionRun.Text = "___IS 2 ";
-                            else if (effStack > 16 && effStack <= 20) DecisionRun.Text = "___IS 2.5 ";
-                            else if (effStack > 20) DecisionRun.Text = "___IS 3 ";
+                            DecisionRun.Text = "___IS 2 ";
                         }
                         break;
                     }
