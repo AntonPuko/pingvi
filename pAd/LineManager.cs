@@ -335,7 +335,7 @@ namespace Pingvi {
             bool facingDelayCbet = CheckLineInLinesMass(compositeLine, facingDelayCbetMass);
             if (facingDelayCbet) return HeroTurnState.FacingDelayCbet;
             //facingDonk
-            string[] facingDonkMass = {"Rcf|xBc|b|", "Rc|xBc|b|"};
+            string[] facingDonkMass = {"Rcf|xBc|b|", "Rc|xBc|b|", "flRc|xBc|b|"};
             bool facingDonk = CheckLineInLinesMass(compositeLine, facingDonkMass);
             if(facingDonk) return HeroTurnState.FacingDonk;
 

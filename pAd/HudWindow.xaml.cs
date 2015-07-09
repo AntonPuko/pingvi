@@ -336,7 +336,7 @@ namespace Pingvi
                     break;
 
                 case HeroFlopState.Bet:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 200, 130));
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(137, 217, 150));
                     DecisionRun.Text = "BT";
 
                     StatName1Run.Text = "fb";
@@ -355,7 +355,7 @@ namespace Pingvi
                     break;
 
                 case HeroFlopState.FacingBet:
-                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 200, 200));
+                    DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(235, 223, 158));
                     DecisionRun.Text = "vBT";
 
                     StatName1Run.Text = "cb";

@@ -11,6 +11,8 @@ namespace Pingvi {
             return new RuleContext<T>(value);
         }
 
+      
+
         public static RuleContext<LineInfo> TourneyMultiplierEqOrMoreThan(this RuleContext<LineInfo> context, int value) {
             return context.If(l => l.Elements.TourneyMultiplier >= value);
         }
