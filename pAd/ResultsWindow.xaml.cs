@@ -35,6 +35,8 @@ namespace Pingvi
         private DispatcherTimer _timer;
         private NpgsqlConnection _npgSqlConnection;
 
+        private bool _isResultRefreshing = false;
+
         private double _usdRubExRate = 0;
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
@@ -144,28 +146,35 @@ namespace Pingvi
             const double bonusFormula = 3.5/40000*600;
             rakeback = rake * vppMultiplicator * bonusFormula * _usdRubExRate;
 
-
-
+            
+            
             CountRun.Text = tagCount.ToString();
-            ResultRun.Text = result.ToString();
-            if (result < 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(255,125,125));
-            if (result > 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
             RakeBackRun.Text = rakeback.ToString("##.#");
 
+            if (_isResultRefreshing) {
 
-            EvBB100Run.Text = evBB100.ToString("0.0");
-            if (evBB100 < 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
-            if (evBB100 > 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
+                ResultRun.Text = result.ToString();
+                if (result < 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
+                if (result > 0) ResultRun.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
+
+                EvBB100Run.Text = evBB100.ToString("0.0");
+                if (evBB100 < 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(255, 125, 125));
+                if (evBB100 > 0) EvBB100Run.Foreground = new SolidColorBrush(Color.FromRgb(90, 190, 80));
+            }
+
+            
+          
         }
 
         private bool isVisible = false;
 
+       
 
         private void CleartStats() {
-            ResultRun.Text = "-";
-            RakeBackRun.Text = "-";
-            EvBB100Run.Text = "-";
-            CountRun.Text = "-";
+            ResultRun.Text = "";
+            RakeBackRun.Text = "";
+            EvBB100Run.Text = "";
+            CountRun.Text = "";
         }
 
 
@@ -176,19 +185,20 @@ namespace Pingvi
         {
               if (!_timer.IsEnabled) _timer.IsEnabled = true;
         }
-
-        private void Run_MouseEnter(object sender, MouseEventArgs e) {
-            if (EvBB100Run.FontSize == 13) EvBB100Run.FontSize = 1;
-            else EvBB100Run.FontSize = 13;
-        }
-
-        private void Run_MouseEnter_1(object sender, MouseEventArgs e)
-        {
-            if (ResultRun.FontSize == 13) ResultRun.FontSize = 1;
-            else ResultRun.FontSize = 13;
-        }
-     
-            
         
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+            if (_isResultRefreshing) {
+                ResultRun.Text = "";
+                EvBB100Run.Text = "";
+                ResultEnableButton.Background = new SolidColorBrush(Color.FromRgb(99, 99, 99));
+                _isResultRefreshing = false;
+            }
+            else {
+                ResultEnableButton.Background = new SolidColorBrush(Color.FromRgb(69, 96, 69));
+                _isResultRefreshing = true;
+            }
+        }
     }
 }
