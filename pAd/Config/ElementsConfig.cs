@@ -20,6 +20,10 @@ namespace Pingvi {
         public PlayerElementsConfig LeftPlayer { get; set; }
         public PlayerElementsConfig RightPlayer { get; set; }
 
+        public PixelPoint HudWindowsPoint { get; set; }
+
+        public Color[] HudWindowColors { get; set; }
+
         public  ElementsConfig() {
             Common = new CommonElementsConfig();
             Hero = new HeroElementsConfig();
@@ -31,6 +35,10 @@ namespace Pingvi {
         }
 
         private void InitElements() {
+
+            HudWindowsPoint = new PixelPoint(339,476);
+            HudWindowColors = new[] {Color.FromArgb(42, 70, 42), Color.FromArgb(42, 42, 42), Color.FromArgb(70, 42, 0)};
+
 
             Common.TableNumberDigitsPath = @"Data\TableNumberDigits\";
             Common.TableNumberDigitsColor = Color.FromArgb(255, 255, 255);

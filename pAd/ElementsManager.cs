@@ -29,6 +29,8 @@ namespace Pingvi {
             FindElements();
         }
 
+
+        /*
         public void  ProcessTable() {
 
             if (!_elements.TablesDictionary.ContainsKey(_elements.TableNumber))
@@ -42,12 +44,15 @@ namespace Pingvi {
             //TODO
             
         }
-
+        */
 
         private  Object locker = new object();
         private void FindElements() {
             
-                
+            //HudWindow
+            _elements.IsHudWindowsInFront = CheckIsHudWindowInFront(_elementsConfig.HudWindowsPoint,
+                _elementsConfig.HudWindowColors);
+
             //TourneyMultiplier 
             _elements.TourneyMultiplier = CheckTourneyMultiplier();
             //TableNumber
@@ -377,7 +382,7 @@ namespace Pingvi {
             //HERO STATE
             //_elements.HeroPlayer.StatePreflop = CheckHeroStatePreflop();
 
-            ProcessTable();
+            //ProcessTable();
 
             //_elements.HeroPlayer.StatePostflop = CheckHeroStatePostflop();
 
@@ -926,7 +931,12 @@ namespace Pingvi {
             }
             return null;
         }
-     
+
+
+        private bool CheckIsHudWindowInFront(PixelPoint hudWindowPoint, Color[] hudWindowColors) {
+            var hWindowPixelColor = TableBitmap.GetPixel(hudWindowPoint.X, hudWindowPoint.Y);
+            return hudWindowColors.Any(c => c == hWindowPixelColor);
+        }
     }
 
 

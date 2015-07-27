@@ -19,6 +19,8 @@ namespace Pingvi
 
 
     public class Elements {
+
+        public bool IsHudWindowsInFront { get; set; }
         public Card FlopCard1 { get; set; }
         public Card FlopCard2 { get; set; }
         public Card FlopCard3 { get; set; }

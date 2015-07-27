@@ -70,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DecisionInfo.cs" />
+    <Compile Include="HHImporter\HandHistory.cs" />
     <Compile Include="LineInfo.cs" />
     <Compile Include="LineManager.cs" />
     <Compile Include="ResultsWindow.xaml.cs">
