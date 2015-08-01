@@ -10,7 +10,7 @@
             </Grid.ColumnDefinitions>
             <Button Name="ResultEnableButton" Margin="0"  Click="Button_Click" BorderThickness="0" Foreground="{x:Null}" Background="#FF636363" Grid.Column="1" BorderBrush="{x:Null}" />
 
-            <RichTextBox VerticalContentAlignment="Center" BorderThickness="0,0,0,0" Background="{x:Null}" MouseUp="RichTextBox_MouseUp" Margin="0"  >
+            <RichTextBox IsReadOnly="True" VerticalContentAlignment="Center" BorderThickness="0,0,0,0" Background="{x:Null}"  Margin="0"  >
                 <FlowDocument AllowDrop="true" Focusable="False" FontSize="13" ForceCursor="false" TextAlignment="Center" >
                     <Paragraph>
                         <Run Name="CountRun" Text="-" Foreground="White" FontWeight="Bold"/>

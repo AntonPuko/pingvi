@@ -12,7 +12,7 @@ namespace Pingvi
         public Rectangle TablePositionRect;
         public TimeSpan BitmapMakeInterval;
         public event Action<Bitmap> NewBitmap;
-
+        private Bitmap _tableBitmap;
         private DispatcherTimer _bitmapTimer;
 
         public ScreenTableManager(Rectangle tableRect, TimeSpan timeInterval)
@@ -20,10 +20,10 @@ namespace Pingvi
             TablePositionRect = tableRect;
             BitmapMakeInterval = timeInterval;
         }
-        
+
         public ScreenTableManager() {
-            TablePositionRect = new Rectangle(550, 20, 808, 581);
-            BitmapMakeInterval = TimeSpan.FromMilliseconds(150);
+            TablePositionRect = new Rectangle(230, 20, 800, 574);
+            BitmapMakeInterval = TimeSpan.FromMilliseconds(100);
         }
 
         public void Start() {
@@ -40,6 +40,12 @@ namespace Pingvi
             _bitmapTimer.Stop();
         }
 
+        public void MakeScreenShot() {
+            if (_tableBitmap == null) return;
+            const string path = @"P:\screens\";
+            _tableBitmap.Save(path + DateTime.Now.ToString("s").Replace("-", "").Replace(":", "") + ".bmp");
+        }
+
         private void MakeTableBitmap(object sender, EventArgs e) {
          //   try {
                 Bitmap bmp = new Bitmap(TablePositionRect.Width, TablePositionRect.Height);
@@ -48,6 +54,7 @@ namespace Pingvi
                         0, 0, TablePositionRect.Size, CopyPixelOperation.SourceCopy);
                 }
 
+                _tableBitmap = bmp;
                 if (NewBitmap != null) {
                     NewBitmap(bmp);
                 }
@@ -56,6 +63,8 @@ namespace Pingvi
        //         Debug.WriteLine(ex.Message + "in ScreenTableManager.MakeTableBitmap()");
       //     }
        }
+
+
 
          
     }

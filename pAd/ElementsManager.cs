@@ -29,41 +29,12 @@ namespace Pingvi {
             FindElements();
         }
 
-
-        /*
-        public void  ProcessTable() {
-
-            if (!_elements.TablesDictionary.ContainsKey(_elements.TableNumber))
-                _elements.TablesDictionary.Add(_elements.TableNumber, _elements.HeroPlayer.StatePreflop);
-            else {
-                if (_elements.CurrentStreet != CurrentStreet.Preflop) return;
-                _elements.TablesDictionary.Remove(_elements.TablesDictionary.FirstOrDefault(k => k.Key == _elements.TableNumber).Key);
-                _elements.TablesDictionary.Add(_elements.TableNumber, _elements.HeroPlayer.StatePreflop);
-            }
-     
-            //TODO
-            
-        }
-        */
-
-        private  Object locker = new object();
         private void FindElements() {
-            
-            //HudWindow
-            _elements.IsHudWindowsInFront = CheckIsHudWindowInFront(_elementsConfig.HudWindowsPoint,
-                _elementsConfig.HudWindowColors);
 
             //TourneyMultiplier 
             _elements.TourneyMultiplier = CheckTourneyMultiplier();
-            //TableNumber
-            _elements.TableNumber = (int)(FindNumber(_elementsConfig.Common.TableNumberDigPosPoints,
-              _elementsConfig.Common.TableNumberDigitsRectMass,
-              _elementsConfig.Common.TableNumberDigitsList, _elementsConfig.Common.TableNumberDigitsColor, false));
-            
-         
              
             //CARDS
-
             #region Cards
 
             _elements.FlopCard1 = FindCard(_elementsConfig.Common.FlopCard1Rect);
@@ -96,19 +67,10 @@ namespace Pingvi {
                _elementsConfig.Common.PotDigitsRectMass, _elementsConfig.Common.PotDigitsList,
                _elementsConfig.Common.PotDigitsColor, true);
 
-
-
-
             //PLAYERs TYPE
-
-
-           
-
             #region PlayerType
-
             _elements.LeftPlayer.Type = CheckPlayerType(_elementsConfig.LeftPlayer.PlayerTypePoint);
             _elements.RightPlayer.Type = CheckPlayerType(_elementsConfig.RightPlayer.PlayerTypePoint);
-
             #endregion
 
             //PLAYER STATISTICS
@@ -295,7 +257,6 @@ namespace Pingvi {
            
 
             //PLAYERs STATUS
-
             #region PlayerStatus
 
             _elements.HeroPlayer.Status = CheckPlayerStatus(_elementsConfig.Hero.PlayerStatusPointHand,
@@ -327,7 +288,6 @@ namespace Pingvi {
             _elements.LeftPlayer.Line = ParseLine(_elementsConfig.LeftPlayer.LinePixelPositions);
             _elements.RightPlayer.Line = ParseLine(_elementsConfig.RightPlayer.LinePixelPositions);
             //CURRENT STACK
-
             #region CurrentPlayersStack
 
             _elements.HeroPlayer.CurrentStack = FindNumber(_elementsConfig.Hero.StackDigPosPoints,
@@ -374,17 +334,6 @@ namespace Pingvi {
 
             _elements.SbBtnEffStack = CountSbBtnEffStack();
 
-            
-
-            //HERO ROLE
-            //_elements.HeroPlayer.Role = CheckHeroRole();
-
-            //HERO STATE
-            //_elements.HeroPlayer.StatePreflop = CheckHeroStatePreflop();
-
-            //ProcessTable();
-
-            //_elements.HeroPlayer.StatePostflop = CheckHeroStatePostflop();
 
             //FIRE EVENT
             if (NewElements != null) {
@@ -440,8 +389,8 @@ namespace Pingvi {
                 for (int i = 0; i < digitsList.Count; i++) {
                     var digTablebmp = TableBitmap.Clone(rect, TableBitmap.PixelFormat);
                     if (BitmapHelper.BitmapsEquals(digTablebmp, digitsList[i])) {
-                        _elements.SbAmt = _elementsConfig.Common.Blinds.SmallBlindsDoubleMass[i];
-                        _elements.BbAmt = _elements.SbAmt*2;
+                        _elements.BbAmt = _elementsConfig.Common.Blinds.BigBlindsDoubleMass[i];
+                        _elements.SbAmt = _elements.BbAmt / 2;
                         break;
                     }
                 }
@@ -756,142 +705,6 @@ namespace Pingvi {
             return effStack;
         }
 
-
-        /*
-        private HeroRole CheckHeroRole() {
-            if (!_elements.HeroPlayer.IsHeroTurn) return HeroRole.None;
-            if (_elements.CurrentStreet == CurrentStreet.Preflop) {
-                if (_elements.HeroPlayer.Position == PlayerPosition.Button) {
-                    return HeroRole.Opener;
-                }
-                else if (_elements.HeroPlayer.Position == PlayerPosition.Sb) {
-                    //HU
-                    if(_elements.InGamePlayers.Count == 2) return HeroRole.Opener;
-                    //MP
-                    if (_elements.InGamePlayers.Count == 3) {
-                        if(_elements.ActivePlayers.Count <= 2) return HeroRole.Opener;
-                        return HeroRole.Defender;
-                    }
-                }
-                else if (_elements.HeroPlayer.Position == PlayerPosition.Bb) {
-                    return HeroRole.Defender;
-                }
-            }
-            else {
-                return HeroRole.None;
-            }
-            return HeroRole.None;
-        }
-
-
-        private HeroStatePreflop CheckHeroStatePreflop() {
-            
-            double maxOppBet;
-            double maxBetPStack;
-            if (_elements.InGamePlayers == null || _elements.InGamePlayers.Count < 2) {
-                maxOppBet = 0;
-                maxBetPStack = 0;
-            }
-            else {
-                maxOppBet = _elements.InGamePlayers.Where(p => p.Name != _elements.HeroPlayer.Name).Select(p => p.Bet).Max();
-                maxBetPStack = _elements.InGamePlayers.FirstOrDefault(p => p.Bet == maxOppBet).Stack;
-            }
-
-
-            if (_elements.CurrentStreet == CurrentStreet.Preflop) {
-                switch (_elements.HeroPlayer.Role) {
-                    // case HeroRole.None:
-                    //    return HeroStatePreflop.None;
-                    case HeroRole.Opener: {
-                        if (maxOppBet <= 1) return HeroStatePreflop.Open;
-
-                        if ((maxOppBet >= 2 && maxOppBet <= 3) && _elements.HeroPlayer.Bet == 1)
-                            return HeroStatePreflop.FacingRaiseVsLimp;
-
-                        if (maxOppBet > _elements.HeroPlayer.Bet &&
-                            (maxOppBet < maxBetPStack/2.5 && maxOppBet < _elements.HeroPlayer.Stack/3))
-                            return HeroStatePreflop.Facing3Bet;
-
-                        
-
-                        if (maxOppBet >= _elements.HeroPlayer.Bet &&
-                            (maxOppBet >= maxBetPStack || maxOppBet >= _elements.HeroPlayer.Stack / 3) && _elements.HeroPlayer.Bet == 1)
-                            return HeroStatePreflop.FacingPushVsLimp;                     
-                       
-
-                        if (maxOppBet >= _elements.HeroPlayer.Bet &&
-                            (maxOppBet >= maxBetPStack || maxOppBet >= _elements.HeroPlayer.Stack/3))
-                            return HeroStatePreflop.FacingPush;
-                        return HeroStatePreflop.None;
-                    }
-                    case HeroRole.Defender: {
-                        if (_elements.HeroPlayer.Bet <= 1 && maxOppBet == 1) return HeroStatePreflop.FacingLimp;
-                        if (_elements.HeroPlayer.Bet <= 1 && maxOppBet > _elements.HeroPlayer.Bet &&
-                            maxOppBet < maxBetPStack &&
-                            (maxOppBet > maxBetPStack/2 || maxOppBet >= _elements.HeroPlayer.Stack/2))
-                            return HeroStatePreflop.FacingPush;
-                        if (_elements.HeroPlayer.Bet <= 1 && maxOppBet > _elements.HeroPlayer.Bet &&
-                            maxOppBet < maxBetPStack) return HeroStatePreflop.FacingOpen;
-                        if (_elements.HeroPlayer.Bet <= 1 && maxOppBet > _elements.HeroPlayer.Bet &&
-                            maxOppBet >= maxBetPStack) return HeroStatePreflop.FacingPush;
-                        return HeroStatePreflop.None;
-                    }
-                }
-            }
-            var tState = _elements.TablesDictionary.FirstOrDefault(t => t.Key == _elements.TableNumber).Value;
-            if(tState == null) return HeroStatePreflop.None;
-            return tState;
-        }
-
-
-        private HeroStatePostflop CheckHeroStatePostflop() {
-            if(_elements.ActivePlayers.Count >2) return HeroStatePostflop.None;
-            double maxOppBet;
-            double maxBetPStack;
-            if (_elements.InGamePlayers == null || _elements.InGamePlayers.Count < 2)
-            {
-                maxOppBet = 0;
-            }
-            else
-            {
-                maxOppBet = _elements.InGamePlayers.Where(p => p.Name != _elements.HeroPlayer.Name).Select(p => p.Bet).Max();
-            }
-
-            if (_elements.CurrentStreet == CurrentStreet.Flop) {
-                 if(_elements.HeroPlayer.StatePreflop == HeroStatePreflop.None) return HeroStatePostflop.None;
-
-                if (_elements.HeroPlayer.StatePreflop == HeroStatePreflop.Open) {
-                    if (_elements.TotalPot - maxOppBet == 2) {
-                        if (_elements.HeroPlayer.Bet == 0 && maxOppBet == 0) return HeroStatePostflop.LimpBet;
-                        if (_elements.HeroPlayer.Bet == 0 && maxOppBet > 0 && _elements.HeroPlayer.RelativePosition == HeroRelativePosition.InPosition) return HeroStatePostflop.FacingDONKVsOpenLimp;
-                    }
-                }
-                 if (_elements.HeroPlayer.StatePreflop == HeroStatePreflop.Open || _elements.HeroPlayer.StatePreflop == HeroStatePreflop.FacingLimp) {
-                     if(_elements.HeroPlayer.Bet == 0 && maxOppBet == 0) return HeroStatePostflop.Cbet;
-                     if(_elements.HeroPlayer.Bet == 0 && maxOppBet > 0 && _elements.HeroPlayer.RelativePosition ==  HeroRelativePosition.InPosition ) return HeroStatePostflop.FacingDonk;
-                     if(_elements.HeroPlayer.Bet == 0 && maxOppBet > 0 && _elements.HeroPlayer.RelativePosition == HeroRelativePosition.OutOfPosition) return HeroStatePostflop.FacingBetToCheck;
-                     if(_elements.HeroPlayer.Bet > 0 && maxOppBet > _elements.HeroPlayer.Bet) return HeroStatePostflop.FacingRaiseToCbet;
-                     return HeroStatePostflop.None;
-                 }
-                 if (_elements.HeroPlayer.StatePreflop == HeroStatePreflop.FacingOpen) {
-                     if(maxOppBet ==0 && _elements.HeroPlayer.RelativePosition == HeroRelativePosition.InPosition) return HeroStatePostflop.MissedCbet;
-                     if(_elements.HeroPlayer.Bet == 0 && maxOppBet > 0) return HeroStatePostflop.FacingCbet;
-                     if(_elements.HeroPlayer.Bet > 0 && maxOppBet > _elements.HeroPlayer.Bet && _elements.HeroPlayer.RelativePosition == HeroRelativePosition.InPosition) return HeroStatePostflop.FacingCheckRaise;
-                     return HeroStatePostflop.None;
-                 }
-                if (_elements.HeroPlayer.StatePreflop == HeroStatePreflop.Facing3Bet) {
-                    if(_elements.HeroPlayer.Bet == 0 && maxOppBet > 0) return HeroStatePostflop.FacingCbet;
-                    if(_elements.HeroPlayer.RelativePosition ==  HeroRelativePosition.InPosition && maxOppBet == 0 ) return HeroStatePostflop.MissedCbet;
-                }
-            }
-            else {
-                return HeroStatePostflop.None;
-            }
-            return HeroStatePostflop.None;
-           
-        }
-        */
-
         private double CountSbBtnEffStack() {
             if (_elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button) == null ||
                 _elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Sb) == null) return 0;
@@ -901,9 +714,7 @@ namespace Pingvi {
 
         }
 
-        private string ParseLine(PixelPoint[] playerLinePixelPositions)
-        {
-
+        private string ParseLine(PixelPoint[] playerLinePixelPositions) {
             StringBuilder sb =  new StringBuilder();
 
             foreach (var pixel in playerLinePixelPositions) {
@@ -931,12 +742,7 @@ namespace Pingvi {
             }
             return null;
         }
-
-
-        private bool CheckIsHudWindowInFront(PixelPoint hudWindowPoint, Color[] hudWindowColors) {
-            var hWindowPixelColor = TableBitmap.GetPixel(hudWindowPoint.X, hudWindowPoint.Y);
-            return hudWindowColors.Any(c => c == hWindowPixelColor);
-        }
+    
     }
 
 

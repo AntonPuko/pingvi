@@ -11,7 +11,7 @@ namespace Pingvi.Config
         public Color DigitsPointColor { get; set; }
         public PixelPoint[] DigitsPosPoints { get; set; }
         public RectangleF[] DigitsRectMass { get; set; }
-        public double[] SmallBlindsDoubleMass { get; set; }
+        public double[] BigBlindsDoubleMass { get; set; }
         public string DigitsPath { get; set; }
         public List<Bitmap> DigitsList { get; set; }
       

@@ -39,7 +39,7 @@ namespace MoveTablePos
 
             IntPtr id = paint.MainWindowHandle;
             Console.Write(id);
-            MoveWindow(paint.MainWindowHandle, 2138, -138, 900, 800, true);
+            MoveWindow(paint.MainWindowHandle, 2141, -135, 900, 800, true);
 
         }
 

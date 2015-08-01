@@ -11,11 +11,12 @@ namespace Pingvi
 
         public MainWindow() {
             _tableManager = new ScreenTableManager();
-            var hudWindow = new HudWindow(_tableManager);
-            
+            var hudWindow = new HudWindow();
             var elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
+
+            hudWindow.MakeScreenShotClick += _tableManager.MakeScreenShot;
 
             _tableManager.NewBitmap += elementManager.OnNewBitmap;
             elementManager.NewElements += lineManager.OnNewElements;
@@ -26,7 +27,6 @@ namespace Pingvi
             hudWindow.Show();
 
             //create new thread for result window because of http query lags
-            
             Thread resultWindowThread = new Thread(new ThreadStart(() => {
                 var resultWindow = new ResultsWindow();
                 resultWindow.Show();
@@ -38,10 +38,6 @@ namespace Pingvi
             resultWindowThread.IsBackground = true;
             resultWindowThread.Start();
              
-
-            
-
-
             InitializeComponent();
 
         }
@@ -60,11 +56,11 @@ namespace Pingvi
             RangeLabel.Content = "";
             RangeLabel.Content = decisionInfo.PreflopRangeChosen;    
 
-            CommonLabel.Content = String.Format("TABN: {0} MULTIPLIER: x{11} DECK: {1} {2} {3} {4} {5} :: Str: {6} :: BL: {7}/{8} :: POT: {9} :: LINE: {10}",
-                elements.TableNumber,
+            CommonLabel.Content = String.Format(" MULTIPLIER: x{0} DECK: {1} {2} {3} {4} {5} :: Str: {6} :: BL: {7}/{8} :: POT: {9} :: LINE: {10}",
+                elements.TourneyMultiplier,
                 elements.FlopCard1.Name, elements.FlopCard2.Name, elements.FlopCard3.Name,
                 elements.TurnCard.Name, elements.RiverCard.Name,
-                elements.CurrentStreet, elements.SbAmt, elements.BbAmt, elements.TotalPot, decisionInfo.LineInfo.FinalCompositeLine, elements.TourneyMultiplier);
+                elements.CurrentStreet, elements.SbAmt, elements.BbAmt, elements.TotalPot, decisionInfo.LineInfo.FinalCompositeLine );
 
 
             HeroLabel.Content =

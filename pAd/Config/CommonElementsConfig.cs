@@ -26,7 +26,6 @@ namespace Pingvi
         public BlindsElementsConfig Blinds { get; set; }
 
         public PixelPoint[] LinePixelPositions { get; set; }
-
         public Dictionary<Color, string> LineLettersDictionary { get; set; }
 
 
@@ -66,11 +65,7 @@ namespace Pingvi
         public List<Bitmap> BetDigitsList { get; set; }
         public Color BetDigitsColor { get; set; }
 
-        public string TableNumberDigitsPath { get; set; }
-        public List<Bitmap> TableNumberDigitsList { get; set; }
-        public Color TableNumberDigitsColor { get; set; }
-        public PixelPoint[] TableNumberDigPosPoints { get; set; }
-        public RectangleF[][] TableNumberDigitsRectMass { get; set; }
+
 
         public string StatsDigitsPath { get; set; }
         public List<Bitmap> StatsDigitsList { get; set; }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -18,43 +19,20 @@ namespace Pingvi
     /// </summary>
     public partial class HudWindow : Window {
 
-        private ScreenTableManager _tableManager;
+        private ScreenTableManager _tableManager; //for making screenshot
         private Bitmap _tableBitmap;
 
-        private DispatcherTimer _topTimer;
+        public Action MakeScreenShotClick;
 
-        public HudWindow(ScreenTableManager tableManager) {
-            _tableManager = tableManager;
-            _tableManager.NewBitmap += OnNewBitmap;
+        public HudWindow() {
             InitializeComponent();
-          //  InitTimer();
         }
 
-        private void InitTimer() {
-            _topTimer = new DispatcherTimer();
-            _topTimer.Interval = TimeSpan.FromMilliseconds(100);
-            _topTimer.Tick += OnTopTimerTick;
-            _topTimer.Start();
-        }
 
-        private void OnTopTimerTick(object sender, EventArgs e) {
-          //  if(this.IsActive == false)
-           // this.Activate();
-        }
 
-        private void OnNewBitmap(Bitmap bmp) {
-            _tableBitmap = bmp;
-        }
-        /*
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            DragMove();
-        } */
-
+      
         public void OnNewDecisionInfo(DecisionInfo decisionInfo) {
 
-            if (!decisionInfo.LineInfo.Elements.IsHudWindowsInFront) this.Activate();
-
-            
             ShowEffectiveStack(decisionInfo.LineInfo.Elements.EffectiveStack);
             ShowRelativePosition(decisionInfo.LineInfo.Elements.HeroPlayer.RelativePosition);
 
@@ -86,8 +64,6 @@ namespace Pingvi
 
 
         }
-
-
 
         public void ShowHeroPreflopStatus(HeroPreflopStatus status) {
             switch (status) {
@@ -302,10 +278,6 @@ namespace Pingvi
           
         }
 
-
-
-        
-   
         private void ShowFlopInfoStats(DecisionInfo decisionInfo) {
             var heroFlopState = decisionInfo.LineInfo.HeroFlopState;
             var opponent = decisionInfo.LineInfo.Elements.HuOpp;
@@ -615,23 +587,23 @@ namespace Pingvi
         }
 
         private void StackLabel_MouseDown(object sender, MouseButtonEventArgs e) {
-            if (_tableBitmap == null) return;
-            const string path = @"P:\screens\";
-            _tableBitmap.Save(path + DateTime.Now.ToString("s").Replace(':',' ') + ".bmp");
+            if (MakeScreenShotClick != null) {
+                MakeScreenShotClick();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //register activate hotkey
-          //  const uint activateHotkeyVLC = 86; // keycode of V
-          //  WINAPI.RegisterHotKey(this, activateHotkeyVLC);
-          //  ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
+            const uint activateHotkeyVLC = 86; // keycode of V
+            WINAPI.RegisterHotKey(this, activateHotkeyVLC);
+            ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-          //  WINAPI.UnregisterHotKey(this);
+           WINAPI.UnregisterHotKey(this);
         }
 
-        //private uint WM_KEYUP = 0x0101;
+        private uint WM_KEYUP = 0x0101;
 
   
         void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)

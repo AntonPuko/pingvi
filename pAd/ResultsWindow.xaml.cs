@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -94,9 +95,11 @@ namespace Pingvi
                     tourneysJson = webClient.DownloadString(tourneysURL);
                 }
                 catch  {
-                    MessageBox.Show("HM не запущен!");
+                    
                     _timer.IsEnabled = false;
                     CleartStats();
+                    Thread.Sleep(5000);
+                    _timer.IsEnabled = true;
                     return;
                 }
                 
@@ -179,16 +182,9 @@ namespace Pingvi
 
 
 
-     
-
-        private void RichTextBox_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-              if (!_timer.IsEnabled) _timer.IsEnabled = true;
-        }
-        
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-
+            //show or hide Results
             if (_isResultRefreshing) {
                 ResultRun.Text = "";
                 EvBB100Run.Text = "";

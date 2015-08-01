@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Pingvi.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Pingvi" Height="540.337" Width="632.272">
+        Title="Pingvi" Height="540.337" Width="632.272" Icon="pingvi.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>

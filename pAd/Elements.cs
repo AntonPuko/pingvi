@@ -19,8 +19,6 @@ namespace Pingvi
 
 
     public class Elements {
-
-        public bool IsHudWindowsInFront { get; set; }
         public Card FlopCard1 { get; set; }
         public Card FlopCard2 { get; set; }
         public Card FlopCard3 { get; set; }
@@ -36,9 +34,6 @@ namespace Pingvi
         public double TotalPot { get; set; }
 
         public CurrentStreet CurrentStreet { get; set; }
-
-        public int TableNumber { get; set; }
-     
 
         public Hero HeroPlayer { get; set; }
         public Player LeftPlayer { get; set; }
@@ -59,22 +54,13 @@ namespace Pingvi
         public string SbLine { get; set; }
         public string BbLine { get; set; }
 
-        //public Queue<KeyValuePair<int, HeroStatePreflop>> TablesQueue { get; set; }
-
-        public Dictionary<int,HeroStatePreflop> TablesDictionary { get;set;} 
-        private const int MaxVolTables = 25;
-
         public Elements() {
-            TablesDictionary = new Dictionary<int, HeroStatePreflop>();
-
-            //TablesQueue = new Queue<KeyValuePair<int, HeroStatePreflop>>(MaxVolTables);
             HeroPlayer = new Hero("Hero");
             LeftPlayer = new Player("LeftPlayer");
             RightPlayer = new Player("RightPlayer");
             EffectiveStack = 0.0;
             BbAmt = 0.0;
             SbAmt = 0.0;
-            TableNumber = 0;
         }
 
     
