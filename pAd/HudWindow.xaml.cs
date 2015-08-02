@@ -181,7 +181,9 @@ namespace Pingvi
                             else if (sbVsbtnEffStack <= 13) DecisionRun.Text = "___IS 2 ";
                         }
                         else {
-                            DecisionRun.Text = "___IS 2 ";
+                             if (effStack <= 16) DecisionRun.Text = "___IS 2 ";
+                             else if (effStack > 16 && effStack <= 20) DecisionRun.Text = "___IS 2.5 ";
+                             else if (effStack > 20) DecisionRun.Text = "___IS 3 ";
                         }
                         break;
                     }
