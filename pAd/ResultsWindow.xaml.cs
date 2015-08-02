@@ -152,7 +152,7 @@ namespace Pingvi
             
             
             CountRun.Text = tagCount.ToString();
-            RakeBackRun.Text = rakeback.ToString("##.#");
+            RakeBackRun.Text = rakeback.ToString("#");
 
             if (_isResultRefreshing) {
 
