@@ -116,8 +116,8 @@ namespace Pingvi {
             RightPlayer.PlayerStatusPointGame = new PixelPoint(755, 144);
 
             Hero.PlayerStatusPointHand = new PixelPoint(375, 443);
-            LeftPlayer.PlayerStatusPointHand = new PixelPoint(190, 137);
-            RightPlayer.PlayerStatusPointHand = new PixelPoint(617, 139);
+            LeftPlayer.PlayerStatusPointHand = new PixelPoint(181, 155);
+            RightPlayer.PlayerStatusPointHand = new PixelPoint(626, 155);
 
             
             Hero.PlayerStatusPointSitOut = new PixelPoint(369, 456);
