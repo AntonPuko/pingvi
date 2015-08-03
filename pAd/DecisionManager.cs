@@ -624,6 +624,13 @@ namespace Pingvi
                .EffectiveStackBetween(10, 13)
                .Do(l => CheckDecision(heroHand, "BB_VS_BTN_LIMP_10-13bb", 0, PlMode.None));
 
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+               .HeroPreflopState(HeroPreflopState.FacingLimp)
+               .Is3Max()
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .EffectiveStackBetween(8, 10)
+               .Do(l => CheckDecision(heroHand, "BB_VS_BTN_LIMP_8-10bb", 0, PlMode.None));
+
                 //BB FACING LIMP 2MAX HU
                 double? limpfold = null;
                 if (lineInfo.Elements.HuOpp != null) limpfold = lineInfo.Elements.HuOpp.Stats.PF_LIMP_FOLD;
@@ -895,7 +902,7 @@ namespace Pingvi
 
 
                 }
-                if (openRaise > 50) {
+                if (openRaise > 40) {
                     //VS LOOSE OPEN
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
                         .HeroPreflopState(HeroPreflopState.FacingOpen)
