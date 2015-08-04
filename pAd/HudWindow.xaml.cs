@@ -596,16 +596,16 @@ namespace Pingvi
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //register activate hotkey
-            const uint activateHotkeyVLC = 86; // keycode of V
-            WINAPI.RegisterHotKey(this, activateHotkeyVLC);
-            ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
+           // const uint activateHotkeyVLC = 86; // keycode of V
+         //   WINAPI.RegisterHotKey(this, activateHotkeyVLC);
+         //   ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-           WINAPI.UnregisterHotKey(this);
+        //   WINAPI.UnregisterHotKey(this);
         }
 
-        private uint WM_KEYUP = 0x0101;
+       // private uint WM_KEYUP = 0x0101;
 
   
         void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
