@@ -177,7 +177,7 @@ namespace Pingvi {
             };
              
             LeftPlayer.BetDigPosPoints = new[] {
-                new PixelPoint(260, 188), new PixelPoint(254, 188), new PixelPoint(248, 188),
+                new PixelPoint(263, 188), new PixelPoint(254, 188), new PixelPoint(248, 188),
                 new PixelPoint(240, 188), new PixelPoint(231, 188), new PixelPoint(225, 188),
                 new PixelPoint(214, 188), new PixelPoint(208, 188), new PixelPoint(202, 188)};
 
