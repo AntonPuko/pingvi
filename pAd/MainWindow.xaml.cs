@@ -79,7 +79,7 @@ namespace Pingvi
                                                     "\nF_CBET: {15}\nF_BET_LPOT: {16}\nF_CBET_FOLDRAISE: {17}" +
                                                     "\nF_FOLD_CBET: {18}\nF_RAISE_CBET: {19}\nF_DONK: {20}" +
                                                     "\nF_DONK_FOLDRAISE: {21}" +
-                                                    "\nPF_OPENMINRAISE: {22}\nPF_OPENPUSH: {23}",
+                                                    "\nPF_OPENMINRAISE: {22}\nPF_OPENPUSH: {23}\nF_CHECKFOLD: {24}\nF_LIMPPOT_FOLD_IP: {25}",
             elements.LeftPlayer.Status, elements.LeftPlayer.Position,
             elements.LeftPlayer.Line,
             elements.LeftPlayer.CurrentStack, elements.LeftPlayer.Bet,
@@ -92,7 +92,7 @@ namespace Pingvi
             elements.LeftPlayer.Stats.F_CBET_FOLDRAISE, elements.LeftPlayer.Stats.F_FOLD_CBET,
             elements.LeftPlayer.Stats.F_RAISE_CBET, elements.LeftPlayer.Stats.F_DONK,
             elements.LeftPlayer.Stats.F_DONK_FOLDRAISE, elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE,
-            elements.LeftPlayer.Stats.PF_OPENPUSH);
+            elements.LeftPlayer.Stats.PF_OPENPUSH, elements.LeftPlayer.Stats.F_CHECKFOLD_OOP, elements.LeftPlayer.Stats.F_LIMPPOT_FOLD_IP);
 
             RightPlayerLabel.Content = String.Format("Status: {0}\nPosition: {1}\nLine: {2}\nCurStack: {3}\nBet: {4}\nStack: {5}\n" +
                                           "Type: {6} \n\nPF_BTN_STEAL: {7}\nPF_SB_STEAL: {8}\nPF_LIMP_FOLD: {9}" +
@@ -101,7 +101,7 @@ namespace Pingvi
                                                     "\nF_CBET: {15}\nF_BET_LPOT: {16}\nF_CBET_FOLDRAISE: {17}" +
                                                     "\nF_FOLD_CBET: {18}\nF_RAISE_CBET: {19}\nF_DONK: {20}" +
                                                     "\nF_DONK_FOLDRAISE: {21}" +
-                                                    "\nPF_OPENMINRAISE: {22}\nPF_OPENPUSH: {23}",
+                                                    "\nPF_OPENMINRAISE: {22}\nPF_OPENPUSH: {23}\nF_CHECKFOLD: {24}\nF_LIMPPOT_FOLD_IP: {25}",
            elements.RightPlayer.Status, elements.RightPlayer.Position,
            elements.RightPlayer.Line,
            elements.RightPlayer.CurrentStack, elements.RightPlayer.Bet,
@@ -114,7 +114,7 @@ namespace Pingvi
            elements.RightPlayer.Stats.F_CBET_FOLDRAISE, elements.RightPlayer.Stats.F_FOLD_CBET,
            elements.RightPlayer.Stats.F_RAISE_CBET, elements.RightPlayer.Stats.F_DONK,
            elements.RightPlayer.Stats.F_DONK_FOLDRAISE, elements.RightPlayer.Stats.PF_SB_OPENMINRAISE,
-           elements.RightPlayer.Stats.PF_OPENPUSH);
+           elements.RightPlayer.Stats.PF_OPENPUSH, elements.RightPlayer.Stats.F_CHECKFOLD_OOP, elements.RightPlayer.Stats.F_LIMPPOT_FOLD_IP);
 
             SituationLabel.Content = String.Format("EffStack: {0} :: HeroRole: {1} :: HeroStatePreflop: {2} :: RelativePos: {3} " +
                                                    "\nPotType: {4} :: PfState: {5} :: FlopState: {6} :: TurnState: {7} :: RiverState: {8}",

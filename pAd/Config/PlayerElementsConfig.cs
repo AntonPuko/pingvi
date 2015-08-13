@@ -86,9 +86,12 @@ namespace Pingvi {
         public PixelPoint[] F_DONK_FOLDRAISE_StatDigPosPoints { get; set; }
         public RectangleF[][] F_DONK_FOLDRAISE_StatDigitsRectMass { get; set; }
 
-     
+        public PixelPoint[] F_CHECKFOLD_OOP_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_CHECKFOLD_OOP_StatDigitsRectMass { get; set; }
 
 
+        public PixelPoint[] F_LIMPPOT_FOLD_IP_StatDigPosPoints { get; set; }
+        public RectangleF[][] F_LIMPPOT_FOLD_IP_StatDigitsRectMass { get; set; }
 
     
 

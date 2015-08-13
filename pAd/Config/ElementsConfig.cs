@@ -100,8 +100,8 @@ namespace Pingvi {
                 {6, Color.FromArgb(0, 56, 32)},
                 {10, Color.FromArgb(0, 79, 0)},
                 {25, Color.FromArgb(55, 31, 76)},
-                {120, Color.FromArgb(5, 5, 5)},
-                {240, Color.FromArgb(5, 5, 5)},
+                {120, Color.FromArgb(76, 7, 7)},
+                {240, Color.FromArgb(76, 7, 7)},
                 {3600, Color.FromArgb(5, 5, 5)}
             };
 
@@ -216,10 +216,9 @@ namespace Pingvi {
             Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 128), "r");
 
             Common.LinePixelPositions = new[] {
-                new PixelPoint(7, 8), new PixelPoint(15, 8), new PixelPoint(23, 8), new PixelPoint(31, 8),
-                new PixelPoint(39, 8), new PixelPoint(47, 8), new PixelPoint(55, 8), new PixelPoint(63, 8),
-                new PixelPoint(71, 8), new PixelPoint(79, 8), new PixelPoint(87, 8), new PixelPoint(95, 8)
-            };
+                new PixelPoint(7, 8), new PixelPoint(16, 8), new PixelPoint(25, 8), new PixelPoint(33, 8),
+                new PixelPoint(42, 8), new PixelPoint(51, 8), new PixelPoint(59, 8), new PixelPoint(69, 8),
+                new PixelPoint(77, 8), new PixelPoint(84, 8)};
 
             Hero.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(462,403));
             LeftPlayer.LinePixelPositions = CountLinePixelPositions(Common.LinePixelPositions, new PixelPoint(230, 81));
@@ -336,6 +335,18 @@ namespace Pingvi {
                 new [] {new RectangleF(32,253,5,4)}
                 };
 
+            LeftPlayer.F_CHECKFOLD_OOP_StatDigPosPoints = new[] { new PixelPoint(43, 268), new PixelPoint(38, 268) };
+            LeftPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(32,263,5,4), new RectangleF(37,263,5,4) }, 
+                new [] {new RectangleF(32,263,5,4)}
+                };
+
+            LeftPlayer.F_LIMPPOT_FOLD_IP_StatDigPosPoints = new[] { new PixelPoint(43, 279), new PixelPoint(38, 279) };
+            LeftPlayer.F_LIMPPOT_FOLD_IP_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(32,274,5,4), new RectangleF(37,274,5,4) }, 
+                new [] {new RectangleF(32,274,5,4)}
+                };
+
             //RIGHT
             //PREFLOP
 
@@ -345,10 +356,10 @@ namespace Pingvi {
                 new [] {new RectangleF(715,190,5,4)}
                 };
 
-            RightPlayer.PF_SB_STEAL_StatDigPosPoints = new[] { new PixelPoint(726, 206), new PixelPoint(721, 206) };
+            RightPlayer.PF_SB_STEAL_StatDigPosPoints = new[] { new PixelPoint(726, 205), new PixelPoint(721, 205) };
             RightPlayer.PF_SB_STEAL_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(715,201,5,4), new RectangleF(720,201,5,4) }, 
-                new [] {new RectangleF(715,201,5,4)}
+                new [] {new RectangleF(715,200,5,4), new RectangleF(720,200,5,4) }, 
+                new [] {new RectangleF(715,200,5,4)}
                 };
 
             RightPlayer.PF_LIMP_FOLD_StatDigPosPoints = new[] { new PixelPoint(726, 216), new PixelPoint(721, 216) };
@@ -357,10 +368,10 @@ namespace Pingvi {
                 new [] {new RectangleF(715,211,5,4)}
                 };
 
-            RightPlayer.PF_FOLD_3BET_StatDigPosPoints = new[] { new PixelPoint(726, 227), new PixelPoint(721, 227) };
+            RightPlayer.PF_FOLD_3BET_StatDigPosPoints = new[] { new PixelPoint(726, 226), new PixelPoint(721, 226) };
             RightPlayer.PF_FOLD_3BET_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(715,222,5,4), new RectangleF(720,222,5,4) }, 
-                new [] {new RectangleF(715,222,5,4)}
+                new [] {new RectangleF(715,221,5,4), new RectangleF(720,221,5,4) }, 
+                new [] {new RectangleF(715,221,5,4)}
                 };
 
             RightPlayer.PF_SB_3BET_VS_BTN_StatDigPosPoints = new[] { new PixelPoint(726, 237), new PixelPoint(721, 237) };
@@ -369,10 +380,10 @@ namespace Pingvi {
                 new [] {new RectangleF(715,232,5,4)}
                 };
 
-            RightPlayer.PF_BB_3BET_VS_BTN_StatDigPosPoints = new[] { new PixelPoint(726, 248), new PixelPoint(721, 248) };
+            RightPlayer.PF_BB_3BET_VS_BTN_StatDigPosPoints = new[] { new PixelPoint(726, 247), new PixelPoint(721, 247) };
             RightPlayer.PF_BB_3BET_VS_BTN_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(715,243,5,4), new RectangleF(720,243,5,4) }, 
-                new [] {new RectangleF(715,243,5,4)}
+                new [] {new RectangleF(715,242,5,4), new RectangleF(720,242,5,4) }, 
+                new [] {new RectangleF(715,242,5,4)}
                 };
 
             RightPlayer.PF_BB_3BET_VS_SB_StatDigPosPoints = new[] { new PixelPoint(726, 258), new PixelPoint(721, 258) };
@@ -381,10 +392,10 @@ namespace Pingvi {
                 new [] {new RectangleF(715,253,5,4)}
                 };
 
-            RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints = new[] { new PixelPoint(726, 269), new PixelPoint(721, 269) };
+            RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints = new[] { new PixelPoint(726, 268), new PixelPoint(721, 268) };
             RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(715,264,5,4), new RectangleF(720,264,5,4) }, 
-                new [] {new RectangleF(715,264,5,4)}
+                new [] {new RectangleF(715,263,5,4), new RectangleF(720,263,5,4) }, 
+                new [] {new RectangleF(715,263,5,4)}
                 };
 
             RightPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints = new[] { new PixelPoint(726, 279), new PixelPoint(721, 279) };
@@ -393,10 +404,10 @@ namespace Pingvi {
                 new [] {new RectangleF(715,274,5,4)}
                 };
 
-            RightPlayer.PF_OPENPUSH_StatDigPosPoints = new[] { new PixelPoint(726, 290), new PixelPoint(721, 290) };
+            RightPlayer.PF_OPENPUSH_StatDigPosPoints = new[] { new PixelPoint(726, 289), new PixelPoint(721, 289) };
             RightPlayer.PF_OPENPUSH_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(715,285,5,4), new RectangleF(720,285,5,4) }, 
-                new [] {new RectangleF(715,285,5,4)}
+                new [] {new RectangleF(715,284,5,4), new RectangleF(720,284,5,4) }, 
+                new [] {new RectangleF(715,284,5,4)}
                 };
 
             //RIGHT FLOP
@@ -406,10 +417,10 @@ namespace Pingvi {
                 new [] {new RectangleF(737,190,5,4)}
                 };
 
-            RightPlayer.F_BET_LPOT_StatDigPosPoints = new[] { new PixelPoint(748, 206), new PixelPoint(743, 206) };
+            RightPlayer.F_BET_LPOT_StatDigPosPoints = new[] { new PixelPoint(748, 205), new PixelPoint(743, 205) };
             RightPlayer.F_BET_LPOT_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(737,201,5,4), new RectangleF(742,201,5,4) }, 
-                new [] {new RectangleF(737,201,5,4)}
+                new [] {new RectangleF(737,200,5,4), new RectangleF(742,200,5,4) }, 
+                new [] {new RectangleF(737,200,5,4)}
                 };
 
             RightPlayer.F_CBET_FOLDRAISE_StatDigPosPoints = new[] { new PixelPoint(748, 216), new PixelPoint(743, 216) };
@@ -418,10 +429,10 @@ namespace Pingvi {
                 new [] {new RectangleF(737,211,5,4)}
                 };
 
-            RightPlayer.F_FOLD_CBET_StatDigPosPoints = new[] { new PixelPoint(748, 227), new PixelPoint(743, 227) };
+            RightPlayer.F_FOLD_CBET_StatDigPosPoints = new[] { new PixelPoint(748, 226), new PixelPoint(743, 226) };
             RightPlayer.F_FOLD_CBET_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(737,222,5,4), new RectangleF(742,222,5,4) }, 
-                new [] {new RectangleF(737,222,5,4)}
+                new [] {new RectangleF(737,221,5,4), new RectangleF(742,221,5,4) }, 
+                new [] {new RectangleF(737,221,5,4)}
                 };
 
             RightPlayer.F_RAISE_CBET_StatDigPosPoints = new[] { new PixelPoint(748, 237), new PixelPoint(743, 237) };
@@ -430,16 +441,28 @@ namespace Pingvi {
                 new [] {new RectangleF(737,232,5,4)}
                 };
 
-            RightPlayer.F_DONK_StatDigPosPoints = new[] { new PixelPoint(748, 248), new PixelPoint(743, 248) };
+            RightPlayer.F_DONK_StatDigPosPoints = new[] { new PixelPoint(748, 247), new PixelPoint(743, 247) };
             RightPlayer.F_DONK_StatDigitsRectMass = new[] {
-                new [] {new RectangleF(737,243,5,4), new RectangleF(742,243,5,4) }, 
-                new [] {new RectangleF(737,243,5,4)}
+                new [] {new RectangleF(737,242,5,4), new RectangleF(742,242,5,4) }, 
+                new [] {new RectangleF(737,242,5,4)}
                 };
 
             RightPlayer.F_DONK_FOLDRAISE_StatDigPosPoints = new[] { new PixelPoint(748, 258), new PixelPoint(743, 258) };
             RightPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass = new[] {
                 new [] {new RectangleF(737,253,5,4), new RectangleF(742,253,5,4) }, 
                 new [] {new RectangleF(737,253,5,4)}
+                };
+
+            RightPlayer.F_CHECKFOLD_OOP_StatDigPosPoints = new[] { new PixelPoint(748, 268), new PixelPoint(743, 268) };
+            RightPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(737,263,5,4), new RectangleF(742,263,5,4) }, 
+                new [] {new RectangleF(737,263,5,4)}
+                };
+
+            RightPlayer.F_LIMPPOT_FOLD_IP_StatDigPosPoints = new[] { new PixelPoint(748, 279), new PixelPoint(743, 279) };
+            RightPlayer.F_LIMPPOT_FOLD_IP_StatDigitsRectMass = new[] {
+                new [] {new RectangleF(737,274,5,4), new RectangleF(742,274,5,4) }, 
+                new [] {new RectangleF(737,274,5,4)}
                 };
 
         }

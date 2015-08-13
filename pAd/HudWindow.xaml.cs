@@ -316,18 +316,10 @@ namespace Pingvi
                     DecisionRun.Text = "BT";
 
                     StatName1Run.Text = "fb";
-                    if (opponent != null) stat1 = opponent.Stats.F_FOLD_CBET;
-
+                    if (opponent != null) stat1 = opponent.Stats.F_LIMPPOT_FOLD_IP;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 45, 60);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
-
-                    StatName2Run.Text = "rb";
-                    if (opponent != null) stat2 = opponent.Stats.F_RAISE_CBET;
-                    Stat2ValRun.Foreground = PeekStatColor(stat2, 10, 25);
-                    Stat2ValRun.Text = stat2 == null ? "-" : stat2.ToString();
-
                     PeekStatNameColor(stat1, StatName1Run);
-                    PeekStatNameColor(stat2, StatName2Run);
                     break;
 
                 case HeroFlopState.FacingBet:
@@ -409,8 +401,8 @@ namespace Pingvi
                     DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 125));
                     DecisionRun.Text = "vmCB";
 
-                    StatName1Run.Text = "cb";
-                    if (opponent != null) stat1 = opponent.Stats.F_CBET;
+                    StatName1Run.Text = "XF";
+                    if (opponent != null) stat1 = opponent.Stats.F_CHECKFOLD_OOP;
                     Stat1ValRun.Foreground = PeekStatColor(stat1, 40, 70);
                     Stat1ValRun.Text = stat1 == null ? "-" : stat1.ToString();
                     break;

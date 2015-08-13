@@ -163,6 +163,16 @@ namespace Pingvi {
                    _elementsConfig.LeftPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
+            _elements.LeftPlayer.Stats.F_CHECKFOLD_OOP =
+              FindNumberN(_elementsConfig.LeftPlayer.F_CHECKFOLD_OOP_StatDigPosPoints,
+                  _elementsConfig.LeftPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass,
+                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.F_LIMPPOT_FOLD_IP =
+              FindNumberN(_elementsConfig.LeftPlayer.F_LIMPPOT_FOLD_IP_StatDigPosPoints,
+                  _elementsConfig.LeftPlayer.F_LIMPPOT_FOLD_IP_StatDigitsRectMass,
+                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
             //RIGHT
             //PREFLOP
             _elements.RightPlayer.Stats.PF_BTN_STEAL =
@@ -250,6 +260,16 @@ namespace Pingvi {
             _elements.RightPlayer.Stats.F_DONK_FOLDRAISE =
                FindNumberN(_elementsConfig.RightPlayer.F_DONK_FOLDRAISE_StatDigPosPoints,
                    _elementsConfig.RightPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass,
+                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_CHECKFOLD_OOP =
+               FindNumberN(_elementsConfig.RightPlayer.F_CHECKFOLD_OOP_StatDigPosPoints,
+                   _elementsConfig.RightPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass,
+                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_LIMPPOT_FOLD_IP =
+               FindNumberN(_elementsConfig.RightPlayer.F_LIMPPOT_FOLD_IP_StatDigPosPoints,
+                   _elementsConfig.RightPlayer.F_LIMPPOT_FOLD_IP_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
 

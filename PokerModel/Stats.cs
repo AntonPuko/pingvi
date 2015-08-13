@@ -27,6 +27,8 @@ namespace PokerModel {
         public double? F_RAISE_CBET; //
         public double? F_DONK;
         public double? F_DONK_FOLDRAISE;
+        public double? F_CHECKFOLD_OOP;
+        public double? F_LIMPPOT_FOLD_IP;
 
     }
 }
