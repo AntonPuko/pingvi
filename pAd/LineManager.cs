@@ -236,7 +236,7 @@ namespace Pingvi {
 
             if(elements.CurrentStreet != CurrentStreet.Flop) return HeroFlopState.None;
             //Donk
-            string[] donkMass = {"rC|","rfC|","fRrC|"};
+            string[] donkMass = {"rC|","rfC|","fRrC|", "rCf|"};
             bool donk = CheckLineInLinesMass(compositeLine, donkMass);
             if (donk) return HeroFlopState.Donk;
 
@@ -299,7 +299,7 @@ namespace Pingvi {
             bool donk = CheckLineInLinesMass(compositeLine, donkMass);
             if(donk) return HeroTurnState.Donk;
             //Bet2 
-            string[] bet2Mass = { "lX|Bc|", "Lx|xBc|x|", "frC|xBc|x|", "lfX|Bc|" };
+            string[] bet2Mass = { "lX|Bc|", "Lx|xBc|x|", "frC|xBc|x|", "lfX|Bc|", "flX|xBc|x|", "frC|xBc|x|" };
             bool bet2 = CheckLineInLinesMass(compositeLine, bet2Mass);
             if(bet2) return HeroTurnState.Bet2;
             //Cbet2
@@ -325,7 +325,7 @@ namespace Pingvi {
             if(betAfterReraiseFlop) return HeroTurnState.BetAfterReraiseFlop;
            
             //FacingCbet2
-            string[] facingCbet2Mass = {"RfrC|bC|b|", "RrfC|bC|b|", "rfC|XbC|Xb|", "frC|bC|b|", "LrC|bC|b|", "rC|XbC|Xb|", "RrC|bC|b|"};
+            string[] facingCbet2Mass = {"RfrC|bC|b|", "RrfC|bC|b|", "rfC|XbC|Xb|", "frC|bC|b|", "LrC|bC|b|", "rC|XbC|Xb|", "RrC|bC|b|", "flX|bC|b|"};
             bool facingCbet2 = CheckLineInLinesMass(compositeLine, facingCbet2Mass);
             if(facingCbet2) return HeroTurnState.FacingCbet2;
 
@@ -349,7 +349,7 @@ namespace Pingvi {
             bool vsMissFlopCbet = CheckLineInLinesMass(compositeLine, vsMissFlopCbetMass);
             if(vsMissFlopCbet) return HeroTurnState.VsMissFCb;
             //vsMissTurnCbet
-            string[] vsMissTurnCbetMass = { "RfrC|bC|x|", "RrfC|bC|x|",  "frC|bC|x|", "LrC|bC|x|", };
+            string[] vsMissTurnCbetMass = { "RfrC|bC|x|", "RrfC|bC|x|",  "frC|bC|x|", "LrC|bC|x|", "flX|bC|x|" };
             bool vsMissTurnCbet = CheckLineInLinesMass(compositeLine, vsMissTurnCbetMass);
             if(vsMissTurnCbet) return HeroTurnState.vsMissTCb;
             //facingDelayBet
