@@ -998,7 +998,7 @@ namespace Pingvi
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .OppBetSizeMinRaise()
-                .EffectiveStackBetween(13, 16)
+                .EffectiveStackBetween(16, 20)
                 .Do(l => CheckDecision(heroHand, "BB_VS_BTN_OPEN_16-20BB", BTN_STEAL_BB, PlMode.More));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
@@ -1070,6 +1070,10 @@ namespace Pingvi
                     if (lineInfo.Elements.HuOpp.Stack >= 2*lineInfo.Elements.HeroPlayer.Stack) foldTo3bet -= 5;
 
                 }
+
+            double? SB_STEAL_HU = null;
+            if (lineInfo.Elements.HuOpp != null) SB_STEAL_HU = lineInfo.Elements.HuOpp.Stats.PF_SB_OPENMINRAISE;
+
 
 
                 //BB VS SB OPEN MINR 3MAX
@@ -1208,9 +1212,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(0, 8)
-                    .Do(
-                        l =>
-                            CheckDecision(heroHand, "COMMON_PushFoldVsOpen_NASH", l.Elements.EffectiveStack, PlMode.Less));
+                    .Do(l => CheckDecision(heroHand, "COMMON_PushFoldVsOpen_NASH", l.Elements.EffectiveStack, PlMode.Less));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1236,13 +1238,19 @@ namespace Pingvi
                     .EffectiveStackBetween(13, 16)
                     .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_13-16bb_2max", openRaise, PlMode.More));
 
+
+
+            //NEW bb vs sb open 17.08 
+
+                if (SB_STEAL_HU == null) SB_STEAL_HU = 35;
+
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
                     .IsHU()
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSizeMinRaise()
                     .EffectiveStackBetween(16, 20)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_16-20bb_2max", openRaise, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_16-20BB", SB_STEAL_HU, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1250,7 +1258,10 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSizeMinRaise()
                     .EffectiveStackBetween(20, 100)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_20-100bb_2max", 0, PlMode.None));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_20-100BB", SB_STEAL_HU, PlMode.More));
+
+            
+                
 
                 //BB VS SB OPEN BIG 2max
 
