@@ -1206,6 +1206,8 @@ namespace Pingvi
 
                 //BB VS SB OPEN MINR 2max
 
+                if (SB_STEAL_HU == null) SB_STEAL_HU = 35;
+
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
                     .IsHU()
@@ -1220,7 +1222,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(8, 10)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_2max", openRaise, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_8-10BB", openRaise, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1228,7 +1230,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSize(2)
                     .EffectiveStackBetween(10, 13)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_10-13bb_2max", openRaise, PlMode.More));
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_10-13BB", openRaise, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1236,13 +1238,7 @@ namespace Pingvi
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                     .OppBetSizeMinRaise()
                     .EffectiveStackBetween(13, 16)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_13-16bb_2max", openRaise, PlMode.More));
-
-
-
-            //NEW bb vs sb open 17.08 
-
-                if (SB_STEAL_HU == null) SB_STEAL_HU = 35;
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_13-16BB", openRaise, PlMode.More));
 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
