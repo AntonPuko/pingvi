@@ -1056,91 +1056,91 @@ namespace Pingvi
 
               
 
-                double? openRaise = null;
-                double? foldTo3bet = null;
+            
 
-                if (lineInfo.Elements.HuOpp != null) {
-                    if (lineInfo.Elements.HuOpp.Position == PlayerPosition.Button)
-                        openRaise = lineInfo.Elements.HuOpp.Stats.PF_BTN_STEAL;
-                    else if (lineInfo.Elements.HuOpp.Position == PlayerPosition.Sb)
-                        openRaise = lineInfo.Elements.HuOpp.Stats.PF_SB_OPENMINRAISE;
-                    foldTo3bet = lineInfo.Elements.HuOpp.Stats.PF_FOLD_3BET;
-
-
-                    const double defaultFoldTo3Bet = 65;
-                    if (foldTo3bet == null) foldTo3bet = defaultFoldTo3Bet;
-                    if (lineInfo.Elements.HuOpp.Stack >= 2*lineInfo.Elements.HeroPlayer.Stack) foldTo3bet -= 5;
-
-                }
-
-            double? SB_STEAL_HU = null;
-            if (lineInfo.Elements.HuOpp != null) SB_STEAL_HU = lineInfo.Elements.HuOpp.Stats.PF_SB_OPENMINRAISE;
-
+           
 
             //BB VS SB OPEN MINR 3MAX
-            
-            if (openRaise == null) openRaise = 45;
+
+            double? SB_STEAL = null;
+            if (lineInfo.Elements.HuOpp != null) SB_STEAL = lineInfo.Elements.HuOpp.Stats.PF_SB_STEAL;
+            if (SB_STEAL == null) SB_STEAL = 40;
+
+            if (!IsOppGoodReg || lineInfo.Elements.TourneyMultiplier >= 9) {
+                
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.InPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(5, 7)
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_5-7BB_BIGMULTI", 0, PlMode.None));
+
+                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                    .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                    .HeroRelativePosition(HeroRelativePosition.InPosition)
+                    .OppBetSize(2)
+                    .EffectiveStackBetween(7, 9)
+                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_7-9BB_BIGMULTI", 0, PlMode.None));
+            }
             
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSize(2)
-                .BBEqOrMoreThen(60)
-                .EffectiveStackBetween(5, 8)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_5-8bb_3max_BIGBLINDS", 0, PlMode.None));
-
-            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
-                .HeroPreflopState(HeroPreflopState.FacingOpen)
-                .IsHU()
-                .HeroRelativePosition(HeroRelativePosition.InPosition)
-                .OppBetSize(2)
-                .EffectiveStackBetween(0, 8)
+                .EffectiveStackBetween(0, 7)
                 .Do(l => CheckDecision(heroHand, "COMMON_PushFoldVsOpen_NASH", l.Elements.EffectiveStack, PlMode.Less));
             
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSize(2)
-                .BBEqOrMoreThen(60)
-                .EffectiveStackBetween(8, 10)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_3max_BIGBLINDS", 0, PlMode.None));
+                .EffectiveStackBetween(7, 9)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_7-9BB", SB_STEAL, PlMode.More));
             
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSize(2)
-                .EffectiveStackBetween(8, 10)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_3max_SMALLBLINDS", openRaise, PlMode.More));
+                .EffectiveStackBetween(9, 11)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_9-11BB", SB_STEAL, PlMode.More));
             
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSize(2)
-                .EffectiveStackBetween(10, 13)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_10-13BB", openRaise, PlMode.More));
+                .EffectiveStackBetween(11, 13)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_11-13BB", SB_STEAL, PlMode.More));
             
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeMinRaise()
-                .EffectiveStackBetween(13, 16)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_13-16BB", openRaise, PlMode.More));
+                .EffectiveStackBetween(13, 15)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_13-15BB", SB_STEAL, PlMode.More));
             
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen)
                 .IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeMinRaise()
-                .EffectiveStackBetween(16, 20)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_16-20BB", openRaise, PlMode.More));
+                .EffectiveStackBetween(15, 17)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_15-17BB", SB_STEAL, PlMode.More));
             
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(17, 20)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_17-20BB", SB_STEAL, PlMode.More));
+
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen)
                 .IsHU()
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .OppBetSizeMinRaise()
                 .EffectiveStackBetween(20, 100)
-                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_20-100BB", openRaise, PlMode.More));
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_3MAX_20-100BB", SB_STEAL, PlMode.More));
             
             
             //BB VS SB OPEN BIG 3max
@@ -1182,62 +1182,67 @@ namespace Pingvi
             
             
             //BB VS SB OPEN MINR 2MAX HU
-            if (SB_STEAL_HU == null) SB_STEAL_HU = 35;
-
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                 .HeroPreflopState(HeroPreflopState.FacingOpen)
                 .IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .OppBetSize(2)
-                .EffectiveStackBetween(0, 8)
+                .EffectiveStackBetween(0, 7)
                 .Do(l => CheckDecision(heroHand, "COMMON_PushFoldVsOpen_NASH", l.Elements.EffectiveStack, PlMode.Less));
 
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .IsHU()
-                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .OppBetSize(2)
-                    .EffectiveStackBetween(8, 10)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_8-10BB", openRaise, PlMode.More));
-
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .IsHU()
-                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .OppBetSize(2)
-                    .EffectiveStackBetween(10, 13)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_10-13BB", openRaise, PlMode.More));
-
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .IsHU()
-                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .OppBetSizeMinRaise()
-                    .EffectiveStackBetween(13, 16)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_13-16BB", openRaise, PlMode.More));
-
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .IsHU()
-                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .OppBetSizeMinRaise()
-                    .EffectiveStackBetween(16, 20)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_16-20BB", SB_STEAL_HU, PlMode.More));
-
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .IsHU()
-                    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                    .OppBetSizeMinRaise()
-                    .EffectiveStackBetween(20, 100)
-                    .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_20-100BB", SB_STEAL_HU, PlMode.More));
-
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSize(2)
+                .EffectiveStackBetween(7, 9)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_7-9BB", SB_STEAL, PlMode.More));
             
-                
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSize(2)
+                .EffectiveStackBetween(9, 11)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_9-11BB", SB_STEAL, PlMode.More));
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(11, 13)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_11-13BB", SB_STEAL, PlMode.More));
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(13, 15)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_13-15BB", SB_STEAL, PlMode.More));
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(15, 17)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_15-17BB", SB_STEAL, PlMode.More));
 
-                //BB VS SB OPEN BIG 2max
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(17, 20)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_17-20BB", SB_STEAL, PlMode.More));
 
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHU()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(20, 100)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_20-100BB", SB_STEAL, PlMode.More));
+            
+            //BB VS SB OPEN BIG 2max
+            
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                     .HeroPreflopState(HeroPreflopState.FacingOpen)
                     .IsHU()
                     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
