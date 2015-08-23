@@ -594,15 +594,14 @@ namespace Pingvi
             if (BB_3BET_VS_SB == null || BB_3BET_VS_SB > 15) {
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(0, 9)
+                    .EffectiveStackBetween(0, 11)
                     .Do(l => CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_0-11bb_UNK", l.Elements.EffectiveStack, PlMode.Less));
                 
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(9, 100)
+                    .EffectiveStackBetween(11, 100)
                     .Do(l => CheckDecision(heroHand, "SB_CALLPUSH_AFTEROPEN_9-100_UNK_NEW", l.Elements.EffectiveStack, PlMode.Less));
             } else {
-                
                 lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                     .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
                     .EffectiveStackBetween(0, 9)
