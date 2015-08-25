@@ -3,10 +3,8 @@ P:\Dropbox\pAd\pAd\bin\Debug\Pingvi.exe
 P:\Dropbox\pAd\pAd\bin\Debug\Pingvi.pdb
 P:\Dropbox\pAd\pAd\bin\Debug\PokerModel.dll
 P:\Dropbox\pAd\pAd\bin\Debug\PokerModel.pdb
-P:\Dropbox\pAd\pAd\obj\Debug\HudWindow.baml
 P:\Dropbox\pAd\pAd\obj\Debug\MainWindow.baml
 P:\Dropbox\pAd\pAd\obj\Debug\VmWindow.baml
-P:\Dropbox\pAd\pAd\obj\Debug\HudWindow.g.cs
 P:\Dropbox\pAd\pAd\obj\Debug\MainWindow.g.cs
 P:\Dropbox\pAd\pAd\obj\Debug\VmWindow.g.cs
 P:\Dropbox\pAd\pAd\obj\Debug\App.g.cs
@@ -47,7 +45,9 @@ P:\Dropbox\pAd\pAd\bin\Debug\fi\Npgsql.resources.dll
 P:\Dropbox\pAd\pAd\bin\Debug\fr\Npgsql.resources.dll
 P:\Dropbox\pAd\pAd\bin\Debug\ja\Npgsql.resources.dll
 P:\Dropbox\pAd\pAd\bin\Debug\zh-CN\Npgsql.resources.dll
-P:\Dropbox\pAd\pAd\obj\Debug\ResultsWindow.baml
-P:\Dropbox\pAd\pAd\obj\Debug\ResultsWindow.g.cs
 P:\Dropbox\pAd\pAd\bin\Debug\Newtonsoft.Json.dll
 P:\Dropbox\pAd\pAd\bin\Debug\Newtonsoft.Json.xml
+P:\Dropbox\pAd\pAd\obj\Debug\HWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\RWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\HWindow.g.cs
+P:\Dropbox\pAd\pAd\obj\Debug\RWindow.g.cs

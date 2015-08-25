@@ -11,7 +11,7 @@ namespace Pingvi
 
         public MainWindow() {
             _tableManager = new ScreenTableManager();
-            var hudWindow = new HudWindow();
+            var hudWindow = new HWindow();
             var elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
@@ -28,7 +28,7 @@ namespace Pingvi
 
             //create new thread for result window because of http query lags
             Thread resultWindowThread = new Thread(new ThreadStart(() => {
-                var resultWindow = new ResultsWindow();
+                var resultWindow = new RWindow();
                 resultWindow.Show();
 
                 System.Windows.Threading.Dispatcher.Run();

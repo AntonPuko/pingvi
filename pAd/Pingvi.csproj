@@ -76,15 +76,15 @@
     <Compile Include="HHImporter\HandHistory.cs" />
     <Compile Include="LineInfo.cs" />
     <Compile Include="LineManager.cs" />
-    <Compile Include="ResultsWindow.xaml.cs">
-      <DependentUpon>ResultsWindow.xaml</DependentUpon>
+    <Compile Include="RWindow.xaml.cs">
+      <DependentUpon>RWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Stuff\BitmapHelper.cs" />
     <Compile Include="Config\BlindsElementsConfig.cs" />
     <Compile Include="Config\CommonElementsConfig.cs" />
     <Compile Include="Config\HeroElementsConfig.cs" />
-    <Compile Include="HudWindow.xaml.cs">
-      <DependentUpon>HudWindow.xaml</DependentUpon>
+    <Compile Include="HWindow.xaml.cs">
+      <DependentUpon>HWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Stuff\PixelPoint.cs" />
     <Compile Include="Config\PlayerElementsConfig.cs" />
@@ -110,7 +110,7 @@
       <DependentUpon>VmWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Stuff\WINAPI.cs" />
-    <Page Include="HudWindow.xaml">
+    <Page Include="HWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,7 +126,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ResultsWindow.xaml">
+    <Page Include="RWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
