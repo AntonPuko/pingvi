@@ -1,0 +1,13 @@
+P:\Dropbox\pAd\HandHistoryTest\bin\Debug\HandHistoryTest.exe.config
+P:\Dropbox\pAd\HandHistoryTest\bin\Debug\HandHistoryTest.exe
+P:\Dropbox\pAd\HandHistoryTest\bin\Debug\HandHistoryTest.pdb
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\App.g.cs
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest_MarkupCompile.cache
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.g.resources
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.Properties.Resources.resources
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.exe
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.pdb
+P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.csprojResolveAssemblyReference.cache
