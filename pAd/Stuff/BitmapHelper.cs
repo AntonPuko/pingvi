@@ -9,12 +9,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 
 namespace Pingvi
 {
     public  static class BitmapHelper
     {
+        public static void GuiAsync(this Dispatcher dispatcher, Action action, DispatcherPriority priority)
+        {
+            if (dispatcher == null)
+                throw new ArgumentNullException("dispatcher");
+
+            if (action == null)
+                throw new ArgumentNullException("action");
+
+            if (dispatcher.CheckAccess())
+                action();
+            else
+                dispatcher.BeginInvoke(action, priority);
+        }
+
 
         /// <summary>
         /// Make source for Image WPF Control

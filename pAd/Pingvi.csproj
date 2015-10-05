@@ -40,6 +40,21 @@
     <ApplicationIcon>pingvi.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge.Imaging">
+      <HintPath>..\..\..\PROG\Aforge\Release\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging.Formats">
+      <HintPath>..\..\..\PROG\Aforge\Release\AForge.Imaging.Formats.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging.IPPrototyper">
+      <HintPath>..\..\..\PROG\Aforge\Release\AForge.Imaging.IPPrototyper.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Neuro">
+      <HintPath>..\..\..\PROG\Aforge\Release\AForge.Neuro.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video">
+      <HintPath>..\..\..\PROG\Aforge\Release\AForge.Video.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -86,6 +101,7 @@
     <Compile Include="HWindow.xaml.cs">
       <DependentUpon>HWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Stuff\LineLetter.cs" />
     <Compile Include="Stuff\PixelPoint.cs" />
     <Compile Include="Config\PlayerElementsConfig.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

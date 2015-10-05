@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using AForge.Imaging.ColorReduction;
+using AForge.Imaging.Filters;
+using Pingvi.Stuff;
 using PokerModel;
 
 
@@ -17,11 +20,13 @@ namespace Pingvi {
 
         private readonly ElementsConfig _elementsConfig;
         private Elements _elements;
+        public ElementsConfig ElementConfig;
 
         
         public ElementsManager() {
             _elementsConfig = new ElementsConfig();
             _elements = new Elements();
+            ElementConfig = _elementsConfig;
         }
 
         public void OnNewBitmap(Bitmap bmp) {
@@ -74,9 +79,9 @@ namespace Pingvi {
             #endregion
 
             //PLAYER STATISTICS
-
+            #region player stats
             //LEFT
-            //PREFLOP
+            //FIRST PANEL
             _elements.LeftPlayer.Stats.PF_BTN_STEAL =
                 FindNumberN(_elementsConfig.LeftPlayer.PF_BTN_STEAL_StatDigPosPoints,
                     _elementsConfig.LeftPlayer.PF_BTN_STEAL_StatDigitsRectMass,
@@ -87,94 +92,152 @@ namespace Pingvi {
                     _elementsConfig.LeftPlayer.PF_SB_STEAL_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
+             _elements.LeftPlayer.Stats.PF_OPENPUSH =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_OPENPUSH_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_OPENPUSH_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
             _elements.LeftPlayer.Stats.PF_LIMP_FOLD =
                 FindNumberN(_elementsConfig.LeftPlayer.PF_LIMP_FOLD_StatDigPosPoints,
                     _elementsConfig.LeftPlayer.PF_LIMP_FOLD_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.PF_FOLD_3BET =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_FOLD_3BET_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_FOLD_3BET_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.PF_LIMP_RERAISE =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_LIMP_RERAISE_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_LIMP_RERAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.PF_SB_3BET_VS_BTN =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_SB_3BET_VS_BTN_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_SB_3BET_VS_BTN_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-
-            _elements.LeftPlayer.Stats.PF_BB_3BET_VS_BTN =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_BB_3BET_VS_BTN_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_BB_3BET_VS_BTN_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-
-            _elements.LeftPlayer.Stats.PF_BB_3BET_VS_SB =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_BB_3BET_VS_SB_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_BB_3BET_VS_SB_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+             _elements.LeftPlayer.Stats.PF_FOLD_3BET =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_FOLD_3BET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_FOLD_3BET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.LeftPlayer.Stats.PF_BB_DEF_VS_SBSTEAL =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-            
-            _elements.LeftPlayer.Stats.PF_SB_OPENMINRAISE =
-               FindNumberN(_elementsConfig.LeftPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.PF_OPENPUSH =
-              FindNumberN(_elementsConfig.LeftPlayer.PF_OPENPUSH_StatDigPosPoints,
-                  _elementsConfig.LeftPlayer.PF_OPENPUSH_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.PF_RAISE_LIMPER =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_RAISE_LIMPER_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_RAISE_LIMPER_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.PF_SB_3BET_VS_BTN =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_SB_3BET_VS_BTN_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_SB_3BET_VS_BTN_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+          
+             _elements.LeftPlayer.Stats.PF_BB_3BET_VS_BTN =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_BB_3BET_VS_BTN_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_BB_3BET_VS_BTN_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.PF_BB_3BET_VS_SB =
+                FindNumberN(_elementsConfig.LeftPlayer.PF_BB_3BET_VS_SB_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.PF_BB_3BET_VS_SB_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
             
-            //LEFT FLOP
+            //SECOND PANEL
+
             _elements.LeftPlayer.Stats.F_CBET =
-               FindNumberN(_elementsConfig.LeftPlayer.F_CBET_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.F_CBET_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.LeftPlayer.F_CBET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.F_BET_LPOT =
-              FindNumberN(_elementsConfig.LeftPlayer.F_BET_LPOT_StatDigPosPoints,
-                  _elementsConfig.LeftPlayer.F_BET_LPOT_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.T_CBET =
+                FindNumberN(_elementsConfig.LeftPlayer.T_CBET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.T_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.F_CBET_FOLDRAISE =
-               FindNumberN(_elementsConfig.LeftPlayer.F_CBET_FOLDRAISE_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.F_CBET_FOLDRAISE_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.R_CBET =
+                FindNumberN(_elementsConfig.LeftPlayer.R_CBET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.R_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.LeftPlayer.Stats.F_FOLD_CBET =
-              FindNumberN(_elementsConfig.LeftPlayer.F_FOLD_CBET_StatDigPosPoints,
-                  _elementsConfig.LeftPlayer.F_FOLD_CBET_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.LeftPlayer.F_FOLD_CBET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_FOLD_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.F_RAISE_CBET =
-               FindNumberN(_elementsConfig.LeftPlayer.F_RAISE_CBET_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.F_RAISE_CBET_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.T_FOLD_CBET =
+                FindNumberN(_elementsConfig.LeftPlayer.T_FOLD_CBET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.T_FOLD_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.F_DONK =
-               FindNumberN(_elementsConfig.LeftPlayer.F_DONK_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.F_DONK_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.R_FOLD_CBET =
+                FindNumberN(_elementsConfig.LeftPlayer.R_FOLD_CBET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.R_FOLD_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.F_DONK_FOLDRAISE =
-               FindNumberN(_elementsConfig.LeftPlayer.F_DONK_FOLDRAISE_StatDigPosPoints,
-                   _elementsConfig.LeftPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.F_CBET_FOLDRAISE =
+                FindNumberN(_elementsConfig.LeftPlayer.F_CBET_FOLDRAISE_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_CBET_FOLDRAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.T_CBET_FOLDRAISE =
+                FindNumberN(_elementsConfig.LeftPlayer.T_CBET_FOLDRAISE_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.T_CBET_FOLDRAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.F_RAISE_BET =
+                FindNumberN(_elementsConfig.LeftPlayer.F_RAISE_BET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_RAISE_BET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.T_RAISE_BET =
+                FindNumberN(_elementsConfig.LeftPlayer.T_RAISE_BET_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.T_RAISE_BET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.F_LP_STEAL =
+                FindNumberN(_elementsConfig.LeftPlayer.F_LP_STEAL_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_LP_STEAL_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            
+            //THIRD PANEL
+            _elements.LeftPlayer.Stats.F_LP_FOLD_VS_STEAL =
+                FindNumberN(_elementsConfig.LeftPlayer.F_LP_FOLD_VS_STEAL_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_LP_FOLD_VS_STEAL_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.F_LP_FOLD_VS_XR =
+                FindNumberN(_elementsConfig.LeftPlayer.F_LP_FOLD_VS_XR_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_LP_FOLD_VS_XR_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.LeftPlayer.Stats.F_CHECKFOLD_OOP =
-              FindNumberN(_elementsConfig.LeftPlayer.F_CHECKFOLD_OOP_StatDigPosPoints,
-                  _elementsConfig.LeftPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.LeftPlayer.F_CHECKFOLD_OOP_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.LeftPlayer.Stats.F_LIMPPOT_FOLD_IP =
-              FindNumberN(_elementsConfig.LeftPlayer.F_LIMPPOT_FOLD_IP_StatDigPosPoints,
-                  _elementsConfig.LeftPlayer.F_LIMPPOT_FOLD_IP_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.LeftPlayer.Stats.T_SKIPF_FOLD_VS_T_PROBE =
+                FindNumberN(_elementsConfig.LeftPlayer.T_SKIPF_FOLD_VS_T_PROBE_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.T_SKIPF_FOLD_VS_T_PROBE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.R_SKIPT_FOLD_VS_R_PROBE =
+                FindNumberN(_elementsConfig.LeftPlayer.R_SKIPT_FOLD_VS_R_PROBE_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.R_SKIPT_FOLD_VS_R_PROBE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.F_DONK =
+                FindNumberN(_elementsConfig.LeftPlayer.F_DONK_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_DONK_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+             _elements.LeftPlayer.Stats.T_DONK =
+                FindNumberN(_elementsConfig.LeftPlayer.T_DONK_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.T_DONK_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.LeftPlayer.Stats.F_DONK_FOLDRAISE =
+                FindNumberN(_elementsConfig.LeftPlayer.F_DONK_FOLDRAISE_StatDigPosPoints,
+                    _elementsConfig.LeftPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
 
             //RIGHT
-            //PREFLOP
+            //FIRST PANEL
             _elements.RightPlayer.Stats.PF_BTN_STEAL =
                 FindNumberN(_elementsConfig.RightPlayer.PF_BTN_STEAL_StatDigPosPoints,
                     _elementsConfig.RightPlayer.PF_BTN_STEAL_StatDigitsRectMass,
@@ -185,9 +248,19 @@ namespace Pingvi {
                     _elementsConfig.RightPlayer.PF_SB_STEAL_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
+            _elements.RightPlayer.Stats.PF_OPENPUSH =
+               FindNumberN(_elementsConfig.RightPlayer.PF_OPENPUSH_StatDigPosPoints,
+                   _elementsConfig.RightPlayer.PF_OPENPUSH_StatDigitsRectMass,
+                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
             _elements.RightPlayer.Stats.PF_LIMP_FOLD =
                 FindNumberN(_elementsConfig.RightPlayer.PF_LIMP_FOLD_StatDigPosPoints,
                     _elementsConfig.RightPlayer.PF_LIMP_FOLD_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.PF_LIMP_RERAISE =
+                FindNumberN(_elementsConfig.RightPlayer.PF_LIMP_RERAISE_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.PF_LIMP_RERAISE_StatDigitsRectMass,
                     _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.PF_FOLD_3BET =
@@ -195,10 +268,20 @@ namespace Pingvi {
                    _elementsConfig.RightPlayer.PF_FOLD_3BET_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
+            _elements.RightPlayer.Stats.PF_BB_DEF_VS_SBSTEAL =
+                FindNumberN(_elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.PF_RAISE_LIMPER =
+                FindNumberN(_elementsConfig.RightPlayer.PF_RAISE_LIMPER_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.PF_RAISE_LIMPER_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
             _elements.RightPlayer.Stats.PF_SB_3BET_VS_BTN =
-               FindNumberN(_elementsConfig.RightPlayer.PF_SB_3BET_VS_BTN_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.PF_SB_3BET_VS_BTN_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.RightPlayer.PF_SB_3BET_VS_BTN_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.PF_SB_3BET_VS_BTN_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.PF_BB_3BET_VS_BTN =
                FindNumberN(_elementsConfig.RightPlayer.PF_BB_3BET_VS_BTN_StatDigPosPoints,
@@ -206,75 +289,109 @@ namespace Pingvi {
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.PF_BB_3BET_VS_SB =
-               FindNumberN(_elementsConfig.RightPlayer.PF_BB_3BET_VS_SB_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.PF_BB_3BET_VS_SB_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.RightPlayer.PF_BB_3BET_VS_SB_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.PF_BB_3BET_VS_SB_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.PF_BB_DEF_VS_SBSTEAL =
-               FindNumberN(_elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.PF_BB_DEF_VS_SBSTEAL_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            //SECOND PANEL
 
-            
-            _elements.RightPlayer.Stats.PF_SB_OPENMINRAISE =
-              FindNumberN(_elementsConfig.RightPlayer.PF_SB_OPENMINRAISE_StatDigPosPoints,
-                  _elementsConfig.RightPlayer.PF_SB_OPENMINRAISE_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-
-            _elements.RightPlayer.Stats.PF_OPENPUSH =
-           FindNumberN(_elementsConfig.RightPlayer.PF_OPENPUSH_StatDigPosPoints,
-               _elementsConfig.RightPlayer.PF_OPENPUSH_StatDigitsRectMass,
-               _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-            
-            //RIGHT FLOP
             _elements.RightPlayer.Stats.F_CBET =
-               FindNumberN(_elementsConfig.RightPlayer.F_CBET_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_CBET_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.RightPlayer.F_CBET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.F_BET_LPOT =
-              FindNumberN(_elementsConfig.RightPlayer.F_BET_LPOT_StatDigPosPoints,
-                  _elementsConfig.RightPlayer.F_BET_LPOT_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.RightPlayer.Stats.T_CBET =
+                FindNumberN(_elementsConfig.RightPlayer.T_CBET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.T_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.F_CBET_FOLDRAISE =
-               FindNumberN(_elementsConfig.RightPlayer.F_CBET_FOLDRAISE_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_CBET_FOLDRAISE_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.RightPlayer.Stats.R_CBET =
+                FindNumberN(_elementsConfig.RightPlayer.R_CBET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.R_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.F_FOLD_CBET =
-              FindNumberN(_elementsConfig.RightPlayer.F_FOLD_CBET_StatDigPosPoints,
-                  _elementsConfig.RightPlayer.F_FOLD_CBET_StatDigitsRectMass,
-                  _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.RightPlayer.F_FOLD_CBET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_FOLD_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.F_RAISE_CBET =
-               FindNumberN(_elementsConfig.RightPlayer.F_RAISE_CBET_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_RAISE_CBET_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+            _elements.RightPlayer.Stats.T_FOLD_CBET =
+                FindNumberN(_elementsConfig.RightPlayer.T_FOLD_CBET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.T_FOLD_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.R_FOLD_CBET =
+                FindNumberN(_elementsConfig.RightPlayer.R_FOLD_CBET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.R_FOLD_CBET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_CBET_FOLDRAISE =
+                FindNumberN(_elementsConfig.RightPlayer.F_CBET_FOLDRAISE_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_CBET_FOLDRAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.T_CBET_FOLDRAISE =
+                FindNumberN(_elementsConfig.RightPlayer.T_CBET_FOLDRAISE_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.T_CBET_FOLDRAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_RAISE_BET =
+                FindNumberN(_elementsConfig.RightPlayer.F_RAISE_BET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_RAISE_BET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.T_RAISE_BET =
+                FindNumberN(_elementsConfig.RightPlayer.T_RAISE_BET_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.T_RAISE_BET_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_LP_STEAL =
+                FindNumberN(_elementsConfig.RightPlayer.F_LP_STEAL_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_LP_STEAL_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            //THIRD PANEL
+            _elements.RightPlayer.Stats.F_LP_FOLD_VS_STEAL =
+                FindNumberN(_elementsConfig.RightPlayer.F_LP_FOLD_VS_STEAL_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_LP_FOLD_VS_STEAL_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_LP_FOLD_VS_XR =
+                FindNumberN(_elementsConfig.RightPlayer.F_LP_FOLD_VS_XR_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_LP_FOLD_VS_XR_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.F_CHECKFOLD_OOP =
+                FindNumberN(_elementsConfig.RightPlayer.F_CHECKFOLD_OOP_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.T_SKIPF_FOLD_VS_T_PROBE =
+                FindNumberN(_elementsConfig.RightPlayer.T_SKIPF_FOLD_VS_T_PROBE_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.T_SKIPF_FOLD_VS_T_PROBE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.R_SKIPT_FOLD_VS_R_PROBE =
+                FindNumberN(_elementsConfig.RightPlayer.R_SKIPT_FOLD_VS_R_PROBE_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.R_SKIPT_FOLD_VS_R_PROBE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.F_DONK =
-               FindNumberN(_elementsConfig.RightPlayer.F_DONK_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_DONK_StatDigitsRectMass,
+                FindNumberN(_elementsConfig.RightPlayer.F_DONK_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_DONK_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+
+            _elements.RightPlayer.Stats.T_DONK =
+               FindNumberN(_elementsConfig.RightPlayer.T_DONK_StatDigPosPoints,
+                   _elementsConfig.RightPlayer.T_DONK_StatDigitsRectMass,
                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
             _elements.RightPlayer.Stats.F_DONK_FOLDRAISE =
-               FindNumberN(_elementsConfig.RightPlayer.F_DONK_FOLDRAISE_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
+                FindNumberN(_elementsConfig.RightPlayer.F_DONK_FOLDRAISE_StatDigPosPoints,
+                    _elementsConfig.RightPlayer.F_DONK_FOLDRAISE_StatDigitsRectMass,
+                    _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
 
-            _elements.RightPlayer.Stats.F_CHECKFOLD_OOP =
-               FindNumberN(_elementsConfig.RightPlayer.F_CHECKFOLD_OOP_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_CHECKFOLD_OOP_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-
-            _elements.RightPlayer.Stats.F_LIMPPOT_FOLD_IP =
-               FindNumberN(_elementsConfig.RightPlayer.F_LIMPPOT_FOLD_IP_StatDigPosPoints,
-                   _elementsConfig.RightPlayer.F_LIMPPOT_FOLD_IP_StatDigitsRectMass,
-                   _elementsConfig.Common.StatsDigitsList, _elementsConfig.Common.StatsDigitsColor, false);
-
-
-
-           
+            #endregion
 
             //PLAYERs STATUS
             #region PlayerStatus
@@ -304,9 +421,14 @@ namespace Pingvi {
 
             //PLAYERS LINE
 
-            _elements.HeroPlayer.Line = ParseLine(_elementsConfig.Hero.LinePixelPositions);
-            _elements.LeftPlayer.Line = ParseLine(_elementsConfig.LeftPlayer.LinePixelPositions);
-            _elements.RightPlayer.Line = ParseLine(_elementsConfig.RightPlayer.LinePixelPositions);
+          //  _elements.HeroPlayer.Line = ParseLine(_elementsConfig.Hero.LinePixelPositions);
+         //   _elements.LeftPlayer.Line = ParseLine(_elementsConfig.LeftPlayer.LinePixelPositions);
+          //  _elements.RightPlayer.Line = ParseLine(_elementsConfig.RightPlayer.LinePixelPositions);
+
+
+            _elements.HeroPlayer.Line = ParseLineAlter(_elementsConfig.Hero.LineRectPosition);
+            _elements.LeftPlayer.Line = ParseLineAlter(_elementsConfig.LeftPlayer.LineRectPosition);
+            _elements.RightPlayer.Line = ParseLineAlter(_elementsConfig.RightPlayer.LineRectPosition);
             //CURRENT STACK
             #region CurrentPlayersStack
 
@@ -373,8 +495,11 @@ namespace Pingvi {
             }
         }
 
-        private Card FindCard(RectangleF cardPosition) {
-            var tbmp = TableBitmap.Clone(cardPosition, TableBitmap.PixelFormat);
+        private Card FindCard(Rectangle cardPosition) {
+
+            Crop filter = new Crop(cardPosition);
+            var tbmp = filter.Apply(TableBitmap);
+
             int num = (from cBmp in _elementsConfig.Common.DeckList
                 where BitmapHelper.BitmapsEquals(cBmp, tbmp)
                 select _elementsConfig.Common.DeckList.IndexOf(cBmp) + 1).FirstOrDefault();
@@ -389,7 +514,7 @@ namespace Pingvi {
         }
         
         private void FindBlinds() {
-            try {
+          //  try {
 
                 var digitColor = _elementsConfig.Common.Blinds.DigitsPointColor;
                 int p = 0;
@@ -414,10 +539,10 @@ namespace Pingvi {
                         break;
                     }
                 }
-            }
-            catch (Exception ex) {
-                Debug.WriteLine(ex.Message + "in Method FindBlinds");
-            }
+       //     }
+       //     catch (Exception ex) {
+       //         Debug.WriteLine(ex.Message + "in Method FindBlinds");
+        //    }
 
         }
         
@@ -450,7 +575,7 @@ namespace Pingvi {
         }
 
         private PlayerStatus CheckPlayerStatus(PixelPoint playerStatusHand, PixelPoint playerStatusGame, PixelPoint playerStatusSitOut) {
-            try {
+       //     try {
                 var statusPointColorSitOut = TableBitmap.GetPixel(playerStatusSitOut.X, playerStatusSitOut.Y);
                 var statusPointColorHand = TableBitmap.GetPixel(playerStatusHand.X, playerStatusHand.Y);
                 var statusPointColorGame = TableBitmap.GetPixel(playerStatusGame.X, playerStatusGame.Y);
@@ -459,11 +584,11 @@ namespace Pingvi {
                 if (statusPointColorHand == _elementsConfig.Common.InHandColor) return PlayerStatus.InHand;
                 if (statusPointColorGame == _elementsConfig.Common.InGameColor) return PlayerStatus.OutOfHand;
                 return PlayerStatus.OutOfGame;
-            }
-            catch (Exception ex) {
-                Debug.WriteLine(ex.Message + "CheckPlayerStatus");
-                return PlayerStatus.OutOfGame;
-            }
+     //       }
+       //     catch (Exception ex) {
+       //         Debug.WriteLine(ex.Message + "CheckPlayerStatus");
+       //         return PlayerStatus.OutOfGame;
+        //    }
         }
 
         private List<Player> CheckActivePlayers() {
@@ -615,10 +740,10 @@ namespace Pingvi {
             return HeroRelativePosition.None;
         }
 
-        private double FindNumber(PixelPoint[] numberCounterPoints, RectangleF[][] stackDigitsRactMass,
+        private double FindNumber(PixelPoint[] numberCounterPoints, Rectangle[][] stackDigitsRactMass,
             List<Bitmap> digitsBitmapsList, Color digPosPointColor, bool inBb) {
             //find stack or bet size
-            try {
+        //    try {
                 //how many digits in full number
                 Color nubmerCounterColor = digPosPointColor;
                 int numberCounts = 0;
@@ -628,7 +753,7 @@ namespace Pingvi {
                 }
                 if (numberCounts >= numberCounterPoints.Length) return 0.0;
 
-                RectangleF[] digitRectMass = stackDigitsRactMass[numberCounts];
+                Rectangle[] digitRectMass = stackDigitsRactMass[numberCounts];
                 //Debug.WriteLine("NUM: {0}", numberCounts);
                 if (digitRectMass.Length == 0) return 0.0;
                 //find numbers in stack
@@ -636,7 +761,14 @@ namespace Pingvi {
                 int a = 1;
 
                 for (int i = digitRectMass.Length - 1; i >= 0; i--) {
-                    var digitTableBmp = TableBitmap.Clone(digitRectMass[i], digitsBitmapsList[0].PixelFormat);
+
+
+                    //var digitTableBmp = TableBitmap.Clone(digitRectMass[i], digitsBitmapsList[0].PixelFormat);
+
+                    Crop filter = new Crop(digitRectMass[i]);
+                    //var digitTableBmp = TableBitmap.Clone(digitRectMass[i], digitsBitmapsList[0].PixelFormat);
+                    var digitTableBmp = filter.Apply(TableBitmap);
+
                     for (int j = 0; j <= 9; j++) {
                         if (!BitmapHelper.BitmapsEquals(digitTableBmp, digitsBitmapsList[j]))
                             continue;
@@ -658,19 +790,19 @@ namespace Pingvi {
                     return fullNumber; 
                 }
                
-            }
-            catch (Exception ex) {
-                Debug.WriteLine(ex.Message + "In method FindNUmber");
-                return 0.0;
-          }
+        //    }
+        //    catch (Exception ex) {
+         //       Debug.WriteLine(ex.Message + "In method FindNUmber");
+        //        return 0.0;
+         // }
         }
 
-        private double? FindNumberN(PixelPoint[] numberCounterPoints, RectangleF[][] stackDigitsRactMass,
+        private double? FindNumberN(PixelPoint[] numberCounterPoints, Rectangle[][] stackDigitsRactMass,
           List<Bitmap> digitsBitmapsList, Color digPosPointColor, bool inBb)
         {
             //find stack or bet size
-            try
-            {
+       //     try
+        //    {
                 //how many digits in full number
                 Color nubmerCounterColor = digPosPointColor;
                 int numberCounts = 0;
@@ -681,16 +813,19 @@ namespace Pingvi {
                 }
                 if (numberCounts >= numberCounterPoints.Length) return null;
 
-                RectangleF[] digitRectMass = stackDigitsRactMass[numberCounts];
+                Rectangle[] digitRectMass = stackDigitsRactMass[numberCounts];
                 //Debug.WriteLine("NUM: {0}", numberCounts);
                 if (digitRectMass.Length == 0) return 0.0;
                 //find numbers in stack
                 double fullNumber = 0.0;
                 int a = 1;
+            
+                for (int i = digitRectMass.Length - 1; i >= 0; i--) {
 
-                for (int i = digitRectMass.Length - 1; i >= 0; i--)
-                {
-                    var digitTableBmp = TableBitmap.Clone(digitRectMass[i], digitsBitmapsList[0].PixelFormat);
+                    Crop filter = new Crop(digitRectMass[i]);
+                    //var digitTableBmp = TableBitmap.Clone(digitRectMass[i], digitsBitmapsList[0].PixelFormat);
+                    var digitTableBmp = filter.Apply(TableBitmap);
+
                     for (int j = 0; j <= 9; j++)
                     {
                         if (!BitmapHelper.BitmapsEquals(digitTableBmp, digitsBitmapsList[j]))
@@ -710,12 +845,12 @@ namespace Pingvi {
                     return fullNumber;
                 }
 
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + "In method FindNUmber");
-                return null;
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+       //         Debug.WriteLine(ex.Message + "In method FindNUmber");
+       //         return null;
+       //     }
         }
 
         private double CountEffStack() {
@@ -734,19 +869,75 @@ namespace Pingvi {
 
         }
 
-        private string ParseLine(PixelPoint[] playerLinePixelPositions) {
-            StringBuilder sb =  new StringBuilder();
+  
 
-            foreach (var pixel in playerLinePixelPositions) {
-                foreach (var letter in _elementsConfig.Common.LineLettersDictionary) {
+
+
+        private string ParseLine(PixelPoint[] playerLinePixelPositions)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var pixel in playerLinePixelPositions)
+            {
+                foreach (var letter in _elementsConfig.Common.LineLettersDictionary)
+                {
                     if (TableBitmap.GetPixel(pixel.X, pixel.Y) == letter.Key)
                         sb.Append(letter.Value);
-                  //  break; //todo разобраться почему не рабобтает с брейк
+                    //  break; //todo разобраться почему не рабобтает с брейк
                 }
-                 
+
             }
 
             return sb.ToString();
+        }
+
+
+  
+        private string ParseLineAlter(Rectangle[] playerLineRectPositions){
+            StringBuilder sb =  new StringBuilder();
+
+            foreach (Rectangle t in playerLineRectPositions) {
+                
+                Crop filter = new Crop(t);
+                var letterTableBitmap = filter.Apply(TableBitmap);
+                letterTableBitmap = Grayscale.CommonAlgorithms.BT709.Apply(letterTableBitmap);
+                Threshold tfilter = new Threshold();
+                letterTableBitmap = tfilter.Apply(letterTableBitmap);
+
+                var numericBitmap = CountBitmap(letterTableBitmap);
+                var res = _elementsConfig.Common.LineNetwork.Compute(numericBitmap);
+                double letterNumer = res.Max();
+                int letterNumber = res.TakeWhile(r => r != letterNumer).Count();
+
+              
+              //  int letterNumber = res.TakeWhile(r => !(r > 0.3)).Count();
+
+
+                if (new LineLetter(letterNumber).Letter == "") break;
+                sb.Append(new LineLetter(letterNumber).Letter);
+
+
+            }
+  
+            return sb.ToString();
+        }
+
+
+        private double[] CountBitmap(Bitmap letterBitmap)
+        {
+            var res = new double[letterBitmap.Size.Width * letterBitmap.Size.Height];
+            int c = 0;
+            for (int i = 0; i < letterBitmap.Width; i++)
+            {
+                for (int j = 0; j < letterBitmap.Height; j++)
+                {
+                    var pixelColor = letterBitmap.GetPixel(i, j);
+                    if (pixelColor == Color.FromArgb(255, 255, 255, 255)) res[c] = 0.5;
+                    else res[c] = -0.5;
+                    c++;
+                }
+            }
+            return res;
         }
 
         private double CountBetToPot(double pot, double playerBet) {

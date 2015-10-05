@@ -30,6 +30,8 @@ namespace RangeCreator
         private int _decision2 = 0;
         private double _stat = 0;
         private string _rangePath;
+
+        private bool _isProbCountMode;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +39,7 @@ namespace RangeCreator
             _handsTextBoxArray = HandsMatrixGrid.Children.OfType<TextBlock>().ToArray();
             StatTextBox.TextChanged += StatTextBox_TextChanged;
 
-            CreateraRangeButtonClick(null, null);
+            CreateRangeButtonClick(null, null);
         }
 
         private void StatTextBox_TextChanged(object sender, RoutedEventArgs e) {
@@ -52,7 +54,7 @@ namespace RangeCreator
 
         
 
-        private void CreateraRangeButtonClick(object sender, RoutedEventArgs e) {
+        private void CreateRangeButtonClick(object sender, RoutedEventArgs e) {
             const string fullRange =
                 "22+, A2s+, K2s+, Q2s+, J2s+, T2s+, 92s+, 82s+, 72s+, 62s+, 52s+, 42s+, 32s, A2o+, K2o+, Q2o+, J2o+, T2o+, 92o+, 82o+, 72o+, 62o+, 52o+, 42o+, 32o";
             _range = new Range(RangeNameTextBox.Text, fullRange);
@@ -61,6 +63,8 @@ namespace RangeCreator
             {
                 ClearTbInMatrix(tb); 
             }
+
+            CountActions();
             
         }
 
@@ -183,6 +187,7 @@ namespace RangeCreator
                 hand.D2 = _decision2;
                 hand.S1 = _stat;
             }
+            CountActions();
         }
 
         private void SaveRangeButton_Click(object sender, RoutedEventArgs e)
@@ -206,6 +211,70 @@ namespace RangeCreator
               
                
             ColorHandsInMatrix();
+            CountActions();
+        }
+
+
+        private void CountActions() {
+            NoneLabel.Content = CountRangeDecisionPersents(1, 0);
+            NoneLabel2.Content = CountRangeDecisionPersents(2, 0);
+            FoldLabel.Content = CountRangeDecisionPersents(1, 1);
+            FoldLabel2.Content = CountRangeDecisionPersents(2, 1);
+            LimpLabel.Content = CountRangeDecisionPersents(1, 2);
+            LimpLabel2.Content = CountRangeDecisionPersents(2, 2);
+            OpenLabel.Content = CountRangeDecisionPersents(1, 3);
+            OpenLabel2.Content = CountRangeDecisionPersents(2, 3);
+            CallLabel.Content = CountRangeDecisionPersents(1, 4);
+            CallLabel2.Content = CountRangeDecisionPersents(2, 4);
+            Bet3Label.Content = CountRangeDecisionPersents(1, 5);
+            Bet3Label2.Content = CountRangeDecisionPersents(2, 5);
+            PushLabel.Content = CountRangeDecisionPersents(1, 6);
+            PushLabel2.Content = CountRangeDecisionPersents(2, 6);
+
+            if (FoldLabel.Content.ToString() != "-") {
+                VpipLabel.Content = 100 - Double.Parse(CountRangeDecisionPersents(1, 1));   
+            }
+            if (FoldLabel2.Content.ToString() != "-") {
+                VpipLabel2.Content = 100 - Double.Parse(CountRangeDecisionPersents(2, 1)); 
+            }
+            
+        }
+
+        private string CountRangeDecisionPersents(int decisionNumber, int decisionType) {
+            if (_range == null) return "-";
+            if (decisionNumber > 2 || decisionNumber < 1) return "-";
+            if (decisionType > 6 || decisionNumber < 0) return "-";
+
+            var rangeLength = _range.Hands.Count();
+
+            double handsCount;
+
+            if (_isProbCountMode) {
+                handsCount = decisionNumber == 1 ? _range.Hands.Where(hand => hand.D1 == decisionType).Sum(hand => hand.S1 / 100)
+                : _range.Hands.Where(hand => hand.D2 == decisionType).Sum(hand => 1 - hand.S1 / 100);
+            }
+            else {
+                handsCount = decisionNumber == 1 ? _range.Hands.Count(h => h.D1 == decisionType)
+               : _range.Hands.Count(h => h.D2 == decisionType);
+            }
+
+            return (handsCount/(double)rangeLength*100.0).ToString("F1");
+        }
+
+
+
+        private void SwitchModeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isProbCountMode == false) {
+                _isProbCountMode = true;
+                SwitchModeButton.Content = "ToDecMode";
+                CountActions();
+            }
+            else {
+                _isProbCountMode = false;
+                SwitchModeButton.Content = "ToProbMode";
+                CountActions();
+            }
         }
         
 

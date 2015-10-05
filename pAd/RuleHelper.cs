@@ -11,6 +11,21 @@ namespace Pingvi {
             return new RuleContext<T>(value);
         }
 
+
+        public static RuleContext<LineInfo> StatEqOrMoreThan(this RuleContext<LineInfo> context, double? stat,
+            double statValue) {
+            return context.If(l => stat != null && stat >= statValue);
+        }
+
+        public static RuleContext<LineInfo> StatEqOrLessThan(this RuleContext<LineInfo> context, double? stat,
+            int statValue) {
+            return context.If(l => stat != null && stat <= statValue);
+        }
+
+        public static RuleContext<LineInfo> StatIsNull(this RuleContext<LineInfo> context, double? stat) {
+            return context.If(l => stat == null);
+        }
+
       
 
         public static RuleContext<LineInfo> TourneyMultiplierEqOrMoreThan(this RuleContext<LineInfo> context, int value) {
@@ -76,7 +91,7 @@ namespace Pingvi {
         {
             return context.If(l => {
                 var oppStack = l.Elements.ActivePlayers.First(p => p.Name != l.Elements.HeroPlayer.Name).Stack;
-                return 2*oppStack >= l.Elements.HeroPlayer.Stack;
+                return oppStack/2 >= l.Elements.HeroPlayer.Stack;
             });
         }
 

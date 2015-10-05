@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AForge.Neuro;
 using Pingvi.Config;
 
 namespace Pingvi
@@ -11,11 +12,11 @@ namespace Pingvi
    public class CommonElementsConfig {
        
 
-        public RectangleF FlopCard1Rect { get; set; }
-        public RectangleF FlopCard2Rect { get; set; }
-        public RectangleF FlopCard3Rect { get; set; }
-        public RectangleF TurnCardRect { get; set; }
-        public RectangleF RiverCardRect { get; set; }
+        public Rectangle FlopCard1Rect { get; set; }
+        public Rectangle FlopCard2Rect { get; set; }
+        public Rectangle FlopCard3Rect { get; set; }
+        public Rectangle TurnCardRect { get; set; }
+        public Rectangle RiverCardRect { get; set; }
 
         public string DeckPath { get; set; }
         public List<Bitmap> DeckList { get; set; } 
@@ -25,8 +26,18 @@ namespace Pingvi
 
         public BlindsElementsConfig Blinds { get; set; }
 
+
+
+       //LINE
         public PixelPoint[] LinePixelPositions { get; set; }
         public Dictionary<Color, string> LineLettersDictionary { get; set; }
+
+
+
+       //alterline
+        public Rectangle[] LineRectPositions { get; set; }
+        public string LineNetworkPath { get; set; }
+        public ActivationNetwork LineNetwork { get; set; }
 
 
         //Colors
@@ -59,7 +70,7 @@ namespace Pingvi
         public Color PotDigitsColor { get; set; }
 
         public PixelPoint[] PotDigPosPoints { get; set; }
-        public RectangleF[][] PotDigitsRectMass { get; set; }
+        public Rectangle[][] PotDigitsRectMass { get; set; }
 
         public string BetDigitsPath { get; set; }
         public List<Bitmap> BetDigitsList { get; set; }

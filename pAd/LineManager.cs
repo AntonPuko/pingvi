@@ -274,7 +274,7 @@ namespace Pingvi {
             bool facingBet = CheckLineInLinesMass(compositeLine, facingBetMass);
             if(facingBet) return HeroFlopState.FacingBet;
             //FacingMissCbet
-            string[] facingMissCbetMass = {"RrfC|x|", "RfrC|x|", "frC|x|", "LrC|x", "RrC|x|"};
+            string[] facingMissCbetMass = {"RrfC|x|", "RfrC|x|", "frC|x|", "LrC|x", "RrC|x|",  "LrC|x|"};
             bool facingMissCbet = CheckLineInLinesMass(compositeLine, facingMissCbetMass);
             if(facingMissCbet) return HeroFlopState.FacingMissCbet;
             //FacingBetVsMissCbet
@@ -320,7 +320,7 @@ namespace Pingvi {
             bool delayCbet = CheckLineInLinesMass(compositeLine, delayCbetMass);
             if(delayCbet) return HeroTurnState.DelayCbet;;
             //BetAfterReraiseFlop
-            string[] betAfterReraiseFlopMass = {"rC|XbRc|", "rfC|XbRc|", "lX|XbRc|"};
+            string[] betAfterReraiseFlopMass = {"rC|XbRc|", "rfC|XbRc|", "lX|XbRc|", "Lx|bRc|x|"};
             bool betAfterReraiseFlop = CheckLineInLinesMass(compositeLine, betAfterReraiseFlopMass);
             if(betAfterReraiseFlop) return HeroTurnState.BetAfterReraiseFlop;
            
