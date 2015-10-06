@@ -69,7 +69,7 @@ namespace NeuralLineDetection
             _network = new ActivationNetwork( new BipolarSigmoidFunction(2.0), _inputs[0].Length, _outputs[0].Length);
 
             BackPropagationLearning teacher = new BackPropagationLearning(_network);
-            teacher.LearningRate = 0.1;
+            teacher.LearningRate = 0.05;
 
             int epoch = 1;
 

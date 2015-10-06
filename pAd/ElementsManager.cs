@@ -879,11 +879,11 @@ namespace Pingvi {
 
             foreach (var pixel in playerLinePixelPositions)
             {
-                foreach (var letter in _elementsConfig.Common.LineLettersDictionary)
+                foreach (var letter in _elementsConfig.Common.LineLettersColorDictionary)
                 {
                     if (TableBitmap.GetPixel(pixel.X, pixel.Y) == letter.Key)
                         sb.Append(letter.Value);
-                    //  break; //todo разобраться почему не рабобтает с брейк
+                  
                 }
 
             }
@@ -906,15 +906,12 @@ namespace Pingvi {
 
                 var numericBitmap = CountBitmap(letterTableBitmap);
                 var res = _elementsConfig.Common.LineNetwork.Compute(numericBitmap);
-                double letterNumer = res.Max();
-                int letterNumber = res.TakeWhile(r => r != letterNumer).Count();
-
-              
-              //  int letterNumber = res.TakeWhile(r => !(r > 0.3)).Count();
 
 
-                if (new LineLetter(letterNumber).Letter == "") break;
-                sb.Append(new LineLetter(letterNumber).Letter);
+                int letterNumber = Array.IndexOf(res, res.Max());
+                var letter = _elementsConfig.Common.LineLettersNumbersDictionary[letterNumber];
+                if (letter == "") break;
+                sb.Append(letter);
 
 
             }
@@ -922,21 +919,24 @@ namespace Pingvi {
             return sb.ToString();
         }
 
-
-        private double[] CountBitmap(Bitmap letterBitmap)
-        {
+        private double[] CountBitmap(Bitmap letterBitmap) {
+            UnsafeBitmap uBitmap = new UnsafeBitmap(letterBitmap);
+            uBitmap.LockBitmap();
             var res = new double[letterBitmap.Size.Width * letterBitmap.Size.Height];
             int c = 0;
             for (int i = 0; i < letterBitmap.Width; i++)
             {
                 for (int j = 0; j < letterBitmap.Height; j++)
                 {
-                    var pixelColor = letterBitmap.GetPixel(i, j);
-                    if (pixelColor == Color.FromArgb(255, 255, 255, 255)) res[c] = 0.5;
+                    PixelData pixelColor = uBitmap.GetPixel(i, j);
+
+                    if (pixelColor.red == 255 && pixelColor.green == 255
+                        && pixelColor.blue == 255) res[c] = 0.5;
                     else res[c] = -0.5;
                     c++;
                 }
             }
+            uBitmap.Dispose();
             return res;
         }
 

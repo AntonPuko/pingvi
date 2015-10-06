@@ -34,7 +34,7 @@ namespace Pingvi
            // vmTableCatcher.CatchVmScreen();
          //   vmTableCatcher.NewTableBitmap += OnNewBitmap;
           //  vmTableCatcher.Start();
-            _screenTableManager.NewBitmap += OnNewBitmap;
+            _screenTableManager.NewTableBitmap += OnNewBitmap;
             _screenTableManager.Start();
 
         }

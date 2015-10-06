@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Pingvi.TableCatchers;
 using PokerModel;
 using Color = System.Windows.Media.Color;
 
@@ -21,19 +22,22 @@ namespace Pingvi
     /// </summary>
     public partial class HWindow : Window {
 
-        private ScreenTableManager _tableManager; //for making screenshot
-        private Bitmap _tableBitmap;
+        private ITableCatcher _tableCather;
+
 
         public Action MakeScreenShotClick;
 
-        public HWindow() {
-            InitializeComponent();
-         
+        public HWindow(ITableCatcher tableCatcher)
+        {
+            _tableCather = tableCatcher;
+            InitializeComponent(); 
+        }
+
+        protected override void OnClosed(EventArgs e) {
+            _tableCather.Stop();
         }
 
 
-
-      
         public void OnNewDecisionInfo(DecisionInfo decisionInfo) {
       
            

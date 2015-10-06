@@ -115,7 +115,11 @@
     <Compile Include="DecisionManager.cs" />
     <Compile Include="RuleContext.cs" />
     <Compile Include="RuleHelper.cs" />
-    <Compile Include="TableCatchers\ScreenTableManager.cs" />
+    <Compile Include="Stuff\UnsafeBitmap.cs" />
+    <Compile Include="TableCatchers\AForgeTableCatcher.cs" />
+    <Compile Include="TableCatchers\ITableCatcher.cs" />
+    <Compile Include="TableCatchers\ScreenShotTableCatcher.cs" />
+    <Compile Include="TableCatchers\_oldScreenTableManager.cs" />
     <Compile Include="TableCatchers\_old_RemoteTableCatcher.cs" />
     <Compile Include="TableCatchers\_old_TableManager.cs" />
     <Compile Include="TableCatchers\_old_VmTableCatcher.cs" />

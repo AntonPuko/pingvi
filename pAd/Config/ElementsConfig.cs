@@ -197,14 +197,14 @@ namespace Pingvi {
             
 
             //LINE
-            Common.LineLettersDictionary = new Dictionary<Color, string>();
-            Common.LineLettersDictionary.Add(Color.FromArgb(128, 128, 128), "|");
-            Common.LineLettersDictionary.Add(Color.FromArgb(64, 128, 128), "f");
-            Common.LineLettersDictionary.Add(Color.FromArgb(192, 192, 192), "x");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 255), "l");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 255, 0), "c");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 64), "b");
-            Common.LineLettersDictionary.Add(Color.FromArgb(255, 128, 128), "r");
+            Common.LineLettersColorDictionary = new Dictionary<Color, string>();
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(128, 128, 128), "|");
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(64, 128, 128), "f");
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(192, 192, 192), "x");
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(255, 128, 255), "l");
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(255, 255, 0), "c");
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(255, 128, 64), "b");
+            Common.LineLettersColorDictionary.Add(Color.FromArgb(255, 128, 128), "r");
 
             Common.LinePixelPositions = new[] {
                 new PixelPoint(7, 8), new PixelPoint(16, 8), new PixelPoint(25, 8), new PixelPoint(33, 8),
@@ -220,6 +220,18 @@ namespace Pingvi {
             //LINE ALTER
             Common.LineNetworkPath = @"Data\network.net";
             Common.LineNetwork = Network.Load(Common.LineNetworkPath) as ActivationNetwork;
+
+            Common.LineLettersNumbersDictionary = new Dictionary<int, string>();
+            Common.LineLettersNumbersDictionary.Add(0, "f");
+            Common.LineLettersNumbersDictionary.Add(1, "l");
+            Common.LineLettersNumbersDictionary.Add(2, "r");
+            Common.LineLettersNumbersDictionary.Add(3, "c");
+            Common.LineLettersNumbersDictionary.Add(4, "x");
+            Common.LineLettersNumbersDictionary.Add(5, "b");
+            Common.LineLettersNumbersDictionary.Add(6, "|");
+            Common.LineLettersNumbersDictionary.Add(7, "");
+            Common.LineLettersNumbersDictionary.Add(8, "");
+       
 
             Common.LineRectPositions = new[] {
                 new Rectangle(4,10,7,9), new Rectangle(12,10,7,9), new Rectangle(20,10,7,9), new Rectangle(28,10,7,9),

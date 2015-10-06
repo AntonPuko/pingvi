@@ -30,7 +30,7 @@ namespace Pingvi
 
        //LINE
         public PixelPoint[] LinePixelPositions { get; set; }
-        public Dictionary<Color, string> LineLettersDictionary { get; set; }
+        public Dictionary<Color, string> LineLettersColorDictionary { get; set; }
 
 
 
@@ -38,6 +38,10 @@ namespace Pingvi
         public Rectangle[] LineRectPositions { get; set; }
         public string LineNetworkPath { get; set; }
         public ActivationNetwork LineNetwork { get; set; }
+
+        public Dictionary<int,string> LineLettersNumbersDictionary { get; set; } 
+
+       
 
 
         //Colors

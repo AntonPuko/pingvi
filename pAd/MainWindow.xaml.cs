@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Threading;
 using AForge.Imaging.Filters;
 using Pingvi.Stuff;
+using Pingvi.TableCatchers;
 using PokerModel;
 
 
@@ -12,26 +13,34 @@ namespace Pingvi
 {
     public partial class MainWindow : Window {
 
-        private readonly ScreenTableManager _tableManager;
+        private readonly ITableCatcher _tableCatcher;
         private Bitmap _tableBitmap;
 
-        private ElementsManager elementManager;
+        private readonly ElementsManager elementManager;
 
         public MainWindow() {
-            _tableManager = new ScreenTableManager();
-            var hudWindow = new HWindow();
+
+            var tablePositionRect = new Rectangle(2150, 20, 800, 574);
+            int tableFrameInterval = 100;
+            TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(300);
+            string screenShotsPath = @"P:\screens\";
+
+            _tableCatcher = new AForgeTableCatcher(tablePositionRect, tableFrameInterval, screenShotsPath);
+        
+            var hudWindow = new HWindow(_tableCatcher);
             elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
 
-            hudWindow.MakeScreenShotClick += _tableManager.MakeScreenShot;
-            _tableManager.NewBitmap += OnNewTableBitmap;
+            hudWindow.MakeScreenShotClick += _tableCatcher.MakeScreenShot;
+
+        //    _tableCatcher.NewTableBitmap += OnNewTableBitmap;
 
 
 
-         
 
-            _tableManager.NewBitmap += elementManager.OnNewBitmap;
+
+            _tableCatcher.NewTableBitmap += elementManager.OnNewBitmap;
             elementManager.NewElements += lineManager.OnNewElements;
             lineManager.NewLineInfo += decisionManager.OnNewLineInfo;
 
@@ -63,7 +72,7 @@ namespace Pingvi
 
 
         private void StartButton_Click(object sender, RoutedEventArgs e) {
-            _tableManager.Start();
+            _tableCatcher.Start();
         }
 
      

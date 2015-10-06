@@ -98,7 +98,7 @@ namespace Pingvi
                     
                     _timer.IsEnabled = false;
                     CleartStats();
-                    Thread.Sleep(5000);
+                    Thread.Sleep(10000);
                     _timer.IsEnabled = true;
                     return;
                 }
