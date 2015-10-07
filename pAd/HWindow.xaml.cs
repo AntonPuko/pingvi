@@ -35,6 +35,7 @@ namespace Pingvi
 
         protected override void OnClosed(EventArgs e) {
             _tableCather.Stop();
+            
         }
 
 

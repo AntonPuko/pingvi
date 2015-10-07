@@ -88,9 +88,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DecisionInfo.cs" />
-    <Compile Include="HHImporter\HandHistory.cs" />
     <Compile Include="LineInfo.cs" />
     <Compile Include="LineManager.cs" />
+    <Compile Include="LWindow.xaml.cs">
+      <DependentUpon>LWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RWindow.xaml.cs">
       <DependentUpon>RWindow.xaml</DependentUpon>
     </Compile>
@@ -123,14 +125,12 @@
     <Compile Include="TableCatchers\_old_RemoteTableCatcher.cs" />
     <Compile Include="TableCatchers\_old_TableManager.cs" />
     <Compile Include="TableCatchers\_old_VmTableCatcher.cs" />
-    <Compile Include="TesterWindow.xaml.cs">
-      <DependentUpon>TesterWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VmWindow.xaml.cs">
-      <DependentUpon>VmWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Stuff\WINAPI.cs" />
     <Page Include="HWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,14 +147,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TesterWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VmWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,6 +186,10 @@
     <Resource Include="pingvi.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

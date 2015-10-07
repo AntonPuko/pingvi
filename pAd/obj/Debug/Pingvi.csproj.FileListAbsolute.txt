@@ -4,9 +4,7 @@ P:\Dropbox\pAd\pAd\bin\Debug\Pingvi.pdb
 P:\Dropbox\pAd\pAd\bin\Debug\PokerModel.dll
 P:\Dropbox\pAd\pAd\bin\Debug\PokerModel.pdb
 P:\Dropbox\pAd\pAd\obj\Debug\MainWindow.baml
-P:\Dropbox\pAd\pAd\obj\Debug\VmWindow.baml
 P:\Dropbox\pAd\pAd\obj\Debug\MainWindow.g.cs
-P:\Dropbox\pAd\pAd\obj\Debug\VmWindow.g.cs
 P:\Dropbox\pAd\pAd\obj\Debug\App.g.cs
 P:\Dropbox\pAd\pAd\obj\Debug\Pingvi_MarkupCompile.cache
 P:\Dropbox\pAd\pAd\obj\Debug\Pingvi.g.resources
@@ -34,8 +32,6 @@ P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi_MarkupCompile.cache
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.g.resources
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.Properties.Resources.resources
 P:\Dropbox\pad-NewRangeModel\pAd\obj\Debug\Pingvi.csproj.GenerateResource.Cache
-P:\Dropbox\pAd\pAd\obj\Debug\TesterWindow.baml
-P:\Dropbox\pAd\pAd\obj\Debug\TesterWindow.g.cs
 P:\Dropbox\pAd\pAd\bin\Debug\Npgsql.dll
 P:\Dropbox\pAd\pAd\bin\Debug\Mono.Security.dll
 P:\Dropbox\pAd\pAd\bin\Debug\Npgsql.xml
@@ -66,3 +62,5 @@ P:\Dropbox\pAd\pAd\bin\Debug\AForge.Neuro.dll
 P:\Dropbox\pAd\pAd\bin\Debug\AForge.Genetic.dll
 P:\Dropbox\pAd\pAd\bin\Debug\AForge.Neuro.xml
 P:\Dropbox\pAd\pAd\bin\Debug\AForge.Genetic.xml
+P:\Dropbox\pAd\pAd\obj\Debug\LWindow.baml
+P:\Dropbox\pAd\pAd\obj\Debug\LWindow.g.cs

@@ -19,10 +19,11 @@ namespace Pingvi
         private readonly ElementsManager elementManager;
 
         public MainWindow() {
-
+            
             var tablePositionRect = new Rectangle(2150, 20, 800, 574);
+            // var tablePositionRect = new Rectangle(230, 20, 800, 574);
             int tableFrameInterval = 100;
-            TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(300);
+           // TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(100);
             string screenShotsPath = @"P:\screens\";
 
             _tableCatcher = new AForgeTableCatcher(tablePositionRect, tableFrameInterval, screenShotsPath);
@@ -34,9 +35,23 @@ namespace Pingvi
 
             hudWindow.MakeScreenShotClick += _tableCatcher.MakeScreenShot;
 
-        //    _tableCatcher.NewTableBitmap += OnNewTableBitmap;
+            _tableCatcher.NewTableBitmap += OnNewTableBitmap;
 
 
+
+            //CREATE LINE WINDOWS
+            var heroLineWindow = new LWindow(0) {Top = 410, Left = 2360};
+            lineManager.NewLineInfo += li => Dispatcher.BeginInvoke((Action)delegate { heroLineWindow.OnNewLineInfo(li); });
+            heroLineWindow.Show();
+
+            var leftLineWindow = new LWindow(1) { Top = 120, Left = 2150 };
+            lineManager.NewLineInfo += li => Dispatcher.BeginInvoke((Action)delegate { leftLineWindow.OnNewLineInfo(li); });
+            leftLineWindow.Show();
+
+            var rightLineWindow = new LWindow(2) { Top = 120, Left = 2380 };
+            lineManager.NewLineInfo += li => Dispatcher.BeginInvoke((Action)delegate { rightLineWindow.OnNewLineInfo(li); });
+            rightLineWindow.Show();
+          
 
 
 

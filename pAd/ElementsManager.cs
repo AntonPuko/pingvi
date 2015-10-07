@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using AForge.Imaging.ColorReduction;
 using AForge.Imaging.Filters;
 using Pingvi.Stuff;
@@ -420,15 +421,15 @@ namespace Pingvi {
             _elements.HeroPlayer.RelativePosition = CheckHeroRelativePosition();
 
             //PLAYERS LINE
-
-          //  _elements.HeroPlayer.Line = ParseLine(_elementsConfig.Hero.LinePixelPositions);
-         //   _elements.LeftPlayer.Line = ParseLine(_elementsConfig.LeftPlayer.LinePixelPositions);
-          //  _elements.RightPlayer.Line = ParseLine(_elementsConfig.RightPlayer.LinePixelPositions);
+            
+        //    _elements.HeroPlayer.Line = ParseLine(_elementsConfig.Hero.LinePixelPositions);
+       //     _elements.LeftPlayer.Line = ParseLine(_elementsConfig.LeftPlayer.LinePixelPositions);
+       //     _elements.RightPlayer.Line = ParseLine(_elementsConfig.RightPlayer.LinePixelPositions);
 
 
             _elements.HeroPlayer.Line = ParseLineAlter(_elementsConfig.Hero.LineRectPosition);
             _elements.LeftPlayer.Line = ParseLineAlter(_elementsConfig.LeftPlayer.LineRectPosition);
-            _elements.RightPlayer.Line = ParseLineAlter(_elementsConfig.RightPlayer.LineRectPosition);
+           _elements.RightPlayer.Line = ParseLineAlter(_elementsConfig.RightPlayer.LineRectPosition);
             //CURRENT STACK
             #region CurrentPlayersStack
 
@@ -709,9 +710,6 @@ namespace Pingvi {
             }
         }
 
-  
-
-
         private HeroRelativePosition CheckHeroRelativePosition() {
             //TODO переписать покрасивше
             if(_elements.HeroPlayer.Status == PlayerStatus.OutOfHand) return HeroRelativePosition.None;
@@ -869,12 +867,10 @@ namespace Pingvi {
 
         }
 
-  
-
-
-
         private string ParseLine(PixelPoint[] playerLinePixelPositions)
         {
+     //       Stopwatch sw = new Stopwatch();
+      //      sw.Start();
             StringBuilder sb = new StringBuilder();
 
             foreach (var pixel in playerLinePixelPositions)
@@ -887,13 +883,13 @@ namespace Pingvi {
                 }
 
             }
-
+        //    MessageBox.Show(sw.ElapsedTicks.ToString());
             return sb.ToString();
         }
 
-
-  
-        private string ParseLineAlter(Rectangle[] playerLineRectPositions){
+        private string ParseLineAlter(Rectangle[] playerLineRectPositions) {
+         //   Stopwatch sw = new Stopwatch();
+         //   sw.Start();
             StringBuilder sb =  new StringBuilder();
 
             foreach (Rectangle t in playerLineRectPositions) {
@@ -915,6 +911,7 @@ namespace Pingvi {
 
 
             }
+        //    MessageBox.Show(sw.ElapsedTicks.ToString());
   
             return sb.ToString();
         }

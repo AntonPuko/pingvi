@@ -238,10 +238,9 @@ namespace Pingvi {
                 new Rectangle(36,10,7,9), new Rectangle(44,10,7,9), new Rectangle(52,10,7,9), new Rectangle(60,10,7,9),
                 new Rectangle(68,10,7,9), new Rectangle(74,10,7,9)};
 
-            Hero.LineRectPosition = CountPlayerLineRectPositions(Common.LineRectPositions, new PixelPoint(462, 405));
-            LeftPlayer.LineRectPosition = CountPlayerLineRectPositions(Common.LineRectPositions, new PixelPoint(225, 82));
-            RightPlayer.LineRectPosition = CountPlayerLineRectPositions(Common.LineRectPositions, new PixelPoint(467, 82));
-
+            LeftPlayer.LineRectPosition = CountPlayerLineRectPositions(Common.LineRectPositions, new PixelPoint(347, 54));
+            RightPlayer.LineRectPosition = CountPlayerLineRectPositions(Common.LineRectPositions, new PixelPoint(347, 84));
+            Hero.LineRectPosition = CountPlayerLineRectPositions(Common.LineRectPositions, new PixelPoint(347, 114));
 
             //STATISTICS
             Common.StatsDigitsPath = @"Data\StatsDigits\";
