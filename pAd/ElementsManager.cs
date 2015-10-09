@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows;
-using AForge.Imaging.ColorReduction;
+
 using AForge.Imaging.Filters;
 using Pingvi.Stuff;
 using PokerModel;
@@ -397,8 +395,8 @@ namespace Pingvi {
             //PLAYERs STATUS
             #region PlayerStatus
 
-            _elements.HeroPlayer.Status = CheckPlayerStatus(_elementsConfig.Hero.PlayerStatusPointHand,
-                _elementsConfig.Hero.PlayerStatusPointGame, _elementsConfig.Hero.PlayerStatusPointSitOut);
+            _elements.HeroPlayer.Status = PlayerStatus.InHand; //CheckPlayerStatus(_elementsConfig.Hero.PlayerStatusPointHand,
+                //_elementsConfig.Hero.PlayerStatusPointGame, _elementsConfig.Hero.PlayerStatusPointSitOut);  // always in hand
             _elements.LeftPlayer.Status = CheckPlayerStatus(_elementsConfig.LeftPlayer.PlayerStatusPointHand,
                 _elementsConfig.LeftPlayer.PlayerStatusPointGame, _elementsConfig.LeftPlayer.PlayerStatusPointSitOut);
             _elements.RightPlayer.Status = CheckPlayerStatus(_elementsConfig.RightPlayer.PlayerStatusPointHand,
@@ -741,7 +739,7 @@ namespace Pingvi {
         private double FindNumber(PixelPoint[] numberCounterPoints, Rectangle[][] stackDigitsRactMass,
             List<Bitmap> digitsBitmapsList, Color digPosPointColor, bool inBb) {
             //find stack or bet size
-        //    try {
+            try {
                 //how many digits in full number
                 Color nubmerCounterColor = digPosPointColor;
                 int numberCounts = 0;
@@ -777,30 +775,30 @@ namespace Pingvi {
                     a = a*10;
                 }
                 if (inBb) {
-                   return fullNumber/_elements.BbAmt;
-                   // if (digitRectMass[digitRectMass.Length - 1].X - 11 == digitRectMass[digitRectMass.Length - 2].X &&
-                   //     fullNumber.ToString().Length >1) {
-                   //     return fullNumber / 10;
-                   // }
-                   // return fullNumber / 10;
+                 //  return fullNumber/_elements.BbAmt;
+                    if (digitRectMass[digitRectMass.Length - 1].X - 11 == digitRectMass[digitRectMass.Length - 2].X &&
+                        fullNumber.ToString().Length >1) {
+                        return fullNumber / 10;
+                    }
+                    return fullNumber / 10;
                 }
                 else {
                     return fullNumber; 
                 }
                
-        //    }
-        //    catch (Exception ex) {
-         //       Debug.WriteLine(ex.Message + "In method FindNUmber");
-        //        return 0.0;
-         // }
+            }
+            catch (Exception ex) {
+                Debug.WriteLine(ex.Message + "In method FindNUmber");
+                return 0.0;
+          }
         }
 
         private double? FindNumberN(PixelPoint[] numberCounterPoints, Rectangle[][] stackDigitsRactMass,
           List<Bitmap> digitsBitmapsList, Color digPosPointColor, bool inBb)
         {
             //find stack or bet size
-       //     try
-        //    {
+            try
+            {
                 //how many digits in full number
                 Color nubmerCounterColor = digPosPointColor;
                 int numberCounts = 0;
@@ -843,12 +841,12 @@ namespace Pingvi {
                     return fullNumber;
                 }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-       //         Debug.WriteLine(ex.Message + "In method FindNUmber");
-       //         return null;
-       //     }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "In method FindNUmber");
+                return null;
+            }
         }
 
         private double CountEffStack() {
@@ -893,21 +891,26 @@ namespace Pingvi {
             StringBuilder sb =  new StringBuilder();
 
             foreach (Rectangle t in playerLineRectPositions) {
-                
-                Crop filter = new Crop(t);
-                var letterTableBitmap = filter.Apply(TableBitmap);
-                letterTableBitmap = Grayscale.CommonAlgorithms.BT709.Apply(letterTableBitmap);
-                Threshold tfilter = new Threshold();
-                letterTableBitmap = tfilter.Apply(letterTableBitmap);
+                try {
+                    Crop filter = new Crop(t);
+                    var letterTableBitmap = filter.Apply(TableBitmap);
+                    letterTableBitmap = Grayscale.CommonAlgorithms.BT709.Apply(letterTableBitmap);
+                    Threshold tfilter = new Threshold();
+                    letterTableBitmap = tfilter.Apply(letterTableBitmap);
 
-                var numericBitmap = CountBitmap(letterTableBitmap);
-                var res = _elementsConfig.Common.LineNetwork.Compute(numericBitmap);
+                    var numericBitmap = CountBitmap(letterTableBitmap);
+                    var res = _elementsConfig.Common.LineNetwork.Compute(numericBitmap);
 
 
-                int letterNumber = Array.IndexOf(res, res.Max());
-                var letter = _elementsConfig.Common.LineLettersNumbersDictionary[letterNumber];
-                if (letter == "") break;
-                sb.Append(letter);
+                    int letterNumber = Array.IndexOf(res, res.Max());
+                    var letter = _elementsConfig.Common.LineLettersNumbersDictionary[letterNumber];
+                    if (letter == "") break;
+                    sb.Append(letter);
+                }
+                catch (Exception ex) {
+                    Debug.Write(ex.Message + " in ParseAlterLine()");
+                }
+            
 
 
             }

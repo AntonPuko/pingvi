@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AForge.Imaging.Filters;
 using AForge.Video;
 
 namespace Pingvi.TableCatchers
@@ -55,10 +56,18 @@ namespace Pingvi.TableCatchers
         }
 
         private void OnStreamNewFrame(object sender, NewFrameEventArgs eventArgs) {
-            _tableBitmap = eventArgs.Frame;
-            if (NewTableBitmap != null) {
-                NewTableBitmap(_tableBitmap);
+            try {
+                _tableBitmap = eventArgs.Frame;
+                if (NewTableBitmap != null)
+                {
+                    NewTableBitmap(_tableBitmap);
+                }
             }
+            catch (Exception ex) {
+                Debug.WriteLine(ex.Message +" in MAkeScreenShot()");
+            }
+            
+        
         }
     }
 }

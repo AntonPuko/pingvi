@@ -163,6 +163,7 @@ namespace Pingvi
 
         private void MakeButton_Click(object sender, RoutedEventArgs e) {
 
+            /*
             var rightPRects =  elementManager.ElementConfig.RightPlayer.LineRectPosition;
             var leftPRects = elementManager.ElementConfig.LeftPlayer.LineRectPosition;
             var heroPRects = elementManager.ElementConfig.Hero.LineRectPosition;
@@ -198,6 +199,24 @@ namespace Pingvi
 
 
             }
+             */
+
+            Rectangle[] rects = new[] {
+                elementManager.ElementConfig.Common.FlopCard1Rect,
+                elementManager.ElementConfig.Common.FlopCard2Rect,
+                elementManager.ElementConfig.Common.FlopCard3Rect,
+                elementManager.ElementConfig.Common.TurnCardRect,
+                elementManager.ElementConfig.Common.RiverCardRect,
+            };
+
+            const string path = @"P:\screens\cards\";
+
+            foreach (var r in rects) {
+                Crop cropfilter = new Crop(r);
+                var bmp = cropfilter.Apply(_tableBitmap);
+                bmp.Save(path + Array.IndexOf(rects,r) + ".bmp");
+            }
+
 
         }
     }

@@ -33,24 +33,33 @@ namespace Pingvi {
             //pot
             Common.PotDigitsPath = @"Data\PotDigits\";
             Common.PotDigitsColor = Color.FromArgb(0, 0, 0);
+            /* POT IN CHIPS
             Common.PotDigPosPoints = new[] { new PixelPoint(409, 38), new PixelPoint(406, 38), new PixelPoint(400, 38) };
             Common.PotDigitsRectMass = new[] {
                 new[] {new Rectangle(413, 39, 6, 6), new Rectangle(420, 39, 6, 6)},
                 new[] {new Rectangle(410, 39, 6, 6), new Rectangle(417, 39, 6, 6), new Rectangle(424, 39, 6, 6),},
                 new[] { new Rectangle(404, 39, 6, 6), new Rectangle(415, 39, 6, 6), new Rectangle(422, 39, 6, 6),
                     new Rectangle(429, 39, 6, 6)} };
+             */
+            Common.PotDigPosPoints = new[] { new PixelPoint(404, 38), new PixelPoint(407, 38), new PixelPoint(409, 38), new PixelPoint(413, 38) };
+            Common.PotDigitsRectMass = new[] {
+                new[] {new Rectangle(408,39,6,6),new Rectangle(415,39,6,6), new Rectangle(426,39,6,6)},
+                new[] {new Rectangle(411,39,6,6),new Rectangle(422,39,6,6)},
+                new[] {new Rectangle(413,39,6,6),  new Rectangle(420,39,6,6),new Rectangle(427,39,6,6), },
+                new[] {new Rectangle(417,39,6,6), new Rectangle(424,39,6,6)}
+            };
 
             //CARDS
             Common.DeckPath = @"Data\Deck\";
             
-            Common.FlopCard1Rect = new Rectangle(253, 175, 7, 4);
-            Common.FlopCard2Rect = new Rectangle(317, 175, 7, 4);
-            Common.FlopCard3Rect = new Rectangle(381, 175, 7, 4);
-            Common.TurnCardRect = new Rectangle(445, 175, 7, 4);
-            Common.RiverCardRect = new Rectangle(509, 175, 7, 4);
+            Common.FlopCard1Rect = new Rectangle(281, 189, 32, 2);
+            Common.FlopCard2Rect = new Rectangle(335, 189, 32, 2);
+            Common.FlopCard3Rect = new Rectangle(389, 189, 32, 2);
+            Common.TurnCardRect = new Rectangle(443, 189, 32, 2);
+            Common.RiverCardRect = new Rectangle(497, 189, 32, 2);
 
-            Hero.Card1Rect = new Rectangle(378, 368, 7, 4);
-            Hero.Card2Rect = new Rectangle(393, 372, 7, 4);
+            Hero.Card1Rect = new Rectangle(368, 375, 32, 2);
+            Hero.Card2Rect = new Rectangle(418, 375, 32, 2);
             //TODO Init LEftPlayer and RightPlayer cards if needs to
 
             //BUTTON
@@ -127,6 +136,7 @@ namespace Pingvi {
             Common.StackDigitsPath = @"Data\StackDigits\";
             Common.StackDigitsColor = Color.FromArgb(192, 192, 192);
 
+            /* STAK IN CHIPS
             Hero.StackDigPosPoints = new[] { new PixelPoint(393, 455), new PixelPoint(389, 455), new PixelPoint(384, 455) };
             Hero.StackDigitsRectMass = new[] {
              new[] {new Rectangle(397, 456, 6, 6), new Rectangle(404, 456, 6, 6) }, 
@@ -147,12 +157,34 @@ namespace Pingvi {
              new[] {new Rectangle(740, 131, 6, 6), new Rectangle(747, 131, 6, 6), new Rectangle(754, 131, 6, 6)},
              new[] {new Rectangle(735, 131, 6, 6), new Rectangle(747, 131, 6, 6),
                     new Rectangle(754, 131, 6, 6), new Rectangle(761, 131, 6, 6)}};
-            
+             */
+
+            Hero.StackDigPosPoints = new[] { new PixelPoint(396, 455), new PixelPoint(393, 455), new PixelPoint(391, 455), new PixelPoint(387, 455) };
+            Hero.StackDigitsRectMass = new[] {
+                new[] {new Rectangle(400, 456, 6, 6), new Rectangle(406, 456, 6, 6)},
+                new[] {new Rectangle(397, 456, 6, 6), new Rectangle(404, 456, 6, 6), new Rectangle(411, 456, 6, 6)},
+                new[] {new Rectangle(395, 456, 6, 6), new Rectangle(406, 456, 6, 6)},
+                new[] {new Rectangle(391, 456, 6, 6), new Rectangle(398, 456, 6, 6), new Rectangle(409, 456, 6, 6)}};
+
+            LeftPlayer.StackDigPosPoints = new[] { new PixelPoint(54, 130), new PixelPoint(51, 130), new PixelPoint(49, 130), new PixelPoint(45, 130) };
+            LeftPlayer.StackDigitsRectMass = new[] {
+             new[] {new Rectangle(58, 131, 6, 6), new Rectangle(64, 131, 6, 6) }, 
+             new[] {new Rectangle(55, 131, 6, 6), new Rectangle(62, 131, 6, 6), new Rectangle(69, 131, 6, 6) }, 
+             new[] {new Rectangle(53, 131, 6, 6), new Rectangle(64, 131, 6, 6) }, 
+             new[] {new Rectangle(49, 131, 6, 6), new Rectangle(56, 131, 6, 6), new Rectangle(67, 131, 6, 6) }};
+
+            RightPlayer.StackDigPosPoints = new[] { new PixelPoint(743, 130), new PixelPoint(740, 130), new PixelPoint(738, 130), new PixelPoint(734, 130) };
+            RightPlayer.StackDigitsRectMass = new[] {
+                new[] {new Rectangle(747, 131, 6, 6), new Rectangle(753, 131, 6, 6) },
+                new[] {new Rectangle(744, 131, 6, 6), new Rectangle(751, 131, 6, 6), new Rectangle(768, 131, 6, 6)},
+                new[] {new Rectangle(742, 131, 6, 6), new Rectangle(753, 131, 6, 6) },
+                new[] {new Rectangle(738, 131, 6, 6), new Rectangle(745, 131, 6, 6), new Rectangle(756, 131, 6, 6)}};
 
             //PLAYER BET
             Common.BetDigitsPath = @"Data\BetDigits\";
             Common.BetDigitsColor = Color.FromArgb(255, 246, 207);
 
+            /* BETS IN CHIPS
             Hero.BetDigPosPoints = new[] {
                 new PixelPoint(452, 320), new PixelPoint(446, 320), new PixelPoint(440, 320),
                 new PixelPoint(429, 320), new PixelPoint(423, 320), new PixelPoint(417, 320),
@@ -194,7 +226,71 @@ namespace Pingvi {
                 new[] {new Rectangle(572, 195, 6, 6), new Rectangle(581, 195, 6, 6), new Rectangle(587, 195, 6, 6), new Rectangle(593, 195, 6, 6)},
                 new[] {new Rectangle(549, 195, 6, 6), new Rectangle(558, 195, 6, 6), new Rectangle(564, 195, 6, 6),new Rectangle(570, 195, 6, 6)},
                 new[] {new Rectangle(526, 195, 6, 6), new Rectangle(535, 195, 6, 6), new Rectangle(541, 195, 6, 6),new Rectangle(547, 195, 6, 6)},};
-            
+            */
+
+            Hero.BetDigPosPoints = new[] {
+                new PixelPoint(449, 320),new PixelPoint(443, 320), new PixelPoint(440, 320), new PixelPoint(434, 320),
+                new PixelPoint(426, 320),new PixelPoint(420, 320), new PixelPoint(417, 320), new PixelPoint(411, 320),
+                new PixelPoint(403, 320),new PixelPoint(397, 320), new PixelPoint(394, 320), new PixelPoint(388, 320)};
+
+            Hero.BetDigitsRectMass = new[] {
+                new[] {new Rectangle(431, 320, 6, 6), new Rectangle(437, 320, 6, 6), new Rectangle(446, 320, 6, 6)},
+                new[] {new Rectangle(431, 320, 6, 6), new Rectangle(440, 320, 6, 6) },
+                new[] {new Rectangle(431, 320, 6, 6), new Rectangle(437, 320, 6, 6), new Rectangle(443, 320, 6, 6)},
+                new[] {new Rectangle(431, 320, 6, 6),new Rectangle(437, 320, 6, 6) },
+
+                new[] {new Rectangle(408, 320, 6, 6), new Rectangle(414, 320, 6, 6), new Rectangle(423, 320, 6, 6)},
+                new[] {new Rectangle(408, 320, 6, 6), new Rectangle(417, 320, 6, 6) },
+                new[] {new Rectangle(408, 320, 6, 6), new Rectangle(414, 320, 6, 6), new Rectangle(420, 320, 6, 6)},
+                new[] {new Rectangle(408, 320, 6, 6),new Rectangle(414, 320, 6, 6) },
+
+                new[] {new Rectangle(385, 320, 6, 6), new Rectangle(391, 320, 6, 6), new Rectangle(400, 320, 6, 6)},
+                new[] {new Rectangle(385, 320, 6, 6), new Rectangle(394, 320, 6, 6) },
+                new[] {new Rectangle(385, 320, 6, 6), new Rectangle(391, 320, 6, 6), new Rectangle(397, 320, 6, 6)},
+                new[] {new Rectangle(385, 320, 6, 6),new Rectangle(391, 320, 6, 6) }};
+
+            LeftPlayer.BetDigPosPoints = new[] {
+                new PixelPoint(257, 188), new PixelPoint(251, 188),new PixelPoint(248, 188), new PixelPoint(242, 188),
+                new PixelPoint(234, 188), new PixelPoint(228, 188),new PixelPoint(225, 188), new PixelPoint(219, 188), 
+                new PixelPoint(211, 188), new PixelPoint(205, 188), new PixelPoint(202, 188), new PixelPoint(196, 188)};
+
+            LeftPlayer.BetDigitsRectMass = new[] {
+                new[] {new Rectangle(239, 188, 6, 6), new Rectangle(245, 188, 6, 6), new Rectangle(254, 188, 6, 6)},
+                new[] {new Rectangle(239, 188, 6, 6), new Rectangle(248, 188, 6, 6)},
+                new[] {new Rectangle(239, 188, 6, 6), new Rectangle(245, 188, 6, 6), new Rectangle(251, 188, 6, 6)},
+                new[] {new Rectangle(239, 188, 6, 6), new Rectangle(245, 188, 6, 6)},
+
+                new[] {new Rectangle(216, 188, 6, 6), new Rectangle(222, 188, 6, 6), new Rectangle(231, 188, 6, 6)},
+                new[] {new Rectangle(216, 188, 6, 6), new Rectangle(225, 188, 6, 6)},
+                new[] {new Rectangle(216, 188, 6, 6), new Rectangle(222, 188, 6, 6), new Rectangle(228, 188, 6, 6)},
+                new[] {new Rectangle(216, 188, 6, 6), new Rectangle(222, 188, 6, 6)},
+
+                new[] {new Rectangle(193, 188, 6, 6), new Rectangle(199, 188, 6, 6), new Rectangle(208, 188, 6, 6)},
+                new[] {new Rectangle(193, 188, 6, 6), new Rectangle(202, 188, 6, 6)},
+                new[] {new Rectangle(193, 188, 6, 6), new Rectangle(199, 188, 6, 6), new Rectangle(205, 188, 6, 6)},
+                new[] {new Rectangle(193, 188, 6, 6),new Rectangle(199, 188, 6, 6), }};
+
+
+            RightPlayer.BetDigPosPoints = new[] {
+                new PixelPoint(589, 194), new PixelPoint(583, 194), new PixelPoint(580, 194), new PixelPoint(574, 194),
+                new PixelPoint(566, 194), new PixelPoint(560, 194), new PixelPoint(557, 194), new PixelPoint(551, 194),
+                new PixelPoint(543, 194), new PixelPoint(537, 194), new PixelPoint(533, 194), new PixelPoint(528, 194)};
+
+            RightPlayer.BetDigitsRectMass = new[] {
+                new[] {new Rectangle(593, 195, 6, 6), new Rectangle(599, 195, 6, 6), },
+                new[] {new Rectangle(587, 195, 6, 6), new Rectangle(593, 195, 6, 6), new Rectangle(599, 195, 6, 6),},
+                new[] {new Rectangle(584, 195, 6, 6), new Rectangle(593, 195, 6, 6), },
+                new[] {new Rectangle(578, 195, 6, 6), new Rectangle(584, 195, 6, 6), new Rectangle(593, 195, 6, 6),},
+                new[] {new Rectangle(570, 195, 6, 6), new Rectangle(576, 195, 6, 6), },
+                new[] {new Rectangle(564, 195, 6, 6), new Rectangle(570, 195, 6, 6), new Rectangle(576, 195, 6, 6),},
+                new[] {new Rectangle(561, 195, 6, 6), new Rectangle(570, 195, 6, 6), },
+                new[] {new Rectangle(555, 195, 6, 6), new Rectangle(561, 195, 6, 6), new Rectangle(570, 195, 6, 6),},
+                new[] {new Rectangle(547, 195, 6, 6), new Rectangle(553, 195, 6, 6), },
+                new[] {new Rectangle(541, 195, 6, 6), new Rectangle(547, 195, 6, 6), new Rectangle(553, 195, 6, 6),},
+                new[] {new Rectangle(538, 195, 6, 6), new Rectangle(547, 195, 6, 6), },
+                new[] {new Rectangle(532, 195, 6, 6), new Rectangle(538, 195, 6, 6), new Rectangle(547, 195, 6, 6),}};
+
+
 
             //LINE
             Common.LineLettersColorDictionary = new Dictionary<Color, string>();
