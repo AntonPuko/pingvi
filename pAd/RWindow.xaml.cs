@@ -67,24 +67,15 @@ namespace Pingvi
 
 
         private void OnTimerTick(object sender, EventArgs e) {
-
-            
             int tagCount = 0;
             double evBB100 = 0;
             double result = 0;
             double rake = 0;
             double rakeback = 0;
 
-
-            
-
-
             string dtNow = DateTime.Now.Hour < 5 ? DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
-
-
             string statsURL = "http://localhost:8001/query?q=select StatTourneyCount, StatEVBigBlindsPer100 from stats where HandTimestamp > {d \"" + dtNow + " 05:00:00 AM\"}";
             string statsJson;
-
             string tourneysURL = "http://localhost:8001/query?q=select BuyInPlusRake, RakeInCents, WinningsInCents from TOURNAMENTS where FirstHandTimestamp > {d \"" + dtNow + " 05:00:00 AM\"} and FinishPosition > 0 ";
             string tourneysJson;
 
@@ -95,11 +86,7 @@ namespace Pingvi
                     tourneysJson = webClient.DownloadString(tourneysURL);
                 }
                 catch  {
-                    
-                    _timer.IsEnabled = false;
                     CleartStats();
-                    Thread.Sleep(10000);
-                    _timer.IsEnabled = true;
                     return;
                 }
                 
@@ -147,7 +134,7 @@ namespace Pingvi
 
             const double vppMultiplicator = 5.5;
             const double bonusFormula = 3.5/40000*600;
-            rakeback = rake * vppMultiplicator * bonusFormula * _usdRubExRate;
+            rakeback = rake*vppMultiplicator;// * bonusFormula * _usdRubExRate;
 
             
             

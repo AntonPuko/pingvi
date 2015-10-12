@@ -434,27 +434,33 @@ namespace Pingvi {
             double? BTN_STEAL = null;
             var buttonOpener = lineInfo.Elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button);
             if (buttonOpener != null) BTN_STEAL = buttonOpener.Stats.PF_BTN_STEAL;
-            const double defaultBTN_STEAL = 45;
+            const double defaultBTN_STEAL = 35;
             if (BTN_STEAL == null) BTN_STEAL = defaultBTN_STEAL;
 
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen)
                 .OppBetSizeMinRaise()
-                .EffectiveStackBetween(3, 20)
-                .Do(
-                    l =>
-                        CheckDecision(heroHand, "SB_VS_BTN_OPEN_3max_0-20bb", lineInfo.Elements.SbBtnEffStack,
-                            PlMode.Less));
+                .EffectiveStackSbVsBtnBetween(0, 15)
+                .Do(l => CheckDecision(heroHand, "SB_VS_BTN_OPEN_0-15", lineInfo.Elements.EffectiveStack, PlMode.Less));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen)
                 .OppBetSizeMinRaise()
-                .EffectiveStackBetween(20, 100)
-                .Do(
-                    l =>
-                        CheckDecision(heroHand, "SB_VS_BTN_OPEN_3max_20-100bb", lineInfo.Elements.SbBtnEffStack,
-                            PlMode.Less));
+                .EffectiveStackSbVsBtnBetween(15, 17)
+                .Do(l => CheckDecision(heroHand, "SB_VS_BTN_OPEN_15-17BB", BTN_STEAL, PlMode.More));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .OppBetSizeMinRaise()
+                .EffectiveStackSbVsBtnBetween(17, 20)
+                .Do(l => CheckDecision(heroHand, "SB_VS_BTN_OPEN_17-20BB", BTN_STEAL, PlMode.More));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .OppBetSizeMinRaise()
+                .EffectiveStackSbVsBtnBetween(20, 100)
+                .Do(l => CheckDecision(heroHand, "SB_VS_BTN_OPEN_20-100BB", BTN_STEAL, PlMode.More));
 
 
             //SB LIMP DEF VS BB RAISE

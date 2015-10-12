@@ -274,7 +274,7 @@ namespace Pingvi {
             RightPlayer.BetDigPosPoints = new[] {
                 new PixelPoint(589, 194), new PixelPoint(583, 194), new PixelPoint(580, 194), new PixelPoint(574, 194),
                 new PixelPoint(566, 194), new PixelPoint(560, 194), new PixelPoint(557, 194), new PixelPoint(551, 194),
-                new PixelPoint(543, 194), new PixelPoint(537, 194), new PixelPoint(533, 194), new PixelPoint(528, 194)};
+                new PixelPoint(543, 194), new PixelPoint(537, 194), new PixelPoint(534, 194), new PixelPoint(528, 194)};
 
             RightPlayer.BetDigitsRectMass = new[] {
                 new[] {new Rectangle(593, 195, 6, 6), new Rectangle(599, 195, 6, 6), },

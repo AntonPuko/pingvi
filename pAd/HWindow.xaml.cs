@@ -653,6 +653,10 @@ namespace Pingvi
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
         //   WINAPI.UnregisterHotKey(this);
+
+            foreach (var p in Process.GetProcesses()) {
+                if (p.ProcessName == "Pingvi") p.Kill();
+            }
         }
 
        // private uint WM_KEYUP = 0x0101;
