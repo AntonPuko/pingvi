@@ -1597,7 +1597,7 @@
         <Name>Td</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AcJc" D1="6" D2="6" S1="0">
+    <RangeHand Name="AcJc" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>13</Value>
         <Suit>Clubs</Suit>
@@ -1611,7 +1611,7 @@
         <Name>Jc</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AsJs" D1="6" D2="6" S1="0">
+    <RangeHand Name="AsJs" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>26</Value>
         <Suit>Spades</Suit>
@@ -1625,7 +1625,7 @@
         <Name>Js</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AhJh" D1="6" D2="6" S1="0">
+    <RangeHand Name="AhJh" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>39</Value>
         <Suit>Hearts</Suit>
@@ -1639,7 +1639,7 @@
         <Name>Jh</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AdJd" D1="6" D2="6" S1="0">
+    <RangeHand Name="AdJd" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>52</Value>
         <Suit>Diamonds</Suit>
@@ -1653,7 +1653,7 @@
         <Name>Jd</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AcQc" D1="6" D2="6" S1="0">
+    <RangeHand Name="AcQc" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>13</Value>
         <Suit>Clubs</Suit>
@@ -1667,7 +1667,7 @@
         <Name>Qc</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AsQs" D1="6" D2="6" S1="0">
+    <RangeHand Name="AsQs" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>26</Value>
         <Suit>Spades</Suit>
@@ -1681,7 +1681,7 @@
         <Name>Qs</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AhQh" D1="6" D2="6" S1="0">
+    <RangeHand Name="AhQh" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>39</Value>
         <Suit>Hearts</Suit>
@@ -1695,7 +1695,7 @@
         <Name>Qh</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AdQd" D1="6" D2="6" S1="0">
+    <RangeHand Name="AdQd" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>52</Value>
         <Suit>Diamonds</Suit>
@@ -1709,7 +1709,7 @@
         <Name>Qd</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AcKc" D1="6" D2="6" S1="0">
+    <RangeHand Name="AcKc" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>13</Value>
         <Suit>Clubs</Suit>
@@ -1723,7 +1723,7 @@
         <Name>Kc</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AsKs" D1="6" D2="6" S1="0">
+    <RangeHand Name="AsKs" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>26</Value>
         <Suit>Spades</Suit>
@@ -1737,7 +1737,7 @@
         <Name>Ks</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AhKh" D1="6" D2="6" S1="0">
+    <RangeHand Name="AhKh" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>39</Value>
         <Suit>Hearts</Suit>
@@ -1751,7 +1751,7 @@
         <Name>Kh</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="AdKd" D1="6" D2="6" S1="0">
+    <RangeHand Name="AdKd" D1="5" D2="5" S1="0">
       <FirstCard>
         <Value>52</Value>
         <Suit>Diamonds</Suit>

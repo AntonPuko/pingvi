@@ -310,49 +310,49 @@ namespace Pingvi {
             #region SB OPEN VS BB 3MAX
             //SB VS BB OPEN 3MAX
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(7, 9)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_7-9BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(9, 11)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_9-11BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(11, 13)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_11-13BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(13, 15)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_13-15BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(15, 17)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_15-17BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(17, 19)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_17-19BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(19, 22)
@@ -362,7 +362,7 @@ namespace Pingvi {
             //SB OPEN VS BB  22-100 3MAX
                 //VS SMALL BB DEF && BIG 3BET
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(22, 100)
@@ -371,7 +371,7 @@ namespace Pingvi {
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_22-100BB_VS_SMALL_BBDEF_BIG3BET", _probRand, PlMode.Less));
                 //VS SMALL BB DEF && BIG 3BET
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(22, 100)
@@ -379,7 +379,7 @@ namespace Pingvi {
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_22-100BB_VS_SMALL_BBDEF_BIG3BET", _probRand, PlMode.Less));
                  //VS BIG BB DEF && BIG 3BET
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(22, 100)
@@ -388,7 +388,7 @@ namespace Pingvi {
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_22-100BB_VS_SMALL_BBDEF_BIG3BET", _probRand, PlMode.Less));
                  //VS BIG BB DEF && BIG 3BET
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(22, 100)
@@ -396,7 +396,7 @@ namespace Pingvi {
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_22-100BB_VS_BIGBBDEF_UNK3BET", _probRand, PlMode.Less));
                  //UNK
             lineInfo.StartRule()
-                .HeroPosition(PlayerPosition.Sb)
+                .HeroPosition(PlayerPosition.Sb).IsHU()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(22, 100)
