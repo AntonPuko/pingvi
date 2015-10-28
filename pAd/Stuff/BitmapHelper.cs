@@ -10,25 +10,25 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using AForge.Imaging;
 
 
 namespace Pingvi
 {
     public  static class BitmapHelper
     {
-        public static void GuiAsync(this Dispatcher dispatcher, Action action, DispatcherPriority priority)
-        {
-            if (dispatcher == null)
-                throw new ArgumentNullException("dispatcher");
 
-            if (action == null)
-                throw new ArgumentNullException("action");
-
-            if (dispatcher.CheckAccess())
-                action();
-            else
-                dispatcher.BeginInvoke(action, priority);
+        public static bool BitmapsEqualsUnmanaged(UnmanagedImage image1, UnmanagedImage image2) {
+            if (image1.Height*image1.Width != image2.Height*image2.Width) return false;
+            for (int x = 0; x < image1.Width; x++) {
+                for (int y = 0; y < image1.Height; y++) {
+                    if (image1.GetPixel(x, y) != image2.GetPixel(x, y))  return false;
+                }
+            }
+            return true;
         }
+    
+
 
 
         /// <summary>
@@ -108,6 +108,68 @@ namespace Pingvi
             }
             
         }
+
+
+        public static double[] ProcessUnsafeBitmapIntoDoubleArray(Bitmap procBitmap) {
+            double[] res = new double[procBitmap.Size.Width * procBitmap.Size.Height];
+
+            unsafe {
+                BitmapData bitmapData = procBitmap.LockBits(new Rectangle(0, 0, procBitmap.Width, procBitmap.Height), ImageLockMode.ReadWrite, procBitmap.PixelFormat);
+                int bytesPerPixel = System.Drawing.Bitmap.GetPixelFormatSize(procBitmap.PixelFormat) / 8;
+                int heightInPixels = bitmapData.Height;
+                int widthInBytes = bitmapData.Width * bytesPerPixel;
+                byte* ptrFirstPixel = (byte*)bitmapData.Scan0;
+
+                int c = 0;
+                for (int y = 0; y < heightInPixels; y++)
+                {
+                    byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
+                    for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
+                    {
+                        int Blue = currentLine[x];
+                        int Green = currentLine[x + 1];
+                        int Red = currentLine[x + 2];
+
+                        if (Blue == 255 && Green == 255 && Red == 255) res[c] = 0.5;
+                        else res[c] = -0.5;
+                        c++;
+                    }
+                }
+
+                procBitmap.Dispose();
+            }
+            return res;
+        }
+        public static double[] ProcessUnsafeBitmapIntoDoubleParallel(Bitmap procBitmap)
+        {
+            double[] res = new double[procBitmap.Size.Width * procBitmap.Size.Height];
+
+            unsafe
+            {
+                BitmapData bitmapData = procBitmap.LockBits(new Rectangle(0, 0, procBitmap.Width, procBitmap.Height), ImageLockMode.ReadWrite, procBitmap.PixelFormat);
+                int bytesPerPixel = System.Drawing.Bitmap.GetPixelFormatSize(procBitmap.PixelFormat) / 8;
+                int heightInPixels = bitmapData.Height;
+                int widthInBytes = bitmapData.Width * bytesPerPixel;
+                byte* ptrFirstPixel = (byte*)bitmapData.Scan0;
+
+                int c = 0;
+                Parallel.For(0, heightInPixels, y => {
+                    byte* currentLine = ptrFirstPixel + (y*bitmapData.Stride);
+                    for (int x = 0; x < widthInBytes; x = x + bytesPerPixel) {
+                        int Blue = currentLine[x];
+                        int Green = currentLine[x + 1];
+                        int Red = currentLine[x + 2];
+
+                        if (Blue == 255 && Green == 255 && Red == 255) res[c] = 0.5;
+                        else res[c] = -0.5;
+                        c++;
+                    }
+                });
+
+                procBitmap.Dispose();
+            }
+            return res;
+        } 
      
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using System.Drawing;
+using AForge.Imaging;
 using AForge.Neuro;
 using Color = System.Drawing.Color;
 
@@ -671,57 +672,56 @@ namespace Pingvi {
         
         //TODO сделать универсальный метод для инициализации листов.
         private void InitDeckList() {
-            Common.DeckList = new List<Bitmap>();
+             Common.DeckListUnmanaged = new List<UnmanagedImage>();
             for (int i = 1; i <= 52; i++) {
                 Bitmap bmp = new Bitmap(String.Format(@"{0}{1}.bmp",Common.DeckPath, i));
-                Common.DeckList.Add(bmp);
+                UnmanagedImage unmanagedBmp = UnmanagedImage.FromManagedImage(bmp);
+                Common.DeckListUnmanaged.Add(unmanagedBmp);
             }
         }
 
         
         private void InitBlindsList() {
-            Common.Blinds.DigitsList = new List<Bitmap>();
+            Common.Blinds.DigitsListUnmanaged = new List<UnmanagedImage>();
             for (int i = 0; i <= 5; i++) {
                 Bitmap bmpActive = new Bitmap(String.Format(@"{0}{1}.bmp", Common.Blinds.DigitsPath, i));
-                Common.Blinds.DigitsList.Add(bmpActive);
+                UnmanagedImage bmpUnmanaged = UnmanagedImage.FromManagedImage(bmpActive);
+                Common.Blinds.DigitsListUnmanaged.Add(bmpUnmanaged);
             }
         }
          
 
         private void InitStackDigitsList() {
-            Common.StackDigitsList = new List<Bitmap>();
+            Common.StackDigitsListUnmanaged = new List<UnmanagedImage>();
             for (int i = 0; i <= 9; i++) {
                 Bitmap bmp = new Bitmap(String.Format(@"{0}{1}.bmp", Common.StackDigitsPath, i));
-                Common.StackDigitsList.Add(bmp);
+                Common.StackDigitsListUnmanaged.Add(UnmanagedImage.FromManagedImage(bmp));
             }
         }
 
         private void InitBetDigitsList() {
-            Common.BetDigitsList = new List<Bitmap>();
+            Common.BetDigitsListUnmanaged = new List<UnmanagedImage>();
             for (int i = 0; i <= 9; i++) {
                 Bitmap bmp = new Bitmap(String.Format(@"{0}{1}.bmp", Common.BetDigitsPath, i));
-                Common.BetDigitsList.Add(bmp);
+                Common.BetDigitsListUnmanaged.Add(UnmanagedImage.FromManagedImage(bmp));
             }
            
         }
 
-        private void InitPotDigitsList()
-        {
-            Common.PotDigitsList = new List<Bitmap>();
+        private void InitPotDigitsList() {
+            Common.PotDigitsListUnmanaged = new List<UnmanagedImage>();
             for (int i = 0; i <= 9; i++) {
                 Bitmap bmp = new Bitmap(String.Format(@"{0}{1}.bmp", Common.PotDigitsPath, i));
-                Common.PotDigitsList.Add(bmp);
+                Common.PotDigitsListUnmanaged.Add(UnmanagedImage.FromManagedImage(bmp));
             }
 
         }
 
-        private void InitStatsDigitsList()
-        {
-            Common.StatsDigitsList = new List<Bitmap>();
-            for (int i = 0; i <= 9; i++)
-            {
+        private void InitStatsDigitsList() {
+            Common.StatsDigitsListUnmanaged = new List<UnmanagedImage>();
+            for (int i = 0; i <= 9; i++) {
                 Bitmap bmp = new Bitmap(String.Format(@"{0}{1}.bmp", Common.StatsDigitsPath, i));
-                Common.StatsDigitsList.Add(bmp);
+                Common.StatsDigitsListUnmanaged.Add(UnmanagedImage.FromManagedImage(bmp));
             }
 
         }

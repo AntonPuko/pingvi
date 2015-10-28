@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using AForge.Imaging;
 
 
 namespace Pingvi.TableCatchers
@@ -8,6 +9,7 @@ namespace Pingvi.TableCatchers
         
         
         event Action<Bitmap> NewTableBitmap;
+        event Action<UnmanagedImage> NewTableImage;
         void Start();
         void Stop();
         void MakeScreenShot();

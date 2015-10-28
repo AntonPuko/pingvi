@@ -32,9 +32,9 @@ namespace Pingvi
             InitializeComponent();
         }
 
-        private Action _dbOpenAction;
+       // private Action _dbOpenAction;
         private DispatcherTimer _timer;
-        private NpgsqlConnection _npgSqlConnection;
+       // private NpgsqlConnection _npgSqlConnection;
 
         private bool _isResultRefreshing = false;
 
@@ -133,7 +133,7 @@ namespace Pingvi
 
 
             const double vppMultiplicator = 5.5;
-            const double bonusFormula = 3.5/40000*600;
+           // const double bonusFormula = 3.5/40000*600;
             rakeback = rake*vppMultiplicator;// * bonusFormula * _usdRubExRate;
 
             
@@ -156,7 +156,7 @@ namespace Pingvi
           
         }
 
-        private bool isVisible = false;
+       // private bool isVisible = false;
 
        
 

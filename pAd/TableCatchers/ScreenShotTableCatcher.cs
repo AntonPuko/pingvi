@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using AForge.Imaging;
 
 namespace Pingvi.TableCatchers {
     public class ScreenShotTableCatcher : ITableCatcher {
@@ -14,6 +15,7 @@ namespace Pingvi.TableCatchers {
         private readonly string _screenShotsPath;
         
         public event Action<Bitmap> NewTableBitmap;
+        public event Action<UnmanagedImage> NewTableImage;
 
 
         public ScreenShotTableCatcher(Rectangle tableRect, TimeSpan timeInterval, string scrShootsPath) {
@@ -61,9 +63,14 @@ namespace Pingvi.TableCatchers {
                 }
 
                 _tableBitmap = bmp;
+                var _uTimage = UnmanagedImage.FromManagedImage(bmp);
                 if (NewTableBitmap != null)
                 {
                     NewTableBitmap(bmp);
+                }
+
+                if (NewTableImage != null) {
+                    NewTableImage(_uTimage);
                 }
 
             }

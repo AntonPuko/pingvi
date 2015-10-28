@@ -22,11 +22,12 @@ namespace Pingvi
             
             var tablePositionRect = new Rectangle(2150, 20, 800, 574);
             // var tablePositionRect = new Rectangle(230, 20, 800, 574);
-            int tableFrameInterval = 100;
+            int tableFrameInterval = 150;
            // TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(100);
             string screenShotsPath = @"P:\screens\";
 
             _tableCatcher = new AForgeTableCatcher(tablePositionRect, tableFrameInterval, screenShotsPath);
+           // _tableCatcher = new ScreenShotTableCatcher(tablePositionRect, tableFrameIntervalSpan, screenShotsPath);
         
             var hudWindow = new HWindow(_tableCatcher);
             elementManager = new ElementsManager();
@@ -35,7 +36,7 @@ namespace Pingvi
 
             hudWindow.MakeScreenShotClick += _tableCatcher.MakeScreenShot;
 
-            _tableCatcher.NewTableBitmap += OnNewTableBitmap;
+           // _tableCatcher.NewTableBitmap += OnNewTableBitmap;
 
 
 
@@ -55,7 +56,7 @@ namespace Pingvi
 
 
 
-            _tableCatcher.NewTableBitmap += elementManager.OnNewBitmap;
+            _tableCatcher.NewTableImage += elementManager.OnNewTableImage;
             elementManager.NewElements += lineManager.OnNewElements;
             lineManager.NewLineInfo += decisionManager.OnNewLineInfo;
 

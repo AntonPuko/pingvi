@@ -22,3 +22,5 @@ P:\Dropbox\pAd\SQLTest\obj\Debug\SQLTest.exe
 P:\Dropbox\pAd\SQLTest\obj\Debug\SQLTest.pdb
 P:\Dropbox\pAd\SQLTest\bin\Debug\Newtonsoft.Json.dll
 P:\Dropbox\pAd\SQLTest\bin\Debug\Newtonsoft.Json.xml
+P:\Dropbox\pAd\SQLTest\bin\Debug\SQLTest.exe.CodeAnalysisLog.xml
+P:\Dropbox\pAd\SQLTest\bin\Debug\SQLTest.exe.lastcodeanalysissucceeded

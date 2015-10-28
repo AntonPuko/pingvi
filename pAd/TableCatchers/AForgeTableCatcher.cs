@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Video;
 
@@ -19,6 +20,8 @@ namespace Pingvi.TableCatchers
         private string _screenShotsPath;
 
         public event Action<Bitmap> NewTableBitmap;
+
+        public event Action<UnmanagedImage> NewTableImage;
 
 
         public AForgeTableCatcher(Rectangle tableRect, int timeInterval, string scrShootsPath) {
@@ -57,14 +60,19 @@ namespace Pingvi.TableCatchers
 
         private void OnStreamNewFrame(object sender, NewFrameEventArgs eventArgs) {
             try {
-                _tableBitmap = eventArgs.Frame;
+                var tbUnmanaged = UnmanagedImage.FromManagedImage(eventArgs.Frame);
+
                 if (NewTableBitmap != null)
                 {
                     NewTableBitmap(_tableBitmap);
                 }
+
+                if (NewTableImage != null) {
+                    NewTableImage(tbUnmanaged);
+                }
             }
             catch (Exception ex) {
-                Debug.WriteLine(ex.Message +" in MAkeScreenShot()");
+                Debug.WriteLine(ex.Message + " in OnStreamNewFrame()");
             }
             
         

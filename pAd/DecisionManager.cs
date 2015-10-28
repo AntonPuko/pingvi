@@ -556,7 +556,7 @@ namespace Pingvi {
             if (LIMPFOLD == null) LIMPFOLD = defaultLIMPFOLD;
 
             //BB VS SB LIMP 2MAX(OOP)
-            const double bigLimpFold = 78;
+           // const double bigLimpFold = 78;
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingLimp)

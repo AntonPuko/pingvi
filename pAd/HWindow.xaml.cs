@@ -307,7 +307,6 @@ namespace Pingvi
         private void ShowFlopInfoStats(DecisionInfo decisionInfo) {
             var heroFlopState = decisionInfo.LineInfo.HeroFlopState;
             var opponent = decisionInfo.LineInfo.Elements.HuOpp;
-            double? stat1 = null, stat2 = null;
 
             switch (heroFlopState) {
                 case HeroFlopState.Donk:

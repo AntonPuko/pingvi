@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AForge.Imaging;
 
 namespace Pingvi.Config
 {
@@ -14,6 +15,8 @@ namespace Pingvi.Config
         public double[] BigBlindsDoubleMass { get; set; }
         public string DigitsPath { get; set; }
         public List<Bitmap> DigitsList { get; set; }
+
+        public List<UnmanagedImage> DigitsListUnmanaged { get; set; } 
       
     }
 }

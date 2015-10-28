@@ -10,4 +10,5 @@ P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.Properties.Resources.re
 P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.csproj.GenerateResource.Cache
 P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.exe
 P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.pdb
-P:\Dropbox\pAd\HandHistoryTest\obj\Debug\HandHistoryTest.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\HandHistoryTest\bin\Debug\HandHistoryTest.exe.CodeAnalysisLog.xml
+P:\Dropbox\pAd\HandHistoryTest\bin\Debug\HandHistoryTest.exe.lastcodeanalysissucceeded

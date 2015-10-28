@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
+
 
 
 namespace NeuralLineDetection
@@ -40,7 +42,8 @@ namespace NeuralLineDetection
                 Bitmap letter = new Bitmap(inputsBitmapsPaths[i]);
                 var inputLetter = inputsBitmapsPaths[i].Replace("Data\\Inputs\\", "")[0];
                 _outputs[i] = OutputsFactory.CreateOutput(inputLetter);
-                _inputs[i] = CountBitmap(letter);
+                _inputs[i] = BitmapHelper.ProcessUnsafeBitmapIntoDoubleArray(letter);
+                //_inputs[i] = CountBitmap(letter);
             }
 
           
@@ -48,6 +51,7 @@ namespace NeuralLineDetection
 
         }
 
+        
         private double[] CountBitmap(Bitmap letterBitmap) {
             var res = new double[letterBitmap.Size.Width * letterBitmap.Size.Height];
             int c = 0;

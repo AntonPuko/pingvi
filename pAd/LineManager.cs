@@ -99,7 +99,7 @@ namespace Pingvi {
         private string _flopCompositeLine;
         private string _turnCompositeLine;
         private string _riverCompositeLine;
-        private string _resultCompositeLine;
+     //   private string _resultCompositeLine;
         private PotNType _potNtype;
 
         

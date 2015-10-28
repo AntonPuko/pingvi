@@ -11,3 +11,5 @@ P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.Properties.Resources.re
 P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.csproj.GenerateResource.Cache
 P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.exe
 P:\Dropbox\pAd\LineManagerTest\obj\Debug\LineManagerTest.pdb
+P:\Dropbox\pAd\LineManagerTest\bin\Debug\LineManagerTest.exe.CodeAnalysisLog.xml
+P:\Dropbox\pAd\LineManagerTest\bin\Debug\LineManagerTest.exe.lastcodeanalysissucceeded

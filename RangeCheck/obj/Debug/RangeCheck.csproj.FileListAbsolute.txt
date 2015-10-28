@@ -12,3 +12,4 @@ P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.Properties.Resources.resources
 P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.csproj.GenerateResource.Cache
 P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.exe
 P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.pdb
+P:\Dropbox\pAd\RangeCheck\obj\Debug\RangeCheck.csprojResolveAssemblyReference.cache

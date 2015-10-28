@@ -13,3 +13,5 @@ P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.Properties.Resources.resource
 P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.csproj.GenerateResource.Cache
 P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.exe
 P:\Dropbox\pAd\RangeCreator\obj\Debug\RangeCreator.pdb
+P:\Dropbox\pAd\RangeCreator\bin\Debug\RangeCreator.exe.CodeAnalysisLog.xml
+P:\Dropbox\pAd\RangeCreator\bin\Debug\RangeCreator.exe.lastcodeanalysissucceeded

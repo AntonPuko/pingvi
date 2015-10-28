@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pingvi.Stuff
 {
-    public unsafe class UnsafeBitmap
+    public unsafe class UnsafeBitmap : IDisposable
     {
         Bitmap bitmap;
 
@@ -22,9 +22,9 @@ namespace Pingvi.Stuff
             this.bitmap = new Bitmap(bitmap);
         }
 
-        public UnsafeBitmap(int width, int height)
+        public UnsafeBitmap(int width, int height, PixelFormat pixelFormat)
         {
-            this.bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            this.bitmap = new Bitmap(width, height, pixelFormat);
         }
 
         public void Dispose()
@@ -97,6 +97,9 @@ namespace Pingvi.Stuff
         {
             return (PixelData*)(pBase + y * width + x * sizeof(PixelData));
         }
+
+     
+     
     }
     public struct PixelData
     {

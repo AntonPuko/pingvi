@@ -21,8 +21,7 @@ namespace Pingvi
         private Run[] _rMass;
 
         private int _player;
-        private int _top;
-        private int _left;
+
         
       /// <summary>
       /// 

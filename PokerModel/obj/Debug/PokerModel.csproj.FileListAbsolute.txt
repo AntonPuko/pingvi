@@ -5,7 +5,6 @@ C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\obj\Debug\Pok
 C:\Users\sony\Documents\Visual Studio 2013\Projects\pAd\PokerModel\obj\Debug\PokerModel.csprojResolveAssemblyReference.cache
 P:\Dropbox\pAd\PokerModel\bin\Debug\PokerModel.dll
 P:\Dropbox\pAd\PokerModel\bin\Debug\PokerModel.pdb
-P:\Dropbox\pAd\PokerModel\obj\Debug\PokerModel.csprojResolveAssemblyReference.cache
 P:\Dropbox\pAd\PokerModel\obj\Debug\PokerModel.dll
 P:\Dropbox\pAd\PokerModel\obj\Debug\PokerModel.pdb
 P:\Dropbox\pad-NewRangeModel\PokerModel\obj\Debug\PokerModel.csprojResolveAssemblyReference.cache
@@ -13,3 +12,5 @@ P:\Dropbox\pad-NewRangeModel\PokerModel\obj\Debug\PokerModel.dll
 P:\Dropbox\pad-NewRangeModel\PokerModel\bin\Debug\PokerModel.dll
 P:\Dropbox\pad-NewRangeModel\PokerModel\bin\Debug\PokerModel.pdb
 P:\Dropbox\pad-NewRangeModel\PokerModel\obj\Debug\PokerModel.pdb
+P:\Dropbox\pAd\PokerModel\bin\Debug\PokerModel.dll.CodeAnalysisLog.xml
+P:\Dropbox\pAd\PokerModel\bin\Debug\PokerModel.dll.lastcodeanalysissucceeded

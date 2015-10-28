@@ -4229,7 +4229,7 @@
         <Name>7d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="9c8c" D1="0" D2="0" S1="0">
+    <RangeHand Name="9c8c" D1="6" D2="6" S1="0">
       <FirstCard>
         <Value>8</Value>
         <Suit>Clubs</Suit>
@@ -4257,7 +4257,7 @@
         <Name>8s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="9h8h" D1="2" D2="2" S1="0">
+    <RangeHand Name="9h8h" D1="6" D2="6" S1="0">
       <FirstCard>
         <Value>34</Value>
         <Suit>Hearts</Suit>

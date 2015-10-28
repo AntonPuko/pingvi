@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using AForge.Imaging;
 using AForge.Neuro;
 using Pingvi.Config;
 
@@ -19,7 +21,10 @@ namespace Pingvi
         public Rectangle RiverCardRect { get; set; }
 
         public string DeckPath { get; set; }
-        public List<Bitmap> DeckList { get; set; } 
+        public List<Bitmap> DeckList { get; set; }
+        public List<UnmanagedImage> DeckListUnmanaged { get; set; } 
+
+       
 
 
        //blinds
@@ -67,10 +72,14 @@ namespace Pingvi
 
         public string StackDigitsPath { get; set; }
         public List<Bitmap> StackDigitsList { get; set; }
+        public List<UnmanagedImage> StackDigitsListUnmanaged { get; set; }
         public Color StackDigitsColor { get; set; }
 
         public string PotDigitsPath { get; set; }
         public List<Bitmap> PotDigitsList { get; set; }
+
+        public List<UnmanagedImage> PotDigitsListUnmanaged { get; set; } 
+
         public Color PotDigitsColor { get; set; }
 
         public PixelPoint[] PotDigPosPoints { get; set; }
@@ -78,12 +87,14 @@ namespace Pingvi
 
         public string BetDigitsPath { get; set; }
         public List<Bitmap> BetDigitsList { get; set; }
+        public List<UnmanagedImage> BetDigitsListUnmanaged { get; set; }
         public Color BetDigitsColor { get; set; }
 
 
 
         public string StatsDigitsPath { get; set; }
         public List<Bitmap> StatsDigitsList { get; set; }
+        public List<UnmanagedImage> StatsDigitsListUnmanaged { get; set; } 
         public Color StatsDigitsColor { get; set; }
 
 
