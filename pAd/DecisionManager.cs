@@ -83,6 +83,8 @@ namespace Pingvi {
                 .SitOutOpp()
                 .Do(e => CheckDecision(heroHand, "COMMON_OPEN_100", 0, PlMode.None));
 
+
+            
             #region BTN
 
             //BTN
@@ -1367,7 +1369,7 @@ namespace Pingvi {
                             PlMode.Less));
 
             #endregion
-
+            
             if (_isNewDecision == false) {
                 _preflopDecision = PreflopDecision.None;
                 _preflopRangeName = "";

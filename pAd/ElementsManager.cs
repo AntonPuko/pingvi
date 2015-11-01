@@ -599,8 +599,8 @@ namespace Pingvi {
         }
 
         private PlayerStatus CheckPlayerStatus(PixelPoint playerStatusHand, PixelPoint playerStatusGame, PixelPoint playerStatusSitOut) {
-            if(TableUnmanagedImage.GetPixel(playerStatusHand.X, playerStatusHand.Y) == _elementsConfig.Common.InHandColor) return PlayerStatus.InHand;
             if (TableUnmanagedImage.GetPixel(playerStatusSitOut.X, playerStatusSitOut.Y) == _elementsConfig.Common.SitOutColor) return PlayerStatus.SitOut;
+            if (TableUnmanagedImage.GetPixel(playerStatusHand.X, playerStatusHand.Y) == _elementsConfig.Common.InHandColor) return PlayerStatus.InHand;
             if(TableUnmanagedImage.GetPixel(playerStatusGame.X, playerStatusGame.Y) == _elementsConfig.Common.InGameColor ) return PlayerStatus.OutOfHand;
             return PlayerStatus.OutOfGame;
         }

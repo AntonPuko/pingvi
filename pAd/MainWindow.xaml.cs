@@ -22,7 +22,7 @@ namespace Pingvi
             
             var tablePositionRect = new Rectangle(2150, 20, 800, 574);
             // var tablePositionRect = new Rectangle(230, 20, 800, 574);
-            int tableFrameInterval = 150;
+            int tableFrameInterval = 100;
            // TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(100);
             string screenShotsPath = @"P:\screens\";
 
@@ -67,6 +67,7 @@ namespace Pingvi
 
             hudWindow.Show();
 
+            
             //create new thread for result window because of http query lags
             Thread resultWindowThread = new Thread(new ThreadStart(() => {
                 var resultWindow = new RWindow();
@@ -77,6 +78,7 @@ namespace Pingvi
             resultWindowThread.SetApartmentState(ApartmentState.STA);
             resultWindowThread.IsBackground = true;
             resultWindowThread.Start();
+            
              
             InitializeComponent();
 

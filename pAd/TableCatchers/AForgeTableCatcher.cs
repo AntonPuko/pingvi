@@ -12,12 +12,14 @@ using AForge.Video;
 namespace Pingvi.TableCatchers
 {
     class AForgeTableCatcher : ITableCatcher{
-
-        private Bitmap _tableBitmap;
+  
+        private UnmanagedImage _tbUnmanaged;
         private readonly Rectangle _tablePositionRect;
         private ScreenCaptureStream _stream;
         private int _timeFrameInterfal;
         private string _screenShotsPath;
+
+
 
         public event Action<Bitmap> NewTableBitmap;
 
@@ -49,10 +51,12 @@ namespace Pingvi.TableCatchers
         }
 
         public void MakeScreenShot() {
-            if (_tableBitmap == null) return;
+            if (_tbUnmanaged == null) return;
             try {
-                _tableBitmap.Save(_screenShotsPath + DateTime.Now.ToString("s").Replace("-", "").Replace(":", "") +
+                var bmp = _tbUnmanaged.ToManagedImage();
+                bmp.Save(_screenShotsPath + DateTime.Now.ToString("s").Replace("-", "").Replace(":", "") +
                                   ".bmp");
+                bmp.Dispose();
             } catch (Exception ex) {
                 Debug.WriteLine(ex.Message + "in MakeScreenShot();");
             }
@@ -60,15 +64,12 @@ namespace Pingvi.TableCatchers
 
         private void OnStreamNewFrame(object sender, NewFrameEventArgs eventArgs) {
             try {
-                var tbUnmanaged = UnmanagedImage.FromManagedImage(eventArgs.Frame);
+                _tbUnmanaged = UnmanagedImage.FromManagedImage(eventArgs.Frame);
 
-                if (NewTableBitmap != null)
-                {
-                    NewTableBitmap(_tableBitmap);
-                }
+           
 
                 if (NewTableImage != null) {
-                    NewTableImage(tbUnmanaged);
+                    NewTableImage(_tbUnmanaged);
                 }
             }
             catch (Exception ex) {

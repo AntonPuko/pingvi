@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Pingvi")]
 [assembly: AssemblyDescription("Pingvi version 2.3.23")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Piglion LTD")]
 [assembly: AssemblyProduct("Pingvi 2.3.23")]
 [assembly: AssemblyCopyright("Piglion 2014")]
 [assembly: AssemblyTrademark("Piglion LTD")]

@@ -8,13 +8,12 @@ using AForge.Imaging;
 namespace Pingvi.TableCatchers {
     public class ScreenShotTableCatcher : ITableCatcher {
 
-        private Bitmap _tableBitmap;
+        private UnmanagedImage _tbUnmanaged;
         private DispatcherTimer _bitmapTimer;
         private readonly Rectangle _tablePositionRect;
         private readonly TimeSpan _bitmapMakeInterval;
         private readonly string _screenShotsPath;
-        
-        public event Action<Bitmap> NewTableBitmap;
+
         public event Action<UnmanagedImage> NewTableImage;
 
 
@@ -41,10 +40,12 @@ namespace Pingvi.TableCatchers {
         }
 
         public void MakeScreenShot() {
-            if (_tableBitmap == null) return;
+            if (_tbUnmanaged == null) return;
             try {
-                _tableBitmap.Save(_screenShotsPath + DateTime.Now.ToString("s").Replace("-", "").Replace(":", "") +
+                var bmp = _tbUnmanaged.ToManagedImage();
+                bmp.Save(_screenShotsPath + DateTime.Now.ToString("s").Replace("-", "").Replace(":", "") +
                                   ".bmp");
+                bmp.Dispose();
             }
             catch (Exception ex) {
                 Debug.WriteLine(ex.Message + "in MakeScreenShot();");
@@ -62,15 +63,9 @@ namespace Pingvi.TableCatchers {
                         0, 0, _tablePositionRect.Size, CopyPixelOperation.SourceCopy);
                 }
 
-                _tableBitmap = bmp;
-                var _uTimage = UnmanagedImage.FromManagedImage(bmp);
-                if (NewTableBitmap != null)
-                {
-                    NewTableBitmap(bmp);
-                }
-
+                _tbUnmanaged = UnmanagedImage.FromManagedImage(bmp);
                 if (NewTableImage != null) {
-                    NewTableImage(_uTimage);
+                    NewTableImage(_tbUnmanaged);
                 }
 
             }
