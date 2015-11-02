@@ -2941,7 +2941,7 @@
         <Name>Jd</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Jc2c" D1="3" D2="4" S1="77">
+    <RangeHand Name="Jc2c" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>10</Value>
         <Suit>Clubs</Suit>
@@ -2955,7 +2955,7 @@
         <Name>2c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Js2s" D1="3" D2="4" S1="77">
+    <RangeHand Name="Js2s" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>23</Value>
         <Suit>Spades</Suit>
@@ -2969,7 +2969,7 @@
         <Name>2s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Jh2h" D1="3" D2="4" S1="77">
+    <RangeHand Name="Jh2h" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>36</Value>
         <Suit>Hearts</Suit>
@@ -2983,7 +2983,7 @@
         <Name>2h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Jd2d" D1="3" D2="4" S1="77">
+    <RangeHand Name="Jd2d" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>49</Value>
         <Suit>Diamonds</Suit>
@@ -2997,7 +2997,7 @@
         <Name>2d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Jc3c" D1="3" D2="4" S1="77">
+    <RangeHand Name="Jc3c" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>10</Value>
         <Suit>Clubs</Suit>
@@ -3011,7 +3011,7 @@
         <Name>3c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Js3s" D1="3" D2="4" S1="77">
+    <RangeHand Name="Js3s" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>23</Value>
         <Suit>Spades</Suit>
@@ -3025,7 +3025,7 @@
         <Name>3s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Jh3h" D1="3" D2="4" S1="77">
+    <RangeHand Name="Jh3h" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>36</Value>
         <Suit>Hearts</Suit>
@@ -3039,7 +3039,7 @@
         <Name>3h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="Jd3d" D1="3" D2="4" S1="77">
+    <RangeHand Name="Jd3d" D1="4" D2="4" S1="0">
       <FirstCard>
         <Value>49</Value>
         <Suit>Diamonds</Suit>
@@ -4005,7 +4005,7 @@
         <Name>3d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="9c4c" D1="4" D2="4" S1="0">
+    <RangeHand Name="9c4c" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>8</Value>
         <Suit>Clubs</Suit>
@@ -4019,7 +4019,7 @@
         <Name>4c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="9s4s" D1="4" D2="4" S1="0">
+    <RangeHand Name="9s4s" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>21</Value>
         <Suit>Spades</Suit>
@@ -4033,7 +4033,7 @@
         <Name>4s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="9h4h" D1="4" D2="4" S1="0">
+    <RangeHand Name="9h4h" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>34</Value>
         <Suit>Hearts</Suit>
@@ -4047,7 +4047,7 @@
         <Name>4h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="9d4d" D1="4" D2="4" S1="0">
+    <RangeHand Name="9d4d" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>47</Value>
         <Suit>Diamonds</Suit>
@@ -4397,7 +4397,7 @@
         <Name>3d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="8c4c" D1="4" D2="4" S1="0">
+    <RangeHand Name="8c4c" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>7</Value>
         <Suit>Clubs</Suit>
@@ -4411,7 +4411,7 @@
         <Name>4c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="8s4s" D1="4" D2="4" S1="0">
+    <RangeHand Name="8s4s" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>20</Value>
         <Suit>Spades</Suit>
@@ -4425,7 +4425,7 @@
         <Name>4s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="8h4h" D1="4" D2="4" S1="0">
+    <RangeHand Name="8h4h" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>33</Value>
         <Suit>Hearts</Suit>
@@ -4439,7 +4439,7 @@
         <Name>4h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="8d4d" D1="4" D2="4" S1="0">
+    <RangeHand Name="8d4d" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>46</Value>
         <Suit>Diamonds</Suit>
@@ -4733,7 +4733,7 @@
         <Name>3d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="7c4c" D1="4" D2="4" S1="0">
+    <RangeHand Name="7c4c" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>6</Value>
         <Suit>Clubs</Suit>
@@ -4747,7 +4747,7 @@
         <Name>4c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="7s4s" D1="4" D2="4" S1="0">
+    <RangeHand Name="7s4s" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>19</Value>
         <Suit>Spades</Suit>
@@ -4761,7 +4761,7 @@
         <Name>4s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="7h4h" D1="4" D2="4" S1="0">
+    <RangeHand Name="7h4h" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>32</Value>
         <Suit>Hearts</Suit>
@@ -4775,7 +4775,7 @@
         <Name>4h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="7d4d" D1="4" D2="4" S1="0">
+    <RangeHand Name="7d4d" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>45</Value>
         <Suit>Diamonds</Suit>
@@ -5013,7 +5013,7 @@
         <Name>3d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="6c4c" D1="4" D2="4" S1="0">
+    <RangeHand Name="6c4c" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>5</Value>
         <Suit>Clubs</Suit>
@@ -5027,7 +5027,7 @@
         <Name>4c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="6s4s" D1="4" D2="4" S1="0">
+    <RangeHand Name="6s4s" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>18</Value>
         <Suit>Spades</Suit>
@@ -5041,7 +5041,7 @@
         <Name>4s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="6h4h" D1="4" D2="4" S1="0">
+    <RangeHand Name="6h4h" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>31</Value>
         <Suit>Hearts</Suit>
@@ -5055,7 +5055,7 @@
         <Name>4h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="6d4d" D1="4" D2="4" S1="0">
+    <RangeHand Name="6d4d" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>44</Value>
         <Suit>Diamonds</Suit>
@@ -5237,7 +5237,7 @@
         <Name>3d</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="5c4c" D1="4" D2="4" S1="0">
+    <RangeHand Name="5c4c" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>4</Value>
         <Suit>Clubs</Suit>
@@ -5251,7 +5251,7 @@
         <Name>4c</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="5s4s" D1="4" D2="4" S1="0">
+    <RangeHand Name="5s4s" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>17</Value>
         <Suit>Spades</Suit>
@@ -5265,7 +5265,7 @@
         <Name>4s</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="5h4h" D1="4" D2="4" S1="0">
+    <RangeHand Name="5h4h" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>30</Value>
         <Suit>Hearts</Suit>
@@ -5279,7 +5279,7 @@
         <Name>4h</Name>
       </SecondCard>
     </RangeHand>
-    <RangeHand Name="5d4d" D1="4" D2="4" S1="0">
+    <RangeHand Name="5d4d" D1="3" D2="4" S1="77">
       <FirstCard>
         <Value>43</Value>
         <Suit>Diamonds</Suit>
