@@ -558,7 +558,17 @@ namespace Pingvi {
             if (LIMPFOLD == null) LIMPFOLD = defaultLIMPFOLD;
 
             //BB VS SB LIMP 2MAX(OOP)
-           // const double bigLimpFold = 78;
+            // const double bigLimpFold = 78;
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+               .HeroPreflopState(HeroPreflopState.FacingLimp)
+               .Is2Max()
+               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+               .EffectiveStackBetween(6, 8)
+               .VsBigStack()
+               .Do(l => CheckDecision(heroHand, "BB_VS_SB_LIMP_2MAX_6-8BB_V_BIG_STAKE", LIMPFOLD, PlMode.More));
+
+
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingLimp)
@@ -566,6 +576,15 @@ namespace Pingvi {
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .EffectiveStackBetween(6, 8)
                 .Do(l => CheckDecision(heroHand, "BB_VS_SB_LIMP_2MAX_6-8BB", LIMPFOLD, PlMode.More));
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+                .HeroPreflopState(HeroPreflopState.FacingLimp)
+                .Is2Max()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .EffectiveStackBetween(8, 10)
+                .VsBigStack()
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_LIMP_2MAX_8-10BB_V_BIG_STAKE", LIMPFOLD, PlMode.More));
+
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingLimp)
