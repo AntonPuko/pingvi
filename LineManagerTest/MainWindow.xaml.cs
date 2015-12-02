@@ -23,59 +23,59 @@ namespace LineManagerTest
 
     enum HeroPosition {  None, Button, SmallBlind, BigBlind}
 
-    enum PlayersInPot { None, HU, MultiPot}
+    enum PlayersInPot { None, Hu, MultiPot}
     enum PotState { None, LimpPot, _2BetPot, _3BetPot, _4BetPot }
     enum PreflopState { None, Open, FacingLimp, FacingOpen, Vs3Bet, Vs4Bet, VsSqueeze, VsPush}
 
     enum FlopState { None, Cbet, Donk, VsBet, VsCbet, VsDonk, VsRaise }
 
-    enum TurnState { None, _2Donk, _2barrel, Vs2Barrel, Vs2Donk, VsCbetR, VsRaise }
+    enum TurnState { None, _2Donk, _2Barrel, Vs2Barrel, Vs2Donk, VsCbetR, VsRaise }
 
-    enum RiverState { None, _3Donk, _3barrel, Vs3Barrel, Vs3Donk, Vs2BarrelR, VsRaise}
+    enum RiverState { None, _3Donk, _3Barrel, Vs3Barrel, Vs3Donk, Vs2BarrelR, VsRaise}
 
 
     public partial class MainWindow : Window {
 
         private HeroPosition _heroPosition = HeroPosition.None;
 
-        private string[] linesMass;
+        private string[] _linesMass;
         public MainWindow()
         {
             InitializeComponent();
             BtnRadioButton.Checked += (sender, args) => _heroPosition = HeroPosition.Button;
-            SBRadioButton.Checked += (sender, args) => _heroPosition = HeroPosition.SmallBlind;
-            BBRadioButton.Checked += (sender, args) => _heroPosition = HeroPosition.BigBlind;
+            SbRadioButton.Checked += (sender, args) => _heroPosition = HeroPosition.SmallBlind;
+            BbRadioButton.Checked += (sender, args) => _heroPosition = HeroPosition.BigBlind;
 
         }
 
         private void CheckButton_Click(object sender, RoutedEventArgs e) {
             UpperHeroDecision();
 
-            linesMass = new []{BtnLineTB.Text, SbLineTB.Text, BbLineTB.Text};
+            _linesMass = new []{BtnLineTb.Text, SbLineTb.Text, BbLineTb.Text};
             
 
-            var max = linesMass.Select(mass => mass.Length).Max();
+            var max = _linesMass.Select(mass => mass.Length).Max();
             StringBuilder st = new StringBuilder();
             //preflop
             for (int i = 0; i < max; i++)
             {
 
-                if (BtnLineTB.Text.Length > i) {
-                    if (BtnLineTB.Text[i] == ',') break;
-                    st.Append(BtnLineTB.Text[i]);
+                if (BtnLineTb.Text.Length > i) {
+                    if (BtnLineTb.Text[i] == ',') break;
+                    st.Append(BtnLineTb.Text[i]);
                     st.Append('-');
                     
                 }
 
-                if (SbLineTB.Text.Length > i) {
-                    if (SbLineTB.Text[i] == ',') break;
-                    st.Append(SbLineTB.Text[i]);
+                if (SbLineTb.Text.Length > i) {
+                    if (SbLineTb.Text[i] == ',') break;
+                    st.Append(SbLineTb.Text[i]);
                     st.Append('-');
                 }
 
-                if (BbLineTB.Text.Length > i) {
-                    if (BbLineTB.Text[i] == ',') break;
-                    st.Append(BbLineTB.Text[i]);
+                if (BbLineTb.Text.Length > i) {
+                    if (BbLineTb.Text[i] == ',') break;
+                    st.Append(BbLineTb.Text[i]);
                     st.Append('-');
                 }
                 
@@ -86,9 +86,9 @@ namespace LineManagerTest
 
             
 
-            var postBtnLine = BtnLineTB.Text.Any(c => c == ',') ? BtnLineTB.Text.Substring(BtnLineTB.Text.IndexOf(',')+1) : "";
-            var postSbLine = SbLineTB.Text.Any(c => c== ',') ? SbLineTB.Text.Substring(SbLineTB.Text.IndexOf(',')+1) : "";
-            var postBbLine = BbLineTB.Text.Any(c => c== ',') ? BbLineTB.Text.Substring(BbLineTB.Text.IndexOf(',')+1) : "";
+            var postBtnLine = BtnLineTb.Text.Any(c => c == ',') ? BtnLineTb.Text.Substring(BtnLineTb.Text.IndexOf(',')+1) : "";
+            var postSbLine = SbLineTb.Text.Any(c => c== ',') ? SbLineTb.Text.Substring(SbLineTb.Text.IndexOf(',')+1) : "";
+            var postBbLine = BbLineTb.Text.Any(c => c== ',') ? BbLineTb.Text.Substring(BbLineTb.Text.IndexOf(',')+1) : "";
             
             var postLineMass = new[] {postSbLine, postBbLine, postBtnLine};
 
@@ -126,19 +126,19 @@ namespace LineManagerTest
         private void DefinePreflopLine() {
             UpperHeroDecision();
 
-            ResultLabel.Content = String.Format("{0}{1}{2}", BtnLineTB.Text, SbLineTB.Text, BbLineTB.Text);
+            ResultLabel.Content = String.Format("{0}{1}{2}", BtnLineTb.Text, SbLineTb.Text, BbLineTb.Text);
         }
 
         private void UpperHeroDecision() {
             switch (_heroPosition) {
                 case HeroPosition.Button:
-                    BtnLineTB.Text = BtnLineTB.Text.ToUpper();
+                    BtnLineTb.Text = BtnLineTb.Text.ToUpper();
                     break;
                     case HeroPosition.SmallBlind:
-                    SbLineTB.Text = SbLineTB.Text.ToUpper();
+                    SbLineTb.Text = SbLineTb.Text.ToUpper();
                     break;
                     case HeroPosition.BigBlind:
-                    BbLineTB.Text = BbLineTB.Text.ToUpper();
+                    BbLineTb.Text = BbLineTb.Text.ToUpper();
                     break;
             }
         }

@@ -4,24 +4,27 @@
         Title="Pingvi" Height="540.337" Width="632.272" Icon="pingvi.ico">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="29*"/>
-            <RowDefinition Height="31*"/>
-            <RowDefinition Height="271*"/>
-            <RowDefinition Height="57*"/>
+            <RowDefinition Height="29*" />
+            <RowDefinition Height="31*" />
+            <RowDefinition Height="271*" />
+            <RowDefinition Height="57*" />
         </Grid.RowDefinitions>
-        <Button Name="StartButton" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="StartButton_Click" Height="20" Margin="0,5,0,0"/>
-        <Label Name="CommonLabel" Content="common" Margin="0" Grid.ColumnSpan="3" Grid.Row="1"/>
-        <Label Name="LeftPlayerLabel" Content="LeftPlayer" Margin="2,5.227,2,2" Grid.Row="2"/>
-        <Label Name="HeroLabel" Content="Hero" Grid.Column="1" Margin="2" Grid.Row="2"/>
-        <Label Name="RightPlayerLabel" Content="RigthPlayer" Grid.Column="2" Margin="2" Grid.Row="2"/>
-        <Label Name="SituationLabel" Content="Situation" Margin="2,2.435,1.906,1.622" Grid.Row="3" Grid.ColumnSpan="3"/>
-        <Label Name="RangeLabel" Content="Label" HorizontalAlignment="Left" Margin="80,3,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="437"/>
-        <Button Name="MakeButton" Content="Make" Grid.Column="2" HorizontalAlignment="Left" Margin="123.396,9,0,0" VerticalAlignment="Top" Width="75" Click="MakeButton_Click"/>
+        <Button Name="StartButton" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"
+                Click="StartButton_Click" Height="20" Margin="0,5,0,0" />
+        <Label Name="CommonLabel" Content="common" Margin="0" Grid.ColumnSpan="3" Grid.Row="1" />
+        <Label Name="LeftPlayerLabel" Content="LeftPlayer" Margin="2,5.227,2,2" Grid.Row="2" />
+        <Label Name="HeroLabel" Content="Hero" Grid.Column="1" Margin="2" Grid.Row="2" />
+        <Label Name="RightPlayerLabel" Content="RigthPlayer" Grid.Column="2" Margin="2" Grid.Row="2" />
+        <Label Name="SituationLabel" Content="Situation" Margin="2,2.435,1.906,1.622" Grid.Row="3" Grid.ColumnSpan="3" />
+        <Label Name="RangeLabel" Content="Label" HorizontalAlignment="Left" Margin="80,3,0,0" VerticalAlignment="Top"
+               Grid.ColumnSpan="3" Width="437" />
+        <Button Name="MakeButton" Content="Make" Grid.Column="2" HorizontalAlignment="Left" Margin="123.396,9,0,0"
+                VerticalAlignment="Top" Width="75" Click="MakeButton_Click" />
 
     </Grid>
 </Window>

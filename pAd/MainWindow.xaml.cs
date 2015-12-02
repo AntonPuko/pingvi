@@ -4,113 +4,121 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using AForge.Imaging.Filters;
-using Pingvi.Stuff;
 using Pingvi.TableCatchers;
 using PokerModel;
 
-
 namespace Pingvi
 {
-    public partial class MainWindow : Window {
-
+    public partial class MainWindow : Window
+    {
         private readonly ITableCatcher _tableCatcher;
+
+        private readonly ElementsManager _elementManager;
         private Bitmap _tableBitmap;
 
-        private readonly ElementsManager elementManager;
-
-        public MainWindow() {
-            
+        public MainWindow()
+        {
             var tablePositionRect = new Rectangle(2150, 20, 800, 574);
             // var tablePositionRect = new Rectangle(230, 20, 800, 574);
-            int tableFrameInterval = 100;
-           // TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(100);
-            string screenShotsPath = @"P:\screens\";
+            var tableFrameInterval = 100;
+            // TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(100);
+            var screenShotsPath = @"P:\screens\";
 
             _tableCatcher = new AForgeTableCatcher(tablePositionRect, tableFrameInterval, screenShotsPath);
-           // _tableCatcher = new ScreenShotTableCatcher(tablePositionRect, tableFrameIntervalSpan, screenShotsPath);
-        
+            // _tableCatcher = new ScreenShotTableCatcher(tablePositionRect, tableFrameIntervalSpan, screenShotsPath);
+
             var hudWindow = new HWindow(_tableCatcher);
-            elementManager = new ElementsManager();
+            _elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
 
             hudWindow.MakeScreenShotClick += _tableCatcher.MakeScreenShot;
 
-           // _tableCatcher.NewTableBitmap += OnNewTableBitmap;
-
+            // _tableCatcher.NewTableBitmap += OnNewTableBitmap;
 
 
             //CREATE LINE WINDOWS
             var heroLineWindow = new LWindow(0) {Top = 410, Left = 2360};
-            lineManager.NewLineInfo += li => Dispatcher.BeginInvoke((Action)delegate { heroLineWindow.OnNewLineInfo(li); });
+            heroLineWindow.ShowInTaskbar = false;
+            lineManager.NewLineInfo +=
+                li => Dispatcher.BeginInvoke((Action) delegate { heroLineWindow.OnNewLineInfo(li); });
             heroLineWindow.Show();
 
-            var leftLineWindow = new LWindow(1) { Top = 120, Left = 2150 };
-            lineManager.NewLineInfo += li => Dispatcher.BeginInvoke((Action)delegate { leftLineWindow.OnNewLineInfo(li); });
+            var leftLineWindow = new LWindow(1) {Top = 120, Left = 2150};
+            leftLineWindow.ShowInTaskbar = false;
+            lineManager.NewLineInfo +=
+                li => Dispatcher.BeginInvoke((Action) delegate { leftLineWindow.OnNewLineInfo(li); });
             leftLineWindow.Show();
 
-            var rightLineWindow = new LWindow(2) { Top = 120, Left = 2380 };
-            lineManager.NewLineInfo += li => Dispatcher.BeginInvoke((Action)delegate { rightLineWindow.OnNewLineInfo(li); });
+
+            var rightLineWindow = new LWindow(2) {Top = 120, Left = 2380};
+            rightLineWindow.ShowInTaskbar = false;
+            lineManager.NewLineInfo +=
+                li => Dispatcher.BeginInvoke((Action) delegate { rightLineWindow.OnNewLineInfo(li); });
             rightLineWindow.Show();
-          
 
 
-
-            _tableCatcher.NewTableImage += elementManager.OnNewTableImage;
-            elementManager.NewElements += lineManager.OnNewElements;
+            _tableCatcher.NewTableImage += _elementManager.OnNewTableImage;
+            _elementManager.NewElements += lineManager.OnNewElements;
             lineManager.NewLineInfo += decisionManager.OnNewLineInfo;
 
-           // decisionManager.NewDecisionInfo += hudWindow.OnNewDecisionInfo;
-           // decisionManager.NewDecisionInfo +=  OnNewDecisionInfo;
-            decisionManager.NewDecisionInfo += di => Dispatcher.BeginInvoke((Action)delegate { hudWindow.OnNewDecisionInfo(di); });
-            decisionManager.NewDecisionInfo += di => Dispatcher.BeginInvoke((Action)delegate { OnNewDecisionInfo(di); });
+            // decisionManager.NewDecisionInfo += hudWindow.OnNewDecisionInfo;
+            // decisionManager.NewDecisionInfo +=  OnNewDecisionInfo;
+            decisionManager.NewDecisionInfo +=
+                di => Dispatcher.BeginInvoke((Action) delegate { hudWindow.OnNewDecisionInfo(di); });
+            decisionManager.NewDecisionInfo +=
+                di => Dispatcher.BeginInvoke((Action) delegate { OnNewDecisionInfo(di); });
 
             hudWindow.Show();
 
-            
+
             //create new thread for result window because of http query lags
-            Thread resultWindowThread = new Thread(new ThreadStart(() => {
+            var resultWindowThread = new Thread(() =>
+            {
                 var resultWindow = new RWindow();
                 resultWindow.Show();
-                System.Windows.Threading.Dispatcher.Run();
-            }));
+                Dispatcher.Run();
+            });
 
             resultWindowThread.SetApartmentState(ApartmentState.STA);
             resultWindowThread.IsBackground = true;
             resultWindowThread.Start();
-            
-             
-            InitializeComponent();
 
+
+            InitializeComponent();
         }
 
-        private void OnNewTableBitmap(Bitmap obj) {
+        private void OnNewTableBitmap(Bitmap obj)
+        {
             _tableBitmap = obj;
         }
 
 
-        private void StartButton_Click(object sender, RoutedEventArgs e) {
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
             _tableCatcher.Start();
         }
 
-     
 
-        private void OnNewDecisionInfo(DecisionInfo decisionInfo) {
-        
+        private void OnNewDecisionInfo(DecisionInfo decisionInfo)
+        {
             var elements = decisionInfo.LineInfo.Elements;
-       
+
             CommonLabel.Content = "";
             RangeLabel.Content = "";
-            RangeLabel.Content = decisionInfo.PreflopRangeChosen;    
+            RangeLabel.Content = decisionInfo.PreflopRangeChosen;
 
-            CommonLabel.Content = String.Format(" MULTIPLIER: x{0} DECK: {1} {2} {3} {4} {5} :: Str: {6} :: BL: {7}/{8} :: POT: {9} :: LINE: {10}",
-                elements.TourneyMultiplier,
-                elements.FlopCard1.Name, elements.FlopCard2.Name, elements.FlopCard3.Name,
-                elements.TurnCard.Name, elements.RiverCard.Name,
-                elements.CurrentStreet, elements.SbAmt, elements.BbAmt, elements.TotalPot, decisionInfo.LineInfo.FinalCompositeLine );
+            CommonLabel.Content =
+                string.Format(
+                    " MULTIPLIER: x{0} DECK: {1} {2} {3} {4} {5} :: Str: {6} :: BL: {7}/{8} :: POT: {9} :: LINE: {10}",
+                    elements.TourneyMultiplier,
+                    elements.FlopCard1.Name, elements.FlopCard2.Name, elements.FlopCard3.Name,
+                    elements.TurnCard.Name, elements.RiverCard.Name,
+                    elements.CurrentStreet, elements.SbAmt, elements.BbAmt, elements.TotalPot,
+                    decisionInfo.LineInfo.FinalCompositeLine);
 
             HeroLabel.Content =
-                String.Format("Status: {0}\nPosition: {1}\nLine: {2}\nCurStack: {3}\nBet: {4}\nStack: {5}\n" +
+                string.Format("Status: {0}\nPosition: {1}\nLine: {2}\nCurStack: {3}\nBet: {4}\nStack: {5}\n" +
                               "IsHeroTurn: {6}\nHeroHand: {7}\n HeroStatePreflop: {8}\nHeroStatePostflop: {9}",
                     elements.HeroPlayer.Status, elements.HeroPlayer.Position,
                     elements.HeroPlayer.Line,
@@ -120,17 +128,21 @@ namespace Pingvi
 
             LeftPlayerLabel.Content = ShowPlayerInfo(elements.LeftPlayer) + "\n" + ShowPlayerStats(elements.LeftPlayer);
 
-            RightPlayerLabel.Content = ShowPlayerInfo(elements.RightPlayer) + "\n" + ShowPlayerStats(elements.RightPlayer);
+            RightPlayerLabel.Content = ShowPlayerInfo(elements.RightPlayer) + "\n" +
+                                       ShowPlayerStats(elements.RightPlayer);
 
-            SituationLabel.Content = String.Format("EffStack: {0} :: HeroRole: {1} :: HeroStatePreflop: {2} :: RelativePos: {3} " +
-                                                   "\nPotType: {4} :: PfState: {5} :: FlopState: {6} :: TurnState: {7} :: RiverState: {8}",
-                elements.EffectiveStack, elements.HeroPlayer.Role, elements.HeroPlayer.StatePreflop, elements.HeroPlayer.RelativePosition,
-                decisionInfo.LineInfo.PotType, decisionInfo.LineInfo.HeroPreflopState, decisionInfo.LineInfo.HeroFlopState, 
-                decisionInfo.LineInfo.HeroTurnState, decisionInfo.LineInfo.HeroRiverState);
-
+            SituationLabel.Content =
+                string.Format("EffStack: {0} :: HeroRole: {1} :: HeroStatePreflop: {2} :: RelativePos: {3} " +
+                              "\nPotType: {4} :: PfState: {5} :: FlopState: {6} :: TurnState: {7} :: RiverState: {8}",
+                    elements.EffectiveStack, elements.HeroPlayer.Role, elements.HeroPlayer.StatePreflop,
+                    elements.HeroPlayer.RelativePosition,
+                    decisionInfo.LineInfo.PotType, decisionInfo.LineInfo.HeroPreflopState,
+                    decisionInfo.LineInfo.HeroFlopState,
+                    decisionInfo.LineInfo.HeroTurnState, decisionInfo.LineInfo.HeroRiverState);
         }
 
-        private string ShowPlayerStats(Player player) {
+        private string ShowPlayerStats(Player player)
+        {
             var stats = player.Stats;
             return string.Format("\nPF_BTN_STEAL: {0}\nPF_SB_STEAL: {1}\nPF_OPENPUSH: {2}" +
                                  "\nPF_LIMP_FOLD: {3}\nPF_LIMP_RERAISE: {4}\nPF_FOLD_3BET: {5}" +
@@ -143,29 +155,30 @@ namespace Pingvi
                                  "\n\nF_LP_FOLD_VS_STEAL: {22}\nF_LP_FOLD_VS_XR: {23}\nF_CHECKFOLD_OOP: {24}" +
                                  "\nT_SKIPF_FOLD_VS_T_PROBE: {25}\nR_SKIPT_FOLD_VS_R_PROBE: {26}" +
                                  "\nF_DONK: {27}\nT_DONK: {28}\nF_DONK_FOLDRAISE: {29}",
-                                 stats.PF_BTN_STEAL, stats.PF_SB_STEAL, stats.PF_OPENPUSH,
-                                 stats.PF_LIMP_FOLD, stats.PF_LIMP_RERAISE, stats.PF_FOLD_3BET,
-                                 stats.PF_BB_DEF_VS_SBSTEAL,stats.PF_RAISE_LIMPER, stats.PF_SB_3BET_VS_BTN,
-                                 stats.PF_BB_3BET_VS_BTN, stats.PF_BB_3BET_VS_SB,
-                                 stats.F_CBET, stats.T_CBET, stats.R_CBET,
-                                 stats.F_FOLD_CBET, stats.T_FOLD_CBET, stats.R_FOLD_CBET,
-                                 stats.F_CBET_FOLDRAISE, stats.T_CBET_FOLDRAISE, stats.F_RAISE_BET,
-                                 stats.T_RAISE_BET, stats.F_LP_STEAL,
-                                 stats.F_LP_FOLD_VS_STEAL, stats.F_LP_FOLD_VS_XR, stats.F_CHECKFOLD_OOP,
-                                 stats.T_SKIPF_FOLD_VS_T_PROBE,stats.R_SKIPT_FOLD_VS_R_PROBE,
-                                 stats.F_DONK,stats.T_DONK, stats.F_DONK_FOLDRAISE
+                stats.PfBtnSteal, stats.PfSbSteal, stats.PfOpenpush,
+                stats.PfLimpFold, stats.PfLimpReraise, stats.PfFold_3Bet,
+                stats.PfBbDefVsSbsteal, stats.PfRaiseLimper, stats.PfSb_3BetVsBtn,
+                stats.PfBb_3BetVsBtn, stats.PfBb_3BetVsSb,
+                stats.FCbet, stats.Cbet, stats.RCbet,
+                stats.FFoldCbet, stats.FoldCbet, stats.RFoldCbet,
+                stats.FCbetFoldraise, stats.CbetFoldraise, stats.FRaiseBet,
+                stats.RaiseBet, stats.FLpSteal,
+                stats.FLpFoldVsSteal, stats.FLpFoldVsXr, stats.FCheckfoldOop,
+                stats.SkipfFoldVsTProbe, stats.RSkiptFoldVsRProbe,
+                stats.FDonk, stats.Donk, stats.FDonkFoldraise
                 );
         }
 
-        private string ShowPlayerInfo(Player player) {
+        private string ShowPlayerInfo(Player player)
+        {
             return string.Format("Status: {0}\nPosition: {1}\nLine: {2}" +
                                  "\nCurStack: {3}\nBet: {4}\nType: {5}",
                 player.Status, player.Position, player.Line,
                 player.CurrentStack, player.Bet, player.Type);
         }
 
-        private void MakeButton_Click(object sender, RoutedEventArgs e) {
-
+        private void MakeButton_Click(object sender, RoutedEventArgs e)
+        {
             /*
             var rightPRects =  elementManager.ElementConfig.RightPlayer.LineRectPosition;
             var leftPRects = elementManager.ElementConfig.LeftPlayer.LineRectPosition;
@@ -204,23 +217,23 @@ namespace Pingvi
             }
              */
 
-            Rectangle[] rects = new[] {
-                elementManager.ElementConfig.Common.FlopCard1Rect,
-                elementManager.ElementConfig.Common.FlopCard2Rect,
-                elementManager.ElementConfig.Common.FlopCard3Rect,
-                elementManager.ElementConfig.Common.TurnCardRect,
-                elementManager.ElementConfig.Common.RiverCardRect,
+            Rectangle[] rects =
+            {
+                _elementManager.ElementConfig.Common.FlopCard1Rect,
+                _elementManager.ElementConfig.Common.FlopCard2Rect,
+                _elementManager.ElementConfig.Common.FlopCard3Rect,
+                _elementManager.ElementConfig.Common.TurnCardRect,
+                _elementManager.ElementConfig.Common.RiverCardRect
             };
 
             const string path = @"P:\screens\cards\";
 
-            foreach (var r in rects) {
-                Crop cropfilter = new Crop(r);
+            foreach (var r in rects)
+            {
+                var cropfilter = new Crop(r);
                 var bmp = cropfilter.Apply(_tableBitmap);
-                bmp.Save(path + Array.IndexOf(rects,r) + ".bmp");
+                bmp.Save(path + Array.IndexOf(rects, r) + ".bmp");
             }
-
-
         }
     }
 }

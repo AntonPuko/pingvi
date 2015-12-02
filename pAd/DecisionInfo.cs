@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pingvi
+﻿namespace Pingvi
 {
-    public class DecisionInfo {
+    public class DecisionInfo
+    {
         public LineInfo LineInfo { get; set; }
         public string PreflopRangeChosen { get; set; }
         public PreflopDecision PreflopDecision { get; set; }

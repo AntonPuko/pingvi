@@ -29,7 +29,7 @@ namespace PokerModel
                     case 2: ParseOffsuited(name); break;
                     case 3: ParseCase3(name); break;
                     case 4: ParseCase4(name); break;
-                    case 5: ParsePaired3or5(name); break;
+                    case 5: ParsePaired3Or5(name); break;
                     case 7: ParseCase7(name); break;
                 }
             }
@@ -64,7 +64,7 @@ namespace PokerModel
             switch (name.Last()) {
                 case Offsuited: ParseOffsuited(name.Substring(0,2)); break;
                 case Suited: ParseSuited(name.Substring(0,2)); break;
-                case '+': ParsePaired3or5(name.Substring(0, 3)); break;
+                case '+': ParsePaired3Or5(name.Substring(0, 3)); break;
             }
         }
 
@@ -106,7 +106,7 @@ namespace PokerModel
 
         }
 
-        private void ParsePaired3or5(string name) {
+        private void ParsePaired3Or5(string name) {
             const int cRangMax = (int) Rang.Ace;
             int cLimit = 0;
             int cRang = 0;

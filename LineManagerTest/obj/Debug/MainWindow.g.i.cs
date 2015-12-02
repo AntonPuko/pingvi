@@ -142,13 +142,13 @@ namespace LineManagerTest {
             switch (connectionId)
             {
             case 1:
-            this.BtnLineTB = ((System.Windows.Controls.TextBox)(target));
+            this.BtnLineTb = ((System.Windows.Controls.TextBox)(target));
             return;
             case 2:
-            this.SbLineTB = ((System.Windows.Controls.TextBox)(target));
+            this.SbLineTb = ((System.Windows.Controls.TextBox)(target));
             return;
             case 3:
-            this.BbLineTB = ((System.Windows.Controls.TextBox)(target));
+            this.BbLineTb = ((System.Windows.Controls.TextBox)(target));
             return;
             case 4:
             this.ResultLabel = ((System.Windows.Controls.Label)(target));
@@ -169,10 +169,10 @@ namespace LineManagerTest {
             this.BtnRadioButton = ((System.Windows.Controls.RadioButton)(target));
             return;
             case 8:
-            this.SBRadioButton = ((System.Windows.Controls.RadioButton)(target));
+            this.SbRadioButton = ((System.Windows.Controls.RadioButton)(target));
             return;
             case 9:
-            this.BBRadioButton = ((System.Windows.Controls.RadioButton)(target));
+            this.BbRadioButton = ((System.Windows.Controls.RadioButton)(target));
             return;
             }
             this._contentLoaded = true;

@@ -20,12 +20,12 @@ namespace RangeCheck
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private Range range;
+        private Range _range;
         public MainWindow()
         {
             InitializeComponent();
 
-            range = XmlRangeHelper.Load(@"Data\NashPush.xml");
+            _range = XmlRangeHelper.Load(@"Data\NashPush.xml");
         }
 
         private void CheckButton_Click(object sender, RoutedEventArgs e) {
@@ -34,7 +34,7 @@ namespace RangeCheck
             var hand = new Hand(new Card(card1), new Card(card2));
             double stack = double.Parse(StackTextBox.Text);
             bool isPush;
-            var hPlaybility = range.Hands.First(h => h.Name == hand.Name).Playability;
+            var hPlaybility = _range.Hands.First(h => h.Name == hand.Name).Playability;
             if (hPlaybility  >= stack)
             {
                 isPush = true;
@@ -45,7 +45,7 @@ namespace RangeCheck
 
 
             ResultLabel.Content = String.Format("playbility: {0}, PUSH: {1}",
-                range.Hands.First(h => h.Name == hand.Name).Playability, isPush);
+                _range.Hands.First(h => h.Name == hand.Name).Playability, isPush);
         }
     }
 }

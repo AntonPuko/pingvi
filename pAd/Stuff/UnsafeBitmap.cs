@@ -1,110 +1,98 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pingvi.Stuff
 {
     public unsafe class UnsafeBitmap : IDisposable
     {
-        Bitmap bitmap;
+        private BitmapData _bitmapData;
+        private byte* _pBase = null;
 
         // three elements used for MakeGreyUnsafe
-        int width;
-        BitmapData bitmapData = null;
-        Byte* pBase = null;
+        private int _width;
 
         public UnsafeBitmap(Bitmap bitmap)
         {
-            this.bitmap = new Bitmap(bitmap);
+            Bitmap = new Bitmap(bitmap);
         }
 
         public UnsafeBitmap(int width, int height, PixelFormat pixelFormat)
         {
-            this.bitmap = new Bitmap(width, height, pixelFormat);
+            Bitmap = new Bitmap(width, height, pixelFormat);
         }
 
-        public void Dispose()
-        {
-            bitmap.Dispose();
-        }
-
-        public Bitmap Bitmap
-        {
-            get
-            {
-                return (bitmap);
-            }
-        }
+        public Bitmap Bitmap { get; }
 
         private Point PixelSize
         {
             get
             {
-                GraphicsUnit unit = GraphicsUnit.Pixel;
-                RectangleF bounds = bitmap.GetBounds(ref unit);
+                var unit = GraphicsUnit.Pixel;
+                var bounds = Bitmap.GetBounds(ref unit);
 
-                return new Point((int)bounds.Width, (int)bounds.Height);
+                return new Point((int) bounds.Width, (int) bounds.Height);
             }
+        }
+
+        public void Dispose()
+        {
+            Bitmap.Dispose();
         }
 
         public void LockBitmap()
         {
-            GraphicsUnit unit = GraphicsUnit.Pixel;
-            RectangleF boundsF = bitmap.GetBounds(ref unit);
-            Rectangle bounds = new Rectangle((int)boundsF.X,
-           (int)boundsF.Y,
-           (int)boundsF.Width,
-           (int)boundsF.Height);
+            var unit = GraphicsUnit.Pixel;
+            var boundsF = Bitmap.GetBounds(ref unit);
+            var bounds = new Rectangle((int) boundsF.X,
+                (int) boundsF.Y,
+                (int) boundsF.Width,
+                (int) boundsF.Height);
 
             // Figure out the number of bytes in a row
             // This is rounded up to be a multiple of 4
             // bytes, since a scan line in an image must always be a multiple of 4 bytes
             // in length. 
-            width = (int)boundsF.Width * sizeof(PixelData);
-            if (width % 4 != 0)
+            _width = (int) boundsF.Width*sizeof (PixelData);
+            if (_width%4 != 0)
             {
-                width = 4 * (width / 4 + 1);
+                _width = 4*(_width/4 + 1);
             }
-            bitmapData =
-           bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            _bitmapData =
+                Bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
-            pBase = (Byte*)bitmapData.Scan0.ToPointer();
+            _pBase = (byte*) _bitmapData.Scan0.ToPointer();
         }
 
         public PixelData GetPixel(int x, int y)
         {
-            PixelData returnValue = *PixelAt(x, y);
+            var returnValue = *PixelAt(x, y);
             return returnValue;
         }
 
         public void SetPixel(int x, int y, PixelData colour)
         {
-            PixelData* pixel = PixelAt(x, y);
+            var pixel = PixelAt(x, y);
             *pixel = colour;
         }
 
         public void UnlockBitmap()
         {
-            bitmap.UnlockBits(bitmapData);
-            bitmapData = null;
-            pBase = null;
-        }
-        public PixelData* PixelAt(int x, int y)
-        {
-            return (PixelData*)(pBase + y * width + x * sizeof(PixelData));
+            Bitmap.UnlockBits(_bitmapData);
+            _bitmapData = null;
+            _pBase = null;
         }
 
-     
-     
+        public PixelData* PixelAt(int x, int y)
+        {
+            return (PixelData*) (_pBase + y*_width + x*sizeof (PixelData));
+        }
     }
+
     public struct PixelData
     {
-        public byte blue;
-        public byte green;
-        public byte red;
+        public byte Blue;
+        public byte Green;
+        public byte Red;
     }
 }

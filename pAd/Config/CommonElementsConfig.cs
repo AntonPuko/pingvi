@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using AForge.Imaging;
 using AForge.Neuro;
 using Pingvi.Config;
 
 namespace Pingvi
 {
-   public class CommonElementsConfig {
-       
+    public class CommonElementsConfig
+    {
+        public CommonElementsConfig()
+        {
+            Blinds = new BlindsElementsConfig();
+        }
+
 
         public Rectangle FlopCard1Rect { get; set; }
         public Rectangle FlopCard2Rect { get; set; }
@@ -22,31 +22,25 @@ namespace Pingvi
 
         public string DeckPath { get; set; }
         public List<Bitmap> DeckList { get; set; }
-        public List<UnmanagedImage> DeckListUnmanaged { get; set; } 
-
-       
+        public List<UnmanagedImage> DeckListUnmanaged { get; set; }
 
 
-       //blinds
+        //blinds
 
         public BlindsElementsConfig Blinds { get; set; }
 
 
-
-       //LINE
+        //LINE
         public PixelPoint[] LinePixelPositions { get; set; }
         public Dictionary<Color, string> LineLettersColorDictionary { get; set; }
 
 
-
-       //alterline
+        //alterline
         public Rectangle[] LineRectPositions { get; set; }
         public string LineNetworkPath { get; set; }
         public ActivationNetwork LineNetwork { get; set; }
 
-        public Dictionary<int,string> LineLettersNumbersDictionary { get; set; } 
-
-       
+        public Dictionary<int, string> LineLettersNumbersDictionary { get; set; }
 
 
         //Colors
@@ -60,7 +54,7 @@ namespace Pingvi
 
         public Color RockColor { get; set; }
         public Color ManiacColor { get; set; }
-       
+
 
         public Color InHandColor { get; set; }
         public Color InGameColor { get; set; }
@@ -78,7 +72,7 @@ namespace Pingvi
         public string PotDigitsPath { get; set; }
         public List<Bitmap> PotDigitsList { get; set; }
 
-        public List<UnmanagedImage> PotDigitsListUnmanaged { get; set; } 
+        public List<UnmanagedImage> PotDigitsListUnmanaged { get; set; }
 
         public Color PotDigitsColor { get; set; }
 
@@ -91,10 +85,9 @@ namespace Pingvi
         public Color BetDigitsColor { get; set; }
 
 
-
         public string StatsDigitsPath { get; set; }
         public List<Bitmap> StatsDigitsList { get; set; }
-        public List<UnmanagedImage> StatsDigitsListUnmanaged { get; set; } 
+        public List<UnmanagedImage> StatsDigitsListUnmanaged { get; set; }
         public Color StatsDigitsColor { get; set; }
 
 
@@ -110,12 +103,5 @@ namespace Pingvi
         public Color MultiplierColorX120 { get; set; }
         public Color MultiplierColorX240 { get; set; }
         public Color MultiplierColorX3600 { get; set; }
-
-        public CommonElementsConfig() {
-           Blinds = new BlindsElementsConfig();
-        }
-
-       
-
     }
 }

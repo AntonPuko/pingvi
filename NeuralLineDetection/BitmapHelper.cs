@@ -127,11 +127,11 @@ namespace NeuralLineDetection
                     byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
                     for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
                     {
-                        int Blue = currentLine[x];
-                        int Green = currentLine[x + 1];
-                        int Red = currentLine[x + 2];
+                        int blue = currentLine[x];
+                        int green = currentLine[x + 1];
+                        int red = currentLine[x + 2];
 
-                        if (Blue == 255 && Green == 255 && Red == 255) res[c] = 0.5;
+                        if (blue == 255 && green == 255 && red == 255) res[c] = 0.5;
                         else res[c] = -0.5;
                         c++;
                     }
@@ -158,11 +158,11 @@ namespace NeuralLineDetection
                     byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
                     for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
                     {
-                        int Blue = currentLine[x];
-                        int Green = currentLine[x + 1];
-                        int Red = currentLine[x + 2];
+                        int blue = currentLine[x];
+                        int green = currentLine[x + 1];
+                        int red = currentLine[x + 2];
 
-                        if (Blue == 255 && Green == 255 && Red == 255) res[c] = 0.5;
+                        if (blue == 255 && green == 255 && red == 255) res[c] = 0.5;
                         else res[c] = -0.5;
                         c++;
                     }

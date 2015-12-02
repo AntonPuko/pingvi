@@ -81,10 +81,10 @@ namespace SQLTest
             
             ResultLabel.Content = rr;
 
-            string URL = "http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"2015-06-26 07:00:00 AM\"}";
+            string url = "http://localhost:8001/query?q=select StatTourneyCount, StatAllInEVAdjustedChips from stats where HandTimestamp > {d \"2015-06-26 07:00:00 AM\"}";
             string json;
             using (var webClient = new System.Net.WebClient()) {
-                json = webClient.DownloadString(URL);
+                json = webClient.DownloadString(url);
             }
 
             
@@ -92,10 +92,10 @@ namespace SQLTest
             var o = JObject.Parse(json);
             var results =  o["Results"];
             var tagCount = results[0]["TagCount"];
-            var chipsEV = results[0]["Chips(EVAdjusted)"];
+            var chipsEv = results[0]["Chips(EVAdjusted)"];
 
 
-            Debug.WriteLine(tagCount + " " + chipsEV);
+            Debug.WriteLine(tagCount + " " + chipsEv);
             
             
            

@@ -25,7 +25,7 @@ namespace RangeParser {
     public partial class MainWindow : Window {
 
        
-        private string path = @"P:\Dropbox\pAd\pAd\bin\Debug\Data\Ranges";
+        private string _path = @"P:\Dropbox\pAd\pAd\bin\Debug\Data\Ranges";
         public MainWindow() {
             InitializeComponent();
             
@@ -34,7 +34,7 @@ namespace RangeParser {
         
        
         private void LoadRangeButton_Click(object sender, RoutedEventArgs e) {
-            var handRange = XmlRangeHelper.Load(path);
+            var handRange = XmlRangeHelper.Load(_path);
          
             StringBuilder sb = new StringBuilder();
             foreach (var h in handRange.Hands) {
@@ -46,8 +46,8 @@ namespace RangeParser {
 
         private void SaveRangeButton_Click(object sender, RoutedEventArgs e) {
             var  handRange = new Range(NameTextBox.Text, RangeBox.Text);
-            path = String.Format("{0}.xml", NameTextBox.Text);
-            XmlRangeHelper.Save(handRange, path);
+            _path = String.Format("{0}.xml", NameTextBox.Text);
+            XmlRangeHelper.Save(handRange, _path);
         }
 
 

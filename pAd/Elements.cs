@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using PokerModel;
 
-namespace Pingvi {
-    public enum ButtonPosition {
+namespace Pingvi
+{
+    public enum ButtonPosition
+    {
         None,
         Hero,
         Left,
         Right
     }
 
-    public enum CurrentStreet {
+    public enum CurrentStreet
+    {
         Preflop,
         Flop,
         Turn,
@@ -17,8 +20,10 @@ namespace Pingvi {
     }
 
 
-    public class Elements {
-        public Elements() {
+    public class Elements
+    {
+        public Elements()
+        {
             HeroPlayer = new Hero("Hero");
             LeftPlayer = new Player("LeftPlayer");
             RightPlayer = new Player("RightPlayer");
@@ -33,7 +38,7 @@ namespace Pingvi {
         public Card TurnCard { get; set; }
         public Card RiverCard { get; set; }
         public int? TourneyMultiplier { get; set; }
-        public bool IsHU { get; set; }
+        public bool IsHu { get; set; }
         public Player HuOpp { get; set; }
         public double SbBtnEffStack { get; set; }
         public double TotalPot { get; set; }
