@@ -186,12 +186,21 @@ namespace Pingvi
 
 
             //SB OPEN VS BB 2MAX HU PROB MODE
+            /*
             lineInfo.StartRule()
                 .HeroPosition(PlayerPosition.Sb)
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
                 .EffectiveStackBetween(7, 8)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7-8BB", bbRaiseLimper, PlMode.More));
+                */
+
+            lineInfo.StartRule()
+             .HeroPosition(PlayerPosition.Sb)
+             .HeroRelativePosition(HeroRelativePosition.InPosition)
+             .HeroPreflopState(HeroPreflopState.Open)
+             .EffectiveStackBetween(7, 8)
+             .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7-8BB_GTO", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
                 .HeroPosition(PlayerPosition.Sb)
