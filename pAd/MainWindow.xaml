@@ -21,10 +21,12 @@
         <Label Name="HeroLabel" Content="Hero" Grid.Column="1" Margin="2" Grid.Row="2" />
         <Label Name="RightPlayerLabel" Content="RigthPlayer" Grid.Column="2" Margin="2" Grid.Row="2" />
         <Label Name="SituationLabel" Content="Situation" Margin="2,2.435,1.906,1.622" Grid.Row="3" Grid.ColumnSpan="3" />
-        <Label Name="RangeLabel" Content="Label" HorizontalAlignment="Left" Margin="80,3,0,0" VerticalAlignment="Top"
-               Grid.ColumnSpan="3" Width="437" />
+        <Label Name="RangeLabel" Content="Label" HorizontalAlignment="Left" Margin="99.698,3,0,0" VerticalAlignment="Top"
+               Grid.ColumnSpan="2" Width="209" Grid.Column="1" />
         <Button Name="MakeButton" Content="Make" Grid.Column="2" HorizontalAlignment="Left" Margin="123.396,9,0,0"
                 VerticalAlignment="Top" Width="75" Click="MakeButton_Click" />
+        <RadioButton x:Name="SecondMonitorRadio" Content="SecMonitor" IsChecked="True" GroupName="MonitorSwitch" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="FirstMonitorRadio" Content="FirstMonitor" GroupName="MonitorSwitch" HorizontalAlignment="Left" Margin="174,11,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

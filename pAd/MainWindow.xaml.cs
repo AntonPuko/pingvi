@@ -11,15 +11,34 @@ namespace Pingvi
 {
     public partial class MainWindow : Window
     {
-        private readonly ITableCatcher _tableCatcher;
+        private ITableCatcher _tableCatcher;
 
-        private readonly ElementsManager _elementManager;
+        private ElementsManager _elementManager;
         private Bitmap _tableBitmap;
+        private int  _fistMonitorShiftConst = 0;
 
         public MainWindow()
         {
-            var tablePositionRect = new Rectangle(2150, 20, 800, 574);
-            // var tablePositionRect = new Rectangle(230, 20, 800, 574);
+            InitializeComponent();
+
+
+
+
+            
+        }
+
+        private void OnNewTableBitmap(Bitmap obj)
+        {
+            _tableBitmap = obj;
+        }
+
+
+        private void StartButton_Click(object sender, RoutedEventArgs e) {
+            StartButton.IsEnabled = false;
+       
+
+            var tablePositionRect = CreateMainWindowRect();
+
             var tableFrameInterval = 100;
             // TimeSpan tableFrameIntervalSpan  = TimeSpan.FromMilliseconds(100);
             var screenShotsPath = @"P:\screens\";
@@ -27,7 +46,9 @@ namespace Pingvi
             _tableCatcher = new AForgeTableCatcher(tablePositionRect, tableFrameInterval, screenShotsPath);
             // _tableCatcher = new ScreenShotTableCatcher(tablePositionRect, tableFrameIntervalSpan, screenShotsPath);
 
-            var hudWindow = new HWindow(_tableCatcher);
+            var hudWindow = new HWindow(_tableCatcher)
+            { Top = tablePositionRect.Top + 425, Left = tablePositionRect.Left + 100 + _fistMonitorShiftConst };
+
             _elementManager = new ElementsManager();
             var lineManager = new LineManager();
             var decisionManager = new DecisionManager();
@@ -38,23 +59,29 @@ namespace Pingvi
 
 
             //CREATE LINE WINDOWS
-            var heroLineWindow = new LWindow(0) {Top = 410, Left = 2360};
+            var heroLineWindow = new LWindow(0)
+            { Top = tablePositionRect.Top + 390, Left = tablePositionRect.Left + 210  + _fistMonitorShiftConst };
+
             heroLineWindow.ShowInTaskbar = false;
             lineManager.NewLineInfo +=
-                li => Dispatcher.BeginInvoke((Action) delegate { heroLineWindow.OnNewLineInfo(li); });
+                li => Dispatcher.BeginInvoke((Action)delegate { heroLineWindow.OnNewLineInfo(li); });
             heroLineWindow.Show();
 
-            var leftLineWindow = new LWindow(1) {Top = 120, Left = 2150};
+            var leftLineWindow = new LWindow(1)
+            { Top = tablePositionRect.Top + 100, Left = tablePositionRect.Left + 0 + _fistMonitorShiftConst };
+
             leftLineWindow.ShowInTaskbar = false;
             lineManager.NewLineInfo +=
-                li => Dispatcher.BeginInvoke((Action) delegate { leftLineWindow.OnNewLineInfo(li); });
+                li => Dispatcher.BeginInvoke((Action)delegate { leftLineWindow.OnNewLineInfo(li); });
             leftLineWindow.Show();
 
 
-            var rightLineWindow = new LWindow(2) {Top = 120, Left = 2380};
+            var rightLineWindow = new LWindow(2)
+            { Top = tablePositionRect.Top + 100, Left = tablePositionRect.Left + 230 + _fistMonitorShiftConst };
+         
             rightLineWindow.ShowInTaskbar = false;
             lineManager.NewLineInfo +=
-                li => Dispatcher.BeginInvoke((Action) delegate { rightLineWindow.OnNewLineInfo(li); });
+                li => Dispatcher.BeginInvoke((Action)delegate { rightLineWindow.OnNewLineInfo(li); });
             rightLineWindow.Show();
 
 
@@ -65,9 +92,9 @@ namespace Pingvi
             // decisionManager.NewDecisionInfo += hudWindow.OnNewDecisionInfo;
             // decisionManager.NewDecisionInfo +=  OnNewDecisionInfo;
             decisionManager.NewDecisionInfo +=
-                di => Dispatcher.BeginInvoke((Action) delegate { hudWindow.OnNewDecisionInfo(di); });
+                di => Dispatcher.BeginInvoke((Action)delegate { hudWindow.OnNewDecisionInfo(di); });
             decisionManager.NewDecisionInfo +=
-                di => Dispatcher.BeginInvoke((Action) delegate { OnNewDecisionInfo(di); });
+                di => Dispatcher.BeginInvoke((Action)delegate { OnNewDecisionInfo(di); });
 
             hudWindow.Show();
 
@@ -75,7 +102,8 @@ namespace Pingvi
             //create new thread for result window because of http query lags
             var resultWindowThread = new Thread(() =>
             {
-                var resultWindow = new RWindow();
+                var resultWindow = new RWindow()
+                { Top = tablePositionRect.Top -20, Left = tablePositionRect.Left + 40 + _fistMonitorShiftConst };
                 resultWindow.Show();
                 Dispatcher.Run();
             });
@@ -84,18 +112,6 @@ namespace Pingvi
             resultWindowThread.IsBackground = true;
             resultWindowThread.Start();
 
-
-            InitializeComponent();
-        }
-
-        private void OnNewTableBitmap(Bitmap obj)
-        {
-            _tableBitmap = obj;
-        }
-
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
             _tableCatcher.Start();
         }
 
@@ -176,6 +192,19 @@ namespace Pingvi
                 player.Status, player.Position, player.Line,
                 player.CurrentStack, player.Bet, player.Type);
         }
+
+        private Rectangle CreateMainWindowRect() {
+            if (SecondMonitorRadio.IsChecked == true)
+            {
+                return new Rectangle(2150, 20, 800, 574);
+            }
+            else
+            {
+                _fistMonitorShiftConst = 165;
+                return new Rectangle(400,20,800,574);
+            }
+        }
+    
 
         private void MakeButton_Click(object sender, RoutedEventArgs e)
         {
