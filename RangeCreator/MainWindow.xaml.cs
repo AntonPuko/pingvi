@@ -29,7 +29,7 @@ namespace RangeCreator
         private int _decision1 = 0;
         private int _decision2 = 0;
         private double _stat = 0;
-        private string _rangePath;
+        private string _rangePath;o
 
         private bool _isProbCountMode;
         public MainWindow()
@@ -86,25 +86,25 @@ namespace RangeCreator
 
             switch (decision) {
                 case 0:
-                    senderButton.Content = "0-None";
+                    senderButton.Content = "N";
                     break;
                 case 1:
-                    senderButton.Content = "1-FOLD";
+                    senderButton.Content = "F";
                     break;
                 case 2:
-                    senderButton.Content = "2-LIMP";
+                    senderButton.Content = "L";
                     break;
                 case 3:
-                    senderButton.Content = "3-OPEN";
+                    senderButton.Content = "O";
                     break;
                 case 4:
-                    senderButton.Content = "4-CALL";
+                    senderButton.Content = "C";
                     break;
                 case 5:
-                    senderButton.Content = "5-3BET";
+                    senderButton.Content = "3";
                     break;
                 case 6:
-                    senderButton.Content = "6-PUSH";
+                    senderButton.Content = "P";
                     break;
 
             }

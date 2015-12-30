@@ -1,0 +1,16 @@
+P:\Dropbox\pAd\GTORangeCreator\bin\Debug\GTORangeCreator.exe.config
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator.csprojResolveAssemblyReference.cache
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\MainWindow.g.cs
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\App.g.cs
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator_MarkupCompile.cache
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator_MarkupCompile.lref
+P:\Dropbox\pAd\GTORangeCreator\bin\Debug\GTORangeCreator.exe
+P:\Dropbox\pAd\GTORangeCreator\bin\Debug\GTORangeCreator.pdb
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\MainWindow.baml
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator.g.resources
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator.Properties.Resources.resources
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator.csproj.GenerateResource.Cache
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator.exe
+P:\Dropbox\pAd\GTORangeCreator\obj\Debug\GTORangeCreator.pdb
+P:\Dropbox\pAd\GTORangeCreator\bin\Debug\PokerModel.dll
+P:\Dropbox\pAd\GTORangeCreator\bin\Debug\PokerModel.pdb

@@ -31,6 +31,7 @@ namespace Pingvi
     public class DecisionManager
     {
         private const string RangesPath = @"Data\Ranges";
+        private const string GtoRangesList = @"Data\GtoRanges";
         private readonly Random _propapilityRandomizer = new Random((int) DateTime.Now.Ticks);
         private bool _isNewDecision;
         private PreflopDecision _preflopDecision;
@@ -38,10 +39,22 @@ namespace Pingvi
         private PreviousLineInfo _prevLineInfo;
         private int _probRand;
         private List<Range> _rangesList;
+        private List<GtoRange> _gtoRangesList;
+
+        private int[][] _probRanges = new[]
+        {
+            new[] {0, 0},
+            new[] {0, 0},
+            new[] {0, 0},
+            new[] {0, 0},
+        };
+
+        double? _raiseSize = 0;
 
         public DecisionManager()
         {
             LoadRanges(RangesPath);
+            LoadGtoRanges(GtoRangesList);
         }
 
         public event Action<DecisionInfo> NewDecisionInfo;
@@ -69,6 +82,7 @@ namespace Pingvi
             if (!IsPrevLineInfoEquals(lineInfo, _prevLineInfo)) _probRand = _propapilityRandomizer.Next(1, 100);
             RefreshPrevLineInfo(lineInfo);
 
+            _raiseSize = null;
 
             _isNewDecision = false;
 
@@ -79,6 +93,7 @@ namespace Pingvi
             {
                 _isNewDecision = true;
                 _preflopDecision = PreflopDecision.None;
+                
             }
 
 
@@ -465,6 +480,14 @@ namespace Pingvi
             if (buttonOpener != null) btnSteal = buttonOpener.Stats.PfBtnSteal;
             const double defaultBtnSteal = 35;
             if (btnSteal == null) btnSteal = defaultBtnSteal;
+
+
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+              .HeroPreflopState(HeroPreflopState.FacingOpen)
+              .OppBetSizeMinRaise()
+              .EffectiveStackSbVsBtnBetween(0, 15)
+              .Do(l => CheckGtoDecision(heroHand, "RangeName"));
+
 
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
@@ -1463,6 +1486,7 @@ namespace Pingvi
                 LineInfo = lineInfo,
                 PreflopRangeChosen = _preflopRangeName,
                 PreflopDecision = _preflopDecision,
+                RaiseSize = _raiseSize,
                 PotOdds = FindPotOdds(lineInfo.Elements)
             };
 
@@ -1549,7 +1573,7 @@ namespace Pingvi
             {
                 if (heroHand.Name == "" || heroHand.Name.Length != 4)
                 {
-                    Debug.WriteLine("wrong heroHand Name");
+                    //Debug.WriteLine("wrong heroHand Name");
                     return;
                 }
 
@@ -1578,12 +1602,70 @@ namespace Pingvi
             }
         }
 
+        private void CheckGtoDecision(Hand heroHand, string rangeName) {
+            if (_isNewDecision || heroHand == null) return;
+            var range = _gtoRangesList.FirstOrDefault(r => r.Name == rangeName);
+            _preflopRangeName = rangeName;
+            if (range != null)
+            {
+                if (heroHand.Name == "" || heroHand.Name.Length != 4) return;
+                var gtoHand = range.Hands.First(n => n.Name == heroHand.Name);
+
+                CountProbRanges(gtoHand);
+
+                if (_probRand > 0 && _probRand <= _probRanges[0][1])
+                {
+                    _preflopDecision = (PreflopDecision) gtoHand.Decisions[0].Value;
+                    _raiseSize = gtoHand.Decisions[0].Size;
+
+                } else if (_probRand > _probRanges[1][0] && _probRand <= _probRanges[1][1])
+                {
+                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[1].Value;
+                    _raiseSize = gtoHand.Decisions[1].Size;
+                } else if (_probRand > _probRanges[2][0] && _probRand <= _probRanges[2][1])
+                {
+                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[2].Value;
+                    _raiseSize = gtoHand.Decisions[2].Size;
+                } else if (_probRand > _probRanges[3][0] && _probRand <= _probRanges[3][1])
+                {
+                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[3].Value;
+                    _raiseSize = gtoHand.Decisions[3].Size;
+                }
+                _isNewDecision = true;
+            }
+            else
+            {
+                Debug.WriteLine(string.Format("can't find range {0}", rangeName));
+            }
+        }
+
+        private void CountProbRanges(GtoRangeHand hand)
+        {
+            _probRanges[0][0] = 0;
+            _probRanges[0][1] = hand.Decisions[0].Probability;
+            _probRanges[1][0] = _probRanges[0][1];
+            _probRanges[1][1] = _probRanges[1][0] + hand.Decisions[1].Probability;
+            _probRanges[2][0] = _probRanges[1][1];
+            _probRanges[2][1] = _probRanges[2][0] + hand.Decisions[2].Probability;
+            _probRanges[3][0] = _probRanges[2][1];
+            _probRanges[3][1] = _probRanges[3][0] + hand.Decisions[3].Probability;
+        }
+
+
         private void LoadRanges(string rangesPath)
         {
             _rangesList = new List<Range>();
             foreach (var file in Directory.GetFiles(rangesPath, "*.xml", SearchOption.AllDirectories))
             {
                 _rangesList.Add(XmlRangeHelper.Load(file));
+            }
+        }
+
+        private void LoadGtoRanges(string gtoRangesPath) {
+            _gtoRangesList = new List<GtoRange>();
+            foreach (var file in Directory.GetFiles(gtoRangesPath, "*.xml", SearchOption.AllDirectories))
+            {
+                _gtoRangesList.Add(XmlGtoRangeHelper.Load(file));
             }
         }
 
