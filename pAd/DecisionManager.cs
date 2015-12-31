@@ -203,7 +203,7 @@ namespace Pingvi
             //VS OTHERS
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroPreflopState(HeroPreflopState.Open)
-                .EffectiveStackBetween(0, 7)
+                .EffectiveStackBetween(0, 6)
                 .Do(l => CheckDecision(heroHand, "SB_OPENPUSH_NASH", l.Elements.EffectiveStack, PlMode.Less));
 
 
@@ -217,11 +217,19 @@ namespace Pingvi
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7-8BB", bbRaiseLimper, PlMode.More));
                 */
 
+            //gto
+            lineInfo.StartRule()
+            .HeroPosition(PlayerPosition.Sb)
+            .HeroRelativePosition(HeroRelativePosition.InPosition)
+            .HeroPreflopState(HeroPreflopState.Open)
+            .EffectiveStackBetween(6, 8)
+            .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_7bb_GTO"));
+
             lineInfo.StartRule()
              .HeroPosition(PlayerPosition.Sb)
              .HeroRelativePosition(HeroRelativePosition.InPosition)
              .HeroPreflopState(HeroPreflopState.Open)
-             .EffectiveStackBetween(7, 8)
+             .EffectiveStackBetween(6, 8)
              .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7-8BB_GTO", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
