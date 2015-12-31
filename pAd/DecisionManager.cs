@@ -1168,7 +1168,7 @@ namespace Pingvi
               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
               .OppBetSizeMinRaise()
               .EffectiveStackBetween(17, 20)
-              .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPEN_2MAX_17-20BB"));
+              .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPEN_2max_18bb_GTO"));
 
            // lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
            //     .HeroPreflopState(HeroPreflopState.FacingOpen).IsHu()

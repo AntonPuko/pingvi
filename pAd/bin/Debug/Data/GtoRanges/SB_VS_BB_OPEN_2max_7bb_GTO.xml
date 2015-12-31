@@ -5416,8 +5416,8 @@
       </SecondCard>
       <Decisions>
         <Decision Value="2" Size="2" Probability="50.64" />
-        <Decision Value="6" Size="0" Probability="0" />
-        <Decision Value="1" Size="0" Probability="49.36" />
+        <Decision Value="6" Size="0" Probability="49.36" />
+        <Decision Value="0" Size="0" Probability="0" />
         <Decision Value="0" Size="0" Probability="0" />
       </Decisions>
     </GtoRangeHand>
@@ -5436,8 +5436,8 @@
       </SecondCard>
       <Decisions>
         <Decision Value="2" Size="2" Probability="50.64" />
-        <Decision Value="6" Size="0" Probability="0" />
-        <Decision Value="1" Size="0" Probability="49.36" />
+        <Decision Value="6" Size="0" Probability="49.36" />
+        <Decision Value="0" Size="0" Probability="0" />
         <Decision Value="0" Size="0" Probability="0" />
       </Decisions>
     </GtoRangeHand>
@@ -5456,8 +5456,8 @@
       </SecondCard>
       <Decisions>
         <Decision Value="2" Size="2" Probability="50.64" />
-        <Decision Value="6" Size="0" Probability="0" />
-        <Decision Value="1" Size="0" Probability="49.36" />
+        <Decision Value="6" Size="0" Probability="49.36" />
+        <Decision Value="0" Size="0" Probability="0" />
         <Decision Value="0" Size="0" Probability="0" />
       </Decisions>
     </GtoRangeHand>
@@ -5476,8 +5476,8 @@
       </SecondCard>
       <Decisions>
         <Decision Value="2" Size="2" Probability="50.64" />
-        <Decision Value="6" Size="0" Probability="0" />
-        <Decision Value="1" Size="0" Probability="49.36" />
+        <Decision Value="6" Size="0" Probability="49.36" />
+        <Decision Value="0" Size="0" Probability="0" />
         <Decision Value="0" Size="0" Probability="0" />
       </Decisions>
     </GtoRangeHand>
