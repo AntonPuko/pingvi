@@ -302,15 +302,7 @@ namespace Pingvi
                             break;
                         case HeroPreflopState.FacingOpen:
                             DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
-                            if (decisionInfo.RaiseSize != null)
-                            {
-                                DecisionRun.Text = "___OP " + decisionInfo.RaiseSize;
-                            }
-                            else
-                            {
-                                DecisionRun.Text = "___OP 63";
-                            }
-                            
+                            DecisionRun.Text = "___OP 63";
                             break;
                     }
                     break;

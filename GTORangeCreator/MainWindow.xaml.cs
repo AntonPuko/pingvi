@@ -29,17 +29,17 @@ namespace GTORangeCreator
       
         
 
-        private int[][] _probRanges = new[]
+        private double[][] _probRanges = new[]
         {
-            new[] {0, 0},
-            new[] {0, 0},
-            new[] {0, 0},
-            new[] {0, 0},
+            new[] {0.0, 0.0},
+            new[] { 0.0, 0.0},
+            new[] { 0.0, 0.0},
+            new[] { 0.0, 0.0},
         };
         
         private int[] _decisions = {0,0,0,0};
         private double[] _sizes = { 0, 0, 0, 0 };
-        private int[] _probabilities = {  0,0,0,0};
+        private double[] _probabilities = {  0,0,0,0};
 
         public MainWindow()
         {
@@ -273,10 +273,10 @@ namespace GTORangeCreator
         }
 
         private void ParseProbValues() {
-            int.TryParse(ProbTb1.Text, out _probabilities[0]);
-            int.TryParse(ProbTb2.Text, out _probabilities[1]);
-            int.TryParse(ProbTb3.Text, out _probabilities[2]);
-            int.TryParse(ProbTb4.Text, out _probabilities[3]);
+            double.TryParse(ProbTb1.Text, out _probabilities[0]);
+            double.TryParse(ProbTb2.Text, out _probabilities[1]);
+            double.TryParse(ProbTb3.Text, out _probabilities[2]);
+            double.TryParse(ProbTb4.Text, out _probabilities[3]);
         }
 
         private void ParseSizeValues()
@@ -310,6 +310,11 @@ namespace GTORangeCreator
             }
          
             return Color.FromArgb(color.A, (byte)red, (byte)green, (byte)blue);
+        }
+
+        private void ProbTb_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            var btn = (TextBox) sender;
+            btn.Text = "";
         }
     }
 }

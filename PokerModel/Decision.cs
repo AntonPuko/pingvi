@@ -14,7 +14,7 @@ namespace PokerModel
         [XmlAttribute]
         public double Size { get; set; }
         [XmlAttribute]
-        public int Probability { get; set; }
+        public double Probability { get; set; }
 
         public Decision() {
             
