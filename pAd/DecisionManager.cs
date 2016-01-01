@@ -196,7 +196,7 @@ namespace Pingvi
             //VS SMALL STACK
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                 .HeroPreflopState(HeroPreflopState.Open)
-                .EffectiveStackBetween(0, 7)
+                .EffectiveStackBetween(0, 6)
                 .VsSmallStack()
                 .Do(l => CheckDecision(heroHand, "SB_OPENPUSH_NASH_EXPANDED", l.Elements.EffectiveStack, PlMode.Less));
 
@@ -366,7 +366,7 @@ namespace Pingvi
                 .HeroPosition(PlayerPosition.Sb).IsHu()
                 .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
-                .EffectiveStackBetween(7, 9)
+                .EffectiveStackBetween(6, 9)
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_3MAX_7-9BB_UNK", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
