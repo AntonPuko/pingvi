@@ -661,6 +661,18 @@ namespace Pingvi
             //BB VS SB LIMP 2MAX(OOP)
             // const double bigLimpFold = 78;
 
+            //gto
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
+              .HeroPreflopState(HeroPreflopState.FacingLimp)
+              .Is2Max()
+              .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+              .EffectiveStackBetween(6, 8)
+              .VsBigStack()
+              .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2max_7bb_GTO"));
+
+
+
+
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingLimp)
                 .Is2Max()
