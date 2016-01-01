@@ -136,8 +136,9 @@ namespace Pingvi
 
 
             const double vppMultiplicator = 5.5;
-            const double bonusFormula = 3.5/40000*600;
-            rakeback = rake*vppMultiplicator*bonusFormula*_usdRubExRate;
+            //const double bonusFormula = 3.5/40000*600; old until 2016
+            const double stepFormula = 50.0/1000;
+            rakeback = rake*vppMultiplicator*stepFormula * _usdRubExRate;
 
 
             CountRun.Text = tagCount.ToString();
