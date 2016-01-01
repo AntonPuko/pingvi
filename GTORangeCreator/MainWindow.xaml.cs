@@ -41,6 +41,9 @@ namespace GTORangeCreator
         private double[] _sizes = { 0, 0, 0, 0 };
         private double[] _probabilities = {  0,0,0,0};
 
+
+        private double[] _decisionFreqArray = new double[7];
+
         public MainWindow()
         {
             InitializeComponent();
@@ -161,6 +164,7 @@ namespace GTORangeCreator
             }
 
             ColorHandsInMatrix();
+            updateFreqTextBox();
         }
 
         private void ColorHandsInMatrix() {
@@ -288,6 +292,50 @@ namespace GTORangeCreator
         }
 
 
+        private void updateFreqTextBox() {
+            CountRangeStats();
+            StringBuilder str = new StringBuilder();
+
+            str.Append("Range Freq: \n");
+            for (int i = 0; i < _decisionFreqArray.Length; i ++)
+            {
+                var decisionName = "";
+                switch (i)
+                {
+                    case 0: decisionName = "none"; break;
+                    case 1: decisionName = "fold"; break;
+                    case 2: decisionName = "limp"; break;
+                    case 3: decisionName = "open/iso"; break;
+                    case 4: decisionName = "call"; break;
+                    case 5: decisionName = "3bet"; break;
+                    case 6: decisionName = "push"; break;
+                    default: decisionName = ""; break;
+                }
+                str.Append(decisionName + ": " + _decisionFreqArray[i].ToString("##.#") + "\n");
+            }
+
+            str.Append("sum: " +_decisionFreqArray.Sum().ToString("##.#"));
+            RangeStatsTextBlock.Text = str.ToString();
+
+        }
+
+        private void CountRangeStats() {
+            for (int i = 0; i < _decisionFreqArray.Length; i++)
+            {
+                _decisionFreqArray[i] = 0;
+            }
+           
+            foreach (var h in _range.Hands)
+            {
+                for (int i = 0; i < _decisionFreqArray.Length; i++)
+                {
+                    var des = h.Decisions.FirstOrDefault(d => d.Value == i);
+                    if (des == null) continue;
+                    _decisionFreqArray[i] += des.Probability / 1326;
+                }
+               
+            }
+        }
 
         public static Color ChangeColorBrightness(Color color, float correctionFactor)
         {

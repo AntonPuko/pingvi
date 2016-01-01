@@ -250,6 +250,7 @@
         <TextBox x:Name="RangeNameTextBox"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="6.34,34,0,0" TextWrapping="Wrap" Text="RangeName" VerticalAlignment="Top" Width="251"/>
         <Button x:Name="SaveRangeButton" Content="SaveRange" Grid.Column="1" HorizontalAlignment="Left" Margin="10.34,385,0,0" VerticalAlignment="Top" Width="75" Click="SaveRangeButton_Click" Height="24"/>
         <Button x:Name="OpenRangeButton" Content="Open" Grid.Column="1" HorizontalAlignment="Left" Margin="6.34,5,0,0" VerticalAlignment="Top" Width="75" Click="OpenRangeButton_Click" Height="24" />
-      
+        <TextBlock x:Name="RangeStatsTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="205.34,102,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Height="129" Width="138"/>
+
     </Grid>
 </Window>
