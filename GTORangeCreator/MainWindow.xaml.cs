@@ -42,7 +42,8 @@ namespace GTORangeCreator
         private double[] _probabilities = {  0,0,0,0};
 
 
-        private double[] _decisionFreqArray = new double[7];
+        private double[] _decisionFreqRangeArray = new double[7];
+        private double[] _decisionFreqHandArray = new double[7];
 
         public MainWindow()
         {
@@ -51,14 +52,66 @@ namespace GTORangeCreator
             CreateRangeBtn_Click(null, null);
         }
 
-        private void Tb_MouseUp(object sender, MouseButtonEventArgs e)
+        private void Tb_MouseLeftBtnUp(object sender, MouseButtonEventArgs e)
         {
             TextBlock targetTb = (TextBlock)sender;
-            
-
             ColorTextBLock(targetTb);
             SetHandDecisions(targetTb);
 
+        }
+
+        private void Tb_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock targetTb = (TextBlock)sender;
+            SetHandStats(targetTb);
+
+        }
+
+        private void SetHandStats(TextBlock targetTb) {
+            GetHandDecisionsFreq(targetTb);
+            StringBuilder str = new StringBuilder();
+
+            str.Append("Hand Freq: \n");
+            for (int i = 0; i < _decisionFreqHandArray.Length; i++)
+            {
+                var decisionName = "";
+                switch (i)
+                {
+                    case 0: decisionName = "none"; break;
+                    case 1: decisionName = "fold"; break;
+                    case 2: decisionName = "limp"; break;
+                    case 3: decisionName = "open/iso"; break;
+                    case 4: decisionName = "call"; break;
+                    case 5: decisionName = "3bet"; break;
+                    case 6: decisionName = "push"; break;
+                    default: decisionName = ""; break;
+                }
+                str.Append(decisionName + ": " + _decisionFreqHandArray[i].ToString("##.#") + "\n");
+            }
+
+            str.Append("sum: " + _decisionFreqRangeArray.Sum().ToString("##.#"));
+            HandStatsTextBlock.Text = str.ToString();
+        }
+
+        private void GetHandDecisionsFreq(TextBlock targetTb) {
+            
+            bool tbIsSuited = targetTb.Tag.ToString()[2] == 's';
+            var hand = _range.Hands.FirstOrDefault(h =>
+                          h.Name[0] == targetTb.Tag.ToString()[0] && h.Name[2] == targetTb.Tag.ToString()[1] &&
+                          h.IsSuited == tbIsSuited);
+
+
+            for (int i = 0; i < _decisionFreqHandArray.Length; i++)
+            {
+                _decisionFreqHandArray[i] = 0;
+            }
+
+            for (int i = 0; i < _decisionFreqRangeArray.Length; i++)
+            {
+                var des = hand.Decisions.FirstOrDefault(d => d.Value == i);
+                if (des == null) continue;
+                _decisionFreqHandArray[i] = des.Probability;
+            }
         }
 
         private void SetHandDecisions(TextBlock targetTb) {
@@ -297,7 +350,7 @@ namespace GTORangeCreator
             StringBuilder str = new StringBuilder();
 
             str.Append("Range Freq: \n");
-            for (int i = 0; i < _decisionFreqArray.Length; i ++)
+            for (int i = 0; i < _decisionFreqRangeArray.Length; i ++)
             {
                 var decisionName = "";
                 switch (i)
@@ -311,27 +364,27 @@ namespace GTORangeCreator
                     case 6: decisionName = "push"; break;
                     default: decisionName = ""; break;
                 }
-                str.Append(decisionName + ": " + _decisionFreqArray[i].ToString("##.#") + "\n");
+                str.Append(decisionName + ": " + _decisionFreqRangeArray[i].ToString("##.#") + "\n");
             }
 
-            str.Append("sum: " +_decisionFreqArray.Sum().ToString("##.#"));
+            str.Append("sum: " +_decisionFreqRangeArray.Sum().ToString("##.#"));
             RangeStatsTextBlock.Text = str.ToString();
 
         }
 
         private void CountRangeStats() {
-            for (int i = 0; i < _decisionFreqArray.Length; i++)
+            for (int i = 0; i < _decisionFreqRangeArray.Length; i++)
             {
-                _decisionFreqArray[i] = 0;
+                _decisionFreqRangeArray[i] = 0;
             }
            
             foreach (var h in _range.Hands)
             {
-                for (int i = 0; i < _decisionFreqArray.Length; i++)
+                for (int i = 0; i < _decisionFreqRangeArray.Length; i++)
                 {
                     var des = h.Decisions.FirstOrDefault(d => d.Value == i);
                     if (des == null) continue;
-                    _decisionFreqArray[i] += des.Probability / 1326;
+                    _decisionFreqRangeArray[i] += des.Probability / 1326;
                 }
                
             }
@@ -364,6 +417,8 @@ namespace GTORangeCreator
             var btn = (TextBox) sender;
             btn.Text = "";
         }
+
+ 
     }
 }
 
