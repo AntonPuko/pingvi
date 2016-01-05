@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,7 +91,7 @@ namespace GTORangeCreator
                 str.Append(decisionName + ": " + _decisionFreqHandArray[i].ToString("##.#") + "\n");
             }
 
-            str.Append("sum: " + _decisionFreqRangeArray.Sum().ToString("##.#"));
+            str.Append("sum: " + _decisionFreqHandArray.Sum().ToString("##.#"));
             HandStatsTextBlock.Text = str.ToString();
         }
 
@@ -418,7 +420,57 @@ namespace GTORangeCreator
             btn.Text = "";
         }
 
- 
+        private void ImportFromTxtButton_Click(object sender, RoutedEventArgs e)
+        {
+            ImportRangeFromPioTxt();
+            ColorHandsInMatrix();
+            updateFreqTextBox();
+        }
+
+        private void ImportRangeFromPioTxt() {
+            try
+            {
+                var path = @"P:\range.txt";
+                string line;
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        var lineMass = line.Split(',');
+                        var hName = lineMass[0];
+                        string hNameShuffleSuits = hName[0].ToString() + hName[3] + hName[2] + hName[1];
+                    
+
+
+                        double[] probs = new double[3];
+
+                        probs[0] = double.Parse(lineMass[1]);
+                        probs[1] = double.Parse(lineMass[2]);
+                        probs[2] = double.Parse(lineMass[3]);
+
+                        var rHand = _range.Hands.FirstOrDefault(h =>
+                        h.Name == hName || h.Name == hNameShuffleSuits);
+
+                        if (rHand == null)
+                        {
+                            Debug.WriteLine("No hand: " + hName);
+                            return;
+                        }
+
+                        for (int i = 0; i < probs.Length; i++)
+                        {
+                            rHand.Decisions[i].Value = _decisions[i];
+                            rHand.Decisions[i].Probability = probs[i];
+                            rHand.Decisions[i].Size = _sizes[i];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
     }
 }
 
