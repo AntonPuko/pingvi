@@ -245,7 +245,7 @@
         <TextBox x:Name="ProbTb2" Grid.Column="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="35.34,255,0,0" TextWrapping="NoWrap" Text="0" VerticalAlignment="Top" Width="24" RenderTransformOrigin="-0.708,0.1" KeyUp="ProbTb_KeyUp"  MouseDoubleClick="ProbTb_MouseDoubleClick"/>
         <TextBox x:Name="ProbTb3" Grid.Column="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="64.34,255,0,0" TextWrapping="NoWrap" Text="0" VerticalAlignment="Top" Width="24" RenderTransformOrigin="-0.708,0.1" KeyUp="ProbTb_KeyUp"  MouseDoubleClick="ProbTb_MouseDoubleClick"/>
         <TextBox x:Name="ProbTb4" Grid.Column="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="93.34,255,0,0" TextWrapping="NoWrap" Text="0" VerticalAlignment="Top" Width="24" RenderTransformOrigin="-0.708,0.1" KeyUp="ProbTb_KeyUp"  MouseDoubleClick="ProbTb_MouseDoubleClick"/>
-        <TextBox x:Name="ProbSum" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="137.34,255,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="ProbSum" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="51.34,283,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="CreateRangeBtn" Content="Create" Grid.Column="1" HorizontalAlignment="Left" Margin="6.34,62,0,0" VerticalAlignment="Top" Width="75" Click="CreateRangeBtn_Click" Height="18"/>
         <TextBox x:Name="RangeNameTextBox"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="6.34,34,0,0" TextWrapping="Wrap" Text="RangeName" VerticalAlignment="Top" Width="251"/>
         <Button x:Name="SaveRangeButton" Content="SaveRange" Grid.Column="1" HorizontalAlignment="Left" Margin="10.34,385,0,0" VerticalAlignment="Top" Width="75" Click="SaveRangeButton_Click" Height="24"/>
@@ -253,6 +253,10 @@
         <TextBlock x:Name="RangeStatsTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="209.34,256,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Height="129" Width="138"/>
         <TextBlock x:Name="HandStatsTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="209.34,64,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Height="129" Width="138"/>
         <Button x:Name="ImportFromTxtButton" Content="Import" Grid.Column="1" HorizontalAlignment="Left" Margin="86.34,62,0,0" VerticalAlignment="Top" Width="75" Click="ImportFromTxtButton_Click"/>
+        <Label x:Name="DecLabel5" Content="D5" Grid.Column="1" HorizontalAlignment="Left" Margin="122.34,137,0,0" VerticalAlignment="Top" Height="24" Width="24"/>
+        <Button x:Name="DecBtn5" Tag="4"  Content="-" Grid.Column="1" HorizontalAlignment="Left" Margin="122.34,166,0,0" VerticalAlignment="Top" Width="24" Height="18" Click="DecBtn_OnClickecBtn_Click"/>
+        <TextBox x:Name="SizeTb5" Grid.Column="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="122.34,208,0,0" TextWrapping="NoWrap" Text="0" VerticalAlignment="Top" Width="24" RenderTransformOrigin="-0.708,0.1" KeyUp="SizeTb_KeyUp"/>
+        <TextBox x:Name="ProbTb5" Grid.Column="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="122.34,255,0,0" TextWrapping="NoWrap" Text="0" VerticalAlignment="Top" Width="24" RenderTransformOrigin="-0.708,0.1" KeyUp="ProbTb_KeyUp"  MouseDoubleClick="ProbTb_MouseDoubleClick"/>
 
     </Grid>
 </Window>

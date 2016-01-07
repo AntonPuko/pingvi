@@ -27,6 +27,7 @@ namespace PokerModel
                 new Decision(0, 0, 0),
                 new Decision(0, 0, 0),
                 new Decision(0, 0, 0),
+                new Decision(0, 0, 0),
                 new Decision(0, 0, 0)
             };
             return decList;

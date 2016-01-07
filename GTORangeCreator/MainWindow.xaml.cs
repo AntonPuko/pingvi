@@ -37,11 +37,12 @@ namespace GTORangeCreator
             new[] { 0.0, 0.0},
             new[] { 0.0, 0.0},
             new[] { 0.0, 0.0},
+            new[] { 0.0, 0.0},
         };
         
-        private int[] _decisions = {0,0,0,0};
-        private double[] _sizes = { 0, 0, 0, 0 };
-        private double[] _probabilities = {  0,0,0,0};
+        private int[] _decisions = {0,0,0,0,0};
+        private double[] _sizes = { 0, 0, 0, 0,0 };
+        private double[] _probabilities = {  0,0,0,0,0};
 
 
         private double[] _decisionFreqRangeArray = new double[7];
@@ -66,7 +67,6 @@ namespace GTORangeCreator
         {
             TextBlock targetTb = (TextBlock)sender;
             SetHandStats(targetTb);
-
         }
 
         private void SetHandStats(TextBlock targetTb) {
@@ -110,9 +110,10 @@ namespace GTORangeCreator
 
             for (int i = 0; i < _decisionFreqRangeArray.Length; i++)
             {
-                var des = hand.Decisions.FirstOrDefault(d => d.Value == i);
-                if (des == null) continue;
-                _decisionFreqHandArray[i] = des.Probability;
+                var matchedDecisions = hand.Decisions.Where(d => d.Value == i);
+                if (!matchedDecisions.Any()) continue;
+                var sum = matchedDecisions.Sum(dec => dec.Probability);
+                _decisionFreqRangeArray[i] += sum;
             }
         }
 
@@ -124,7 +125,7 @@ namespace GTORangeCreator
                           h.IsSuited == tbIsSuited);
             foreach (var hand in hands)
             {
-                for (int i = 0; i < 4; i ++)
+                for (int i = 0; i < _decisions.Length; i ++)
                 {
                     hand.Decisions[i].Value = _decisions[i];
                     hand.Decisions[i].Size = _sizes[i];
@@ -218,7 +219,7 @@ namespace GTORangeCreator
                 }
             }
 
-            ColorHandsInMatrix();
+           ColorHandsInMatrix();
             updateFreqTextBox();
         }
 
@@ -234,7 +235,7 @@ namespace GTORangeCreator
                        h.Name[0] == tb.Tag.ToString()[0] && h.Name[2] == tb.Tag.ToString()[1] &&
                        h.IsSuited == tbIsSuited);
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < _decisions.Length; i++)
                 {
                     _decisions[i] = fhand.Decisions[i].Value;
                     _sizes[i] = fhand.Decisions[i].Size;
@@ -276,7 +277,10 @@ namespace GTORangeCreator
                 new GradientStop(GetColorByDecision(_decisions[2]), _probRanges[2][1]/100.0),
 
                 new GradientStop(GetColorByDecision(_decisions[3]), _probRanges[3][0]/100.0),
-                new GradientStop(GetColorByDecision(_decisions[3]), _probRanges[3][1]/100.0)
+                new GradientStop(GetColorByDecision(_decisions[3]), _probRanges[3][1]/100.0),
+
+                new GradientStop(GetColorByDecision(_decisions[4]), _probRanges[4][0]/100.0),
+                new GradientStop(GetColorByDecision(_decisions[4]), _probRanges[4][1]/100.0)
             };
 
             gradient.GradientStops = stopCollection;
@@ -310,6 +314,8 @@ namespace GTORangeCreator
             _probRanges[2][1] = _probRanges[2][0] + _probabilities[2];
             _probRanges[3][0] = _probRanges[2][1];
             _probRanges[3][1] = _probRanges[3][0] + _probabilities[3];
+            _probRanges[4][0] = _probRanges[3][1];
+            _probRanges[4][1] = _probRanges[4][0] + _probabilities[4];
         }
         
     
@@ -336,6 +342,7 @@ namespace GTORangeCreator
             double.TryParse(ProbTb2.Text, out _probabilities[1]);
             double.TryParse(ProbTb3.Text, out _probabilities[2]);
             double.TryParse(ProbTb4.Text, out _probabilities[3]);
+            double.TryParse(ProbTb5.Text, out _probabilities[4]);
         }
 
         private void ParseSizeValues()
@@ -344,6 +351,7 @@ namespace GTORangeCreator
             double.TryParse(SizeTb2.Text, out _sizes[1]);
             double.TryParse(SizeTb3.Text, out _sizes[2]);
             double.TryParse(SizeTb4.Text, out _sizes[3]);
+            double.TryParse(SizeTb5.Text, out _sizes[4]);
         }
 
 
@@ -384,9 +392,11 @@ namespace GTORangeCreator
             {
                 for (int i = 0; i < _decisionFreqRangeArray.Length; i++)
                 {
-                    var des = h.Decisions.FirstOrDefault(d => d.Value == i);
-                    if (des == null) continue;
-                    _decisionFreqRangeArray[i] += des.Probability / 1326;
+                    var matchedDecisions = h.Decisions.Where(d => d.Value == i);
+                    if (!matchedDecisions.Any()) continue;
+                    var sum = matchedDecisions.Sum(dec => dec.Probability);
+
+                    _decisionFreqRangeArray[i] += sum / 1326;
                 }
                
             }
@@ -428,48 +438,55 @@ namespace GTORangeCreator
         }
 
         private void ImportRangeFromPioTxt() {
-            try
-            {
+         
                 var path = @"P:\range.txt";
                 string line;
                 using (StreamReader sr = new StreamReader(path))
                 {
                     while ((line = sr.ReadLine()) != null)
                     {
+                        if (line.StartsWith("Hand")) continue;
+
                         var lineMass = line.Split(',');
                         var hName = lineMass[0];
                         string hNameShuffleSuits = hName[0].ToString() + hName[3] + hName[2] + hName[1];
                     
 
 
-                        double[] probs = new double[3];
+                        double[] probs = new double[5];
 
                         probs[0] = double.Parse(lineMass[1]);
                         probs[1] = double.Parse(lineMass[2]);
-                        probs[2] = double.Parse(lineMass[3]);
+                        probs[2] = lineMass.Length >= 4 ? double.Parse(lineMass[3]) : 0.0;
+                        probs[3] = lineMass.Length >= 5 ? double.Parse(lineMass[4]) : 0.0;
+                        probs[4] = lineMass.Length >= 6 ? double.Parse(lineMass[5]) : 0.0;
 
-                        var rHand = _range.Hands.FirstOrDefault(h =>
-                        h.Name == hName || h.Name == hNameShuffleSuits);
 
-                        if (rHand == null)
+
+                        var rHands = _range.Hands.Where(h =>
+                        h.Name == hName || h.Name == hNameShuffleSuits); //
+
+                     //   if (rHand == null)
+                     //   {
+                     //       Debug.WriteLine("No hand: " + hName);
+                    //        return;
+                     //   }
+
+                        foreach (var rHand in rHands)
                         {
-                            Debug.WriteLine("No hand: " + hName);
-                            return;
+                            for (int i = 0; i < probs.Length; i++)
+                            {
+                                rHand.Decisions[i].Value = _decisions[i];
+                                rHand.Decisions[i].Probability = probs[i];
+                                rHand.Decisions[i].Size = _sizes[i];
+                            }
                         }
 
-                        for (int i = 0; i < probs.Length; i++)
-                        {
-                            rHand.Decisions[i].Value = _decisions[i];
-                            rHand.Decisions[i].Probability = probs[i];
-                            rHand.Decisions[i].Size = _sizes[i];
-                        }
+                       
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
+            
+     
         }
     }
 }

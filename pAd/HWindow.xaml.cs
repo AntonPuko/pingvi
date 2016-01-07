@@ -224,14 +224,13 @@ namespace Pingvi
                         }
                         default:
                             DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
-                            /*
-                        if (decisionInfo.LineInfo.Elements.HeroPlayer.RelativePosition ==
-                            HeroRelativePosition.OutOfPosition) {
-                            if (effStack > 15) DecisionRun.Text = "___OR 2.25 ";
-                            else DecisionRun.Text = "___OR";
-                        }
-                        else {                            
-                        }*/
+                   
+                            if (decisionInfo.RaiseSize != null && decisionInfo.RaiseSize != 2.0)
+                            {
+                                DecisionRun.Text = "___OR " + decisionInfo.RaiseSize;
+                                break;
+                            }
+
                             DecisionRun.Text = "___OR  ";
                             break;
                     }
@@ -279,6 +278,10 @@ namespace Pingvi
                             DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
                             DecisionRun.Text = "___CP 6";
                             break;
+                        case HeroPreflopState.Facing3Bet:
+                            DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                            DecisionRun.Text = "___C3b";
+                            break;
                     }
                     break;
                 case PreflopDecision._3Bet:
@@ -301,6 +304,10 @@ namespace Pingvi
                             DecisionRun.Text = "___PtLR 26";
                             break;
                         case HeroPreflopState.FacingOpen:
+                            DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
+                            DecisionRun.Text = "___OP 63";
+                            break;
+                        case HeroPreflopState.Facing3Bet:
                             DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(5, 5, 255));
                             DecisionRun.Text = "___OP 63";
                             break;
