@@ -16,14 +16,12 @@ namespace Pingvi
 
         public Rectangle TablePositionRect;
 
-        public ScreenTableManager(Rectangle tableRect, TimeSpan timeInterval)
-        {
+        public ScreenTableManager(Rectangle tableRect, TimeSpan timeInterval) {
             TablePositionRect = tableRect;
             BitmapMakeInterval = timeInterval;
         }
 
-        public ScreenTableManager()
-        {
+        public ScreenTableManager() {
             //TablePositionRect = new Rectangle(230, 20, 800, 574);
             TablePositionRect = new Rectangle(230 + 1920, 20, 800, 574);
             BitmapMakeInterval = TimeSpan.FromMilliseconds(100);
@@ -31,8 +29,7 @@ namespace Pingvi
 
         public event Action<Bitmap> NewTableBitmap;
 
-        public void Start()
-        {
+        public void Start() {
             // CreateStream();
 
             if (_bitmapTimer == null)
@@ -44,22 +41,19 @@ namespace Pingvi
             _bitmapTimer.Start();
         }
 
-        public void Stop()
-        {
+        public void Stop() {
             if (_bitmapTimer == null) return;
             _bitmapTimer.Stop();
         }
 
-        public void MakeScreenShot()
-        {
+        public void MakeScreenShot() {
             if (_tableBitmap == null) return;
             const string path = @"P:\screens\";
 
             _tableBitmap.Save(path + DateTime.Now.ToString("s").Replace("-", "").Replace(":", "") + ".bmp");
         }
 
-        private void MakeTableBitmap(object sender, EventArgs e)
-        {
+        private void MakeTableBitmap(object sender, EventArgs e) {
             try
             {
                 var bmp = new Bitmap(TablePositionRect.Width, TablePositionRect.Height);
@@ -81,15 +75,13 @@ namespace Pingvi
             }
         }
 
-        public void CreateStream()
-        {
+        public void CreateStream() {
             var stream = new ScreenCaptureStream(TablePositionRect);
             stream.NewFrame += stream_NewFrame;
             stream.Start();
         }
 
-        private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
+        private void stream_NewFrame(object sender, NewFrameEventArgs eventArgs) {
             _tableBitmap = eventArgs.Frame;
 
             // _tableBitmap = Grayscale.CommonAlgorithms.BT709.Apply(_tableBitmap);

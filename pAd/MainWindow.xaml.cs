@@ -11,31 +11,23 @@ namespace Pingvi
 {
     public partial class MainWindow : Window
     {
+        private ElementsManager _elementManager;
+        private int _fistMonitorShiftConst;
+        private Bitmap _tableBitmap;
         private ITableCatcher _tableCatcher;
 
-        private ElementsManager _elementManager;
-        private Bitmap _tableBitmap;
-        private int  _fistMonitorShiftConst = 0;
-
-        public MainWindow()
-        {
+        public MainWindow() {
             InitializeComponent();
-
-
-
-
-            
         }
 
-        private void OnNewTableBitmap(Bitmap obj)
-        {
+        private void OnNewTableBitmap(Bitmap obj) {
             _tableBitmap = obj;
         }
 
 
         private void StartButton_Click(object sender, RoutedEventArgs e) {
             StartButton.IsEnabled = false;
-       
+
 
             var tablePositionRect = CreateMainWindowRect();
 
@@ -47,7 +39,7 @@ namespace Pingvi
             // _tableCatcher = new ScreenShotTableCatcher(tablePositionRect, tableFrameIntervalSpan, screenShotsPath);
 
             var hudWindow = new HWindow(_tableCatcher)
-            { Top = tablePositionRect.Top + 425, Left = tablePositionRect.Left + 100 + _fistMonitorShiftConst };
+            {Top = tablePositionRect.Top + 425, Left = tablePositionRect.Left + 100 + _fistMonitorShiftConst};
 
             _elementManager = new ElementsManager();
             var lineManager = new LineManager();
@@ -60,28 +52,28 @@ namespace Pingvi
 
             //CREATE LINE WINDOWS
             var heroLineWindow = new LWindow(0)
-            { Top = tablePositionRect.Top + 390, Left = tablePositionRect.Left + 210  + _fistMonitorShiftConst };
+            {Top = tablePositionRect.Top + 390, Left = tablePositionRect.Left + 210 + _fistMonitorShiftConst};
 
             heroLineWindow.ShowInTaskbar = false;
             lineManager.NewLineInfo +=
-                li => Dispatcher.BeginInvoke((Action)delegate { heroLineWindow.OnNewLineInfo(li); });
+                li => Dispatcher.BeginInvoke((Action) delegate { heroLineWindow.OnNewLineInfo(li); });
             heroLineWindow.Show();
 
             var leftLineWindow = new LWindow(1)
-            { Top = tablePositionRect.Top + 100, Left = tablePositionRect.Left + 0 + _fistMonitorShiftConst };
+            {Top = tablePositionRect.Top + 100, Left = tablePositionRect.Left + 0 + _fistMonitorShiftConst};
 
             leftLineWindow.ShowInTaskbar = false;
             lineManager.NewLineInfo +=
-                li => Dispatcher.BeginInvoke((Action)delegate { leftLineWindow.OnNewLineInfo(li); });
+                li => Dispatcher.BeginInvoke((Action) delegate { leftLineWindow.OnNewLineInfo(li); });
             leftLineWindow.Show();
 
 
             var rightLineWindow = new LWindow(2)
-            { Top = tablePositionRect.Top + 100, Left = tablePositionRect.Left + 230 + _fistMonitorShiftConst };
-         
+            {Top = tablePositionRect.Top + 100, Left = tablePositionRect.Left + 230 + _fistMonitorShiftConst};
+
             rightLineWindow.ShowInTaskbar = false;
             lineManager.NewLineInfo +=
-                li => Dispatcher.BeginInvoke((Action)delegate { rightLineWindow.OnNewLineInfo(li); });
+                li => Dispatcher.BeginInvoke((Action) delegate { rightLineWindow.OnNewLineInfo(li); });
             rightLineWindow.Show();
 
 
@@ -92,9 +84,9 @@ namespace Pingvi
             // decisionManager.NewDecisionInfo += hudWindow.OnNewDecisionInfo;
             // decisionManager.NewDecisionInfo +=  OnNewDecisionInfo;
             decisionManager.NewDecisionInfo +=
-                di => Dispatcher.BeginInvoke((Action)delegate { hudWindow.OnNewDecisionInfo(di); });
+                di => Dispatcher.BeginInvoke((Action) delegate { hudWindow.OnNewDecisionInfo(di); });
             decisionManager.NewDecisionInfo +=
-                di => Dispatcher.BeginInvoke((Action)delegate { OnNewDecisionInfo(di); });
+                di => Dispatcher.BeginInvoke((Action) delegate { OnNewDecisionInfo(di); });
 
             hudWindow.Show();
 
@@ -102,8 +94,11 @@ namespace Pingvi
             //create new thread for result window because of http query lags
             var resultWindowThread = new Thread(() =>
             {
-                var resultWindow = new RWindow()
-                { Top = tablePositionRect.Top -20, Left = tablePositionRect.Left + 40 + _fistMonitorShiftConst };
+                var resultWindow = new RWindow
+                {
+                    Top = tablePositionRect.Top - 20,
+                    Left = tablePositionRect.Left + 40 + _fistMonitorShiftConst
+                };
                 resultWindow.Show();
                 Dispatcher.Run();
             });
@@ -116,8 +111,7 @@ namespace Pingvi
         }
 
 
-        private void OnNewDecisionInfo(DecisionInfo decisionInfo)
-        {
+        private void OnNewDecisionInfo(DecisionInfo decisionInfo) {
             var elements = decisionInfo.LineInfo.Elements;
 
             CommonLabel.Content = "";
@@ -157,8 +151,7 @@ namespace Pingvi
                     decisionInfo.LineInfo.HeroTurnState, decisionInfo.LineInfo.HeroRiverState);
         }
 
-        private string ShowPlayerStats(Player player)
-        {
+        private string ShowPlayerStats(Player player) {
             var stats = player.Stats;
             return string.Format("\nPF_BTN_STEAL: {0}\nPF_SB_STEAL: {1}\nPF_OPENPUSH: {2}" +
                                  "\nPF_LIMP_FOLD: {3}\nPF_LIMP_RERAISE: {4}\nPF_FOLD_3BET: {5}" +
@@ -185,8 +178,7 @@ namespace Pingvi
                 );
         }
 
-        private string ShowPlayerInfo(Player player)
-        {
+        private string ShowPlayerInfo(Player player) {
             return string.Format("Status: {0}\nPosition: {1}\nLine: {2}" +
                                  "\nCurStack: {3}\nBet: {4}\nType: {5}",
                 player.Status, player.Position, player.Line,
@@ -198,16 +190,12 @@ namespace Pingvi
             {
                 return new Rectangle(2150, 20, 800, 574);
             }
-            else
-            {
-                _fistMonitorShiftConst = 165;
-                return new Rectangle(400,20,800,574);
-            }
+            _fistMonitorShiftConst = 165;
+            return new Rectangle(400, 20, 800, 574);
         }
-    
 
-        private void MakeButton_Click(object sender, RoutedEventArgs e)
-        {
+
+        private void MakeButton_Click(object sender, RoutedEventArgs e) {
             /*
             var rightPRects =  elementManager.ElementConfig.RightPlayer.LineRectPosition;
             var leftPRects = elementManager.ElementConfig.LeftPlayer.LineRectPosition;

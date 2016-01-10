@@ -21,20 +21,17 @@ namespace Pingvi
 
         public Action MakeScreenShotClick;
 
-        public HWindow(ITableCatcher tableCatcher)
-        {
+        public HWindow(ITableCatcher tableCatcher) {
             _tableCather = tableCatcher;
             InitializeComponent();
         }
 
-        protected override void OnClosed(EventArgs e)
-        {
+        protected override void OnClosed(EventArgs e) {
             _tableCather.Stop();
         }
 
 
-        public void OnNewDecisionInfo(DecisionInfo decisionInfo)
-        {
+        public void OnNewDecisionInfo(DecisionInfo decisionInfo) {
             ShowEffectiveStack(decisionInfo.LineInfo.Elements.EffectiveStack);
             ShowRelativePosition(decisionInfo.LineInfo.Elements.HeroPlayer.RelativePosition);
 
@@ -69,8 +66,7 @@ namespace Pingvi
             }
         }
 
-        public void ShowHeroPreflopStatus(HeroPreflopStatus status)
-        {
+        public void ShowHeroPreflopStatus(HeroPreflopStatus status) {
             switch (status)
             {
                 case HeroPreflopStatus.Agressor:
@@ -92,8 +88,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowEffectiveStack(double effStack)
-        {
+        private void ShowEffectiveStack(double effStack) {
             if (effStack == 0) StackLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (effStack > 0.0 && effStack <= 9.5)
                 StackLabel.Foreground = new SolidColorBrush(Color.FromRgb(36, 116, 246));
@@ -105,8 +100,7 @@ namespace Pingvi
             StackLabel.Content = "S:" + effStack.ToString("#.#");
         }
 
-        private void ShowPotOdds(double potOdds)
-        {
+        private void ShowPotOdds(double potOdds) {
             AdditionalInfoLabel.Content = potOdds == 0.0 ? "-" : $"o: {potOdds.ToString("##")}";
             if (potOdds == 0.0) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (potOdds > 0.0 && potOdds <= 20)
@@ -119,8 +113,7 @@ namespace Pingvi
                 AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(204, 0, 33));
         }
 
-        private void ShowBetToPot(double betToPot)
-        {
+        private void ShowBetToPot(double betToPot) {
             AdditionalInfoLabel.Content = betToPot == 0.0 ? "-" : $"b: {betToPot.ToString("0.0")}";
             if (betToPot == 0.0) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (betToPot > 0.0 && betToPot <= 0.39)
@@ -133,8 +126,7 @@ namespace Pingvi
                 AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
         }
 
-        private void ShowRelativePosition(HeroRelativePosition relPosition)
-        {
+        private void ShowRelativePosition(HeroRelativePosition relPosition) {
             switch (relPosition)
             {
                 case HeroRelativePosition.None:
@@ -149,8 +141,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowPotType(PotType potType)
-        {
+        private void ShowPotType(PotType potType) {
             switch (potType)
             {
                 case PotType.Limped:
@@ -172,8 +163,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowPreflopDecision(DecisionInfo decisionInfo)
-        {
+        private void ShowPreflopDecision(DecisionInfo decisionInfo) {
             var decision = decisionInfo.PreflopDecision;
             var effStack = decisionInfo.LineInfo.Elements.EffectiveStack;
             var heroPreflopState = decisionInfo.LineInfo.HeroPreflopState;
@@ -198,33 +188,27 @@ namespace Pingvi
 
                             if (decisionInfo.RaiseSize != null)
                             {
-
-                                    DecisionRun.Text = "___IS " + decisionInfo.RaiseSize;
-                                    break;
+                                DecisionRun.Text = "___IS " + decisionInfo.RaiseSize;
+                                break;
+                            }
+                            var sbVsbtnEffStack = decisionInfo.LineInfo.Elements.SbBtnEffStack;
+                            if (decisionInfo.LineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb)
+                            {
+                                if (sbVsbtnEffStack >= 20) DecisionRun.Text = "___IS 3 ";
+                                else if (sbVsbtnEffStack < 20 && sbVsbtnEffStack > 13) DecisionRun.Text = "___IS 3 ";
+                                else if (sbVsbtnEffStack <= 13) DecisionRun.Text = "___IS 2.5 ";
                             }
                             else
                             {
-                                    var sbVsbtnEffStack = decisionInfo.LineInfo.Elements.SbBtnEffStack;
-                                    if (decisionInfo.LineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb)
-                                    {
-                                        if (sbVsbtnEffStack >= 20) DecisionRun.Text = "___IS 3 ";
-                                        else if (sbVsbtnEffStack < 20 && sbVsbtnEffStack > 13) DecisionRun.Text = "___IS 3 ";
-                                        else if (sbVsbtnEffStack <= 13) DecisionRun.Text = "___IS 2.5 ";
-                                    }
-                                    else
-                                    {
-                                        if (effStack <= 10) DecisionRun.Text = "___IS 2 ";
-                                        else if (effStack > 10 && effStack <= 22) DecisionRun.Text = "___IS 2.5 ";
-                                        else if (effStack > 22) DecisionRun.Text = "___IS 3 ";
-                                    }
-                                    break;
-                                }
-
-                 
+                                if (effStack <= 10) DecisionRun.Text = "___IS 2 ";
+                                else if (effStack > 10 && effStack <= 22) DecisionRun.Text = "___IS 2.5 ";
+                                else if (effStack > 22) DecisionRun.Text = "___IS 3 ";
+                            }
+                            break;
                         }
                         default:
                             DecisionRun.Foreground = new SolidColorBrush(Color.FromRgb(55, 240, 255));
-                   
+
                             if (decisionInfo.RaiseSize != null && decisionInfo.RaiseSize != 2.0)
                             {
                                 DecisionRun.Text = "___OR " + decisionInfo.RaiseSize;
@@ -339,8 +323,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowFlopInfoStats(DecisionInfo decisionInfo)
-        {
+        private void ShowFlopInfoStats(DecisionInfo decisionInfo) {
             var heroFlopState = decisionInfo.LineInfo.HeroFlopState;
             var opponent = decisionInfo.LineInfo.Elements.HuOpp;
 
@@ -460,8 +443,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowTurnInfoStats(DecisionInfo decisionInfo)
-        {
+        private void ShowTurnInfoStats(DecisionInfo decisionInfo) {
             var heroTurnState = decisionInfo.LineInfo.HeroTurnState;
             var opponent = decisionInfo.LineInfo.Elements.HuOpp;
 
@@ -594,8 +576,7 @@ namespace Pingvi
             }
         }
 
-        private void ShowRiverInfoStats(DecisionInfo decisionInfo)
-        {
+        private void ShowRiverInfoStats(DecisionInfo decisionInfo) {
             var heroRiverState = decisionInfo.LineInfo.HeroRiverState;
             var opponent = decisionInfo.LineInfo.Elements.HuOpp;
 
@@ -657,8 +638,7 @@ namespace Pingvi
             }
         }
 
-        private void ClearStats()
-        {
+        private void ClearStats() {
             StatName1Run.Text = "";
             StatName1Run.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             StatName2Run.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
@@ -671,15 +651,13 @@ namespace Pingvi
             Stat2ValRun.Text = "";
         }
 
-        private void PeekStatNameColor(double? statValue, Run statDefRun)
-        {
+        private void PeekStatNameColor(double? statValue, Run statDefRun) {
             if (statValue == null || statValue == 0)
                 statDefRun.Foreground = new SolidColorBrush(Color.FromRgb(180, 180, 180));
             else statDefRun.Foreground = new SolidColorBrush(Color.FromRgb(250, 250, 250));
         }
 
-        private SolidColorBrush PeekStatColor(double? stat, int lim1, int lim2)
-        {
+        private SolidColorBrush PeekStatColor(double? stat, int lim1, int lim2) {
             if (stat == null || stat == 0) return new SolidColorBrush(Color.FromRgb(125, 125, 125));
             if (stat > 0 && stat <= lim1) return new SolidColorBrush(Color.FromRgb(0, 255, 0));
             if (stat > lim1 && stat <= lim2) return new SolidColorBrush(Color.FromRgb(255, 255, 175));
@@ -688,40 +666,35 @@ namespace Pingvi
         }
 
 
-        private void SetStat1(double? stat, string name, int colorSeparator1, int colorSeperator2)
-        {
+        private void SetStat1(double? stat, string name, int colorSeparator1, int colorSeperator2) {
             StatName1Run.Text = name;
             if (stat == null || stat == 0) StatName1Run.Foreground = new SolidColorBrush(Color.FromRgb(125, 125, 125));
             Stat1ValRun.Text = stat == null ? "-" : stat.ToString();
             Stat1ValRun.Foreground = PeekStatColor(stat, colorSeparator1, colorSeperator2);
         }
 
-        private void SetStat2(double? stat, string name, int colorSeparator1, int colorSeperator2)
-        {
+        private void SetStat2(double? stat, string name, int colorSeparator1, int colorSeperator2) {
             StatName2Run.Text = name;
             if (stat == null || stat == 0) StatName2Run.Foreground = new SolidColorBrush(Color.FromRgb(125, 125, 125));
             Stat2ValRun.Text = stat == null ? "-" : stat.ToString();
             Stat2ValRun.Foreground = PeekStatColor(stat, colorSeparator1, colorSeperator2);
         }
 
-        private void StackLabel_MouseDown(object sender, MouseButtonEventArgs e)
-        {
+        private void StackLabel_MouseDown(object sender, MouseButtonEventArgs e) {
             if (MakeScreenShotClick != null)
             {
                 MakeScreenShotClick();
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
             //register activate hotkey
             // const uint activateHotkeyVLC = 86; // keycode of V
             //   WINAPI.RegisterHotKey(this, activateHotkeyVLC);
             //   ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
+        private void Window_Closing(object sender, CancelEventArgs e) {
             //   WINAPI.UnregisterHotKey(this);
 
             foreach (var p in Process.GetProcesses())
@@ -733,8 +706,7 @@ namespace Pingvi
         // private uint WM_KEYUP = 0x0101;
 
 
-        private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
-        {
+        private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled) {
             /*
             if (msg.message == WM_KEYUP) {
                 Debug.WriteLine(msg.wParam);
@@ -756,23 +728,20 @@ namespace Pingvi
         private readonly double? _rCbet;
         private readonly double? _tCbet;
 
-        public CbetStrength(CurrentStreet currentStreet, double? pfSteal, double? fCbet)
-        {
+        public CbetStrength(CurrentStreet currentStreet, double? pfSteal, double? fCbet) {
             _currentStreet = currentStreet;
             _pfSteal = pfSteal;
             _fCbet = fCbet;
         }
 
-        public CbetStrength(CurrentStreet currentStreet, double? pfSteal, double? fCbet, double? tCbet)
-        {
+        public CbetStrength(CurrentStreet currentStreet, double? pfSteal, double? fCbet, double? tCbet) {
             _currentStreet = currentStreet;
             _pfSteal = pfSteal;
             _fCbet = fCbet;
             _tCbet = tCbet;
         }
 
-        public CbetStrength(CurrentStreet currentStreet, double? pfSteal, double? fCbet, double? tCbet, double? rCbet)
-        {
+        public CbetStrength(CurrentStreet currentStreet, double? pfSteal, double? fCbet, double? tCbet, double? rCbet) {
             _currentStreet = currentStreet;
             _pfSteal = pfSteal;
             _fCbet = fCbet;
@@ -839,8 +808,7 @@ namespace Pingvi
             }
         }
 
-        private byte DoubleToByte(double? value)
-        {
+        private byte DoubleToByte(double? value) {
             if (value == null) return 0;
             var val = (int) value;
             if (val > 255) val = 255;

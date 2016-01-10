@@ -8,8 +8,7 @@ namespace Pingvi
     {
         private AutomationElement _observingTable;
 
-        public TableManager()
-        {
+        public TableManager() {
             TableWindowClassName = "PokerStarsTableFrameClass";
         }
 
@@ -17,20 +16,17 @@ namespace Pingvi
 
         public event Action<AutomationElement> NewTable;
 
-        public void Start()
-        {
+        public void Start() {
             _observingTable = AutomationElement.RootElement;
             Automation.AddAutomationFocusChangedEventHandler(OnFocusChanged);
         }
 
-        public void Stop()
-        {
+        public void Stop() {
             Automation.RemoveAutomationFocusChangedEventHandler(OnFocusChanged);
             _observingTable = null;
         }
 
-        private void OnFocusChanged(object sender, AutomationFocusChangedEventArgs e)
-        {
+        private void OnFocusChanged(object sender, AutomationFocusChangedEventArgs e) {
             try
             {
                 var focusedElement = (AutomationElement) sender;
@@ -56,8 +52,7 @@ namespace Pingvi
             }
         }
 
-        private AutomationElement GetTopLevelWindow(AutomationElement element)
-        {
+        private AutomationElement GetTopLevelWindow(AutomationElement element) {
             var walker = TreeWalker.ControlViewWalker;
 
             AutomationElement elementParent;

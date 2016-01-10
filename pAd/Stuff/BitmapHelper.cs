@@ -10,8 +10,7 @@ namespace Pingvi
 {
     public static class BitmapHelper
     {
-        public static bool BitmapsEqualsUnmanaged(UnmanagedImage image1, UnmanagedImage image2)
-        {
+        public static bool BitmapsEqualsUnmanaged(UnmanagedImage image1, UnmanagedImage image2) {
             if (image1.Height*image1.Width != image2.Height*image2.Width) return false;
             for (var x = 0; x < image1.Width; x++)
             {
@@ -29,8 +28,7 @@ namespace Pingvi
         /// </summary>
         /// <param name="bmp"></param>
         /// <returns></returns>
-        public static BitmapImage MakeImage(Bitmap bmp)
-        {
+        public static BitmapImage MakeImage(Bitmap bmp) {
             if (bmp != null)
             {
                 using (var memory = new MemoryStream())
@@ -55,8 +53,7 @@ namespace Pingvi
         /// <param name="bmp1"></param>
         /// <param name="bmp2"></param>
         /// <returns></returns>
-        public static unsafe bool BitmapsEquals(Bitmap bmp1, Bitmap bmp2)
-        {
+        public static unsafe bool BitmapsEquals(Bitmap bmp1, Bitmap bmp2) {
             if (bmp1.Size != bmp2.Size)
                 return false;
             var bmpd1 = bmp1.LockBits(new Rectangle(0, 0, bmp1.Width, bmp1.Height), ImageLockMode.ReadOnly,
@@ -90,8 +87,7 @@ namespace Pingvi
         /// <param name="bmp1"></param>
         /// <param name="bmp2"></param>
         /// <returns></returns>
-        public static bool BitmapsEqualsByPixels(Bitmap bmp1, Bitmap bmp2)
-        {
+        public static bool BitmapsEqualsByPixels(Bitmap bmp1, Bitmap bmp2) {
             {
                 for (var i = 0; i < bmp1.Width; ++i)
                 {
@@ -106,8 +102,7 @@ namespace Pingvi
         }
 
 
-        public static double[] ProcessUnsafeBitmapIntoDoubleArray(Bitmap procBitmap)
-        {
+        public static double[] ProcessUnsafeBitmapIntoDoubleArray(Bitmap procBitmap) {
             var res = new double[procBitmap.Size.Width*procBitmap.Size.Height];
 
             unsafe
@@ -140,8 +135,7 @@ namespace Pingvi
             return res;
         }
 
-        public static double[] ProcessUnsafeBitmapIntoDoubleParallel(Bitmap procBitmap)
-        {
+        public static double[] ProcessUnsafeBitmapIntoDoubleParallel(Bitmap procBitmap) {
             var res = new double[procBitmap.Size.Width*procBitmap.Size.Height];
 
             unsafe

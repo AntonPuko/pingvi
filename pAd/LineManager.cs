@@ -109,11 +109,11 @@ namespace Pingvi
 
     public class LineManager
     {
-        
+        private string _flopCompositeLine;
+
         //   private string _resultCompositeLine;
         private PotNType _potNtype;
         private string _preflopCompositeLine;
-        private string _flopCompositeLine;
         private string _riverCompositeLine;
         private string _turnCompositeLine;
 
@@ -121,16 +121,14 @@ namespace Pingvi
         public Action<LineInfo> NewLineInfo;
 
 
-        private PotNType DefinePotNType(Elements elements)
-        {
+        private PotNType DefinePotNType(Elements elements) {
             if (elements.ActivePlayers.Count == 3) return PotNType.Multipot;
             if (elements.ActivePlayers.Count == 2 && elements.InGamePlayers.Count == 3) return PotNType.Hu3Max;
             if (elements.InGamePlayers.Count == 2) return PotNType.Hu2Max;
             return PotNType.None;
         }
 
-        private PotType DefinePotType(string preflopCompositiveLine)
-        {
+        private PotType DefinePotType(string preflopCompositiveLine) {
             var r = preflopCompositiveLine.Count(l => l == 'R' || l == 'r');
             var L = preflopCompositiveLine.Count(l => l == 'L' || l == 'l');
             if (L == 1 && r == 0) return PotType.Limped;
@@ -140,8 +138,7 @@ namespace Pingvi
             return PotType.None;
         }
 
-        private bool CheckFacingPush(Elements elements)
-        {
+        private bool CheckFacingPush(Elements elements) {
             double maxOppBet;
             double maxBetPStack;
             if (elements.InGamePlayers == null || elements.InGamePlayers.Count < 2)
@@ -161,8 +158,7 @@ namespace Pingvi
             return false;
         }
 
-        private bool CheckLineInLinesMass(string line, string[] linesMass)
-        {
+        private bool CheckLineInLinesMass(string line, string[] linesMass) {
             var isLineInMass = false;
             foreach (var l in linesMass)
             {
@@ -171,8 +167,7 @@ namespace Pingvi
             return isLineInMass;
         }
 
-        private HeroPreflopStatus DefineHeroPreflopStatus(string preflopLine)
-        {
+        private HeroPreflopStatus DefineHeroPreflopStatus(string preflopLine) {
             string[] agressorLines =
             {
                 "Rcf|", "Rfc|", "Rcc|", "rRfc|", "rRcf|", "rRcc|", "fRc|", "lRfc|", "lRcc|", "Rc|",
@@ -193,8 +188,7 @@ namespace Pingvi
             return HeroPreflopStatus.None;
         }
 
-        private HeroPreflopState DefineHeroPreflopState(Elements elements)
-        {
+        private HeroPreflopState DefineHeroPreflopState(Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Preflop) return HeroPreflopState.None;
 
             var facingPush = CheckFacingPush(elements);
@@ -260,8 +254,7 @@ namespace Pingvi
             return HeroPreflopState.None;
         }
 
-        private HeroFlopState DefineHeroFlopState(string compositeLine, Elements elements)
-        {
+        private HeroFlopState DefineHeroFlopState(string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Flop) return HeroFlopState.None;
             //Donk
             string[] donkMass = {"rC|", "rfC|", "fRrC|", "rCf|"};
@@ -327,8 +320,7 @@ namespace Pingvi
             return HeroFlopState.None;
         }
 
-        private HeroTurnState DefineHeroTurnState(string compositeLine, Elements elements)
-        {
+        private HeroTurnState DefineHeroTurnState(string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.Turn) return HeroTurnState.None;
             //Donk
             string[] donkMass = {"rC|XbC|", "rfC|XbC|", "lX|XbC|"};
@@ -421,8 +413,7 @@ namespace Pingvi
             return HeroTurnState.None;
         }
 
-        private HeroRiverState DefineHeroRiverState(string compositeLine, Elements elements)
-        {
+        private HeroRiverState DefineHeroRiverState(string compositeLine, Elements elements) {
             if (elements.CurrentStreet != CurrentStreet.River) return HeroRiverState.None;
             //Cbet3
             string[] cbet3Mass = {"fRc|Bc|Bc|", "Rc|Bc|Bc|", "rRc|Bc|Bc|", "rRf|Bc|Bc|", "flRc|xBc|xBc|x|"};
@@ -437,8 +428,7 @@ namespace Pingvi
         }
 
 
-        public void OnNewElements(Elements elements)
-        {
+        public void OnNewElements(Elements elements) {
             var btnLine = elements.InGamePlayers.Any(p => p.Position == PlayerPosition.Button)
                 ? elements.InGamePlayers.First(p => p.Position == PlayerPosition.Button).Line
                 : "";
@@ -522,8 +512,7 @@ namespace Pingvi
             }
         }
 
-        private string[] CropLines(string[] linesMass)
-        {
+        private string[] CropLines(string[] linesMass) {
             var resultMass = new string[linesMass.Length];
             for (var i = 0; i < linesMass.Length; i++)
             {
@@ -533,8 +522,7 @@ namespace Pingvi
             return resultMass;
         }
 
-        private string CompositeLine(string[] lineMassive)
-        {
+        private string CompositeLine(string[] lineMassive) {
             var result = new StringBuilder();
             var maxLength = lineMassive.Select(mass => mass.Length).Max();
 

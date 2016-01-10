@@ -2,8 +2,7 @@
 {
     internal class LineLetter
     {
-        public LineLetter(int letterNumber)
-        {
+        public LineLetter(int letterNumber) {
             switch (letterNumber)
             {
                 case 0:

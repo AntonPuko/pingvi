@@ -8,8 +8,7 @@ namespace Pingvi
     //TODO сделать XML реализацию
     public class ElementsConfig
     {
-        public ElementsConfig()
-        {
+        public ElementsConfig() {
             Common = new CommonElementsConfig();
             Hero = new HeroElementsConfig();
             LeftPlayer = new PlayerElementsConfig();
@@ -27,8 +26,7 @@ namespace Pingvi
 
         public Color[] HudWindowColors { get; set; }
 
-        private void InitElements()
-        {
+        private void InitElements() {
             //pot
             Common.PotDigitsPath = @"Data\PotDigits\";
             Common.PotDigitsColor = Color.FromArgb(0, 0, 0);
@@ -802,8 +800,7 @@ namespace Pingvi
             };
         }
 
-        private void InitLists()
-        {
+        private void InitLists() {
             InitDeckList();
             InitBlindsList();
             InitStackDigitsList();
@@ -814,8 +811,7 @@ namespace Pingvi
 
 
         //TODO сделать универсальный метод для инициализации листов.
-        private void InitDeckList()
-        {
+        private void InitDeckList() {
             Common.DeckListUnmanaged = new List<UnmanagedImage>();
             for (var i = 1; i <= 52; i++)
             {
@@ -826,8 +822,7 @@ namespace Pingvi
         }
 
 
-        private void InitBlindsList()
-        {
+        private void InitBlindsList() {
             Common.Blinds.DigitsListUnmanaged = new List<UnmanagedImage>();
             for (var i = 0; i <= 5; i++)
             {
@@ -838,8 +833,7 @@ namespace Pingvi
         }
 
 
-        private void InitStackDigitsList()
-        {
+        private void InitStackDigitsList() {
             Common.StackDigitsListUnmanaged = new List<UnmanagedImage>();
             for (var i = 0; i <= 9; i++)
             {
@@ -848,8 +842,7 @@ namespace Pingvi
             }
         }
 
-        private void InitBetDigitsList()
-        {
+        private void InitBetDigitsList() {
             Common.BetDigitsListUnmanaged = new List<UnmanagedImage>();
             for (var i = 0; i <= 9; i++)
             {
@@ -858,8 +851,7 @@ namespace Pingvi
             }
         }
 
-        private void InitPotDigitsList()
-        {
+        private void InitPotDigitsList() {
             Common.PotDigitsListUnmanaged = new List<UnmanagedImage>();
             for (var i = 0; i <= 9; i++)
             {
@@ -868,8 +860,7 @@ namespace Pingvi
             }
         }
 
-        private void InitStatsDigitsList()
-        {
+        private void InitStatsDigitsList() {
             Common.StatsDigitsListUnmanaged = new List<UnmanagedImage>();
             for (var i = 0; i <= 9; i++)
             {
@@ -879,8 +870,7 @@ namespace Pingvi
         }
 
         private PixelPoint[] CountLinePixelPositions(PixelPoint[] commonLinePixelPositions,
-            PixelPoint playerCornerPixelPoint)
-        {
+            PixelPoint playerCornerPixelPoint) {
             var playerPixelPointsMass = new PixelPoint[commonLinePixelPositions.Length];
 
             for (var i = 0; i < commonLinePixelPositions.Length; i++)
@@ -894,8 +884,7 @@ namespace Pingvi
 
 
         private Rectangle[] CountPlayerLineRectPositions(Rectangle[] commonLineRectPositions,
-            PixelPoint playerCornerPixelPoint)
-        {
+            PixelPoint playerCornerPixelPoint) {
             var playerLineRectPositionMass = new Rectangle[commonLineRectPositions.Length];
 
             for (var i = 0; i < commonLineRectPositions.Length; i++)

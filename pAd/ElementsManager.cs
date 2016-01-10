@@ -13,16 +13,15 @@ namespace Pingvi
 {
     internal class ElementsManager
     {
-        private readonly ElementsConfig _elementsConfig;
         private readonly Elements _elements;
+        private readonly ElementsConfig _elementsConfig;
         public ElementsConfig ElementConfig;
 
 
         //private Stopwatch sw = new Stopwatch();
 
 
-        public ElementsManager()
-        {
+        public ElementsManager() {
             _elementsConfig = new ElementsConfig();
             _elements = new Elements();
             ElementConfig = _elementsConfig;
@@ -35,20 +34,17 @@ namespace Pingvi
 
         public event Action<Elements> NewElements;
 
-        public void OnNewTableImage(UnmanagedImage tableImage)
-        {
+        public void OnNewTableImage(UnmanagedImage tableImage) {
             TableUnmanagedImage = tableImage;
             FindElements();
         }
 
-        public void OnNewBitmap(Bitmap bmp)
-        {
+        public void OnNewBitmap(Bitmap bmp) {
             TableBitmap = bmp;
             FindElements();
         }
 
-        private void FindElements()
-        {
+        private void FindElements() {
             //TourneyMultiplier 
             _elements.TourneyMultiplier = CheckTourneyMultiplier();
 
@@ -417,7 +413,7 @@ namespace Pingvi
             #region PlayerStatus
 
             _elements.HeroPlayer.Status = PlayerStatus.InHand;
-                //CheckPlayerStatus(_elementsConfig.Hero.PlayerStatusPointHand,
+            //CheckPlayerStatus(_elementsConfig.Hero.PlayerStatusPointHand,
             //_elementsConfig.Hero.PlayerStatusPointGame, _elementsConfig.Hero.PlayerStatusPointSitOut);  // always in hand
             _elements.LeftPlayer.Status = CheckPlayerStatus(_elementsConfig.LeftPlayer.PlayerStatusPointHand,
                 _elementsConfig.LeftPlayer.PlayerStatusPointGame, _elementsConfig.LeftPlayer.PlayerStatusPointSitOut);
@@ -497,15 +493,13 @@ namespace Pingvi
             _elements.SbBtnEffStack = CountSbBtnEffStack();
 
 
-           
             if (NewElements != null)
             {
                 NewElements(_elements);
             }
         }
 
-        private void CheckIsHu()
-        {
+        private void CheckIsHu() {
             if (_elements.ActivePlayers.Count == 2)
             {
                 _elements.IsHu = true;
@@ -518,8 +512,7 @@ namespace Pingvi
             }
         }
 
-        private Card FindCard(Rectangle cardPosition)
-        {
+        private Card FindCard(Rectangle cardPosition) {
             //    sw.Start();
             var filter = new Crop(cardPosition);
             var cTImage = filter.Apply(TableUnmanagedImage);
@@ -535,16 +528,14 @@ namespace Pingvi
             return new Card(num);
         }
 
-        private CurrentStreet CheckCurrentStreet(Card flopCard1, Card turnCard, Card riverCard)
-        {
+        private CurrentStreet CheckCurrentStreet(Card flopCard1, Card turnCard, Card riverCard) {
             if (flopCard1.Name == "") return CurrentStreet.Preflop;
             if (riverCard.Name != "") return CurrentStreet.River;
             if (turnCard.Name != "") return CurrentStreet.Turn;
             return CurrentStreet.Flop;
         }
 
-        private void FindBlinds()
-        {
+        private void FindBlinds() {
             //  try {
             //     sw.Start();
             var digitColor = _elementsConfig.Common.Blinds.DigitsPointColor;
@@ -587,8 +578,7 @@ namespace Pingvi
             //     sw.Reset();
         }
 
-        private ButtonPosition FindButton()
-        {
+        private ButtonPosition FindButton() {
             var buttonColor = _elementsConfig.Common.ButtonColor;
 
             if (TableUnmanagedImage.GetPixel(_elementsConfig.Hero.ButtonPoint.X,
@@ -601,9 +591,11 @@ namespace Pingvi
             return ButtonPosition.None;
         }
 
-        private PlayerType CheckPlayerType(PixelPoint playerTypePoint)
-        {
+        private PlayerType CheckPlayerType(PixelPoint playerTypePoint) {
             var pixelColor = TableUnmanagedImage.GetPixel(playerTypePoint.X, playerTypePoint.Y);
+
+       
+
             if (pixelColor == _elementsConfig.Common.RockColor) return PlayerType.Rock;
             if (pixelColor == _elementsConfig.Common.ManiacColor) return PlayerType.Maniac;
             if (pixelColor == _elementsConfig.Common.FishColor) return PlayerType.Fish;
@@ -617,8 +609,7 @@ namespace Pingvi
         }
 
         private PlayerStatus CheckPlayerStatus(PixelPoint playerStatusHand, PixelPoint playerStatusGame,
-            PixelPoint playerStatusSitOut)
-        {
+            PixelPoint playerStatusSitOut) {
             if (TableUnmanagedImage.GetPixel(playerStatusSitOut.X, playerStatusSitOut.Y) ==
                 _elementsConfig.Common.SitOutColor) return PlayerStatus.SitOut;
             if (TableUnmanagedImage.GetPixel(playerStatusHand.X, playerStatusHand.Y) ==
@@ -628,8 +619,7 @@ namespace Pingvi
             return PlayerStatus.OutOfGame;
         }
 
-        private List<Player> CheckActivePlayers()
-        {
+        private List<Player> CheckActivePlayers() {
             var activeOpponents = new List<Player>();
             if (_elements.HeroPlayer.Status == PlayerStatus.InHand) activeOpponents.Add(_elements.HeroPlayer);
             if (_elements.LeftPlayer.Status == PlayerStatus.InHand) activeOpponents.Add(_elements.LeftPlayer);
@@ -637,8 +627,7 @@ namespace Pingvi
             return activeOpponents;
         }
 
-        private List<Player> CheckInGamePlayers()
-        {
+        private List<Player> CheckInGamePlayers() {
             var inGamePlayers = new List<Player>();
             if (_elements.HeroPlayer.Status != PlayerStatus.OutOfGame) inGamePlayers.Add(_elements.HeroPlayer);
             if (_elements.LeftPlayer.Status != PlayerStatus.OutOfGame) inGamePlayers.Add(_elements.LeftPlayer);
@@ -646,8 +635,7 @@ namespace Pingvi
             return inGamePlayers;
         }
 
-        private List<Player> CheckSitOutPlayers()
-        {
+        private List<Player> CheckSitOutPlayers() {
             var sitOutPlayers = new List<Player>();
             if (_elements.HeroPlayer.Status == PlayerStatus.SitOut) sitOutPlayers.Add(_elements.HeroPlayer);
             if (_elements.LeftPlayer.Status == PlayerStatus.SitOut) sitOutPlayers.Add(_elements.LeftPlayer);
@@ -655,16 +643,14 @@ namespace Pingvi
             return sitOutPlayers;
         }
 
-        private bool CheckIsHeroTurn()
-        {
+        private bool CheckIsHeroTurn() {
             if (_elements.HeroPlayer.Status == PlayerStatus.OutOfGame) return false;
             return _elementsConfig.Hero.IsTurnColor ==
                    TableUnmanagedImage.GetPixel(_elementsConfig.Hero.IsTurnPoint.X,
                        _elementsConfig.Hero.IsTurnPoint.Y);
         }
 
-        private void CheckPlayersPosition(ButtonPosition buttonPosition)
-        {
+        private void CheckPlayersPosition(ButtonPosition buttonPosition) {
             var inGamePlrsCnt = _elements.InGamePlayers.Count;
             switch (buttonPosition)
             {
@@ -750,8 +736,7 @@ namespace Pingvi
             }
         }
 
-        private HeroRelativePosition CheckHeroRelativePosition()
-        {
+        private HeroRelativePosition CheckHeroRelativePosition() {
             //TODO переписать покрасивше
             if (_elements.HeroPlayer.Status == PlayerStatus.OutOfHand) return HeroRelativePosition.None;
             if (_elements.HeroPlayer.Position == PlayerPosition.Button) return HeroRelativePosition.InPosition;
@@ -788,8 +773,7 @@ namespace Pingvi
         }
 
         private double FindNumber(PixelPoint[] numberCounterPoints, Rectangle[][] stackDigitsRactMass,
-            List<UnmanagedImage> digitsBitmapsList, Color digPosPointColor, bool inBb)
-        {
+            List<UnmanagedImage> digitsBitmapsList, Color digPosPointColor, bool inBb) {
             //find stack or bet size
             try
             {
@@ -848,8 +832,7 @@ namespace Pingvi
         }
 
         private double? FindNumberN(PixelPoint[] numberCounterPoints, Rectangle[][] stackDigitsRactMass,
-            List<UnmanagedImage> digitsBitmapsList, Color digPosPointColor, bool inBb)
-        {
+            List<UnmanagedImage> digitsBitmapsList, Color digPosPointColor, bool inBb) {
             //find stack or bet size
             try
             {
@@ -899,16 +882,14 @@ namespace Pingvi
             }
         }
 
-        private double CountEffStack()
-        {
+        private double CountEffStack() {
             if (!_elements.ActivePlayers.Any()) return 0.0f;
             var effStack =
                 _elements.ActivePlayers.Select(player => player.Stack).Concat(new double[] {100}).Min();
             return effStack;
         }
 
-        private double CountSbBtnEffStack()
-        {
+        private double CountSbBtnEffStack() {
             if (_elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Button) == null ||
                 _elements.ActivePlayers.FirstOrDefault(p => p.Position == PlayerPosition.Sb) == null) return 0;
             var btnstack = _elements.ActivePlayers.First(p => p.Position == PlayerPosition.Button).Stack;
@@ -938,8 +919,7 @@ namespace Pingvi
         */
         //  Stopwatch sw = new Stopwatch();
 
-        private string ParseLineAlter(Rectangle[] playerLineRectPositions)
-        {
+        private string ParseLineAlter(Rectangle[] playerLineRectPositions) {
             // sw.Start();
             var sb = new StringBuilder();
 
@@ -978,8 +958,7 @@ namespace Pingvi
             return sb.ToString();
         }
 
-        private double[] CountUnmanagedImage(UnmanagedImage image)
-        {
+        private double[] CountUnmanagedImage(UnmanagedImage image) {
             var res = new double[image.Height*image.Width];
             var c = 0;
 
@@ -997,14 +976,12 @@ namespace Pingvi
         }
 
 
-        private double CountBetToPot(double pot, double playerBet)
-        {
+        private double CountBetToPot(double pot, double playerBet) {
             if (pot == 0 || playerBet == 0) return 0.0;
             return playerBet/(pot - playerBet);
         }
 
-        private int? CheckTourneyMultiplier()
-        {
+        private int? CheckTourneyMultiplier() {
             var pixelColor = TableUnmanagedImage.GetPixel(_elementsConfig.Common.MultiplierPixelPoint.X,
                 _elementsConfig.Common.MultiplierPixelPoint.Y);
             foreach (var c in _elementsConfig.Common.MultiplierColors.Where(c => pixelColor == c.Value))

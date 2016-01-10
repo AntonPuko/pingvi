@@ -18,15 +18,13 @@ namespace Pingvi
         /// <param name="player"> 0 - hero 1 - left 2 - right</param>
         /// <param name="top"></param>
         /// <param name="left"></param>
-        public LWindow(int player)
-        {
+        public LWindow(int player) {
             InitializeComponent();
             _player = player;
             InitTextBlock();
         }
 
-        private void InitTextBlock()
-        {
+        private void InitTextBlock() {
             if (LineTextBlock == null) return;
             _rMass = new Run[10];
             for (var i = 0; i < _rMass.Length; i++)
@@ -37,8 +35,7 @@ namespace Pingvi
             }
         }
 
-        public void OnNewLineInfo(LineInfo lineInfo)
-        {
+        public void OnNewLineInfo(LineInfo lineInfo) {
             for (var i = 0; i < _rMass.Length; i++)
             {
                 _rMass[i].Foreground = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));

@@ -8,8 +8,7 @@ namespace Pingvi
 {
     public class CommonElementsConfig
     {
-        public CommonElementsConfig()
-        {
+        public CommonElementsConfig() {
             Blinds = new BlindsElementsConfig();
         }
 

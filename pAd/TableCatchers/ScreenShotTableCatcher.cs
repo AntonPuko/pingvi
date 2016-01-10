@@ -17,8 +17,7 @@ namespace Pingvi.TableCatchers
         private UnmanagedImage _tbUnmanaged;
 
 
-        public ScreenShotTableCatcher(Rectangle tableRect, TimeSpan timeInterval, string scrShootsPath)
-        {
+        public ScreenShotTableCatcher(Rectangle tableRect, TimeSpan timeInterval, string scrShootsPath) {
             _tablePositionRect = tableRect;
             _bitmapMakeInterval = timeInterval;
             _screenShotsPath = scrShootsPath;
@@ -27,8 +26,7 @@ namespace Pingvi.TableCatchers
         public event Action<UnmanagedImage> NewTableImage;
 
 
-        public void Start()
-        {
+        public void Start() {
             if (_bitmapTimer == null)
             {
                 _bitmapTimer = new DispatcherTimer();
@@ -38,14 +36,12 @@ namespace Pingvi.TableCatchers
             _bitmapTimer.Start();
         }
 
-        public void Stop()
-        {
+        public void Stop() {
             if (_bitmapTimer == null) return;
             _bitmapTimer.Stop();
         }
 
-        public void MakeScreenShot()
-        {
+        public void MakeScreenShot() {
             if (_tbUnmanaged == null) return;
             try
             {
@@ -60,8 +56,7 @@ namespace Pingvi.TableCatchers
             }
         }
 
-        private void MakeTableBitmap(object sender, EventArgs e)
-        {
+        private void MakeTableBitmap(object sender, EventArgs e) {
             try
             {
                 var bmp = new Bitmap(_tablePositionRect.Width, _tablePositionRect.Height);

@@ -22,8 +22,7 @@ namespace Pingvi
 
     public class Elements
     {
-        public Elements()
-        {
+        public Elements() {
             HeroPlayer = new Hero("Hero");
             LeftPlayer = new Player("LeftPlayer");
             RightPlayer = new Player("RightPlayer");

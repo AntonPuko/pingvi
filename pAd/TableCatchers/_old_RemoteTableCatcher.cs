@@ -18,22 +18,19 @@ namespace Pingvi
         public RectangleF TableOnRemoteDesktopRect;
 
 
-        public RemoteTableCatcher()
-        {
+        public RemoteTableCatcher() {
             TableOnRemoteDesktopRect = new RectangleF(144, 35, 808, 586);
         }
 
         private event Action NewRemoteDesktop;
         public event Action<Bitmap> NewTableBitmap;
 
-        public void Start()
-        {
+        public void Start() {
             NewRemoteDesktop += StartMakingBitmaps;
             CatchRemoteTable();
         }
 
-        public void CatchRemoteTable()
-        {
+        public void CatchRemoteTable() {
             var rutView = Process.GetProcessesByName("rutview");
             if (rutView.Length == 0)
             {
@@ -60,8 +57,7 @@ namespace Pingvi
         }
 
 
-        public void StartMakingBitmaps()
-        {
+        public void StartMakingBitmaps() {
             if (_bitmapMakerTimer == null)
             {
                 _bitmapMakerTimer = new DispatcherTimer();
@@ -72,8 +68,7 @@ namespace Pingvi
         }
 
 
-        private void MakeTableBitmap(object sender, EventArgs e)
-        {
+        private void MakeTableBitmap(object sender, EventArgs e) {
             try
             {
                 //MAKE REMOTE DESKTOP BITMAP

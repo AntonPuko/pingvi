@@ -8,16 +8,15 @@ namespace Pingvi.TableCatchers
 {
     internal class AForgeTableCatcher : ITableCatcher
     {
-        private readonly Rectangle _tablePositionRect;
         private readonly string _screenShotsPath;
+        private readonly Rectangle _tablePositionRect;
+        private readonly int _timeFrameInterfal;
         private ScreenCaptureStream _stream;
 
         private UnmanagedImage _tbUnmanaged;
-        private readonly int _timeFrameInterfal;
 
 
-        public AForgeTableCatcher(Rectangle tableRect, int timeInterval, string scrShootsPath)
-        {
+        public AForgeTableCatcher(Rectangle tableRect, int timeInterval, string scrShootsPath) {
             _timeFrameInterfal = timeInterval;
             _tablePositionRect = tableRect;
             _screenShotsPath = scrShootsPath;
@@ -25,18 +24,15 @@ namespace Pingvi.TableCatchers
 
         public event Action<UnmanagedImage> NewTableImage;
 
-        public void Start()
-        {
+        public void Start() {
             CreateStream();
         }
 
-        public void Stop()
-        {
+        public void Stop() {
             _stream.Stop();
         }
 
-        public void MakeScreenShot()
-        {
+        public void MakeScreenShot() {
             if (_tbUnmanaged == null) return;
             try
             {
@@ -54,8 +50,7 @@ namespace Pingvi.TableCatchers
 
         public event Action<Bitmap> NewTableBitmap;
 
-        private void CreateStream()
-        {
+        private void CreateStream() {
             _stream = new ScreenCaptureStream(_tablePositionRect);
 
 
@@ -64,8 +59,7 @@ namespace Pingvi.TableCatchers
             _stream.Start();
         }
 
-        private void OnStreamNewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
+        private void OnStreamNewFrame(object sender, NewFrameEventArgs eventArgs) {
             try
             {
                 _tbUnmanaged = UnmanagedImage.FromManagedImage(eventArgs.Frame);

@@ -23,15 +23,13 @@ namespace Pingvi
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        public static void RegisterHotKey(Window window, uint keyVlc)
-        {
+        public static void RegisterHotKey(Window window, uint keyVlc) {
             var hwnd = new WindowInteropHelper(window).Handle;
             _keyId = window.GetHashCode();
             RegisterHotKey(hwnd, _keyId, 0, (int) keyVlc);
         }
 
-        public static void UnregisterHotKey(Window window)
-        {
+        public static void UnregisterHotKey(Window window) {
             try
             {
                 var hwnd = new WindowInteropHelper(window).Handle;

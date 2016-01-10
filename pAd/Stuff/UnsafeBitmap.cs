@@ -12,13 +12,11 @@ namespace Pingvi.Stuff
         // three elements used for MakeGreyUnsafe
         private int _width;
 
-        public UnsafeBitmap(Bitmap bitmap)
-        {
+        public UnsafeBitmap(Bitmap bitmap) {
             Bitmap = new Bitmap(bitmap);
         }
 
-        public UnsafeBitmap(int width, int height, PixelFormat pixelFormat)
-        {
+        public UnsafeBitmap(int width, int height, PixelFormat pixelFormat) {
             Bitmap = new Bitmap(width, height, pixelFormat);
         }
 
@@ -35,13 +33,11 @@ namespace Pingvi.Stuff
             }
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             Bitmap.Dispose();
         }
 
-        public void LockBitmap()
-        {
+        public void LockBitmap() {
             var unit = GraphicsUnit.Pixel;
             var boundsF = Bitmap.GetBounds(ref unit);
             var bounds = new Rectangle((int) boundsF.X,
@@ -64,27 +60,23 @@ namespace Pingvi.Stuff
             _pBase = (byte*) _bitmapData.Scan0.ToPointer();
         }
 
-        public PixelData GetPixel(int x, int y)
-        {
+        public PixelData GetPixel(int x, int y) {
             var returnValue = *PixelAt(x, y);
             return returnValue;
         }
 
-        public void SetPixel(int x, int y, PixelData colour)
-        {
+        public void SetPixel(int x, int y, PixelData colour) {
             var pixel = PixelAt(x, y);
             *pixel = colour;
         }
 
-        public void UnlockBitmap()
-        {
+        public void UnlockBitmap() {
             Bitmap.UnlockBits(_bitmapData);
             _bitmapData = null;
             _pBase = null;
         }
 
-        public PixelData* PixelAt(int x, int y)
-        {
+        public PixelData* PixelAt(int x, int y) {
             return (PixelData*) (_pBase + y*_width + x*sizeof (PixelData));
         }
     }

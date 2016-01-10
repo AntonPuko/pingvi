@@ -22,13 +22,11 @@ namespace Pingvi
 
         private double _usdRubExRate;
 
-        public RWindow()
-        {
+        public RWindow() {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
             try
             {
                 var exchangeRatesUrl = "http://www.apilayer.net/api/live?access_key=b5a73c66b2b8f58fee2d61ac8e9695a2";
@@ -60,8 +58,7 @@ namespace Pingvi
         }
 
 
-        private void OnTimerTick(object sender, EventArgs e)
-        {
+        private void OnTimerTick(object sender, EventArgs e) {
             var tagCount = 0;
             double evBb100 = 0;
             double result = 0;
@@ -138,7 +135,7 @@ namespace Pingvi
             const double vppMultiplicator = 5.5;
             //const double bonusFormula = 3.5/40000*600; old until 2016
             const double stepFormula = 50.0/1000;
-            rakeback = rake*vppMultiplicator*stepFormula * _usdRubExRate;
+            rakeback = rake*vppMultiplicator*stepFormula*_usdRubExRate;
 
 
             CountRun.Text = tagCount.ToString();
@@ -159,8 +156,7 @@ namespace Pingvi
         // private bool isVisible = false;
 
 
-        private void CleartStats()
-        {
+        private void CleartStats() {
             ResultRun.Text = "";
             RakeBackRun.Text = "";
             EvBb100Run.Text = "";
@@ -168,8 +164,7 @@ namespace Pingvi
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        private void Button_Click(object sender, RoutedEventArgs e) {
             //show or hide Results
             if (_isResultRefreshing)
             {

@@ -9,21 +9,18 @@ namespace Pingvi.TableCatchers
 {
     public class VmTableCatcher
     {
-        public AutomationElement AeVmDesktop;
-
         private DispatcherTimer _bitmapTimer;
+        public AutomationElement AeVmDesktop;
         public RectangleF TableOnVmDesktopRect;
 
-        public VmTableCatcher()
-        {
+        public VmTableCatcher() {
             TableOnVmDesktopRect = new RectangleF(0, 0, 808, 586);
         }
 
         public event Action<Bitmap> NewTableBitmap;
 
 
-        public void Start()
-        {
+        public void Start() {
             if (_bitmapTimer == null)
             {
                 _bitmapTimer = new DispatcherTimer();
@@ -33,8 +30,7 @@ namespace Pingvi.TableCatchers
             _bitmapTimer.Start();
         }
 
-        public void CatchVmScreen()
-        {
+        public void CatchVmScreen() {
             var vmwareProcess = Process.GetProcessesByName("VMware");
             if (vmwareProcess.Length == 0) MessageBox.Show("VWware не запущен");
             AeVmDesktop = AutomationElement.FromHandle(vmwareProcess[0].MainWindowHandle);
@@ -42,8 +38,7 @@ namespace Pingvi.TableCatchers
             //_aeVmDesktop = aeVmMainWindow.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ClassNameProperty, "MKSEmbedded")); 
         }
 
-        private void MakeTableBitmap(object sender, EventArgs e)
-        {
+        private void MakeTableBitmap(object sender, EventArgs e) {
             try
             {
                 //MAKE REMOTE DESKTOP BITMAP

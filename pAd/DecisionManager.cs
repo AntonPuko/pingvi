@@ -32,36 +32,34 @@ namespace Pingvi
     {
         private const string RangesPath = @"Data\Ranges";
         private const string GtoRangesList = @"Data\GtoRanges";
-        private readonly Random _propapilityRandomizer = new Random((int)DateTime.Now.Ticks);
+        private readonly Random _propapilityRandomizer = new Random((int) DateTime.Now.Ticks);
+        private List<GtoRange> _gtoRangesList;
         private bool _isNewDecision;
         private PreflopDecision _preflopDecision;
         private string _preflopRangeName;
         private PreviousLineInfo _prevLineInfo;
         private double _probRand;
-        private List<Range> _rangesList;
-        private List<GtoRange> _gtoRangesList;
 
-        private double[][] _probRanges = new[]
+        private readonly double[][] _probRanges =
         {
             new[] {0.0, 0.0},
-            new[] { 0.0, 0.0},
-            new[] { 0.0, 0.0},
-            new[] { 0.0, 0.0},
-            new[] { 0.0, 0.0},
+            new[] {0.0, 0.0},
+            new[] {0.0, 0.0},
+            new[] {0.0, 0.0},
+            new[] {0.0, 0.0}
         };
 
-        double? _raiseSize = 0;
+        private double? _raiseSize = 0;
+        private List<Range> _rangesList;
 
-        public DecisionManager()
-        {
+        public DecisionManager() {
             LoadRanges(RangesPath);
             LoadGtoRanges(GtoRangesList);
         }
 
         public event Action<DecisionInfo> NewDecisionInfo;
 
-        private bool IsPrevLineInfoEquals(LineInfo lineInfo, PreviousLineInfo prevLineInfo)
-        {
+        private bool IsPrevLineInfoEquals(LineInfo lineInfo, PreviousLineInfo prevLineInfo) {
             return prevLineInfo.LastEffectiveStack == lineInfo.Elements.EffectiveStack &&
                    prevLineInfo.LastHeroPlayerStack == lineInfo.Elements.HeroPlayer.Stack &&
                    prevLineInfo.LastHeroPosition == lineInfo.Elements.HeroPlayer.Position &&
@@ -69,8 +67,7 @@ namespace Pingvi
                    prevLineInfo.LastTourneyMultiplicator == lineInfo.Elements.TourneyMultiplier;
         }
 
-        private void RefreshPrevLineInfo(LineInfo lineInfo)
-        {
+        private void RefreshPrevLineInfo(LineInfo lineInfo) {
             _prevLineInfo.LastEffectiveStack = lineInfo.Elements.EffectiveStack;
             _prevLineInfo.LastHeroPlayerStack = lineInfo.Elements.HeroPlayer.Stack;
             _prevLineInfo.LastHeroPosition = lineInfo.Elements.HeroPlayer.Position;
@@ -78,9 +75,8 @@ namespace Pingvi
             _prevLineInfo.LastTourneyMultiplicator = lineInfo.Elements.TourneyMultiplier;
         }
 
-        public void OnNewLineInfo(LineInfo lineInfo)
-        {
-            if (!IsPrevLineInfoEquals(lineInfo, _prevLineInfo)) _probRand = GetRandomNumber(0.0,100.0);
+        public void OnNewLineInfo(LineInfo lineInfo) {
+            if (!IsPrevLineInfoEquals(lineInfo, _prevLineInfo)) _probRand = GetRandomNumber(0.0, 100.0);
             RefreshPrevLineInfo(lineInfo);
 
             _raiseSize = null;
@@ -94,7 +90,6 @@ namespace Pingvi
             {
                 _isNewDecision = true;
                 _preflopDecision = PreflopDecision.None;
-                
             }
 
 
@@ -104,7 +99,6 @@ namespace Pingvi
             lineInfo.StartRule().HeroPreflopState(HeroPreflopState.Open)
                 .SitOutOpp()
                 .Do(e => CheckDecision(heroHand, "COMMON_OPEN_100", 0, PlMode.None));
-
 
             #region GTO
 
@@ -205,211 +199,211 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_17BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(17.5, 18.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_18BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(17.5, 18.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_18BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(18.5, 19.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_19BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(18.5, 19.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_19BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(19.5, 20.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_20BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(19.5, 20.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_20BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(20.5, 21.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_21BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(20.5, 21.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_21BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(21.5, 22.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_22BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(21.5, 22.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_22BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_23BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_23BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_24BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_24BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(24.5, 100)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_25BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_25BB_GTO"));
 
                     //SB DEF VS ISO LIMP
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSize(2)
-                       .EffectiveStackBetween(4.5, 5.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_5BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSize(2)
+                        .EffectiveStackBetween(4.5, 5.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_5BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSize(2)
-                       .EffectiveStackBetween(5.5, 6.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_6BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSize(2)
+                        .EffectiveStackBetween(5.5, 6.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_6BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSize(2)
-                       .EffectiveStackBetween(6.5, 7.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_7BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSize(2)
+                        .EffectiveStackBetween(6.5, 7.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_7BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSize(2)
-                       .EffectiveStackBetween(7.5, 8.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_8BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSize(2)
+                        .EffectiveStackBetween(7.5, 8.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_8BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(8.5, 9.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_9BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(8.5, 9.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_9BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(9.5, 10.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_10BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(9.5, 10.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_10BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(10.5, 11.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_11BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(10.5, 11.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_11BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(11.5, 12.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_12BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(11.5, 12.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_12BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(12.5, 13.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_13BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(12.5, 13.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_13BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(13.5, 14.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_14BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(13.5, 14.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_14BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(14.5, 15.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_15BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(14.5, 15.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_15BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 2.3)
-                       .EffectiveStackBetween(15.5, 16.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_16BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 2.3)
+                        .EffectiveStackBetween(15.5, 16.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP2_16BB_GTO"));
 
                     //TODO СДЕЛАТЬ РЕНЖ 16+ С МЕНЬШИМ КОЛИЧЕСТВОМ ПУША
                     //SB DEF VS ISO LIMP 2.5
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(12, 17.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_17BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(12, 17.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_17BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(17.5, 18.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_18BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(17.5, 18.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_18BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(18.5, 19.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_19BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(18.5, 19.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_19BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(19.5, 20.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_20BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(19.5, 20.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_20BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(20.5, 21.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_21BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(20.5, 21.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_21BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(21.5, 22.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_22BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(21.5, 22.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_22BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_23BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_23BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_24BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_24BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2.35, 2.8)
-                       .EffectiveStackBetween(24.5, 100)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_25BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2.35, 2.8)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_25BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
@@ -514,17 +508,17 @@ namespace Pingvi
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(3, 4)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP4_23BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(3, 4)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP4_23BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(3, 4)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP4_24BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(3, 4)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP4_24BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
@@ -538,7 +532,10 @@ namespace Pingvi
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
                         .HeroPreflopState(HeroPreflopState.FacingPushVsLimp)
                         .EffectiveStackBetween(5, 100)
-                        .Do(l => CheckDecision(heroHand, "SB_DEF_VS_BB_PUSH_VLIMP_2MAX_5-25BB_GTO", l.Elements.EffectiveStack, PlMode.Less));
+                        .Do(
+                            l =>
+                                CheckDecision(heroHand, "SB_DEF_VS_BB_PUSH_VLIMP_2MAX_5-25BB_GTO",
+                                    l.Elements.EffectiveStack, PlMode.Less));
 
                     //SB DEF VS BB 3BET
 
@@ -599,60 +596,60 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_17BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(17.5, 18.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_18BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(17.5, 18.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_18BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(18.5, 19.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_19BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(18.5, 19.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_19BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(19.5, 20.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_20BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(19.5, 20.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_20BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(20.5, 21.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_21BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(20.5, 21.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_21BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(21.5, 22.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_22BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(21.5, 22.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_22BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_23BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_23BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_24BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_24BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .HeroPreflopState(HeroPreflopState.Facing3Bet)
-                       .OppBetSizeBetween(3, 5)
-                       .EffectiveStackBetween(24.5, 100)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_25BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .HeroPreflopState(HeroPreflopState.Facing3Bet)
+                        .OppBetSizeBetween(3, 5)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_3BET45_25BB_GTO"));
                 }
 
                 if (lineInfo.Elements.HeroPlayer.Position == PlayerPosition.Bb)
@@ -924,22 +921,22 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_22BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                       .HeroPreflopState(HeroPreflopState.FacingLimp)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_23BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingLimp)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_23BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                       .HeroPreflopState(HeroPreflopState.FacingLimp)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_24BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingLimp)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_24BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                      .HeroPreflopState(HeroPreflopState.FacingLimp)
-                      .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                      .EffectiveStackBetween(24.5, 100)
-                      .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_25BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingLimp)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_25BB_GTO"));
 
 
                     //BB DEF VS SB OPENPSUH
@@ -947,7 +944,10 @@ namespace Pingvi
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                         .EffectiveStackBetween(5, 11)
-                        .Do(l => CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_2MAX_5-11BB_GTO", l.Elements.EffectiveStack, PlMode.Less));
+                        .Do(
+                            l =>
+                                CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_2MAX_5-11BB_GTO", l.Elements.EffectiveStack,
+                                    PlMode.Less));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
@@ -990,25 +990,21 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_19BB_GTO"));
                 }
             }
-             
-
-             
 
 
             if (lineInfo.PotNType == PotNType.Hu3Max)
             {
-
                 if (lineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb)
                 {
                     //SB 3MAX
                     //SB 3MAX OPEN
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(4.5, 5.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_5BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(4.5, 5.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_5BB_GTO"));
 
                     lineInfo.StartRule()
                         .HeroPosition(PlayerPosition.Sb)
@@ -1095,60 +1091,60 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_17BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(17.5, 18.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_18BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(17.5, 18.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_18BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(18.5, 19.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_19BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(18.5, 19.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_19BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(19.5, 20.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_20BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(19.5, 20.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_20BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(20.5, 21.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_21BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(20.5, 21.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_21BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(21.5, 22.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_22BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(21.5, 22.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_22BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_23BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_23BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_24BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_24BB_GTO"));
 
                     lineInfo.StartRule()
-                       .HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.Open)
-                       .EffectiveStackBetween(24.5, 100)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_25BB_GTO"));
+                        .HeroPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.Open)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_3MAX_HU_25BB_GTO"));
 
                     //3MAX SB DEF VS ISO LIMP25 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
@@ -1222,25 +1218,25 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_14BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 3)
-                       .EffectiveStackBetween(14.5, 15.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_15BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 3)
+                        .EffectiveStackBetween(14.5, 15.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_15BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 3)
-                       .EffectiveStackBetween(15.5, 16.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_16BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 3)
+                        .EffectiveStackBetween(15.5, 16.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_16BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                       .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                       .OppBetSizeBetween(2, 3)
-                       .EffectiveStackBetween(16.5, 17.5)
-                       .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_17BB_GTO"));
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                        .OppBetSizeBetween(2, 3)
+                        .EffectiveStackBetween(16.5, 17.5)
+                        .Do(l => CheckGtoDecision(heroHand, "SB_DEF_VS_BB_ISOLIMP25_3MAX_HU_17BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
@@ -1301,11 +1297,14 @@ namespace Pingvi
 
                     //SB DEF VS ISO PUSH
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Sb).IsHu()
-                      .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-                      .OppPosition(PlayerPosition.Bb)
-                      .HeroPreflopState(HeroPreflopState.FacingPushVsLimp)
-                      .EffectiveStackBetween(5, 100)
-                      .Do(l => CheckDecision(heroHand, "SB_DEF_VS_BB_PUSH_VLIMP_3MAX_HU_5-25BB_GTO", l.Elements.EffectiveStack, PlMode.Less));
+                        .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                        .OppPosition(PlayerPosition.Bb)
+                        .HeroPreflopState(HeroPreflopState.FacingPushVsLimp)
+                        .EffectiveStackBetween(5, 100)
+                        .Do(
+                            l =>
+                                CheckDecision(heroHand, "SB_DEF_VS_BB_PUSH_VLIMP_3MAX_HU_5-25BB_GTO",
+                                    l.Elements.EffectiveStack, PlMode.Less));
                 }
 
                 if (lineInfo.Elements.HeroPlayer.Position == PlayerPosition.Bb)
@@ -1438,25 +1437,25 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_22BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max().IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingLimp)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .EffectiveStackBetween(22.5, 23.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_23BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingLimp)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_23BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max().IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingLimp)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .EffectiveStackBetween(23.5, 24.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_24BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingLimp)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_24BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max().IsHu()
-                      .HeroPreflopState(HeroPreflopState.FacingLimp)
-                      .OppPosition(PlayerPosition.Sb)
-                      .HeroRelativePosition(HeroRelativePosition.InPosition)
-                      .EffectiveStackBetween(24.5, 100)
-                      .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_25BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingLimp)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_25BB_GTO"));
 
                     //BB VS SB OPEN2 
 
@@ -1583,119 +1582,120 @@ namespace Pingvi
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_15BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingOpen)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .OppBetSizeBetween(2.1, 2.7)
-                       .EffectiveStackBetween(15.5, 16.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_16BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.1, 2.7)
+                        .EffectiveStackBetween(15.5, 16.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_16BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingOpen)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .OppBetSizeBetween(2, 2.7)
-                       .EffectiveStackBetween(16.5, 17.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_17BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2, 2.7)
+                        .EffectiveStackBetween(16.5, 17.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_17BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingOpen)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .OppBetSizeBetween(2, 2.7)
-                       .EffectiveStackBetween(17.5, 18.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_18BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2, 2.7)
+                        .EffectiveStackBetween(17.5, 18.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_18BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingOpen)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .OppBetSizeBetween(2, 2.7)
-                       .EffectiveStackBetween(18.5, 19.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_19BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2, 2.7)
+                        .EffectiveStackBetween(18.5, 19.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_19BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                       .HeroPreflopState(HeroPreflopState.FacingOpen)
-                       .OppPosition(PlayerPosition.Sb)
-                       .HeroRelativePosition(HeroRelativePosition.InPosition)
-                       .OppBetSizeBetween(2, 2.7)
-                       .EffectiveStackBetween(19.5, 20.5)
-                       .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_20BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2, 2.7)
+                        .EffectiveStackBetween(19.5, 20.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR25_3MAX_HU_20BB_GTO"));
 
                     //BB VS SB OPEN3
+
                     #endregion
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                      .HeroPreflopState(HeroPreflopState.FacingOpen)
-                      .OppPosition(PlayerPosition.Sb)
-                      .HeroRelativePosition(HeroRelativePosition.InPosition)
-                      .OppBetSizeBetween(2.7, 3)
-                      .EffectiveStackBetween(14, 17.5)
-                      .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_17BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.7, 3)
+                        .EffectiveStackBetween(14, 17.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_17BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                      .HeroPreflopState(HeroPreflopState.FacingOpen)
-                      .OppPosition(PlayerPosition.Sb)
-                      .HeroRelativePosition(HeroRelativePosition.InPosition)
-                      .OppBetSizeBetween(2.7, 3)
-                      .EffectiveStackBetween(17.5, 18.5)
-                      .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_18BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.7, 3)
+                        .EffectiveStackBetween(17.5, 18.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_18BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                     .HeroPreflopState(HeroPreflopState.FacingOpen)
-                     .OppPosition(PlayerPosition.Sb)
-                     .HeroRelativePosition(HeroRelativePosition.InPosition)
-                     .OppBetSizeBetween(2.7, 3)
-                     .EffectiveStackBetween(18.5, 19.5)
-                     .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_19BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.7, 3)
+                        .EffectiveStackBetween(18.5, 19.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_19BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .OppPosition(PlayerPosition.Sb)
-                    .HeroRelativePosition(HeroRelativePosition.InPosition)
-                    .OppBetSizeBetween(2.7, 3)
-                    .EffectiveStackBetween(19.5, 20.5)
-                    .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_20BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.7, 3)
+                        .EffectiveStackBetween(19.5, 20.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_20BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .OppPosition(PlayerPosition.Sb)
-                    .HeroRelativePosition(HeroRelativePosition.InPosition)
-                    .OppBetSizeBetween(2.5, 3)
-                    .EffectiveStackBetween(20.5, 21.5)
-                    .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_21BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.5, 3)
+                        .EffectiveStackBetween(20.5, 21.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_21BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .OppPosition(PlayerPosition.Sb)
-                    .HeroRelativePosition(HeroRelativePosition.InPosition)
-                    .OppBetSizeBetween(2.5, 3)
-                    .EffectiveStackBetween(21.5, 22.5)
-                    .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_22BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.5, 3)
+                        .EffectiveStackBetween(21.5, 22.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_22BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                    .HeroPreflopState(HeroPreflopState.FacingOpen)
-                    .OppPosition(PlayerPosition.Sb)
-                    .HeroRelativePosition(HeroRelativePosition.InPosition)
-                    .OppBetSizeBetween(2.5, 3)
-                    .EffectiveStackBetween(22.5, 23.5)
-                    .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_23BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.5, 3)
+                        .EffectiveStackBetween(22.5, 23.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_23BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                   .HeroPreflopState(HeroPreflopState.FacingOpen)
-                   .OppPosition(PlayerPosition.Sb)
-                   .HeroRelativePosition(HeroRelativePosition.InPosition)
-                   .OppBetSizeBetween(2.5, 3)
-                   .EffectiveStackBetween(23.5, 24.5)
-                   .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_24BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.5, 3)
+                        .EffectiveStackBetween(23.5, 24.5)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_24BB_GTO"));
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
-                   .HeroPreflopState(HeroPreflopState.FacingOpen)
-                   .OppPosition(PlayerPosition.Sb)
-                   .HeroRelativePosition(HeroRelativePosition.InPosition)
-                   .OppBetSizeBetween(2.5, 3)
-                   .EffectiveStackBetween(24.5, 100)
-                   .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_25BB_GTO"));
+                        .HeroPreflopState(HeroPreflopState.FacingOpen)
+                        .OppPosition(PlayerPosition.Sb)
+                        .HeroRelativePosition(HeroRelativePosition.InPosition)
+                        .OppBetSizeBetween(2.5, 3)
+                        .EffectiveStackBetween(24.5, 100)
+                        .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_25BB_GTO"));
 
                     //3mAX bb def vs sb openpush
 
@@ -1703,14 +1703,12 @@ namespace Pingvi
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                         .OppPosition(PlayerPosition.Sb)
                         .EffectiveStackBetween(5, 100)
-                        .Do(l => CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_3MAX_HU_5-25BB_GTO", l.Elements.EffectiveStack, PlMode.Less));
+                        .Do(
+                            l =>
+                                CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_3MAX_HU_5-25BB_GTO",
+                                    l.Elements.EffectiveStack, PlMode.Less));
                 }
             }
-               
-
-              
-           
-
 
             #region BTN
 
@@ -1753,10 +1751,10 @@ namespace Pingvi
                 .Do(l => CheckDecision(heroHand, "BTN_OPEN_13-17bb", merged_3BetVsBtn, PlMode.More));
 
             //checking, not deploy!
-          //  lineInfo.StartRule().HeroPosition(PlayerPosition.Button)
-           //    .HeroPreflopState(HeroPreflopState.Open)
-           //    .HeroStackBetween(17, 100)
-           //    .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_18bb_GTO"));
+            //  lineInfo.StartRule().HeroPosition(PlayerPosition.Button)
+            //    .HeroPreflopState(HeroPreflopState.Open)
+            //    .HeroStackBetween(17, 100)
+            //    .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_18bb_GTO"));
 
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Button)
@@ -1827,18 +1825,18 @@ namespace Pingvi
 
             //gto
             lineInfo.StartRule()
-            .HeroPosition(PlayerPosition.Sb)
-            .HeroRelativePosition(HeroRelativePosition.InPosition)
-            .HeroPreflopState(HeroPreflopState.Open)
-            .EffectiveStackBetween(6, 8)
-            .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_7bb_GTO"));
+                .HeroPosition(PlayerPosition.Sb)
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
+                .HeroPreflopState(HeroPreflopState.Open)
+                .EffectiveStackBetween(6, 8)
+                .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_7bb_GTO"));
 
             lineInfo.StartRule()
-             .HeroPosition(PlayerPosition.Sb)
-             .HeroRelativePosition(HeroRelativePosition.InPosition)
-             .HeroPreflopState(HeroPreflopState.Open)
-             .EffectiveStackBetween(6, 8)
-             .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7-8BB_GTO", _probRand, PlMode.Less));
+                .HeroPosition(PlayerPosition.Sb)
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
+                .HeroPreflopState(HeroPreflopState.Open)
+                .EffectiveStackBetween(6, 8)
+                .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7-8BB_GTO", _probRand, PlMode.Less));
 
             lineInfo.StartRule()
                 .HeroPosition(PlayerPosition.Sb)
@@ -1908,13 +1906,12 @@ namespace Pingvi
                 .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_15-17BB_UNK", _probRand, PlMode.Less));
 
             //gto
-              lineInfo.StartRule()
-                   .HeroPosition(PlayerPosition.Sb)
-                 .HeroRelativePosition(HeroRelativePosition.InPosition)
+            lineInfo.StartRule()
+                .HeroPosition(PlayerPosition.Sb)
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .HeroPreflopState(HeroPreflopState.Open)
-                  .EffectiveStackBetween(17, 19)
-                  .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_18bb_GTO"));
-
+                .EffectiveStackBetween(17, 19)
+                .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_OPEN_2max_18bb_GTO"));
 
 
             //vs regs
@@ -1947,12 +1944,12 @@ namespace Pingvi
             }
 
             //vs unk
-          //  lineInfo.StartRule()
-         //       .HeroPosition(PlayerPosition.Sb)
-           //     .HeroRelativePosition(HeroRelativePosition.InPosition)
-          //      .HeroPreflopState(HeroPreflopState.Open)
-          //      .EffectiveStackBetween(17, 19)
-          //      .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_17-19BB_UNK", 0, PlMode.None));
+            //  lineInfo.StartRule()
+            //       .HeroPosition(PlayerPosition.Sb)
+            //     .HeroRelativePosition(HeroRelativePosition.InPosition)
+            //      .HeroPreflopState(HeroPreflopState.Open)
+            //      .EffectiveStackBetween(17, 19)
+            //      .Do(l => CheckDecision(heroHand, "SB_OPEN_VS_BB_2MAX_17-19BB_UNK", 0, PlMode.None));
 
             lineInfo.StartRule()
                 .HeroPosition(PlayerPosition.Sb)
@@ -2114,12 +2111,11 @@ namespace Pingvi
             if (btnSteal == null) btnSteal = defaultBtnSteal;
 
 
-           // lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+            // lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
             //  .HeroPreflopState(HeroPreflopState.FacingOpen)
             //  .OppBetSizeMinRaise()
             //  .EffectiveStackSbVsBtnBetween(0, 15)
             //  .Do(l => CheckGtoDecision(heroHand, "RangeName"));
-
 
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
@@ -2161,10 +2157,10 @@ namespace Pingvi
                 .Do(l => CheckDecision(heroHand, "SB_DefVSMinRaise_AfterLIMP_IP_9-12bb_UNK", null, PlMode.None));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                 .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
-                 .OppBetSizeBetween(2,3)
-                 .EffectiveStackBetween(16, 19)
-                 .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_ISODEF_2max_18bb_GTO"));
+                .HeroPreflopState(HeroPreflopState.FacingIsOvsLimp)
+                .OppBetSizeBetween(2, 3)
+                .EffectiveStackBetween(16, 19)
+                .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_ISODEF_2max_18bb_GTO"));
 
             //SB LIMPDEF VS BB PUSH
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
@@ -2205,13 +2201,13 @@ namespace Pingvi
             //SB VS BB 3BET
             //gto
 
-  
+
             //gto
             lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                   .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                   .EffectiveStackBetween(16, 19)
-                   .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_PUSHDEF_2max_18bb_GTO"));
-            
+                .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
+                .EffectiveStackBetween(16, 19)
+                .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_PUSHDEF_2max_18bb_GTO"));
+
 
             if (bb_3BetVsSb == null || bb_3BetVsSb > 30)
             {
@@ -2271,14 +2267,12 @@ namespace Pingvi
 
             //gto
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
-              .HeroPreflopState(HeroPreflopState.FacingLimp)
-              .Is2Max()
-              .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .EffectiveStackBetween(6, 8)
-              .VsBigStack()
-              .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2max_7bb_GTO"));
-
-
+                .HeroPreflopState(HeroPreflopState.FacingLimp)
+                .Is2Max()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .EffectiveStackBetween(6, 8)
+                .VsBigStack()
+                .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2max_7bb_GTO"));
 
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
@@ -2329,19 +2323,19 @@ namespace Pingvi
 
             //gto
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
-               .HeroPreflopState(HeroPreflopState.FacingLimp)
-               .Is2Max()
-               .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-               .EffectiveStackBetween(16, 20)
-               .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2max_18bb_GTO"));
+                .HeroPreflopState(HeroPreflopState.FacingLimp)
+                .Is2Max()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .EffectiveStackBetween(16, 20)
+                .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2max_18bb_GTO"));
 
 
             //lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
             //    .HeroPreflopState(HeroPreflopState.FacingLimp)
             //    .Is2Max()
             //    .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-             //   .EffectiveStackBetween(16, 20)
-             //   .Do(l => CheckDecision(heroHand, "BB_VS_SB_LIMP_2MAX_16-20BB", limpfold, PlMode.More));
+            //   .EffectiveStackBetween(16, 20)
+            //   .Do(l => CheckDecision(heroHand, "BB_VS_SB_LIMP_2MAX_16-20BB", limpfold, PlMode.More));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingLimp)
@@ -2382,8 +2376,6 @@ namespace Pingvi
                 .HeroRelativePosition(HeroRelativePosition.InPosition)
                 .EffectiveStackBetween(16, 100)
                 .Do(l => CheckDecision(heroHand, "BB_VS_SB_LIMP_3MAX_16-100BB", limpfold, PlMode.More));
-
-       
 
 
             //BB VS BTN LIMP 3MAX HU
@@ -2639,13 +2631,13 @@ namespace Pingvi
                 .Do(l => CheckDecision(heroHand, "COMMON_PushFoldVsOpen_NASH", l.Elements.EffectiveStack, PlMode.Less));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
-              .HeroPreflopState(HeroPreflopState.FacingOpen)
-              .IsHu()
-              .HeroRelativePosition(HeroRelativePosition.InPosition)
-              .OppBetSize(2)
-              .BbEqOrMoreThen(60)
-              .EffectiveStackBetween(8, 10)
-              .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_3max_BIGBLINDS", 0, PlMode.None));
+                .HeroPreflopState(HeroPreflopState.FacingOpen)
+                .IsHu()
+                .HeroRelativePosition(HeroRelativePosition.InPosition)
+                .OppBetSize(2)
+                .BbEqOrMoreThen(60)
+                .EffectiveStackBetween(8, 10)
+                .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_8-10bb_3max_BIGBLINDS", 0, PlMode.None));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb)
                 .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -2694,9 +2686,6 @@ namespace Pingvi
                 .OppBetSizeMinRaise()
                 .EffectiveStackBetween(20, 100)
                 .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_20-100bb_3max", sbSteal, PlMode.More));
-
-
-
 
 
             //BB VS SB OPEN BIG 3max
@@ -2784,18 +2773,18 @@ namespace Pingvi
 
             //gto
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-              .HeroPreflopState(HeroPreflopState.FacingOpen).IsHu()
-              .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-              .OppBetSizeMinRaise()
-              .EffectiveStackBetween(17, 20)
-              .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPEN_2max_18bb_GTO"));
+                .HeroPreflopState(HeroPreflopState.FacingOpen).IsHu()
+                .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+                .OppBetSizeMinRaise()
+                .EffectiveStackBetween(17, 20)
+                .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPEN_2max_18bb_GTO"));
 
-           // lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-           //     .HeroPreflopState(HeroPreflopState.FacingOpen).IsHu()
-           //     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
-           //     .OppBetSizeMinRaise()
-           //     .EffectiveStackBetween(17, 20)
-           //     .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_17-20BB", sbSteal, PlMode.More));
+            // lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+            //     .HeroPreflopState(HeroPreflopState.FacingOpen).IsHu()
+            //     .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
+            //     .OppBetSizeMinRaise()
+            //     .EffectiveStackBetween(17, 20)
+            //     .Do(l => CheckDecision(heroHand, "BB_VS_SB_OPEN_2MAX_17-20BB", sbSteal, PlMode.More));
 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                 .HeroPreflopState(HeroPreflopState.FacingOpen).IsHu()
@@ -3179,8 +3168,7 @@ namespace Pingvi
             }
         }
 
-        private Foldto3Bet ChooseFoldTo3BetCategory(double? foldTo3Bet, Elements elements)
-        {
+        private Foldto3Bet ChooseFoldTo3BetCategory(double? foldTo3Bet, Elements elements) {
             if (foldTo3Bet == null) return Foldto3Bet.None;
             if (elements.EffectiveStack > 15)
             {
@@ -3193,8 +3181,7 @@ namespace Pingvi
             return Foldto3Bet.Small;
         }
 
-        private double FindPotOdds(Elements elements)
-        {
+        private double FindPotOdds(Elements elements) {
             //TODO возможно нерпавильно считается в мультипотах, разобраться
             var heroBet = elements.HeroPlayer.Bet;
             var opponents = elements.ActivePlayers.Where(p => p.Name != elements.HeroPlayer.Name);
@@ -3207,8 +3194,7 @@ namespace Pingvi
             return (oppBet - heroBet)/pot*100;
         }
 
-        private void CheckDecision(Hand heroHand, string rangeName, double stat, PlMode plMode)
-        {
+        private void CheckDecision(Hand heroHand, string rangeName, double stat, PlMode plMode) {
             if (_isNewDecision || heroHand == null) return;
             var range = _rangesList.FirstOrDefault(r => r.Name == rangeName);
             _preflopRangeName = rangeName;
@@ -3246,8 +3232,7 @@ namespace Pingvi
             }
         }
 
-        private void CheckDecision(Hand heroHand, string rangeName, double? stat, PlMode plMode)
-        {
+        private void CheckDecision(Hand heroHand, string rangeName, double? stat, PlMode plMode) {
             if (_isNewDecision || heroHand == null) return;
             var range = _rangesList.FirstOrDefault(r => r.Name == rangeName);
             _preflopRangeName = rangeName;
@@ -3300,22 +3285,25 @@ namespace Pingvi
                 {
                     _preflopDecision = (PreflopDecision) gtoHand.Decisions[0].Value;
                     _raiseSize = gtoHand.Decisions[0].Size;
-
-                } else if (_probRand > _probRanges[1][0] && _probRand <= _probRanges[1][1])
+                }
+                else if (_probRand > _probRanges[1][0] && _probRand <= _probRanges[1][1])
                 {
-                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[1].Value;
+                    _preflopDecision = (PreflopDecision) gtoHand.Decisions[1].Value;
                     _raiseSize = gtoHand.Decisions[1].Size;
-                } else if (_probRand > _probRanges[2][0] && _probRand <= _probRanges[2][1])
+                }
+                else if (_probRand > _probRanges[2][0] && _probRand <= _probRanges[2][1])
                 {
-                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[2].Value;
+                    _preflopDecision = (PreflopDecision) gtoHand.Decisions[2].Value;
                     _raiseSize = gtoHand.Decisions[2].Size;
-                } else if (_probRand > _probRanges[3][0] && _probRand <= _probRanges[3][1])
+                }
+                else if (_probRand > _probRanges[3][0] && _probRand <= _probRanges[3][1])
                 {
-                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[3].Value;
+                    _preflopDecision = (PreflopDecision) gtoHand.Decisions[3].Value;
                     _raiseSize = gtoHand.Decisions[3].Size;
-                } else if (_probRand > _probRanges[4][0] && _probRand <= _probRanges[4][1])
+                }
+                else if (_probRand > _probRanges[4][0] && _probRand <= _probRanges[4][1])
                 {
-                    _preflopDecision = (PreflopDecision)gtoHand.Decisions[4].Value;
+                    _preflopDecision = (PreflopDecision) gtoHand.Decisions[4].Value;
                     _raiseSize = gtoHand.Decisions[4].Size;
                 }
 
@@ -3328,13 +3316,11 @@ namespace Pingvi
             }
         }
 
-        private  double GetRandomNumber(double minimum, double maximum)
-        {
-        
-            return _propapilityRandomizer.NextDouble() * (maximum - minimum) + minimum;
+        private double GetRandomNumber(double minimum, double maximum) {
+            return _propapilityRandomizer.NextDouble()*(maximum - minimum) + minimum;
         }
-        private void CountProbRanges(GtoRangeHand hand)
-        {
+
+        private void CountProbRanges(GtoRangeHand hand) {
             _probRanges[0][0] = 0;
             _probRanges[0][1] = hand.Decisions[0].Probability;
             _probRanges[1][0] = _probRanges[0][1];
@@ -3348,8 +3334,7 @@ namespace Pingvi
         }
 
 
-        private void LoadRanges(string rangesPath)
-        {
+        private void LoadRanges(string rangesPath) {
             _rangesList = new List<Range>();
             foreach (var file in Directory.GetFiles(rangesPath, "*.xml", SearchOption.AllDirectories))
             {

@@ -7,12 +7,10 @@ namespace Pingvi
     /// </summary>
     public class PixelPoint
     {
-        public PixelPoint()
-        {
+        public PixelPoint() {
         }
 
-        public PixelPoint(int x, int y)
-        {
+        public PixelPoint(int x, int y) {
             X = x;
             Y = y;
         }

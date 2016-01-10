@@ -5,98 +5,81 @@ namespace Pingvi
 {
     public static class RuleHelper
     {
-        public static RuleContext<T> StartRule<T>(this T value)
-        {
+        public static RuleContext<T> StartRule<T>(this T value) {
             return new RuleContext<T>(value);
         }
 
 
         public static RuleContext<LineInfo> StatEqOrMoreThan(this RuleContext<LineInfo> context, double? stat,
-            double statValue)
-        {
+            double statValue) {
             return context.If(l => stat != null && stat >= statValue);
         }
 
         public static RuleContext<LineInfo> StatEqOrLessThan(this RuleContext<LineInfo> context, double? stat,
-            int statValue)
-        {
+            int statValue) {
             return context.If(l => stat != null && stat <= statValue);
         }
 
-        public static RuleContext<LineInfo> StatIsNull(this RuleContext<LineInfo> context, double? stat)
-        {
+        public static RuleContext<LineInfo> StatIsNull(this RuleContext<LineInfo> context, double? stat) {
             return context.If(l => stat == null);
         }
 
 
-        public static RuleContext<LineInfo> TourneyMultiplierEqOrMoreThan(this RuleContext<LineInfo> context, int value)
-        {
+        public static RuleContext<LineInfo> TourneyMultiplierEqOrMoreThan(this RuleContext<LineInfo> context, int value) {
             return context.If(l => l.Elements.TourneyMultiplier >= value);
         }
 
-        public static RuleContext<LineInfo> TourneyMultiplierEqOrLessThan(this RuleContext<LineInfo> context, int value)
-        {
+        public static RuleContext<LineInfo> TourneyMultiplierEqOrLessThan(this RuleContext<LineInfo> context, int value) {
             return context.If(l => l.Elements.TourneyMultiplier <= value);
         }
 
         public static RuleContext<LineInfo> HeroPreflopState(this RuleContext<LineInfo> context,
-            HeroPreflopState state)
-        {
+            HeroPreflopState state) {
             return context.If(e => e.HeroPreflopState == state);
         }
 
         public static RuleContext<LineInfo> HeroFlopState(this RuleContext<LineInfo> context,
-            HeroFlopState state)
-        {
+            HeroFlopState state) {
             return context.If(e => e.HeroFlopState == state);
         }
 
-        public static RuleContext<LineInfo> LeftPlayerType(this RuleContext<LineInfo> context, PlayerType playerType)
-        {
+        public static RuleContext<LineInfo> LeftPlayerType(this RuleContext<LineInfo> context, PlayerType playerType) {
             return context.If(l => l.Elements.LeftPlayer.Type == playerType);
         }
 
-        public static RuleContext<LineInfo> HeroPosition(this RuleContext<LineInfo> context, PlayerPosition position)
-        {
+        public static RuleContext<LineInfo> HeroPosition(this RuleContext<LineInfo> context, PlayerPosition position) {
             return context.If(l => l.Elements.HeroPlayer.Position == position);
         }
 
         public static RuleContext<LineInfo> EffectiveStackBetween(this RuleContext<LineInfo> context, double minAmtBb,
-            double maxAmtBb)
-        {
+            double maxAmtBb) {
             return context.If(l => l.Elements.EffectiveStack > minAmtBb && l.Elements.EffectiveStack <= maxAmtBb);
         }
 
         public static RuleContext<LineInfo> EffectiveStackSbVsBtnBetween(this RuleContext<LineInfo> context,
             double minAmtBb,
-            double maxAmtBb)
-        {
+            double maxAmtBb) {
             return context.If(l => l.Elements.SbBtnEffStack > minAmtBb && l.Elements.SbBtnEffStack <= maxAmtBb);
         }
 
         public static RuleContext<LineInfo> HeroStackBetween(this RuleContext<LineInfo> context, double minAmtBb,
-            double maxAmtBb)
-        {
+            double maxAmtBb) {
             return context.If(l => l.Elements.HeroPlayer.Stack > minAmtBb && l.Elements.HeroPlayer.Stack <= maxAmtBb);
         }
 
-        public static RuleContext<LineInfo> Street(this RuleContext<LineInfo> context, CurrentStreet street)
-        {
+        public static RuleContext<LineInfo> Street(this RuleContext<LineInfo> context, CurrentStreet street) {
             return context.If(l => l.Elements.CurrentStreet == street);
         }
 
-        public static RuleContext<LineInfo> IsHu(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> IsHu(this RuleContext<LineInfo> context) {
             return context.If(l => l.Elements.ActivePlayers.Count == 2);
         }
 
-        public static RuleContext<LineInfo> IsMp(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> IsMp(this RuleContext<LineInfo> context) {
             return context.If(l => l.Elements.ActivePlayers.Count == 3);
         }
 
-        public static RuleContext<LineInfo> VsBigStack(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> VsBigStack(this RuleContext<LineInfo> context) {
             return context.If(l =>
             {
                 var oppStack = l.Elements.ActivePlayers.First(p => p.Name != l.Elements.HeroPlayer.Name).Stack;
@@ -104,8 +87,7 @@ namespace Pingvi
             });
         }
 
-        public static RuleContext<LineInfo> VsSmallStack(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> VsSmallStack(this RuleContext<LineInfo> context) {
             return context.If(l =>
             {
                 var oppStack = l.Elements.ActivePlayers.First(p => p.Name != l.Elements.HeroPlayer.Name).Stack;
@@ -113,8 +95,7 @@ namespace Pingvi
             });
         }
 
-        public static RuleContext<LineInfo> SitOutOpp(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> SitOutOpp(this RuleContext<LineInfo> context) {
             return
                 context.If(
                     l =>
@@ -122,24 +103,20 @@ namespace Pingvi
                         l.Elements.SitOutPlayers.First().Status == PlayerStatus.SitOut);
         }
 
-        public static RuleContext<LineInfo> HeroRole(this RuleContext<LineInfo> context, HeroRole role)
-        {
+        public static RuleContext<LineInfo> HeroRole(this RuleContext<LineInfo> context, HeroRole role) {
             return context.If(l => l.Elements.HeroPlayer.Role == role);
         }
 
-        public static RuleContext<LineInfo> HeroState(this RuleContext<LineInfo> context, HeroStatePreflop statePreflop)
-        {
+        public static RuleContext<LineInfo> HeroState(this RuleContext<LineInfo> context, HeroStatePreflop statePreflop) {
             return context.If(l => l.Elements.HeroPlayer.StatePreflop == statePreflop);
         }
 
         public static RuleContext<LineInfo> HeroRelativePosition(this RuleContext<LineInfo> context,
-            HeroRelativePosition relativePosition)
-        {
+            HeroRelativePosition relativePosition) {
             return context.If(l => l.Elements.HeroPlayer.RelativePosition == relativePosition);
         }
 
-        public static RuleContext<LineInfo> OppTypes(this RuleContext<LineInfo> context, PlayerType[] types)
-        {
+        public static RuleContext<LineInfo> OppTypes(this RuleContext<LineInfo> context, PlayerType[] types) {
             return
                 context.If(
                     l =>
@@ -157,8 +134,7 @@ namespace Pingvi
                     });
         }
 
-        public static RuleContext<LineInfo> OppBetSize(this RuleContext<LineInfo> context, double betSize)
-        {
+        public static RuleContext<LineInfo> OppBetSize(this RuleContext<LineInfo> context, double betSize) {
             return context.If(l =>
             {
                 var opponents = l.Elements.ActivePlayers.Where(p => p.Name != l.Elements.HeroPlayer.Name);
@@ -168,8 +144,7 @@ namespace Pingvi
             });
         }
 
-        public static RuleContext<LineInfo> OppBetSizeBetween(this RuleContext<LineInfo> context, double min, double max)
-        {
+        public static RuleContext<LineInfo> OppBetSizeBetween(this RuleContext<LineInfo> context, double min, double max) {
             return context.If(l =>
             {
                 var opponents = l.Elements.ActivePlayers.Where(p => p.Name != l.Elements.HeroPlayer.Name);
@@ -179,8 +154,7 @@ namespace Pingvi
             });
         }
 
-        public static RuleContext<LineInfo> OppBetSizeMinRaise(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> OppBetSizeMinRaise(this RuleContext<LineInfo> context) {
             return context.If(l =>
             {
                 var opponents = l.Elements.ActivePlayers.Where(p => p.Name != l.Elements.HeroPlayer.Name);
@@ -191,34 +165,28 @@ namespace Pingvi
             });
         }
 
-        public static RuleContext<LineInfo> OppPosition(this RuleContext<LineInfo> context, PlayerPosition position)
-        {
+        public static RuleContext<LineInfo> OppPosition(this RuleContext<LineInfo> context, PlayerPosition position) {
             return context.If(l => l.Elements.HuOpp.Position == position);
         }
 
-        public static RuleContext<LineInfo> OppStackBetween(this RuleContext<LineInfo> context, double min, double max)
-        {
+        public static RuleContext<LineInfo> OppStackBetween(this RuleContext<LineInfo> context, double min, double max) {
             return context.If(l => l.Elements.HuOpp.Stack > min && l.Elements.HuOpp.Stack <= max);
         }
 
-        public static RuleContext<LineInfo> BbEqOrMoreThen(this RuleContext<LineInfo> context, double bbSize)
-        {
+        public static RuleContext<LineInfo> BbEqOrMoreThen(this RuleContext<LineInfo> context, double bbSize) {
             return context.If(l => l.Elements.BbAmt >= bbSize);
         }
 
 
-        public static RuleContext<LineInfo> BbEqOrLessThen(this RuleContext<LineInfo> context, double bbSize)
-        {
+        public static RuleContext<LineInfo> BbEqOrLessThen(this RuleContext<LineInfo> context, double bbSize) {
             return context.If(l => l.Elements.BbAmt <= bbSize);
         }
 
-        public static RuleContext<LineInfo> Is3Max(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> Is3Max(this RuleContext<LineInfo> context) {
             return context.If(l => l.Elements.InGamePlayers.Count == 3);
         }
 
-        public static RuleContext<LineInfo> Is2Max(this RuleContext<LineInfo> context)
-        {
+        public static RuleContext<LineInfo> Is2Max(this RuleContext<LineInfo> context) {
             return context.If(l => l.Elements.InGamePlayers.Count == 2);
         }
     }
