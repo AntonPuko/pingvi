@@ -363,53 +363,54 @@ namespace Pingvi
 
             //STATISTICS
             Common.StatsDigitsPath = @"Data\StatsDigits\";
-            Common.StatsDigitsColor = Color.FromArgb(25, 70, 42);
 
+            //Common.StatsDigitsColor = Color.FromArgb(25, 70, 42);
+            Common.StatsDigitsColor = Color.FromArgb(11, 157, 164);
             //LEFT
             //FRIST PANEL
-            LeftPlayer.PfBtnStealStatDigPosPoints = new[] {new PixelPoint(21, 197), new PixelPoint(16, 197)};
+            LeftPlayer.PfBtnStealStatDigPosPoints = new[] {new PixelPoint(21, 196), new PixelPoint(16, 196)};
             LeftPlayer.PfBtnStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 190, 5, 4), new Rectangle(15, 190, 5, 4)},
                 new[] {new Rectangle(10, 190, 5, 4)}
             };
 
-            LeftPlayer.PfSbStealStatDigPosPoints = new[] {new PixelPoint(21, 208), new PixelPoint(16, 208)};
+            LeftPlayer.PfSbStealStatDigPosPoints = new[] {new PixelPoint(21, 207), new PixelPoint(16, 207)};
             LeftPlayer.PfSbStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 201, 5, 4), new Rectangle(15, 201, 5, 4)},
                 new[] {new Rectangle(10, 201, 5, 4)}
             };
 
-            LeftPlayer.PfOpenpushStatDigPosPoints = new[] {new PixelPoint(21, 218), new PixelPoint(16, 218)};
+            LeftPlayer.PfOpenpushStatDigPosPoints = new[] {new PixelPoint(21, 217), new PixelPoint(16, 217)};
             LeftPlayer.PfOpenpushStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 211, 5, 4), new Rectangle(15, 211, 5, 4)},
                 new[] {new Rectangle(10, 211, 5, 4)}
             };
 
-            LeftPlayer.PfLimpFoldStatDigPosPoints = new[] {new PixelPoint(21, 229), new PixelPoint(16, 229)};
+            LeftPlayer.PfLimpFoldStatDigPosPoints = new[] {new PixelPoint(21, 228), new PixelPoint(16, 228)};
             LeftPlayer.PfLimpFoldStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 222, 5, 4), new Rectangle(15, 222, 5, 4)},
                 new[] {new Rectangle(10, 222, 5, 4)}
             };
 
-            LeftPlayer.PfLimpReraiseStatDigPosPoints = new[] {new PixelPoint(21, 239), new PixelPoint(16, 239)};
+            LeftPlayer.PfLimpReraiseStatDigPosPoints = new[] {new PixelPoint(21, 238), new PixelPoint(16, 238)};
             LeftPlayer.PfLimpReraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 232, 5, 4), new Rectangle(15, 232, 5, 4)},
                 new[] {new Rectangle(10, 232, 5, 4)}
             };
 
-            LeftPlayer.PfFold_3BetStatDigPosPoints = new[] {new PixelPoint(21, 250), new PixelPoint(16, 250)};
+            LeftPlayer.PfFold_3BetStatDigPosPoints = new[] {new PixelPoint(21, 249), new PixelPoint(16, 249)};
             LeftPlayer.PfFold_3BetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 243, 5, 4), new Rectangle(15, 243, 5, 4)},
                 new[] {new Rectangle(10, 243, 5, 4)}
             };
 
-            LeftPlayer.PfBbDefVsSbstealStatDigPosPoints = new[] {new PixelPoint(21, 260), new PixelPoint(16, 260)};
+            LeftPlayer.PfBbDefVsSbstealStatDigPosPoints = new[] {new PixelPoint(21, 259), new PixelPoint(16, 259)};
             LeftPlayer.PfBbDefVsSbstealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 253, 5, 4), new Rectangle(15, 253, 5, 4)},
@@ -417,28 +418,28 @@ namespace Pingvi
             };
 
 
-            LeftPlayer.PfRaiseLimperStatDigPosPoints = new[] {new PixelPoint(21, 271), new PixelPoint(16, 271)};
+            LeftPlayer.PfRaiseLimperStatDigPosPoints = new[] {new PixelPoint(21, 270), new PixelPoint(16, 270)};
             LeftPlayer.PfRaiseLimperStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 264, 5, 4), new Rectangle(15, 264, 5, 4)},
                 new[] {new Rectangle(10, 264, 5, 4)}
             };
 
-            LeftPlayer.PfSb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(21, 281), new PixelPoint(16, 281)};
+            LeftPlayer.PfSb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(21, 280), new PixelPoint(16, 280)};
             LeftPlayer.PfSb_3BetVsBtnStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 274, 5, 4), new Rectangle(15, 274, 5, 4)},
                 new[] {new Rectangle(10, 274, 5, 4)}
             };
 
-            LeftPlayer.PfBb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(21, 292), new PixelPoint(16, 292)};
+            LeftPlayer.PfBb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(21, 291), new PixelPoint(16, 291)};
             LeftPlayer.PfBb_3BetVsBtnStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 285, 5, 4), new Rectangle(15, 285, 5, 4)},
                 new[] {new Rectangle(10, 285, 5, 4)}
             };
 
-            LeftPlayer.PfBb_3BetVsSbStatDigPosPoints = new[] {new PixelPoint(21, 302), new PixelPoint(16, 302)};
+            LeftPlayer.PfBb_3BetVsSbStatDigPosPoints = new[] {new PixelPoint(21, 301), new PixelPoint(16, 301)};
             LeftPlayer.PfBb_3BetVsSbStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(10, 295, 5, 4), new Rectangle(15, 295, 5, 4)},
@@ -446,77 +447,77 @@ namespace Pingvi
             };
 
             //SECOND PANEL
-            LeftPlayer.FCbetStatDigPosPoints = new[] {new PixelPoint(43, 197), new PixelPoint(38, 197)};
+            LeftPlayer.FCbetStatDigPosPoints = new[] {new PixelPoint(43, 196), new PixelPoint(38, 196)};
             LeftPlayer.FCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 190, 5, 4), new Rectangle(37, 190, 5, 4)},
                 new[] {new Rectangle(32, 190, 5, 4)}
             };
 
-            LeftPlayer.CbetStatDigPosPoints = new[] {new PixelPoint(43, 208), new PixelPoint(38, 208)};
+            LeftPlayer.CbetStatDigPosPoints = new[] {new PixelPoint(43, 207), new PixelPoint(38, 207)};
             LeftPlayer.CbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 201, 5, 4), new Rectangle(37, 201, 5, 4)},
                 new[] {new Rectangle(32, 201, 5, 4)}
             };
 
-            LeftPlayer.RCbetStatDigPosPoints = new[] {new PixelPoint(43, 218), new PixelPoint(38, 218)};
+            LeftPlayer.RCbetStatDigPosPoints = new[] {new PixelPoint(43, 217), new PixelPoint(38, 217)};
             LeftPlayer.RCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 211, 5, 4), new Rectangle(37, 211, 5, 4)},
                 new[] {new Rectangle(32, 211, 5, 4)}
             };
 
-            LeftPlayer.FFoldCbetStatDigPosPoints = new[] {new PixelPoint(43, 229), new PixelPoint(38, 229)};
+            LeftPlayer.FFoldCbetStatDigPosPoints = new[] {new PixelPoint(43, 228), new PixelPoint(38, 228)};
             LeftPlayer.FFoldCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 222, 5, 4), new Rectangle(37, 222, 5, 4)},
                 new[] {new Rectangle(32, 222, 5, 4)}
             };
 
-            LeftPlayer.FoldCbetStatDigPosPoints = new[] {new PixelPoint(43, 239), new PixelPoint(38, 239)};
+            LeftPlayer.FoldCbetStatDigPosPoints = new[] {new PixelPoint(43, 238), new PixelPoint(38, 238)};
             LeftPlayer.FoldCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 232, 5, 4), new Rectangle(37, 232, 5, 4)},
                 new[] {new Rectangle(32, 232, 5, 4)}
             };
 
-            LeftPlayer.RFoldCbetStatDigPosPoints = new[] {new PixelPoint(43, 250), new PixelPoint(38, 250)};
+            LeftPlayer.RFoldCbetStatDigPosPoints = new[] {new PixelPoint(43, 249), new PixelPoint(38, 249)};
             LeftPlayer.RFoldCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 243, 5, 4), new Rectangle(37, 243, 5, 4)},
                 new[] {new Rectangle(32, 243, 5, 4)}
             };
 
-            LeftPlayer.FCbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(43, 260), new PixelPoint(38, 260)};
+            LeftPlayer.FCbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(43, 259), new PixelPoint(38, 259)};
             LeftPlayer.FCbetFoldraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 253, 5, 4), new Rectangle(37, 253, 5, 4)},
                 new[] {new Rectangle(32, 253, 5, 4)}
             };
 
-            LeftPlayer.CbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(43, 271), new PixelPoint(38, 271)};
+            LeftPlayer.CbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(43, 270), new PixelPoint(38, 270)};
             LeftPlayer.CbetFoldraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 264, 5, 4), new Rectangle(37, 264, 5, 4)},
                 new[] {new Rectangle(32, 264, 5, 4)}
             };
 
-            LeftPlayer.FRaiseBetStatDigPosPoints = new[] {new PixelPoint(43, 281), new PixelPoint(38, 281)};
+            LeftPlayer.FRaiseBetStatDigPosPoints = new[] {new PixelPoint(43, 280), new PixelPoint(38, 280)};
             LeftPlayer.FRaiseBetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 274, 5, 4), new Rectangle(37, 274, 5, 4)},
                 new[] {new Rectangle(32, 274, 5, 4)}
             };
 
-            LeftPlayer.RaiseBetStatDigPosPoints = new[] {new PixelPoint(43, 292), new PixelPoint(38, 292)};
+            LeftPlayer.RaiseBetStatDigPosPoints = new[] {new PixelPoint(43, 291), new PixelPoint(38, 291)};
             LeftPlayer.RaiseBetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 285, 5, 4), new Rectangle(37, 285, 5, 4)},
                 new[] {new Rectangle(32, 285, 5, 4)}
             };
 
-            LeftPlayer.FLpStealStatDigPosPoints = new[] {new PixelPoint(43, 302), new PixelPoint(38, 302)};
+            LeftPlayer.FLpStealStatDigPosPoints = new[] {new PixelPoint(43, 301), new PixelPoint(38, 301)};
             LeftPlayer.FLpStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(32, 295, 5, 4), new Rectangle(37, 295, 5, 4)},
@@ -524,58 +525,56 @@ namespace Pingvi
             };
 
             //THIRD PANEL
-            LeftPlayer.FLpFoldVsStealStatDigPosPoints = new[] {new PixelPoint(65, 197), new PixelPoint(60, 197)};
+            LeftPlayer.FLpFoldVsStealStatDigPosPoints = new[] {new PixelPoint(65, 196), new PixelPoint(60, 196)};
             LeftPlayer.FLpFoldVsStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 190, 5, 4), new Rectangle(59, 190, 5, 4)},
                 new[] {new Rectangle(54, 190, 5, 4)}
             };
 
-            LeftPlayer.FLpFoldVsXrStatDigPosPoints = new[] {new PixelPoint(65, 208), new PixelPoint(60, 20)};
+            LeftPlayer.FLpFoldVsXrStatDigPosPoints = new[] {new PixelPoint(65, 207), new PixelPoint(60, 207)};
             LeftPlayer.FLpFoldVsXrStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 201, 5, 4), new Rectangle(59, 201, 5, 4)},
                 new[] {new Rectangle(54, 201, 5, 4)}
             };
 
-            LeftPlayer.FCheckfoldOopStatDigPosPoints = new[] {new PixelPoint(65, 218), new PixelPoint(60, 218)};
+            LeftPlayer.FCheckfoldOopStatDigPosPoints = new[] {new PixelPoint(65, 217), new PixelPoint(60, 217)};
             LeftPlayer.FCheckfoldOopStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 211, 5, 4), new Rectangle(59, 211, 5, 4)},
                 new[] {new Rectangle(54, 211, 5, 4)}
             };
 
-            LeftPlayer.SkipfFoldVsTProbeStatDigPosPoints = new[]
-            {new PixelPoint(65, 229), new PixelPoint(60, 229)};
+            LeftPlayer.SkipfFoldVsTProbeStatDigPosPoints = new[] {new PixelPoint(65, 228), new PixelPoint(60, 228)};
             LeftPlayer.SkipfFoldVsTProbeStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 222, 5, 4), new Rectangle(59, 222, 5, 4)},
                 new[] {new Rectangle(54, 222, 5, 4)}
             };
 
-            LeftPlayer.RSkiptFoldVsRProbeStatDigPosPoints = new[]
-            {new PixelPoint(65, 239), new PixelPoint(60, 239)};
+            LeftPlayer.RSkiptFoldVsRProbeStatDigPosPoints = new[] {new PixelPoint(65, 238), new PixelPoint(60, 238)};
             LeftPlayer.RSkiptFoldVsRProbeStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 232, 5, 4), new Rectangle(59, 232, 5, 4)},
                 new[] {new Rectangle(54, 232, 5, 4)}
             };
 
-            LeftPlayer.FDonkStatDigPosPoints = new[] {new PixelPoint(65, 250), new PixelPoint(60, 250)};
+            LeftPlayer.FDonkStatDigPosPoints = new[] {new PixelPoint(65, 249), new PixelPoint(60, 249)};
             LeftPlayer.FDonkStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 243, 5, 4), new Rectangle(59, 243, 5, 4)},
                 new[] {new Rectangle(54, 243, 5, 4)}
             };
 
-            LeftPlayer.DonkStatDigPosPoints = new[] {new PixelPoint(65, 260), new PixelPoint(60, 260)};
+            LeftPlayer.DonkStatDigPosPoints = new[] {new PixelPoint(65, 259), new PixelPoint(60, 259)};
             LeftPlayer.DonkStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 253, 5, 4), new Rectangle(59, 253, 5, 4)},
                 new[] {new Rectangle(54, 253, 5, 4)}
             };
 
-            LeftPlayer.FDonkFoldraiseStatDigPosPoints = new[] {new PixelPoint(65, 271), new PixelPoint(60, 271)};
+            LeftPlayer.FDonkFoldraiseStatDigPosPoints = new[] {new PixelPoint(65, 270), new PixelPoint(60, 270)};
             LeftPlayer.FDonkFoldraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(54, 264, 5, 4), new Rectangle(59, 264, 5, 4)},
@@ -584,78 +583,77 @@ namespace Pingvi
 
             //RIGHT
             //FIRST PANEL
-            RightPlayer.PfBtnStealStatDigPosPoints = new[] {new PixelPoint(726, 197), new PixelPoint(721, 197)};
+            RightPlayer.PfBtnStealStatDigPosPoints = new[] {new PixelPoint(726, 196), new PixelPoint(721, 196)};
             RightPlayer.PfBtnStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 190, 5, 4), new Rectangle(720, 190, 5, 4)},
                 new[] {new Rectangle(715, 190, 5, 4)}
             };
 
-            RightPlayer.PfSbStealStatDigPosPoints = new[] {new PixelPoint(726, 207), new PixelPoint(721, 207)};
+            RightPlayer.PfSbStealStatDigPosPoints = new[] {new PixelPoint(726, 206), new PixelPoint(721, 206)};
             RightPlayer.PfSbStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 200, 5, 4), new Rectangle(720, 200, 5, 4)},
                 new[] {new Rectangle(715, 200, 5, 4)}
             };
 
-            RightPlayer.PfOpenpushStatDigPosPoints = new[] {new PixelPoint(726, 218), new PixelPoint(721, 218)};
+            RightPlayer.PfOpenpushStatDigPosPoints = new[] {new PixelPoint(726, 217), new PixelPoint(721, 217)};
             RightPlayer.PfOpenpushStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 211, 5, 4), new Rectangle(720, 211, 5, 4)},
                 new[] {new Rectangle(715, 211, 5, 4)}
             };
 
-            RightPlayer.PfLimpFoldStatDigPosPoints = new[] {new PixelPoint(726, 228), new PixelPoint(721, 228)};
+            RightPlayer.PfLimpFoldStatDigPosPoints = new[] {new PixelPoint(726, 227), new PixelPoint(721, 227)};
             RightPlayer.PfLimpFoldStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 221, 5, 4), new Rectangle(720, 221, 5, 4)},
                 new[] {new Rectangle(715, 221, 5, 4)}
             };
 
-            RightPlayer.PfLimpReraiseStatDigPosPoints = new[] {new PixelPoint(726, 239), new PixelPoint(721, 239)};
+            RightPlayer.PfLimpReraiseStatDigPosPoints = new[] {new PixelPoint(726, 238), new PixelPoint(721, 238)};
             RightPlayer.PfLimpReraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 232, 5, 4), new Rectangle(720, 232, 5, 4)},
                 new[] {new Rectangle(715, 232, 5, 4)}
             };
 
-            RightPlayer.PfFold_3BetStatDigPosPoints = new[] {new PixelPoint(726, 249), new PixelPoint(721, 249)};
+            RightPlayer.PfFold_3BetStatDigPosPoints = new[] {new PixelPoint(726, 248), new PixelPoint(721, 248)};
             RightPlayer.PfFold_3BetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 242, 5, 4), new Rectangle(720, 242, 5, 4)},
                 new[] {new Rectangle(715, 242, 5, 4)}
             };
 
-            RightPlayer.PfBbDefVsSbstealStatDigPosPoints = new[]
-            {new PixelPoint(726, 260), new PixelPoint(721, 260)};
+            RightPlayer.PfBbDefVsSbstealStatDigPosPoints = new[]  {new PixelPoint(726, 259), new PixelPoint(721, 259)};
             RightPlayer.PfBbDefVsSbstealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 253, 5, 4), new Rectangle(720, 253, 5, 4)},
                 new[] {new Rectangle(715, 253, 5, 4)}
             };
 
-            RightPlayer.PfRaiseLimperStatDigPosPoints = new[] {new PixelPoint(726, 270), new PixelPoint(721, 270)};
+            RightPlayer.PfRaiseLimperStatDigPosPoints = new[] {new PixelPoint(726, 269), new PixelPoint(721, 269)};
             RightPlayer.PfRaiseLimperStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 263, 5, 4), new Rectangle(720, 263, 5, 4)},
                 new[] {new Rectangle(715, 263, 5, 4)}
             };
 
-            RightPlayer.PfSb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(726, 281), new PixelPoint(721, 281)};
+            RightPlayer.PfSb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(726, 280), new PixelPoint(721, 280)};
             RightPlayer.PfSb_3BetVsBtnStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 274, 5, 4), new Rectangle(720, 274, 5, 4)},
                 new[] {new Rectangle(715, 274, 5, 4)}
             };
 
-            RightPlayer.PfBb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(726, 291), new PixelPoint(721, 291)};
+            RightPlayer.PfBb_3BetVsBtnStatDigPosPoints = new[] {new PixelPoint(726, 290), new PixelPoint(721, 290)};
             RightPlayer.PfBb_3BetVsBtnStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 284, 5, 4), new Rectangle(720, 284, 5, 4)},
                 new[] {new Rectangle(715, 284, 5, 4)}
             };
 
-            RightPlayer.PfBb_3BetVsSbStatDigPosPoints = new[] {new PixelPoint(726, 302), new PixelPoint(721, 302)};
+            RightPlayer.PfBb_3BetVsSbStatDigPosPoints = new[] {new PixelPoint(726, 301), new PixelPoint(721, 301)};
             RightPlayer.PfBb_3BetVsSbStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(715, 295, 5, 4), new Rectangle(720, 295, 5, 4)},
@@ -663,77 +661,77 @@ namespace Pingvi
             };
 
             //RIGHT SECOND PANEL
-            RightPlayer.FCbetStatDigPosPoints = new[] {new PixelPoint(748, 197), new PixelPoint(743, 197)};
+            RightPlayer.FCbetStatDigPosPoints = new[] {new PixelPoint(748, 196), new PixelPoint(743, 196)};
             RightPlayer.FCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 190, 5, 4), new Rectangle(742, 190, 5, 4)},
                 new[] {new Rectangle(737, 190, 5, 4)}
             };
 
-            RightPlayer.CbetStatDigPosPoints = new[] {new PixelPoint(748, 207), new PixelPoint(743, 207)};
+            RightPlayer.CbetStatDigPosPoints = new[] {new PixelPoint(748, 206), new PixelPoint(743, 206)};
             RightPlayer.CbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 200, 5, 4), new Rectangle(742, 200, 5, 4)},
                 new[] {new Rectangle(737, 200, 5, 4)}
             };
 
-            RightPlayer.RCbetStatDigPosPoints = new[] {new PixelPoint(748, 218), new PixelPoint(743, 218)};
+            RightPlayer.RCbetStatDigPosPoints = new[] {new PixelPoint(748, 217), new PixelPoint(743, 217)};
             RightPlayer.RCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 211, 5, 4), new Rectangle(742, 211, 5, 4)},
                 new[] {new Rectangle(737, 211, 5, 4)}
             };
 
-            RightPlayer.FFoldCbetStatDigPosPoints = new[] {new PixelPoint(748, 228), new PixelPoint(743, 228)};
+            RightPlayer.FFoldCbetStatDigPosPoints = new[] {new PixelPoint(748, 227), new PixelPoint(743, 227)};
             RightPlayer.FFoldCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 221, 5, 4), new Rectangle(742, 221, 5, 4)},
                 new[] {new Rectangle(737, 221, 5, 4)}
             };
 
-            RightPlayer.FoldCbetStatDigPosPoints = new[] {new PixelPoint(748, 239), new PixelPoint(743, 239)};
+            RightPlayer.FoldCbetStatDigPosPoints = new[] {new PixelPoint(748, 238), new PixelPoint(743, 238)};
             RightPlayer.FoldCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 232, 5, 4), new Rectangle(742, 232, 5, 4)},
                 new[] {new Rectangle(737, 232, 5, 4)}
             };
 
-            RightPlayer.RFoldCbetStatDigPosPoints = new[] {new PixelPoint(748, 249), new PixelPoint(743, 249)};
+            RightPlayer.RFoldCbetStatDigPosPoints = new[] {new PixelPoint(748, 248), new PixelPoint(743, 248)};
             RightPlayer.RFoldCbetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 242, 5, 4), new Rectangle(742, 242, 5, 4)},
                 new[] {new Rectangle(737, 242, 5, 4)}
             };
 
-            RightPlayer.FCbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(748, 260), new PixelPoint(743, 260)};
+            RightPlayer.FCbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(748, 259), new PixelPoint(743, 259)};
             RightPlayer.FCbetFoldraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 253, 5, 4), new Rectangle(742, 253, 5, 4)},
                 new[] {new Rectangle(737, 253, 5, 4)}
             };
 
-            RightPlayer.CbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(748, 270), new PixelPoint(743, 270)};
+            RightPlayer.CbetFoldraiseStatDigPosPoints = new[] {new PixelPoint(748, 269), new PixelPoint(743, 269)};
             RightPlayer.CbetFoldraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 263, 5, 4), new Rectangle(742, 263, 5, 4)},
                 new[] {new Rectangle(737, 263, 5, 4)}
             };
 
-            RightPlayer.FRaiseBetStatDigPosPoints = new[] {new PixelPoint(748, 281), new PixelPoint(743, 281)};
+            RightPlayer.FRaiseBetStatDigPosPoints = new[] {new PixelPoint(748, 280), new PixelPoint(743, 280)};
             RightPlayer.FRaiseBetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 274, 5, 4), new Rectangle(742, 274, 5, 4)},
                 new[] {new Rectangle(737, 274, 5, 4)}
             };
 
-            RightPlayer.RaiseBetStatDigPosPoints = new[] {new PixelPoint(748, 291), new PixelPoint(743, 291)};
+            RightPlayer.RaiseBetStatDigPosPoints = new[] {new PixelPoint(748, 290), new PixelPoint(743, 290)};
             RightPlayer.RaiseBetStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 284, 5, 4), new Rectangle(742, 284, 5, 4)},
                 new[] {new Rectangle(737, 284, 5, 4)}
             };
 
-            RightPlayer.FLpStealStatDigPosPoints = new[] {new PixelPoint(748, 302), new PixelPoint(743, 302)};
+            RightPlayer.FLpStealStatDigPosPoints = new[] {new PixelPoint(748, 301), new PixelPoint(743, 301)};
             RightPlayer.FLpStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(737, 295, 5, 4), new Rectangle(742, 295, 5, 4)},
@@ -741,58 +739,56 @@ namespace Pingvi
             };
 
             //RIGHT THIRD PANEL
-            RightPlayer.FLpFoldVsStealStatDigPosPoints = new[] {new PixelPoint(770, 197), new PixelPoint(765, 197)};
+            RightPlayer.FLpFoldVsStealStatDigPosPoints = new[] {new PixelPoint(770, 196), new PixelPoint(765, 196)};
             RightPlayer.FLpFoldVsStealStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 190, 5, 4), new Rectangle(764, 190, 5, 4)},
                 new[] {new Rectangle(759, 190, 5, 4)}
             };
 
-            RightPlayer.FLpFoldVsXrStatDigPosPoints = new[] {new PixelPoint(770, 207), new PixelPoint(765, 207)};
+            RightPlayer.FLpFoldVsXrStatDigPosPoints = new[] {new PixelPoint(770, 206), new PixelPoint(765, 206)};
             RightPlayer.FLpFoldVsXrStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 200, 5, 4), new Rectangle(764, 200, 5, 4)},
                 new[] {new Rectangle(759, 200, 5, 4)}
             };
 
-            RightPlayer.FCheckfoldOopStatDigPosPoints = new[] {new PixelPoint(770, 218), new PixelPoint(765, 218)};
+            RightPlayer.FCheckfoldOopStatDigPosPoints = new[] {new PixelPoint(770, 217), new PixelPoint(765, 217)};
             RightPlayer.FCheckfoldOopStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 211, 5, 4), new Rectangle(764, 211, 5, 4)},
                 new[] {new Rectangle(759, 211, 5, 4)}
             };
 
-            RightPlayer.SkipfFoldVsTProbeStatDigPosPoints = new[]
-            {new PixelPoint(770, 228), new PixelPoint(765, 228)};
+            RightPlayer.SkipfFoldVsTProbeStatDigPosPoints = new[] {new PixelPoint(770, 227), new PixelPoint(765, 227)};
             RightPlayer.SkipfFoldVsTProbeStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 221, 5, 4), new Rectangle(764, 221, 5, 4)},
                 new[] {new Rectangle(759, 221, 5, 4)}
             };
 
-            RightPlayer.RSkiptFoldVsRProbeStatDigPosPoints = new[]
-            {new PixelPoint(770, 239), new PixelPoint(765, 239)};
+            RightPlayer.RSkiptFoldVsRProbeStatDigPosPoints = new[] {new PixelPoint(770, 238), new PixelPoint(765, 238)};
             RightPlayer.RSkiptFoldVsRProbeStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 232, 5, 4), new Rectangle(764, 232, 5, 4)},
                 new[] {new Rectangle(759, 232, 5, 4)}
             };
 
-            RightPlayer.FDonkStatDigPosPoints = new[] {new PixelPoint(770, 249), new PixelPoint(765, 249)};
+            RightPlayer.FDonkStatDigPosPoints = new[] {new PixelPoint(770, 248), new PixelPoint(765, 248)};
             RightPlayer.FDonkStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 242, 5, 4), new Rectangle(764, 242, 5, 4)},
                 new[] {new Rectangle(759, 242, 5, 4)}
             };
 
-            RightPlayer.DonkStatDigPosPoints = new[] {new PixelPoint(770, 260), new PixelPoint(765, 260)};
+            RightPlayer.DonkStatDigPosPoints = new[] {new PixelPoint(770, 259), new PixelPoint(765, 259)};
             RightPlayer.DonkStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 253, 5, 4), new Rectangle(764, 253, 5, 4)},
                 new[] {new Rectangle(759, 253, 5, 4)}
             };
 
-            RightPlayer.FDonkFoldraiseStatDigPosPoints = new[] {new PixelPoint(770, 270), new PixelPoint(765, 270)};
+            RightPlayer.FDonkFoldraiseStatDigPosPoints = new[] {new PixelPoint(770, 269), new PixelPoint(765, 269)};
             RightPlayer.FDonkFoldraiseStatDigitsRectMass = new[]
             {
                 new[] {new Rectangle(759, 263, 5, 4), new Rectangle(764, 263, 5, 4)},
