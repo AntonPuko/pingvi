@@ -874,6 +874,7 @@ namespace Pingvi
                         .EffectiveStackBetween(18.5, 19.5)
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_19BB_GTO"));
 
+                    /*
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                         .HeroPreflopState(HeroPreflopState.FacingLimp)
                         .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
@@ -909,7 +910,7 @@ namespace Pingvi
                         .HeroRelativePosition(HeroRelativePosition.OutOfPosition)
                         .EffectiveStackBetween(24.5, 100)
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_2MAX_25BB_GTO"));
-
+                        */
 
                     //BB DEF VS SB OPENPSUH
 
@@ -1386,6 +1387,7 @@ namespace Pingvi
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
                         .EffectiveStackBetween(18.5, 19.5)
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_19BB_GTO"));
+                    /*
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max().IsHu()
                         .HeroPreflopState(HeroPreflopState.FacingLimp)
@@ -1428,6 +1430,7 @@ namespace Pingvi
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
                         .EffectiveStackBetween(24.5, 100)
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_LIMP_3MAX_HU_25BB_GTO"));
+                    */
 
                     //BB VS SB OPEN2 
 
