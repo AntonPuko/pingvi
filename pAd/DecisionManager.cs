@@ -1598,7 +1598,7 @@ namespace Pingvi
 
                     //BB VS SB OPEN3
 
-                    #endregion
+            /*
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).IsHu()
                         .HeroPreflopState(HeroPreflopState.FacingOpen)
@@ -1671,7 +1671,7 @@ namespace Pingvi
                         .OppBetSizeBetween(2.5, 3)
                         .EffectiveStackBetween(24.5, 100)
                         .Do(l => CheckGtoDecision(heroHand, "BB_VS_SB_OPENR3_3MAX_HU_25BB_GTO"));
-
+                        */
                     //3mAX bb def vs sb openpush
 
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
@@ -1684,7 +1684,7 @@ namespace Pingvi
                                     l.Elements.EffectiveStack, PlMode.Less));
                 }
             }
-
+            #endregion
             #region BTN
 
             //BTN
