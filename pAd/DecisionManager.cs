@@ -1290,6 +1290,7 @@ namespace Pingvi
                 if (lineInfo.Elements.HeroPlayer.Position == PlayerPosition.Bb)
                 {
                     //3MAX BB VS LIMP
+
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max().IsHu()
                         .HeroPreflopState(HeroPreflopState.FacingLimp)
                         .OppPosition(PlayerPosition.Sb)
