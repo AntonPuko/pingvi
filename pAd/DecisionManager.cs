@@ -107,36 +107,6 @@ namespace Pingvi
                 if (lineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb)
                 {
                     //SB OPEN 2MAX
-                    /*
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(4.5, 5.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_5BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(5.5, 6.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_6BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(6.5, 7.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_7BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(7.5, 8.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_8BB_GTO"));
-                    */
-
                     lineInfo.StartRule()
                         .HeroPosition(PlayerPosition.Sb)
                         .HeroRelativePosition(HeroRelativePosition.InPosition)
@@ -200,64 +170,7 @@ namespace Pingvi
                         .EffectiveStackBetween(16.5, 17)
                         .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_17BB_GTO"));
 
-
-                    /*
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(17.5, 18.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_18BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(18.5, 19.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_19BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(19.5, 20.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_20BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(20.5, 21.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_21BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(21.5, 22.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_22BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(22.5, 23.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_23BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(23.5, 24.5)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_24BB_GTO"));
-
-                    lineInfo.StartRule()
-                        .HeroPosition(PlayerPosition.Sb)
-                        .HeroRelativePosition(HeroRelativePosition.InPosition)
-                        .HeroPreflopState(HeroPreflopState.Open)
-                        .EffectiveStackBetween(24.5, 100)
-                        .Do(l => CheckGtoDecision(heroHand, "SB_OPEN_VS_BB_2MAX_25BB_GTO"));
-                        */
+   
 
                     //SB DEF VS ISO LIMP
                     /*
@@ -921,6 +834,8 @@ namespace Pingvi
 
                     //BB DEF VS SB OPENPSUH
 
+                    /*
+
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                         .EffectiveStackBetween(5, 11)
@@ -968,6 +883,8 @@ namespace Pingvi
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                         .EffectiveStackBetween(18.5, 19.5)
                         .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_19BB_GTO"));
+
+                    */
                 }
             }
 
