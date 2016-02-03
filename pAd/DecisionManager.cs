@@ -1671,20 +1671,20 @@ namespace Pingvi
             //SMALL STAKES
             lineInfo.StartRule().HeroPosition(PlayerPosition.Button).IsHu()
                 .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                .EffectiveStackBetween(0, 8)
+                .EffectiveStackBetween(0,4)
                 .Do(
                     l =>
                         CheckDecision(heroHand, "BTN_CALLPUSH_VSOPEN_0-11bb_UNK", l.Elements.EffectiveStack, PlMode.Less));
             //BTN CALL PUSHVS SB 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Button).IsHu()
                 .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                .EffectiveStackBetween(8, 100)
+                .EffectiveStackBetween(4, 100)
                 .OppPosition(PlayerPosition.Sb)
                 .Do(l => CheckDecision(heroHand, "btn_callpush_vs_SB", l.Elements.EffectiveStack, PlMode.Less));
             //BTN CALL PUSHVS BB 
             lineInfo.StartRule().HeroPosition(PlayerPosition.Button).IsHu()
                 .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                .EffectiveStackBetween(8, 100)
+                .EffectiveStackBetween(4, 100)
                 .OppPosition(PlayerPosition.Bb)
                 .Do(l => CheckDecision(heroHand, "btn_callpush_vs_BB", l.Elements.EffectiveStack, PlMode.Less));
 
