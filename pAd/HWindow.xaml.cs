@@ -194,15 +194,15 @@ namespace Pingvi
                             var sbVsbtnEffStack = decisionInfo.LineInfo.Elements.SbBtnEffStack;
                             if (decisionInfo.LineInfo.Elements.HeroPlayer.Position == PlayerPosition.Sb)
                             {
-                                if (sbVsbtnEffStack >= 20) DecisionRun.Text = "___IS 3 ";
-                                else if (sbVsbtnEffStack < 20 && sbVsbtnEffStack > 13) DecisionRun.Text = "___IS 3 ";
+                                if (sbVsbtnEffStack >= 17) DecisionRun.Text = "___IS 3 ";
+                                else if (sbVsbtnEffStack <17 && sbVsbtnEffStack > 13) DecisionRun.Text = "___IS 3 ";
                                 else if (sbVsbtnEffStack <= 13) DecisionRun.Text = "___IS 2.5 ";
                             }
                             else
                             {
                                 if (effStack <= 10) DecisionRun.Text = "___IS 2 ";
-                                else if (effStack > 10 && effStack <= 22) DecisionRun.Text = "___IS 2.5 ";
-                                else if (effStack > 22) DecisionRun.Text = "___IS 3 ";
+                                else if (effStack > 10 && effStack <= 17) DecisionRun.Text = "___IS 2.5 ";
+                                else if (effStack >17) DecisionRun.Text = "___IS 3 ";
                             }
                             break;
                         }
