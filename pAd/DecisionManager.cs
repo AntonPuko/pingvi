@@ -2116,48 +2116,20 @@ namespace Pingvi
                 .Do(l => CheckGtoDecision(heroHand, "SB_VS_BB_PUSHDEF_2max_18bb_GTO"));
                 */
 
-            if (bb_3BetVsSb == null || bb_3BetVsSb > 30)
-            {
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                    .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(0, 9)
-                    .Do(l => CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_0-11bb_UNK", l.Elements.EffectiveStack,
-                        PlMode.Less));
 
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                    .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(9, 100)
-                    .Do(
-                        l =>
-                            CheckDecision(heroHand, "SB_CALLPUSH_AFTEROPEN_9-100_UNK_NEW", l.Elements.EffectiveStack,
-                                PlMode.Less));
-            }
-            else
-            {
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                    .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(0, 9)
-                    .Do(
-                        l =>
-                            CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_0-11bb_UNK", l.Elements.EffectiveStack,
-                                PlMode.Less));
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+             .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
+             .EffectiveStackBetween(0, 9)
+             .Do(l => CheckDecision(heroHand, "SB_CALLPUSH_VSOPEN_0-11bb_UNK", l.Elements.EffectiveStack,
+                 PlMode.Less));
 
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                    .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(9, 13)
-                    .Do(l => CheckDecision(heroHand, "SB_CALLPuSH_VSOPEN_10-13bb_EXPL", bb_3BetVsSb, PlMode.More));
-
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                    .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(13, 20)
-                    .Do(l => CheckDecision(heroHand, "SB_CALLPuSH_VSOPEN_13-20bb_EXPL", bb_3BetVsSb, PlMode.More));
-
-                lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
-                    .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
-                    .EffectiveStackBetween(20, 100)
-                    .Do(l => CheckDecision(heroHand, "SB_CALLPuSH_VSOPEN_20bb+_EXPL", bb_3BetVsSb, PlMode.More));
-            }
-
+            lineInfo.StartRule().HeroPosition(PlayerPosition.Sb)
+                .HeroPreflopState(HeroPreflopState.FacingPushVsOpen)
+                .EffectiveStackBetween(9, 100)
+                .Do(
+                    l =>
+                        CheckDecision(heroHand, "SB_CALLPUSH_AFTEROPEN_9-100_UNK_NEW", l.Elements.EffectiveStack,
+                            PlMode.Less));
             #endregion
 
             #region BB
