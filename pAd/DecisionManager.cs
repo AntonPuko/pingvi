@@ -1604,6 +1604,7 @@ namespace Pingvi
                         */
                     //3mAX bb def vs sb openpush
 
+                    /*
                     lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is3Max()
                         .HeroPreflopState(HeroPreflopState.FacingOpenPush)
                         .OppPosition(PlayerPosition.Sb)
@@ -1612,6 +1613,7 @@ namespace Pingvi
                             l =>
                                 CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_3MAX_HU_5-25BB_GTO",
                                     l.Elements.EffectiveStack, PlMode.Less));
+                                    */
                 }
             }
             #endregion

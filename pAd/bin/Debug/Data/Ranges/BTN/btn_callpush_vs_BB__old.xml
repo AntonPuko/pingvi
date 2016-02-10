@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Range xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="btn_callpush_vs_BB">
+<Range xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="btn_callpush_vs_BB__old">
   <Hands>
     <RangeHand Name="2c2s" D1="4" D2="1" S1="16">
       <FirstCard>
