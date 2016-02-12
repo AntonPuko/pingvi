@@ -41,14 +41,6 @@ namespace GTORangeCreatorPostgre {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 9 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Grid GridBinder;
-        
-        #line default
-        #line hidden
-        
-        
         #line 14 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button ConnectDbButton;
@@ -104,14 +96,6 @@ namespace GTORangeCreatorPostgre {
         #line default
         #line hidden
         
-        
-        #line 21 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label LabelBind;
-        
-        #line default
-        #line hidden
-        
         private bool _contentLoaded;
         
         /// <summary>
@@ -143,31 +127,25 @@ namespace GTORangeCreatorPostgre {
             switch (connectionId)
             {
             case 1:
-            this.GridBinder = ((System.Windows.Controls.Grid)(target));
-            return;
-            case 2:
             this.ConnectDbButton = ((System.Windows.Controls.Button)(target));
             return;
-            case 3:
+            case 2:
             this.SaveRangeButton = ((System.Windows.Controls.Button)(target));
             return;
-            case 4:
+            case 3:
             this.label = ((System.Windows.Controls.Label)(target));
             return;
-            case 5:
+            case 4:
             this.label_Copy = ((System.Windows.Controls.Label)(target));
             return;
-            case 6:
+            case 5:
             this.label1 = ((System.Windows.Controls.Label)(target));
             return;
-            case 7:
+            case 6:
             this.label_Copy1 = ((System.Windows.Controls.Label)(target));
             return;
-            case 8:
+            case 7:
             this.label_Copy2 = ((System.Windows.Controls.Label)(target));
-            return;
-            case 9:
-            this.LabelBind = ((System.Windows.Controls.Label)(target));
             return;
             }
             this._contentLoaded = true;
