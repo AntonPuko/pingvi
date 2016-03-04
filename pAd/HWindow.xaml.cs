@@ -101,7 +101,8 @@ namespace Pingvi
         }
 
         private void ShowPotOdds(double potOdds) {
-            AdditionalInfoLabel.Content = potOdds == 0.0 ? "-" : $"o: {potOdds.ToString("##")}";
+            // net 4.6 AdditionalInfoLabel.Content = potOdds == 0.0 ? "-" : $"o: {potOdds.ToString("##")}";
+            AdditionalInfoLabel.Content = potOdds == 0.0 ? "-" : "o: " + potOdds.ToString("##");
             if (potOdds == 0.0) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (potOdds > 0.0 && potOdds <= 20)
                 AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(12, 255, 48));
@@ -114,7 +115,8 @@ namespace Pingvi
         }
 
         private void ShowBetToPot(double betToPot) {
-            AdditionalInfoLabel.Content = betToPot == 0.0 ? "-" : $"b: {betToPot.ToString("0.0")}";
+            // net 4.6 AdditionalInfoLabel.Content = betToPot == 0.0 ? "-" : $"b: {betToPot.ToString("0.0")}";
+            AdditionalInfoLabel.Content = betToPot == 0.0 ? "-" : "b: " + betToPot.ToString("0.0");
             if (betToPot == 0.0) AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (betToPot > 0.0 && betToPot <= 0.39)
                 AdditionalInfoLabel.Foreground = new SolidColorBrush(Color.FromRgb(12, 255, 48));

@@ -20,7 +20,7 @@ namespace Pingvi.Stuff
             Bitmap = new Bitmap(width, height, pixelFormat);
         }
 
-        public Bitmap Bitmap { get; }
+        public Bitmap Bitmap { get; set; }
 
         private Point PixelSize
         {
