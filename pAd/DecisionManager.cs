@@ -836,56 +836,57 @@ namespace Pingvi
                     //BB DEF VS SB OPENPSUH
 
                    
-                    //04.03.2016
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(5, 11)
-                        .Do(
-                            l =>
-                                CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_2MAX_5-11BB_GTO", l.Elements.EffectiveStack,
-                                    PlMode.Less));
- /*
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(11, 12.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_12BB_GTO"));
+                    
+                    /*
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(5, 11)
+                       .Do(
+                           l =>
+                               CheckDecision(heroHand, "BB_DEF_VS_SB_OPUSH_2MAX_5-11BB_GTO", l.Elements.EffectiveStack,
+                                   PlMode.Less));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(12.5, 13.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_13BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(11, 12.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_12BB_GTO"));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(13.5, 14.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_14BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(12.5, 13.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_13BB_GTO"));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(14.5, 15.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_15BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(13.5, 14.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_14BB_GTO"));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(15.5, 16.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_16BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(14.5, 15.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_15BB_GTO"));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(16.5, 17.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_17BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(15.5, 16.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_16BB_GTO"));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(17.5, 18.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_18BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(16.5, 17.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_17BB_GTO"));
 
-                    lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
-                        .HeroPreflopState(HeroPreflopState.FacingOpenPush)
-                        .EffectiveStackBetween(18.5, 19.5)
-                        .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_19BB_GTO"));
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(17.5, 18.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_18BB_GTO"));
 
-                    */
+                   lineInfo.StartRule().HeroPosition(PlayerPosition.Bb).Is2Max()
+                       .HeroPreflopState(HeroPreflopState.FacingOpenPush)
+                       .EffectiveStackBetween(18.5, 19.5)
+                       .Do(l => CheckGtoDecision(heroHand, "BB_DEF_VS_SV_OPUSH_2MAX_19BB_GTO"));
+
+                   */
                 }
             }
 
